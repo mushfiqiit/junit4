@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/11_runTest/junit/framework/TestCase.java:10: warning: [NullAway] @NonNull field fName not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/11_runTest/junit/framework/TestCase.java:20: warning: [NullAway] dereferenced expression runMethod is @Nullable

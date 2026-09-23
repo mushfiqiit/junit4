@@ -1,0 +1,12 @@
+Slice: 130_assertEquals
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:685: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/130_assertEquals/org/junit/Assert.java:10: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/130_assertEquals/org/junit/Assert.java:10: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  file name matches : Assert.java == Assert.java
+  message matches   : yes (exact)
+  line differs      : 685 -> 10
+VERDICT: REPRODUCED

@@ -1,0 +1,13 @@
+Slice: 11_runTest
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:172: warning: [NullAway] dereferenced expression runMethod is @Nullable
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/11_runTest/junit/framework/TestCase.java:10: warning: [NullAway] @NonNull field fName not initialized
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/11_runTest/junit/framework/TestCase.java:20: warning: [NullAway] dereferenced expression runMethod is @Nullable
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/11_runTest/junit/framework/TestCase.java:20: warning: [NullAway] dereferenced expression runMethod is @Nullable
+  file name matches : TestCase.java == TestCase.java
+  message matches   : yes (exact)
+  line differs      : 172 -> 20
+VERDICT: REPRODUCED

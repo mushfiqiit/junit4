@@ -1,0 +1,13 @@
+Slice: 69_constructLeafRequest
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:122: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/69_constructLeafRequest/org/junit/experimental/max/MaxCore.java:23: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/69_constructLeafRequest/org/junit/experimental/max/MaxCore.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/69_constructLeafRequest/org/junit/experimental/max/MaxCore.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  file name matches : MaxCore.java == MaxCore.java
+  message matches   : yes (exact)
+  line differs      : 122 -> 25
+VERDICT: REPRODUCED

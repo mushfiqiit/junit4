@@ -1,0 +1,3 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_getMessage/junit/framework/ComparisonFailure.java:7: warning: [NullAway] @NonNull field fExpected not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_getMessage/junit/framework/ComparisonFailure.java:9: warning: [NullAway] @NonNull field fActual not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_getMessage/junit/framework/ComparisonFailure.java:13: warning: [NullAway] passing @Nullable parameter 'super.getMessage()' where @NonNull is required

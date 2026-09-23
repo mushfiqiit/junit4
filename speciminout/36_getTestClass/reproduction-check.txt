@@ -1,0 +1,14 @@
+Slice: 36_getTestClass
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:296: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 3 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/36_getTestClass/org/junit/runner/Description.java:7: warning: [NullAway] @NonNull field fTestClass not initialized
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/36_getTestClass/org/junit/runner/Description.java:15: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/36_getTestClass/org/junit/runner/Description.java:21: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/36_getTestClass/org/junit/runner/Description.java:15: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : Description.java == Description.java
+  message matches   : yes (exact)
+  line differs      : 296 -> 15
+VERDICT: REPRODUCED

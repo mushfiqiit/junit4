@@ -1,0 +1,15 @@
+Slice: 61_AssumptionViolatedException
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:54: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+nullaway-warnings.txt: 4 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:10: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:14: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:16: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:26: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:26: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  file name matches : AssumptionViolatedException.java == AssumptionViolatedException.java
+  message matches   : yes (exact)
+  line differs      : 54 -> 26
+VERDICT: REPRODUCED

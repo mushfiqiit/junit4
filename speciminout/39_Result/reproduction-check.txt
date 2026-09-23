@@ -1,0 +1,16 @@
+Slice: 39_Result
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:39: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 37) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/39_Result/org/junit/runner/Result.java:30: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/39_Result/org/junit/runner/Result.java:14: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/39_Result/org/junit/runner/Result.java:30: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  file name matches : Result.java == Result.java
+  message matches   : yes, after normalizing embedded "(line N)" references
+    original message   : initializer method does not guarantee @NonNull field serializedForm (line 37) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    slice message       : initializer method does not guarantee @NonNull field serializedForm (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    normalized (both)   : initializer method does not guarantee @NonNull field serializedForm (line #) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  line differs      : 39 -> 30
+VERDICT: REPRODUCED

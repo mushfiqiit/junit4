@@ -1,0 +1,19 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/106_threadGroupForNewThread/org/junit/internal/runners/statements/FailOnTimeout.java:14: warning: [removal] isDaemon() in ThreadGroup has been deprecated and marked for removal
+    if (!threadGroup.isDaemon()) {
+                    ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/106_threadGroupForNewThread/org/junit/internal/runners/statements/FailOnTimeout.java:16: warning: [removal] setDaemon(boolean) in ThreadGroup has been deprecated and marked for removal
+        threadGroup.setDaemon(true);
+                   ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/106_threadGroupForNewThread/org/junit/internal/runners/statements/FailOnTimeout.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+      return null;
+      ^
+    (see http://t.uber.com/nullaway )
+3 warnings
+
+BUILD SUCCESSFUL in 5s
+2 actionable tasks: 1 executed, 1 up-to-date

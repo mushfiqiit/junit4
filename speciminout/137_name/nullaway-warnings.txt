@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/137_name/org/junit/rules/TestName.java:5: warning: [NullAway] @NonNull field name not initialized

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/71_findLeaves/org/junit/experimental/max/MaxCore.java:12: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

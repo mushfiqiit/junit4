@@ -1,0 +1,13 @@
+Slice: 74_testFinished
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:128: warning: [NullAway] unboxing of a @Nullable value
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/74_testFinished/org/junit/experimental/max/MaxHistory.java:16: warning: [NullAway] @NonNull field MaxHistory$RememberingListener.starts not initialized
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/74_testFinished/org/junit/experimental/max/MaxHistory.java:20: warning: [NullAway] unboxing of a @Nullable value
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/74_testFinished/org/junit/experimental/max/MaxHistory.java:20: warning: [NullAway] unboxing of a @Nullable value
+  file name matches : MaxHistory.java == MaxHistory.java
+  message matches   : yes (exact)
+  line differs      : 128 -> 20
+VERDICT: REPRODUCED

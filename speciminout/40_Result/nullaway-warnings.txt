@@ -1,0 +1,6 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:31: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 29) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:42: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:44: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:46: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:48: warning: [NullAway] assigning @Nullable expression to @NonNull field

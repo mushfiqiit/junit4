@@ -1,0 +1,33 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:31: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 29) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  private Result(SerializedForm serializedForm) {
+          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private static final ObjectStreamField[] serialPersistentFields = null;
+                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:42: warning: [NullAway] assigning @Nullable expression to @NonNull field
+    private final AtomicInteger fCount = null;
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:44: warning: [NullAway] assigning @Nullable expression to @NonNull field
+    private final AtomicInteger fIgnoreCount = null;
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:46: warning: [NullAway] assigning @Nullable expression to @NonNull field
+    private final AtomicInteger assumptionFailureCount = null;
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:48: warning: [NullAway] assigning @Nullable expression to @NonNull field
+    private final List<Failure> fFailures = null;
+                                ^
+    (see http://t.uber.com/nullaway )
+6 warnings
+
+BUILD SUCCESSFUL in 5s
+2 actionable tasks: 1 executed, 1 up-to-date

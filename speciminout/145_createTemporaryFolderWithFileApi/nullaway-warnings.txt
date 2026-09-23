@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/145_createTemporaryFolderWithFileApi/org/junit/rules/TemporaryFolder.java:10: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/145_createTemporaryFolderWithFileApi/org/junit/rules/TemporaryFolder.java:33: warning: [NullAway] dereferenced expression createdFolder is @Nullable

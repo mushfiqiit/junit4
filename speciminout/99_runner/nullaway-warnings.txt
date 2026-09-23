@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/99_runner/org/junit/internal/requests/MemoizingRequest.java:8: warning: [NullAway] @NonNull field runner not initialized

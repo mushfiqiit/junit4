@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:119: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required

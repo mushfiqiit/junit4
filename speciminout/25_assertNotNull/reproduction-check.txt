@@ -1,0 +1,12 @@
+Slice: 25_assertNotNull
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:248: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/25_assertNotNull/junit/framework/Assert.java:7: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/25_assertNotNull/junit/framework/Assert.java:7: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  file name matches : Assert.java == Assert.java
+  message matches   : yes (exact)
+  line differs      : 248 -> 7
+VERDICT: REPRODUCED

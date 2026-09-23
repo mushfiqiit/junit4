@@ -1,0 +1,12 @@
+Slice: 90_runnerForClass
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java:42: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/90_runnerForClass/org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java:24: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/90_runnerForClass/org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java:24: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : AllDefaultPossibilitiesBuilder.java == AllDefaultPossibilitiesBuilder.java
+  message matches   : yes (exact)
+  line differs      : 42 -> 24
+VERDICT: REPRODUCED

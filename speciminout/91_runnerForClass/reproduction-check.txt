@@ -1,0 +1,9 @@
+Slice: 91_runnerForClass
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/JUnit3Builder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/91_runnerForClass/org/junit/internal/builders/JUnit3Builder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Near-miss finding (same file + message, but SAME line -- not counted): /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/91_runnerForClass/org/junit/internal/builders/JUnit3Builder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+VERDICT: NOT REPRODUCED (same-line near-miss only)

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/147_allParameters/org/junit/runners/Parameterized.java:17: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

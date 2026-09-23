@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/86_runnerForClass/org/junit/internal/builders/AnnotatedBuilder.java:18: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

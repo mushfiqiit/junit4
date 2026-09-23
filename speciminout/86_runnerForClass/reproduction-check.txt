@@ -1,0 +1,12 @@
+Slice: 86_runnerForClass
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AnnotatedBuilder.java:90: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/86_runnerForClass/org/junit/internal/builders/AnnotatedBuilder.java:18: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/86_runnerForClass/org/junit/internal/builders/AnnotatedBuilder.java:18: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : AnnotatedBuilder.java == AnnotatedBuilder.java
+  message matches   : yes (exact)
+  line differs      : 90 -> 18
+VERDICT: REPRODUCED

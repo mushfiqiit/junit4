@@ -1,0 +1,13 @@
+Slice: 56_findDeepAnnotation
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:123: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/56_findDeepAnnotation/org/junit/experimental/theories/ParameterSignature.java:10: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/56_findDeepAnnotation/org/junit/experimental/theories/ParameterSignature.java:22: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/56_findDeepAnnotation/org/junit/experimental/theories/ParameterSignature.java:10: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : ParameterSignature.java == ParameterSignature.java
+  message matches   : yes (exact)
+  line differs      : 123 -> 10
+VERDICT: REPRODUCED

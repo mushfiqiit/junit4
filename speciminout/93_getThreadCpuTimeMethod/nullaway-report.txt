@@ -1,0 +1,25 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:10: warning: [NullAway] @NonNull static field ReflectiveThreadMXBean$Holder.getThreadCpuTimeMethod not initialized
+    static final Method getThreadCpuTimeMethod;
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:12: warning: [NullAway] @NonNull static field ReflectiveThreadMXBean$Holder.isThreadCpuTimeSupportedMethod not initialized
+    static final Method isThreadCpuTimeSupportedMethod;
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:25: warning: [NullAway] assigning @Nullable expression to @NonNull field
+      getThreadCpuTimeMethod = threadCpuTime;
+                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:26: warning: [NullAway] assigning @Nullable expression to @NonNull field
+      isThreadCpuTimeSupportedMethod = threadCpuTimeSupported;
+                                     ^
+    (see http://t.uber.com/nullaway )
+4 warnings
+
+BUILD SUCCESSFUL in 4s
+2 actionable tasks: 1 executed, 1 up-to-date

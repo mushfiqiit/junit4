@@ -1,0 +1,12 @@
+Slice: 47_filteredChildren
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:75: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/47_filteredChildren/org/junit/runners/ParentRunner.java:10: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/47_filteredChildren/org/junit/runners/ParentRunner.java:10: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  file name matches : ParentRunner.java == ParentRunner.java
+  message matches   : yes (exact)
+  line differs      : 75 -> 10
+VERDICT: REPRODUCED

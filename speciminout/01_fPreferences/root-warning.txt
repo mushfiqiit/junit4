@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/01_fPreferences/junit/runner/BaseTestRunner.java:8: warning: [NullAway] @NonNull static field fPreferences not initialized

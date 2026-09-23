@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/140_TemporaryFolder/org/junit/rules/TemporaryFolder.java:17: warning: [NullAway] initializer method does not guarantee @NonNull field folder (line 11) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/140_TemporaryFolder/org/junit/rules/TemporaryFolder.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field

@@ -1,0 +1,9 @@
+Slice: 43_TestSuite
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:108: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/43_TestSuite/junit/framework/TestSuite.java:11: warning: [NullAway] initializer method does not guarantee @NonNull fields fName (line 7), fTests (line 9) are initialized along all control-flow paths (remember to check for exceptions or early returns).
+
+No finding in this slice matches the original warning's file name + message.
+VERDICT: NOT REPRODUCED

@@ -1,0 +1,12 @@
+Slice: 144_newFolder
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:223: warning: [NullAway] dereferenced expression relativePath is @Nullable
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/144_newFolder/org/junit/rules/TemporaryFolder.java:36: warning: [NullAway] dereferenced expression relativePath is @Nullable
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/144_newFolder/org/junit/rules/TemporaryFolder.java:36: warning: [NullAway] dereferenced expression relativePath is @Nullable
+  file name matches : TemporaryFolder.java == TemporaryFolder.java
+  message matches   : yes (exact)
+  line differs      : 223 -> 36
+VERDICT: REPRODUCED

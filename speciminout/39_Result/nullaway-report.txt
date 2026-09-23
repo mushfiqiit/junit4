@@ -1,0 +1,17 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/39_Result/org/junit/runner/Result.java:30: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  public Result() {
+         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/39_Result/org/junit/runner/Result.java:14: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private static final ObjectStreamField[] serialPersistentFields = null;
+                                           ^
+    (see http://t.uber.com/nullaway )
+2 warnings
+
+BUILD SUCCESSFUL in 4s
+2 actionable tasks: 1 executed, 1 up-to-date

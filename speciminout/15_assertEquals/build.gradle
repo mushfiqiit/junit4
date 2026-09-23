@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'net.ltgt.errorprone' version '3.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    errorprone           'com.google.errorprone:error_prone_core:2.50.0'
+    annotationProcessor  'com.uber.nullaway:nullaway:0.13.7'
+    compileOnly          'com.uber.nullaway:nullaway-annotations:0.13.7'
+    compileOnly          'com.google.code.findbugs:jsr305:3.0.2'
+    compileOnly          'org.jspecify:jspecify:0.3.0'
+    compileOnly          fileTree(dir: '/Users/mushfiqurrahmanchowdhury/junit-deps', include: '*.jar')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['.']
+            include '**/*.java'
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.errorprone {
+        disableAllChecks = true
+        check('NullAway', net.ltgt.gradle.errorprone.CheckSeverity.WARN)
+        check('RequireExplicitNullMarking', net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+        option('NullAway:AnnotatedPackages', 'org.junit,junit')
+        option('NullAway:JSpecifyMode', 'false')
+    }
+    // Required for Error Prone to run at all (see
+    // https://errorprone.info/docs/installation#gradle): javac's default
+    // --should-stop=ifError policy (INIT) stops compilation before the FLOW
+    // phase Error Prone hooks into, so it refuses to run under it --
+    // "The default --should-stop=ifError policy (INIT) is not supported by
+    // Error Prone, pass --should-stop=ifError=FLOW instead". Unlike the
+    // --add-exports/--add-opens JVM flags (which net.ltgt.gradle.errorprone
+    // adds automatically on JDK 16+), these compilerArgs are not added for
+    // you and must be set explicitly -- gson's own pom.xml sets the Maven
+    // equivalent of both for the same reason.
+    options.compilerArgs << '-XDcompilePolicy=simple' << '--should-stop=ifError=FLOW'
+    // Also required by Error Prone specifically on JDK 21 -- without it,
+    // compilation fails immediately with "-XDaddTypeAnnotationsToSymbol=true
+    // is required by Error Prone on JDK 21", the same way the two flags
+    // above are required on JDK 16+. gson's own pom.xml sets this too.
+    options.compilerArgs << '-XDaddTypeAnnotationsToSymbol=true'
+    options.compilerArgs << '-Xmaxwarns' << '10000'
+}

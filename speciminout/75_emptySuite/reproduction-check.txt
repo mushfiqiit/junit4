@@ -1,0 +1,12 @@
+Slice: 75_emptySuite
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:33: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/75_emptySuite/org/junit/runners/Suite.java:13: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/75_emptySuite/org/junit/runners/Suite.java:13: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+  file name matches : Suite.java == Suite.java
+  message matches   : yes (exact)
+  line differs      : 33 -> 13
+VERDICT: REPRODUCED

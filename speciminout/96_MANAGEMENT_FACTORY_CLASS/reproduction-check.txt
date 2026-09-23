@@ -1,0 +1,13 @@
+Slice: 96_MANAGEMENT_FACTORY_CLASS
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:12: warning: [NullAway] @NonNull static field ManagementFactory$FactoryHolder.MANAGEMENT_FACTORY_CLASS not initialized
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/96_MANAGEMENT_FACTORY_CLASS/org/junit/internal/management/ManagementFactory.java:9: warning: [NullAway] @NonNull static field ManagementFactory$FactoryHolder.MANAGEMENT_FACTORY_CLASS not initialized
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/96_MANAGEMENT_FACTORY_CLASS/org/junit/internal/management/ManagementFactory.java:17: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/96_MANAGEMENT_FACTORY_CLASS/org/junit/internal/management/ManagementFactory.java:9: warning: [NullAway] @NonNull static field ManagementFactory$FactoryHolder.MANAGEMENT_FACTORY_CLASS not initialized
+  file name matches : ManagementFactory.java == ManagementFactory.java
+  message matches   : yes (exact)
+  line differs      : 12 -> 9
+VERDICT: REPRODUCED

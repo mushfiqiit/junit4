@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/74_testFinished/org/junit/experimental/max/MaxHistory.java:16: warning: [NullAway] @NonNull field MaxHistory$RememberingListener.starts not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/74_testFinished/org/junit/experimental/max/MaxHistory.java:20: warning: [NullAway] unboxing of a @Nullable value

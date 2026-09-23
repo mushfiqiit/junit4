@@ -1,0 +1,12 @@
+Slice: 137_name
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TestName.java:28: warning: [NullAway] @NonNull field name not initialized
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/137_name/org/junit/rules/TestName.java:5: warning: [NullAway] @NonNull field name not initialized
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/137_name/org/junit/rules/TestName.java:5: warning: [NullAway] @NonNull field name not initialized
+  file name matches : TestName.java == TestName.java
+  message matches   : yes (exact)
+  line differs      : 28 -> 5
+VERDICT: REPRODUCED

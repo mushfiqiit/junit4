@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/95_getInputArgumentsMethod/org/junit/internal/management/ReflectiveRuntimeMXBean.java:10: warning: [NullAway] @NonNull static field ReflectiveRuntimeMXBean$Holder.getInputArgumentsMethod not initialized

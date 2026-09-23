@@ -1,0 +1,13 @@
+Slice: 109_getStuckThread
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:247: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/109_getStuckThread/org/junit/internal/runners/statements/FailOnTimeout.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/109_getStuckThread/org/junit/internal/runners/statements/FailOnTimeout.java:24: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/109_getStuckThread/org/junit/internal/runners/statements/FailOnTimeout.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : FailOnTimeout.java == FailOnTimeout.java
+  message matches   : yes (exact)
+  line differs      : 247 -> 11
+VERDICT: REPRODUCED

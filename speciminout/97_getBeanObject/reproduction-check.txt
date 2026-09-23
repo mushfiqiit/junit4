@@ -1,0 +1,13 @@
+Slice: 97_getBeanObject
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:40: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/97_getBeanObject/org/junit/internal/management/ManagementFactory.java:9: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/97_getBeanObject/org/junit/internal/management/ManagementFactory.java:22: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/97_getBeanObject/org/junit/internal/management/ManagementFactory.java:22: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : ManagementFactory.java == ManagementFactory.java
+  message matches   : yes (exact)
+  line differs      : 40 -> 22
+VERDICT: REPRODUCED

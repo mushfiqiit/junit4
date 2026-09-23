@@ -1,0 +1,12 @@
+Slice: 41_getMessage
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/notification/Failure.java:88: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/41_getMessage/org/junit/runner/notification/Failure.java:12: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/41_getMessage/org/junit/runner/notification/Failure.java:12: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : Failure.java == Failure.java
+  message matches   : yes (exact)
+  line differs      : 88 -> 12
+VERDICT: REPRODUCED

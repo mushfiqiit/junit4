@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:570: warning: [NullAway] passing @Nullable parameter 'rule != null ? rule.order() : null' where @NonNull is required

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/146_RunnersFactory/org/junit/runners/Parameterized.java:23: warning: [NullAway] assigning @Nullable expression to @NonNull field

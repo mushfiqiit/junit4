@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'net.ltgt.errorprone' version '3.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit 4's only compile-time dependency (see junit4/pom.xml). No
+    // nullness-annotation jars (nullaway-annotations/jsr305/jspecify) are on
+    // the compile classpath: JUnit's sources don't use them, and
+    // nullaway-annotations 0.13.x is published for Java 11+, which Gradle
+    // refuses to resolve against a classpath it targets at Java 8 (derived
+    // from options.release = 8 below) -- "No matching variant of
+    // com.uber.nullaway:nullaway-annotations ... compatible with Java 11 and
+    // the consumer needed a component, compatible with Java 8". This also
+    // keeps copyDeps from copying them into JAR_PATH.
+    implementation       'org.hamcrest:hamcrest-core:1.3'
+    errorprone           'com.google.errorprone:error_prone_core:2.50.0'
+    annotationProcessor  'com.uber.nullaway:nullaway:0.13.7'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java']
+            include 'org/**/*.java'
+            include 'junit/**/*.java'
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 8
+    options.errorprone {
+        disableAllChecks = true
+        check('NullAway', net.ltgt.gradle.errorprone.CheckSeverity.WARN)
+        check('RequireExplicitNullMarking', net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+        option('NullAway:AnnotatedPackages', 'org.junit,junit')
+        option('NullAway:JSpecifyMode', 'false')
+    }
+    // Error Prone on JDK 21 requires these -- see RunCheckerAll.sh.
+    options.compilerArgs << '-XDcompilePolicy=simple' << '--should-stop=ifError=FLOW'
+    options.compilerArgs << '-XDaddTypeAnnotationsToSymbol=true'
+    // Don't let a flood of warnings get truncated, and don't fail the build on them.
+    options.compilerArgs << '-Xmaxwarns' << '100000'
+}
+
+// Copies JUnit's compile-time dependency jars (hamcrest-core) into JAR_PATH,
+// for Specimin's --jarPath and the slice checks in RunCheckerAll.sh /
+// RunCFCheckerAll.sh.
+tasks.register('copyDeps', Copy) {
+    from configurations.compileClasspath
+    into '/Users/mushfiqurrahmanchowdhury/junit-deps'
+}

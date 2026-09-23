@@ -1,0 +1,12 @@
+Slice: 67_addMultiPointMethods
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/AllMembersSupplier.java:84: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/67_addMultiPointMethods/org/junit/experimental/theories/internal/AllMembersSupplier.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/67_addMultiPointMethods/org/junit/experimental/theories/internal/AllMembersSupplier.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  file name matches : AllMembersSupplier.java == AllMembersSupplier.java
+  message matches   : yes (exact)
+  line differs      : 84 -> 25
+VERDICT: REPRODUCED

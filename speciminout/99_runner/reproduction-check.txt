@@ -1,0 +1,12 @@
+Slice: 99_runner
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/MemoizingRequest.java:11: warning: [NullAway] @NonNull field runner not initialized
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/99_runner/org/junit/internal/requests/MemoizingRequest.java:8: warning: [NullAway] @NonNull field runner not initialized
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/99_runner/org/junit/internal/requests/MemoizingRequest.java:8: warning: [NullAway] @NonNull field runner not initialized
+  file name matches : MemoizingRequest.java == MemoizingRequest.java
+  message matches   : yes (exact)
+  line differs      : 11 -> 8
+VERDICT: REPRODUCED
