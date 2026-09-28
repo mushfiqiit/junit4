@@ -1,0 +1,58 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `ParentRunner.filteredChildren` | `@Nullable` | The field is explicitly initialized to `null` and represents a lazily populated cache, so it is intended to be nullable. |
+
+## B) Cause of the warning
+
+The warning points to the initializer `null` in `private volatile List<T> filteredChildren = null;`. Under NullAway’s default assumptions, the unannotated field `List<T> filteredChildren` is `@NonNull`, while the literal `null` is a `@Nullable` expression. Therefore NullAway reports that a `@Nullable` expression is being assigned to a `@NonNull` field. Annotating `filteredChildren` as `@Nullable` makes the field’s declared nullness match its actual usage and allows the null initializer.
+
+```java
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
+
+  @Nullable
+  private volatile List<T> filteredChildren = null;
+}
+```

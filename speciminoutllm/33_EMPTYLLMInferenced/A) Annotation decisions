@@ -1,0 +1,5 @@
+import javax.annotation.Nullable;
+// | location | inferred annotation | one-sentence reason |
+// | --- | --- | --- |
+// | org.junit.runner.Description#Description(Class, String, Annotation...) parameter `clazz` | `@Nullable` | `Description.EMPTY` is constructed with a null class, so the constructor's class parameter must accept null. |
+//

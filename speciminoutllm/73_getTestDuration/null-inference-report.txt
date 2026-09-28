@@ -1,0 +1,43 @@
+
+
+```java
+// A) Annotation decisions
+//
+// | location | inferred annotation | one-sentence reason |
+// |---|---|---|
+// | MaxHistory#getTestDuration return type | @Nullable | fDurations.get(...) may return null when the mapping is absent, so the method's result is nullable. |
+
+// B) Cause of the warning
+// Line 12 returns fDurations.get(key.toString()). NullAway treats Map#get as @Nullable, while getTestDuration's unannotated Long return type is @NonNull, so returning the nullable expression is unsafe. Annotating the method return type @Nullable matches the actual nullability and resolves the warning.
+
+// === org/junit/experimental/max/MaxHistory.java ===
+package org.junit.experimental.max;
+
+import java.io.Serializable;
+import java.util.Map;
+import javax.annotation.Nullable;
+import org.junit.runner.Description;
+
+public class MaxHistory implements Serializable {
+
+  private final Map<String, Long> fDurations;
+
+  @Nullable
+  Long getTestDuration(Description key) {
+    return fDurations.get(key.toString());
+  }
+}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {
+
+  public String toString() {
+    throw new java.lang.Error();
+  }
+}
+```

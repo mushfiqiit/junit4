@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveThreadMXBean.java:17: warning: [NullAway] @NonNull static field ReflectiveThreadMXBean$Holder.isThreadCpuTimeSupportedMethod not initialized

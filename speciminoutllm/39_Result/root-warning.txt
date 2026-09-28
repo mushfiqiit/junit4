@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/39_Result/org/junit/runner/Result.java:30: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 28) is initialized along all control-flow paths (remember to check for exceptions or early returns).

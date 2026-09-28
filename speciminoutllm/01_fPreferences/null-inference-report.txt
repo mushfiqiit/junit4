@@ -1,0 +1,42 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `junit.runner.BaseTestRunner.fPreferences` field declaration | `@Nullable` | This static field has no initializer in the reduced code, so it may be null before any assignment and should not be treated as `@NonNull`. |
+
+No parameters or return types are involved in this warning.
+
+## B) Cause of the warning
+
+The warning points to the declaration of `fPreferences`:
+
+```java
+private static Properties fPreferences;
+```
+
+NullAway treats unannotated fields as `@NonNull` by default. For a static `@NonNull` field, NullAway expects it to be initialized at its declaration or in a static initializer. Because the reduced code contains neither, NullAway reports that the `@NonNull` static field is not initialized. Annotating the field with `@Nullable` tells NullAway that the field is allowed to hold `null` before assignment, which resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === junit/framework/TestListener.java ===
+package junit.framework;
+
+public interface TestListener {}
+
+
+// === junit/runner/BaseTestRunner.java ===
+package junit.runner;
+
+import java.util.Properties;
+import javax.annotation.Nullable;
+import junit.framework.TestListener;
+
+public abstract class BaseTestRunner implements TestListener {
+
+  @Nullable
+  private static Properties fPreferences;
+}
+```

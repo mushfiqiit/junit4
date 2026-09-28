@@ -1,0 +1,12 @@
+Slice: 80_parentDescription
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:286: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/80_parentDescription/org/junit/experimental/categories/Categories.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/80_parentDescription/org/junit/experimental/categories/Categories.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : Categories.java == Categories.java
+  message matches   : yes (exact)
+  line differs      : 286 -> 13
+VERDICT: REPRODUCED

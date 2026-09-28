@@ -1,0 +1,53 @@
+
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `FailOnTimeout.CallableStatement.call()` return type | `@Nullable` | The method explicitly returns `null` when the wrapped statement completes without throwing, so its return type must be nullable. |
+
+The warning is caused by the `return null;` statement inside `CallableStatement.call()`. Under NullAway, an unannotated `Throwable` return type is treated as `@NonNull`, while the `null` literal is inherently `@Nullable`, so returning it from a `@NonNull` method is unsafe. Annotating the `call()` return type as `@Nullable` declares that callers may receive `null`, resolving the reported warning.
+
+```java
+// === org/junit/internal/runners/statements/FailOnTimeout.java ===
+package org.junit.internal.runners.statements;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import javax.annotation.Nullable;
+import org.junit.runners.model.Statement;
+
+public class FailOnTimeout extends Statement {
+
+  private final Statement originalStatement;
+
+  public void evaluate() throws Throwable {
+    throw new java.lang.Error();
+  }
+
+  private class CallableStatement implements Callable<Throwable> {
+
+    private final CountDownLatch startLatch;
+
+    @Nullable
+    public Throwable call() throws Exception {
+      try {
+        startLatch.countDown();
+        originalStatement.evaluate();
+      } catch (Exception e) {
+        throw e;
+      } catch (Throwable e) {
+        return e;
+      }
+      return null;
+    }
+  }
+}
+
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {
+
+  public abstract void evaluate() throws Throwable;
+}
+```

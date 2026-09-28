@@ -1,0 +1,32 @@
+
+
+```java
+// A) Annotation decisions
+//
+// | location                         | inferred annotation | reason |
+// |----------------------------------|---------------------|--------|
+// | TestFailure#exceptionMessage()   | @Nullable           | The returned exception message can be null, so this method must declare a @Nullable return type. |
+//
+// B) Cause of the warning
+//
+// Line 10 returns thrownException().getMessage().
+// Throwable#getMessage() is @Nullable, so the returned expression is a @Nullable String.
+// The method exceptionMessage() was declared to return a non-null String, so NullAway reports the return.
+// Annotating exceptionMessage() as @Nullable makes the declared return type compatible with the potentially-null message.
+//
+// === junit/framework/TestFailure.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+public class TestFailure {
+
+  public Throwable thrownException() {
+    throw new java.lang.Error();
+  }
+
+  public @Nullable String exceptionMessage() {
+    return thrownException().getMessage();
+  }
+}
+```

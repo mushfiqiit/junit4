@@ -1,0 +1,23 @@
+Summary: 153 slice folder(s) checked
+  Reproduced     : 140
+  Not reproduced : 9
+  Skipped        : 4
+
+Not reproduced:
+  - 43_TestSuite
+  - 44_TestSuite
+  - 50_classRules
+  - 51_classRules
+  - 52_accept
+  - 88_runnerForClass
+  - 89_runnerForClass
+  - 91_runnerForClass
+  - 92_runnerForClass
+
+Skipped:
+  - 45_TestSuite
+  - 58_NAME_ASCENDING
+  - 81_getIncludedCategory
+  - 82_getExcludedCategory
+
+Per-slice details written to each folder's reproduction-check.txt

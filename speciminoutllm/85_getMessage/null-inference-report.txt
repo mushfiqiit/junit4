@@ -1,0 +1,52 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `ComparisonCompactor.compact(String message)` parameter `message` | `@Nullable` | It is called with `super.getMessage()`, which can be null, so the parameter must be allowed to accept a null value. |
+| Other fields, parameters, and return types in the reduced file | unannotated, i.e. default `@Nonnull` under NullAway | They are not needed to resolve this specific passing warning, so they should not be annotated. |
+
+B) Cause of the warning
+
+The warning occurs on the call:
+
+```java
+.compact(super.getMessage())
+```
+
+NullAway treats `super.getMessage()`, from the JDK `Throwable`/`AssertionError` hierarchy, as `@Nullable` because a throwable detail message may be absent. The `compact` method’s `message` parameter is unannotated, so NullAway assumes it is `@Nonnull`. Passing a `@Nullable` expression to an assumed-`@Nonnull` parameter causes the warning. Annotating `message` as `@Nullable` declares that this parameter may legally receive a null message, which resolves the warning without adding null checks.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/ComparisonFailure.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class ComparisonFailure extends AssertionError {
+
+  private static final int MAX_CONTEXT_LENGTH = 0;
+
+  private String fExpected;
+
+  private String fActual;
+
+  public String getMessage() {
+    return new ComparisonCompactor(MAX_CONTEXT_LENGTH, fExpected, fActual)
+        .compact(super.getMessage());
+  }
+
+  private static class ComparisonCompactor {
+
+    public ComparisonCompactor(int contextLength, String expected, String actual) {
+      throw new java.lang.Error();
+    }
+
+    public String compact(@Nullable String message) {
+      throw new java.lang.Error();
+    }
+  }
+}
+```

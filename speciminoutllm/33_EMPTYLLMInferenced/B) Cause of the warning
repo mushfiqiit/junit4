@@ -1,0 +1,5 @@
+import javax.annotation.Nullable;
+// The warning points to the `null` literal passed as the first argument to the `Description` constructor.
+// NullAway treats the unannotated `Class<?> clazz` parameter as `@NonNull`, so passing `null` is considered unsafe.
+// Annotating `clazz` as `@Nullable` makes the null argument legal without changing the existing logic.
+//

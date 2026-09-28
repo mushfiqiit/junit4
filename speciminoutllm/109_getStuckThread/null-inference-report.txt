@@ -1,0 +1,59 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `FailOnTimeout#getStuckThread` return type | `@Nullable` | This method can explicitly return `null`, such as when the thread group contains no threads. |
+| `FailOnTimeout#getStuckThread(Thread mainThread)` parameter | no annotation, i.e. non-null by default | This parameter is not the source of the reported warning and is dereferenced normally in the existing logic. |
+
+## B) Cause of the warning
+
+NullAway treats an unannotated `Thread` return type as `@Nonnull`, meaning the method is expected to never return `null`. At line 11, the method executes `return null;`, which is a `@Nullable` expression being returned from a method whose return type is assumed non-null. Annotating the return type of `getStuckThread` as `@Nullable` tells NullAway that returning `null` from this method is intentional and allowed.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/internal/runners/statements/FailOnTimeout.java ===
+package org.junit.internal.runners.statements;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import org.junit.runners.model.Statement;
+
+public class FailOnTimeout extends Statement {
+
+  private @Nullable Thread getStuckThread(Thread mainThread) {
+    List<Thread> threadsInGroup = getThreadsInGroup(mainThread.getThreadGroup());
+    if (threadsInGroup.isEmpty()) {
+      return null;
+    }
+    Thread stuckThread = null;
+    long maxCpuTime = 0;
+    for (Thread thread : threadsInGroup) {
+      if (thread.getState() == Thread.State.RUNNABLE) {
+        long threadCpuTime = cpuTime(thread);
+        if (stuckThread == null || threadCpuTime > maxCpuTime) {
+          stuckThread = thread;
+          maxCpuTime = threadCpuTime;
+        }
+      }
+    }
+    return (stuckThread == mainThread) ? null : stuckThread;
+  }
+
+  private List<Thread> getThreadsInGroup(ThreadGroup group) {
+    throw new java.lang.Error();
+  }
+
+  private long cpuTime(Thread thr) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+```

@@ -1,0 +1,16 @@
+Slice: 140_TemporaryFolder
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:68: warning: [NullAway] initializer method does not guarantee @NonNull field folder (line 48) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/140_TemporaryFolder/org/junit/rules/TemporaryFolder.java:17: warning: [NullAway] initializer method does not guarantee @NonNull field folder (line 11) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/140_TemporaryFolder/org/junit/rules/TemporaryFolder.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/140_TemporaryFolder/org/junit/rules/TemporaryFolder.java:17: warning: [NullAway] initializer method does not guarantee @NonNull field folder (line 11) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  file name matches : TemporaryFolder.java == TemporaryFolder.java
+  message matches   : yes, after normalizing embedded "(line N)" references
+    original message   : initializer method does not guarantee @NonNull field folder (line 48) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    slice message       : initializer method does not guarantee @NonNull field folder (line 11) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    normalized (both)   : initializer method does not guarantee @NonNull field folder (line #) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  line differs      : 68 -> 17
+VERDICT: REPRODUCED

@@ -1,0 +1,14 @@
+Slice: 42_getMessage
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonFailure.java:36: warning: [NullAway] passing @Nullable parameter 'super.getMessage()' where @NonNull is required
+
+nullaway-warnings.txt: 3 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_getMessage/junit/framework/ComparisonFailure.java:7: warning: [NullAway] @NonNull field fExpected not initialized
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_getMessage/junit/framework/ComparisonFailure.java:9: warning: [NullAway] @NonNull field fActual not initialized
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_getMessage/junit/framework/ComparisonFailure.java:13: warning: [NullAway] passing @Nullable parameter 'super.getMessage()' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_getMessage/junit/framework/ComparisonFailure.java:13: warning: [NullAway] passing @Nullable parameter 'super.getMessage()' where @NonNull is required
+  file name matches : ComparisonFailure.java == ComparisonFailure.java
+  message matches   : yes (exact)
+  line differs      : 36 -> 13
+VERDICT: REPRODUCED

@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/66_getValue/org/junit/experimental/theories/internal/AllMembersSupplier.java:13: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/66_getValue/org/junit/experimental/theories/internal/AllMembersSupplier.java:17: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

@@ -1,0 +1,42 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `junit.framework.Assert.assertEquals(String message, char expected, char actual)` — parameter `message` | `@Nullable` | The `assertEquals(char, char)` overload intentionally calls this method with `null` for the message, so `message` may legitimately be null. |
+
+No other annotations are required for this warning.
+
+## B) Cause of the warning
+
+The warning points to line 11:
+
+```java
+assertEquals(null, expected, actual);
+```
+
+Here, the literal `null` is being passed as the first argument, which is bound to the parameter `String message`. Under NullAway, an unannotated reference-type parameter is treated as `@NonNull`, so NullAway reports that a `@Nullable` expression, namely `null`, is being passed where a non-null value is required.
+
+Marking `message` as `@Nullable` fixes the warning because it tells NullAway that this parameter is allowed to accept `null`.
+
+## C) Corrected annotated code
+
+```java
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertEquals(@Nullable String message, char expected, char actual) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertEquals(char expected, char actual) {
+    assertEquals(null, expected, actual);
+  }
+}
+```

@@ -1,0 +1,48 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `String message` parameter of `Assert.assertArrayEquals(String message, Object[] expecteds, Object[] actuals)` | `@Nullable` | The no-message overload intentionally calls this method with `null`, so the message argument is allowed to be null. |
+| All other parameters, return types, and fields in the reduced code | unchanged / default `@Nonnull` | They are not implicated by this specific NullAway warning, so they should remain default non-null. |
+
+## B) Cause of the warning
+
+The warning is triggered by the call:
+
+```java
+assertArrayEquals(null, expecteds, actuals);
+```
+
+in the two-argument overload. The first argument is a `null` literal being passed to the `String message` parameter of the three-argument overload. Because `message` has no nullness annotation, NullAway treats it as `@Nonnull` by default, so passing `null` is reported as unsafe.
+
+In JUnit 4, the message parameter is optional: the two-argument method exists precisely to call the three-argument method without providing a message. Therefore, the `message` parameter should be annotated `@Nullable`, which tells NullAway that passing a `null` literal there is allowed.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+import org.junit.internal.ArrayComparisonFailure;
+
+public class Assert {
+
+  public static void assertArrayEquals(@Nullable String message, Object[] expecteds, Object[] actuals)
+      throws ArrayComparisonFailure {
+    throw new java.lang.Error();
+  }
+
+  public static void assertArrayEquals(Object[] expecteds, Object[] actuals) {
+    assertArrayEquals(null, expecteds, actuals);
+  }
+}
+
+
+// === org/junit/internal/ArrayComparisonFailure.java ===
+package org.junit.internal;
+
+public class ArrayComparisonFailure extends AssertionError {}
+```

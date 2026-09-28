@@ -1,0 +1,12 @@
+Slice: 46_getExpectedException
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/BlockJUnit4ClassRunner.java:443: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/46_getExpectedException/org/junit/runners/BlockJUnit4ClassRunner.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/46_getExpectedException/org/junit/runners/BlockJUnit4ClassRunner.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : BlockJUnit4ClassRunner.java == BlockJUnit4ClassRunner.java
+  message matches   : yes (exact)
+  line differs      : 443 -> 11
+VERDICT: REPRODUCED

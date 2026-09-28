@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:108: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).

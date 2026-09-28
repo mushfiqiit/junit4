@@ -1,0 +1,49 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `ManagementFactory.FactoryHolder.MANAGEMENT_FACTORY_CLASS` | `@Nullable` | This static final field can remain `null` if `Classes.getClass(...)` throws `ClassNotFoundException`, because the caught exception leaves the local variable equal to `null`. |
+
+B) Cause of the warning
+
+NullAway treats unannotated fields as `@Nonnull` by default. The static initializer assigns `MANAGEMENT_FACTORY_CLASS` from a local variable that is initialized to `null` and may not be reassigned if `ClassNotFoundException` is caught, so NullAway cannot prove that the final static field is always initialized to a non-null value. Annotating the field `@Nullable` tells NullAway that the field is allowed to hold `null`, resolving the warning.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/Classes.java ===
+package org.junit.internal;
+
+public class Classes {
+
+  public static Class<?> getClass(String className) throws ClassNotFoundException {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/management/ManagementFactory.java ===
+package org.junit.internal.management;
+
+import javax.annotation.Nullable;
+import org.junit.internal.Classes;
+
+public class ManagementFactory {
+
+  private static final class FactoryHolder {
+
+    private static final @Nullable Class<?> MANAGEMENT_FACTORY_CLASS;
+
+    static {
+      Class<?> managementFactoryClass = null;
+      try {
+        managementFactoryClass = Classes.getClass("java.lang.management.ManagementFactory");
+      } catch (ClassNotFoundException e) {
+      }
+      MANAGEMENT_FACTORY_CLASS = managementFactoryClass;
+    }
+  }
+}
+```

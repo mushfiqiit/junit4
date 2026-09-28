@@ -1,0 +1,33 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/59_getSortedEntries/org/junit/runners/RuleContainer.java:13: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private final IdentityHashMap<Object, Integer> orderValues = null;
+                                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/59_getSortedEntries/org/junit/runners/RuleContainer.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private final List<TestRule> testRules = null;
+                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/59_getSortedEntries/org/junit/runners/RuleContainer.java:17: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private final List<MethodRule> methodRules = null;
+                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/59_getSortedEntries/org/junit/runners/RuleContainer.java:19: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  static final Comparator<RuleEntry> ENTRY_COMPARATOR = null;
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/59_getSortedEntries/org/junit/runners/RuleContainer.java:24: warning: [NullAway] passing @Nullable parameter 'orderValues.get(rule)' where @NonNull is required
+      ruleEntries.add(new RuleEntry(rule, RuleEntry.TYPE_METHOD_RULE, orderValues.get(rule)));
+                                                                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/59_getSortedEntries/org/junit/runners/RuleContainer.java:27: warning: [NullAway] passing @Nullable parameter 'orderValues.get(rule)' where @NonNull is required
+      ruleEntries.add(new RuleEntry(rule, RuleEntry.TYPE_TEST_RULE, orderValues.get(rule)));
+                                                                                   ^
+    (see http://t.uber.com/nullaway )
+6 warnings
+
+BUILD SUCCESSFUL in 5s
+2 actionable tasks: 1 executed, 1 up-to-date

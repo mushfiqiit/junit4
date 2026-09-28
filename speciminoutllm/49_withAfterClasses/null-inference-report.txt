@@ -1,0 +1,155 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | reason |
+|---|---:|---|
+| `org.junit.internal.runners.statements.RunAfters.RunAfters(Statement next, List<FrameworkMethod> afters, Object target)` — `target` parameter | `@Nullable` | The warning is caused by passing the literal `null` for `target`, and class-level `@AfterClass` handling may legitimately be invoked with a `null` target for static methods. |
+
+No other parameter, return type, or field annotation is required to fix this specific warning.
+
+## B) Cause of the warning
+
+On line 19 of `ParentRunner.java`, the code calls:
+
+```java
+new RunAfters(statement, afters, null)
+```
+
+The third constructor argument is `null`. In the reduced `RunAfters` constructor, the corresponding parameter is declared as:
+
+```java
+Object target
+```
+
+Under NullAway, an unannotated reference-type parameter is treated as `@NonNull` by default. Therefore, passing the `@Nullable` literal `null` where an unannotated/`@NonNull` `Object` parameter is expected triggers:
+
+```text
+[NullAway] passing @Nullable parameter 'null' where @NonNull is required
+```
+
+Marking the `target` parameter of `RunAfters` as `@Nullable` tells NullAway that this argument is allowed to be `null`, which resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/AfterClass.java ===
+package org.junit;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface AfterClass {}
+
+
+// === org/junit/internal/runners/statements/RunAfters.java ===
+package org.junit.internal.runners.statements;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+
+public class RunAfters extends Statement {
+
+  public RunAfters(Statement next, List<FrameworkMethod> afters, @Nullable Object target) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import java.util.List;
+import org.junit.AfterClass;
+import org.junit.internal.runners.statements.RunAfters;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
+
+  private final TestClass testClass;
+
+  protected Statement withAfterClasses(Statement statement) {
+    List<FrameworkMethod> afters = testClass.getAnnotatedMethods(AfterClass.class);
+    return afters.isEmpty() ? statement : new RunAfters(statement, afters, null);
+  }
+}
+
+
+// === org/junit/runners/model/Annotatable.java ===
+package org.junit.runners.model;
+
+public interface Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMember.java ===
+package org.junit.runners.model;
+
+public abstract class FrameworkMember<T extends FrameworkMember<T>> implements Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMethod.java ===
+package org.junit.runners.model;
+
+public class FrameworkMethod extends FrameworkMember<FrameworkMethod> {}
+
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+
+
+// === org/junit/runners/model/TestClass.java ===
+package org.junit.runners.model;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+
+public class TestClass implements Annotatable {
+
+  public List<FrameworkMethod> getAnnotatedMethods(Class<? extends Annotation> annotationClass) {
+    throw new java.lang.Error();
+  }
+}
+```

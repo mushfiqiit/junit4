@@ -1,0 +1,47 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `ManagementFactory.FactoryHolder.getBeanObject` return type | `@Nullable` | The method can return `null` on the fallback path, and `Method.invoke` can also return a nullable object, so the method’s return type must be nullable. |
+
+No other annotation changes are needed to fix this specific warning; `methodName` can remain unannotated and is treated as non-null by default.
+
+B) Cause of the warning
+
+The method `getBeanObject` has an inferred `@NonNull` return type because it is unannotated. NullAway reports the return statement returning a `@Nullable` value—specifically the final `return null;` on line 22—as unsafe because a `@NonNull` method is not allowed to return null. Marking the method’s return type as `@Nullable` makes the method contract consistent with its actual behavior and resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/management/ManagementFactory.java ===
+package org.junit.internal.management;
+
+import java.lang.reflect.InvocationTargetException;
+
+import javax.annotation.Nullable;
+
+public class ManagementFactory {
+
+  private static final class FactoryHolder {
+
+    private static final Class<?> MANAGEMENT_FACTORY_CLASS;
+
+    @Nullable
+    static Object getBeanObject(String methodName) {
+      if (MANAGEMENT_FACTORY_CLASS != null) {
+        try {
+          return MANAGEMENT_FACTORY_CLASS.getMethod(methodName).invoke(null);
+        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException e) {
+        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException e) {
+        } catch (SecurityException e) {
+        }
+      }
+      return null;
+    }
+  }
+}
+```

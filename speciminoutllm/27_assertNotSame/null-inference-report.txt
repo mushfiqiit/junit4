@@ -1,0 +1,32 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `Assert.assertNotSame(String message, Object expected, Object actual)` parameter `message` | `@Nullable` | The two-argument overload explicitly passes `null` as the message, so the message parameter is allowed to be null. |
+
+B) Cause of the warning
+
+The warning is caused by the call `assertNotSame(null, expected, actual);` in the two-argument overload. NullAway treats the unannotated `String message` parameter as `@NonNull` by default, so passing the `null` literal is rejected. Annotating `message` as `@Nullable` tells NullAway that this parameter may legally receive `null`, which resolves the warning without changing any logic.
+
+C) Corrected annotated code
+
+```java
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertNotSame(@Nullable String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertNotSame(Object expected, Object actual) {
+    assertNotSame(null, expected, actual);
+  }
+}
+```

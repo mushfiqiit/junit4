@@ -1,0 +1,12 @@
+Slice: 100_rethrowAsException
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:47: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/100_rethrowAsException/org/junit/internal/Throwables.java:7: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/100_rethrowAsException/org/junit/internal/Throwables.java:7: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : Throwables.java == Throwables.java
+  message matches   : yes (exact)
+  line differs      : 47 -> 7
+VERDICT: REPRODUCED

@@ -1,0 +1,3 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/37_getTestClass/org/junit/runner/Description.java:7: warning: [NullAway] @NonNull field fTestClass not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/37_getTestClass/org/junit/runner/Description.java:15: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/37_getTestClass/org/junit/runner/Description.java:21: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

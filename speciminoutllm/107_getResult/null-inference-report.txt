@@ -1,0 +1,59 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `FailOnTimeout#getResult` return type | `@Nullable` | This method can return `null` because both `FutureTask#get` may return a null `Throwable` result and `ExecutionException#getCause` is nullable. |
+
+B) Cause of the warning
+
+The warning points to `return e.getCause();` on line 25. NullAway treats `ExecutionException.getCause()` as a `@Nullable` expression, but `getResult` is currently inferred to have a `@NonNull` return type because its return type `Throwable` is unannotated. Returning that nullable expression from a non-null-returning method is therefore unsafe. Adding `@Nullable` to `getResult` correctly declares that callers must handle a possible `null` result, which resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/runners/statements/FailOnTimeout.java ===
+package org.junit.internal.runners.statements;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import javax.annotation.Nullable;
+import org.junit.runners.model.Statement;
+
+public class FailOnTimeout extends Statement {
+
+  private final TimeUnit timeUnit;
+
+  private final long timeout = 0L;
+
+  @Nullable
+  private Throwable getResult(FutureTask<Throwable> task, Thread thread) {
+    try {
+      if (timeout > 0) {
+        return task.get(timeout, timeUnit);
+      } else {
+        return task.get();
+      }
+    } catch (InterruptedException e) {
+      return e;
+    } catch (ExecutionException e) {
+      return e.getCause();
+    } catch (TimeoutException e) {
+      return createTimeoutException(thread);
+    }
+  }
+
+  private Exception createTimeoutException(Thread thread) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+```

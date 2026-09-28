@@ -1,0 +1,12 @@
+Slice: 28_exceptionMessage
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestFailure.java:58: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/28_exceptionMessage/junit/framework/TestFailure.java:10: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/28_exceptionMessage/junit/framework/TestFailure.java:10: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : TestFailure.java == TestFailure.java
+  message matches   : yes (exact)
+  line differs      : 58 -> 10
+VERDICT: REPRODUCED

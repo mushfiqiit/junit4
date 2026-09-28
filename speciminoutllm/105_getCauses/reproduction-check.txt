@@ -1,0 +1,12 @@
+Slice: 105_getCauses
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/ErrorReportingRunner.java:71: warning: [NullAway] passing @Nullable parameter 'cause.getCause()' where @NonNull is required
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/105_getCauses/org/junit/internal/runners/ErrorReportingRunner.java:16: warning: [NullAway] passing @Nullable parameter 'cause.getCause()' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/105_getCauses/org/junit/internal/runners/ErrorReportingRunner.java:16: warning: [NullAway] passing @Nullable parameter 'cause.getCause()' where @NonNull is required
+  file name matches : ErrorReportingRunner.java == ErrorReportingRunner.java
+  message matches   : yes (exact)
+  line differs      : 71 -> 16
+VERDICT: REPRODUCED

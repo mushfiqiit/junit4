@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/ExcludeCategories.java:44: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

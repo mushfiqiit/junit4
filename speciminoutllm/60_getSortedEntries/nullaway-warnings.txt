@@ -1,0 +1,6 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/60_getSortedEntries/org/junit/runners/RuleContainer.java:13: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/60_getSortedEntries/org/junit/runners/RuleContainer.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/60_getSortedEntries/org/junit/runners/RuleContainer.java:17: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/60_getSortedEntries/org/junit/runners/RuleContainer.java:19: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/60_getSortedEntries/org/junit/runners/RuleContainer.java:24: warning: [NullAway] passing @Nullable parameter 'orderValues.get(rule)' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/60_getSortedEntries/org/junit/runners/RuleContainer.java:27: warning: [NullAway] passing @Nullable parameter 'orderValues.get(rule)' where @NonNull is required

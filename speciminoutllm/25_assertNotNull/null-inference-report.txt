@@ -1,0 +1,33 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `String message` in `public static void assertNotNull(String message, Object object)` | `javax.annotation.Nullable` | The no-message overload intentionally calls this overload with `null` as the message, so the `message` parameter must be allowed to be `null`. |
+| Other parameters in the reduced code | no annotation / left unannotated | They are not the expression causing this specific NullAway warning, so changing them is not required to fix this diagnostic. |
+
+## B) Cause of the warning
+
+The warning is on the call `assertNotNull(null, object);`, specifically on the `null` literal being passed as the first argument. That first argument is bound to the `String message` parameter of `assertNotNull(String message, Object object)`. Since the reduced code has no nullness annotations, NullAway treats the unannotated `message` parameter as `@Nonnull`, so passing the literal `null` is reported as unsafe. Marking `message` as `@Nullable` tells NullAway that this parameter is allowed to be `null`, which resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertNotNull(Object object) {
+    assertNotNull(null, object);
+  }
+
+  public static void assertNotNull(@Nullable String message, Object object) {
+    throw new java.lang.Error();
+  }
+}
+```

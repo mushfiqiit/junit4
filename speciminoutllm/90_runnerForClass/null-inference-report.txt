@@ -1,0 +1,150 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| Return type of `AllDefaultPossibilitiesBuilder.runnerForClass(Class<?> testClass)` | `@Nullable` | This method explicitly returns `null` when none of the builders produces a `Runner`, so its return value may legitimately be null. |
+| Return type of overridden `RunnerBuilder.runnerForClass(Class<?> testClass)` | `@Nullable` | The base `runnerForClass` contract must permit implementations to return `null`, keeping the override relationship nullness-consistent. |
+| All other parameters, returns, and fields in the reduced files | unannotated (treated as `@Nonnull` by NullAway) | They are not implicated by this warning and are assumed to be guaranteed non-null. |
+
+B) Cause of the warning
+
+The warning is reported at the final `return null;` in `AllDefaultPossibilitiesBuilder.runnerForClass`. NullAway treats the unannotated return type `Runner` as a `@NonNull` return type, so returning the null literal is unsafe. Annotating the overriding method’s return type as `@Nullable`, and also annotating the overridden `RunnerBuilder.runnerForClass` return type as `@Nullable`, makes the method contract explicitly nullable and therefore permits `return null;`.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java ===
+package org.junit.internal.builders;
+
+import java.util.Arrays;
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class AllDefaultPossibilitiesBuilder extends RunnerBuilder {
+
+  public @Nullable Runner runnerForClass(Class<?> testClass) throws Throwable {
+    List<RunnerBuilder> builders =
+        Arrays.asList(
+            ignoredBuilder(),
+            annotatedBuilder(),
+            suiteMethodBuilder(),
+            junit3Builder(),
+            junit4Builder());
+    for (RunnerBuilder each : builders) {
+      Runner runner = each.safeRunnerForClass(testClass);
+      if (runner != null) {
+        return runner;
+      }
+    }
+    return null;
+  }
+
+  protected JUnit4Builder junit4Builder() {
+    throw new java.lang.Error();
+  }
+
+  protected JUnit3Builder junit3Builder() {
+    throw new java.lang.Error();
+  }
+
+  protected AnnotatedBuilder annotatedBuilder() {
+    throw new java.lang.Error();
+  }
+
+  protected IgnoredBuilder ignoredBuilder() {
+    throw new java.lang.Error();
+  }
+
+  protected RunnerBuilder suiteMethodBuilder() {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/builders/AnnotatedBuilder.java ===
+package org.junit.internal.builders;
+
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class AnnotatedBuilder extends RunnerBuilder {
+
+  public Runner runnerForClass(Class<?> testClass) throws Exception {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/builders/IgnoredBuilder.java ===
+package org.junit.internal.builders;
+
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class IgnoredBuilder extends RunnerBuilder {
+
+  public Runner runnerForClass(Class<?> testClass) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/builders/JUnit3Builder.java ===
+package org.junit.internal.builders;
+
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class JUnit3Builder extends RunnerBuilder {
+
+  public Runner runnerForClass(Class<?> testClass) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/builders/JUnit4Builder.java ===
+package org.junit.internal.builders;
+
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class JUnit4Builder extends RunnerBuilder {
+
+  public Runner runnerForClass(Class<?> testClass) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public abstract class RunnerBuilder {
+
+  public abstract @Nullable Runner runnerForClass(Class<?> testClass) throws Throwable;
+
+  public Runner safeRunnerForClass(Class<?> testClass) {
+    throw new java.lang.Error();
+  }
+}
+```

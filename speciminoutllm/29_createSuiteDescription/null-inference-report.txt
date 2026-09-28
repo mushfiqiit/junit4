@@ -1,0 +1,39 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.runner.Description#Description(Class<?>, String, Annotation...)` parameter `clazz` | `@Nullable` | `createSuiteDescription` intentionally passes `null` for the `Class` because a suite description does not represent a single test class. |
+
+B) Cause of the warning
+
+The warning is caused by the `null` literal passed as the first argument to the private `Description` constructor on line 9:
+
+```java
+return new Description(null, name, annotations);
+```
+
+Because the constructor parameter `Class<?> clazz` is unannotated, NullAway treats it as `@NonNull` by default. The `null` literal is `@Nullable`, so passing it to that parameter is unsafe under those assumptions. Annotating the `clazz` parameter as `@Nullable` tells NullAway that this parameter is allowed to be `null`, which matches the behavior of `createSuiteDescription`.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+import java.lang.annotation.Annotation;
+import javax.annotation.Nullable;
+
+public class Description implements Serializable {
+
+  public static Description createSuiteDescription(String name, Annotation... annotations) {
+    return new Description(null, name, annotations);
+  }
+
+  private Description(@Nullable Class<?> clazz, String displayName, Annotation... annotations) {
+    throw new java.lang.Error();
+  }
+}
+```

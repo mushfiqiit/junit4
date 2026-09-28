@@ -1,0 +1,30 @@
+package org.junit.internal;
+
+import org.hamcrest.Matcher;
+import org.hamcrest.SelfDescribing;
+import javax.annotation.Nullable;
+
+public class AssumptionViolatedException extends RuntimeException implements SelfDescribing {
+
+  private static final long serialVersionUID = 0L;
+
+  private final String fAssumption;
+
+  private final boolean fValueMatcher = false;
+
+  private final Object fValue;
+
+  private final Matcher<?> fMatcher;
+
+  @Deprecated
+  public AssumptionViolatedException(
+      String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
+    throw new java.lang.Error();
+  }
+
+  @Deprecated
+  public AssumptionViolatedException(String assumption, Throwable e) {
+    this(assumption, false, null, null);
+    initCause(e);
+  }
+}

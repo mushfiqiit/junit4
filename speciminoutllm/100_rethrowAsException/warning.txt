@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:47: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

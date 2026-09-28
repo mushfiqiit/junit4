@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:10: warning: [NullAway] @NonNull static field ReflectiveThreadMXBean$Holder.getThreadCpuTimeMethod not initialized

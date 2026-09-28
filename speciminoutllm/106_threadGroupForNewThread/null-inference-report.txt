@@ -1,0 +1,46 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| Return type of `FailOnTimeout.threadGroupForNewThread()` | `@Nullable` | The method explicitly returns `null` when `lookForStuckThread` is `false`, so its return type is nullable. |
+
+## B) Cause of the warning
+
+The warning is triggered by the `return null;` statement at line 11. NullAway treats the unannotated return type `ThreadGroup` as `@Nonnull`, so returning `null` from this method is considered unsafe for callers that expect a non-null value. Annotating the method’s return type as `@Nullable` tells NullAway that `null` is an allowed return value, which resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/internal/runners/statements/FailOnTimeout.java ===
+package org.junit.internal.runners.statements;
+
+import org.junit.runners.model.Statement;
+import javax.annotation.Nullable;
+
+public class FailOnTimeout extends Statement {
+
+  private final boolean lookForStuckThread = false;
+
+  @Nullable
+  private ThreadGroup threadGroupForNewThread() {
+    if (!lookForStuckThread) {
+      return null;
+    }
+    ThreadGroup threadGroup = new ThreadGroup("FailOnTimeoutGroup");
+    if (!threadGroup.isDaemon()) {
+      try {
+        threadGroup.setDaemon(true);
+      } catch (SecurityException e) {
+      }
+    }
+    return threadGroup;
+  }
+}
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+```

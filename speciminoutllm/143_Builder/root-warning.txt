@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/143_Builder/org/junit/rules/TemporaryFolder.java:13: warning: [NullAway] initializer method does not guarantee @NonNull field parentFolder (line 9) is initialized along all control-flow paths (remember to check for exceptions or early returns).

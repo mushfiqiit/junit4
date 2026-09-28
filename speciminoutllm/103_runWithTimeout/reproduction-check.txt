@@ -1,0 +1,12 @@
+Slice: 103_runWithTimeout
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:65: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/103_runWithTimeout/org/junit/internal/runners/MethodRoadie.java:25: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/103_runWithTimeout/org/junit/internal/runners/MethodRoadie.java:25: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : MethodRoadie.java == MethodRoadie.java
+  message matches   : yes (exact)
+  line differs      : 65 -> 25
+VERDICT: REPRODUCED

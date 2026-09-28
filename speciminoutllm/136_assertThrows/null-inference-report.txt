@@ -1,0 +1,46 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `Assert.assertThrows(String, Class<T>, ThrowingRunnable)` parameter `message` | `@Nullable` | The two-argument `assertThrows` overload intentionally calls the three-argument overload with a `null` message, so this parameter must be allowed to be null. |
+
+## B) Cause of the warning
+
+The warning is produced at the call:
+
+```java
+return assertThrows(null, expectedThrowable, runnable);
+```
+
+This passes a `null` literal as the first argument to the three-argument overload whose first parameter is `String message`. Under NullAway’s default assumptions, an unannotated parameter is `@Nonnull`, so passing a `null` literal is considered unsafe. Marking `message` as `@Nullable` tells NullAway that `null` is an allowed value for that parameter, which fixes the reported warning.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+import org.junit.function.ThrowingRunnable;
+
+public class Assert {
+
+  public static <T extends Throwable> T assertThrows(
+      Class<T> expectedThrowable, ThrowingRunnable runnable) {
+    return assertThrows(null, expectedThrowable, runnable);
+  }
+
+  public static <T extends Throwable> T assertThrows(
+      @Nullable String message, Class<T> expectedThrowable, ThrowingRunnable runnable) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/function/ThrowingRunnable.java ===
+package org.junit.function;
+
+public interface ThrowingRunnable {}
+```

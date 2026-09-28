@@ -1,0 +1,44 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `ParameterSignature.findDeepAnnotation(...)` return type | `@Nullable` | The method deliberately returns `null` when `depth` is `0` or when the requested annotation is not found, so its result may be null. |
+
+No parameters or fields are involved in this warning and remain unannotated/non-null by default.
+
+B) Cause of the warning
+
+The warning points to the `return null;` statement on line 10. Because `findDeepAnnotation` has no nullness annotation on its return type, NullAway infers the return type as `@NonNull`, but the method explicitly returns a `@Nullable` expression (`null`). Annotating the return type as `@Nullable` aligns the method’s declared contract with its actual behavior, so returning `null` is allowed.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/experimental/theories/ParameterSignature.java ===
+package org.junit.experimental.theories;
+
+import java.lang.annotation.Annotation;
+import javax.annotation.Nullable;
+
+public class ParameterSignature {
+
+  private <T extends Annotation> @Nullable T findDeepAnnotation(
+      Annotation[] annotations, Class<T> annotationType, int depth) {
+    if (depth == 0) {
+      return null;
+    }
+    for (Annotation each : annotations) {
+      if (annotationType.isInstance(each)) {
+        return annotationType.cast(each);
+      }
+      Annotation candidate =
+          findDeepAnnotation(each.annotationType().getAnnotations(), annotationType, depth - 1);
+      if (candidate != null) {
+        return annotationType.cast(candidate);
+      }
+    }
+    return null;
+  }
+}
+```

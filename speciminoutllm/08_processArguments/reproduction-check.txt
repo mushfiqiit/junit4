@@ -1,0 +1,12 @@
+Slice: 08_processArguments
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:173: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/08_processArguments/junit/runner/BaseTestRunner.java:27: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/08_processArguments/junit/runner/BaseTestRunner.java:27: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : BaseTestRunner.java == BaseTestRunner.java
+  message matches   : yes (exact)
+  line differs      : 173 -> 27
+VERDICT: REPRODUCED

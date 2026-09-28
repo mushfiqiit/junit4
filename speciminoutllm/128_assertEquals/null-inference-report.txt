@@ -1,0 +1,45 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.Assert#assertEquals(String message, long expected, long actual)` — parameter `message` | `@Nullable` | The no-message overload intentionally passes `null` to represent the absence of a custom message, so `message` must accept null. |
+
+No other parameters, return types, or fields need annotations to fix this warning.
+
+## B) Cause of the warning
+
+The warning is caused by the `null` literal passed as the first argument in:
+
+```java
+assertEquals(null, expected, actual);
+```
+
+The target method is:
+
+```java
+public static void assertEquals(String message, long expected, long actual)
+```
+
+Because `message` is unannotated, NullAway treats it as a `@NonNull` parameter. Passing a `null` literal to a `@NonNull` parameter is unsafe. Annotating `message` as `@Nullable` tells NullAway that this parameter is allowed to be null, which resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertEquals(long expected, long actual) {
+    assertEquals(null, expected, actual);
+  }
+
+  public static void assertEquals(@Nullable String message, long expected, long actual) {
+    throw new java.lang.Error();
+  }
+}
+```

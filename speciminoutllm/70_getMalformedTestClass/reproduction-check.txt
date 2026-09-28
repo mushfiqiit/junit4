@@ -1,0 +1,13 @@
+Slice: 70_getMalformedTestClass
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:154: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/70_getMalformedTestClass/org/junit/experimental/max/MaxCore.java:7: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/70_getMalformedTestClass/org/junit/experimental/max/MaxCore.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/70_getMalformedTestClass/org/junit/experimental/max/MaxCore.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : MaxCore.java == MaxCore.java
+  message matches   : yes (exact)
+  line differs      : 154 -> 13
+VERDICT: REPRODUCED

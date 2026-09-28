@@ -1,0 +1,34 @@
+
+
+```java
+/*
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+| --- | --- | --- |
+| `junit.framework.Assert.assertTrue(String, boolean)` parameter `message` | `@Nullable` | The message may legitimately be absent, and the one-argument overload deliberately passes `null`. |
+| `junit.framework.Assert.assertTrue(String, boolean)` parameter `condition` | unannotated (non-null by default) | The parameter is a primitive `boolean`, so it cannot be null. |
+| return types of `assertTrue` methods | unannotated | The methods return `void`, which has no nullness. |
+| fields | none | This reduced file contains no fields. |
+
+B) Cause of the warning
+
+Line 11 is the call `assertTrue(null, condition)` inside the one-argument overload. NullAway treats the unannotated `String message` parameter of the two-argument overload as a non-null parameter, so passing the `null` literal is reported as unsafe. Marking `message` as `@Nullable` records that null is an accepted value, which fixes the warning while preserving the original logic.
+*/
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertTrue(@Nullable String message, boolean condition) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertTrue(boolean condition) {
+    assertTrue(null, condition);
+  }
+}
+```

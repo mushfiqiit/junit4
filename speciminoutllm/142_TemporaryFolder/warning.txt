@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:58: warning: [NullAway] passing @Nullable parameter '(File) null' where @NonNull is required

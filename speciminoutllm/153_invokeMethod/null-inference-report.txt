@@ -1,0 +1,134 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `FrameworkMethod.invokeExplosively(final Object target, final @Nullable Object... params)` — `params` | `@Nullable` | `RunAfterParams.invokeMethod` intentionally passes a `null` varargs array when the invoked method has no parameters, so `invokeExplosively` must accept a nullable varargs array. |
+| `BlockJUnit4ClassRunnerWithParameters.parameters` | `@Nonnull` / left unannotated | This field is used as the non-null parameter array in the non-null branch of the ternary and does not need to be nullable to fix the reported warning. |
+
+B) Cause of the warning
+
+The warning occurs at the call to `method.invokeExplosively(...)`, where the second argument is the ternary expression `paramCount == 0 ? (Object[]) null : parameters`. Because the ternary has a `null` branch, NullAway infers the argument as `@Nullable`. In the unannotated code, the `Object... params` parameter of `FrameworkMethod.invokeExplosively` is treated as a `@NonNull` varargs array, so passing the potentially null expression is flagged. Annotating `params` as `@Nullable` tells NullAway that `invokeExplosively` accepts a `null` varargs array, resolving the reported warning. The separate `null` passed for `target` is not the reported warning and is left unchanged.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/runners/statements/RunAfters.java ===
+package org.junit.internal.runners.statements;
+
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+
+public class RunAfters extends Statement {
+
+  protected void invokeMethod(FrameworkMethod method) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/BlockJUnit4ClassRunner.java ===
+package org.junit.runners;
+
+import org.junit.runners.model.FrameworkMethod;
+
+public class BlockJUnit4ClassRunner extends ParentRunner<FrameworkMethod> {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {}
+
+
+// === org/junit/runners/model/Annotatable.java ===
+package org.junit.runners.model;
+
+public interface Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMember.java ===
+package org.junit.runners.model;
+
+public abstract class FrameworkMember<T extends FrameworkMember<T>> implements Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMethod.java ===
+package org.junit.runners.model;
+
+import java.lang.reflect.Method;
+import javax.annotation.Nullable;
+
+public class FrameworkMethod extends FrameworkMember<FrameworkMethod> {
+
+  public Method getMethod() {
+    throw new java.lang.Error();
+  }
+
+  public Object invokeExplosively(final Object target, final @Nullable Object... params) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+
+
+// === org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java ===
+package org.junit.runners.parameterized;
+
+import org.junit.internal.runners.statements.RunAfters;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.model.FrameworkMethod;
+
+public class BlockJUnit4ClassRunnerWithParameters extends BlockJUnit4ClassRunner {
+
+  private final Object[] parameters;
+
+  private class RunAfterParams extends RunAfters {
+
+    protected void invokeMethod(FrameworkMethod method) throws Throwable {
+      int paramCount = method.getMethod().getParameterTypes().length;
+      method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+    }
+  }
+}
+```

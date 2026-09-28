@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/56_findDeepAnnotation/org/junit/experimental/theories/ParameterSignature.java:10: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/56_findDeepAnnotation/org/junit/experimental/theories/ParameterSignature.java:22: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

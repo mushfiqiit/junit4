@@ -1,0 +1,18 @@
+Slice: 02_getTest
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:98: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 7 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:12: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:17: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:28: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:31: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:42: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:52: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:55: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_getTest/junit/runner/BaseTestRunner.java:17: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : BaseTestRunner.java == BaseTestRunner.java
+  message matches   : yes (exact)
+  line differs      : 98 -> 17
+VERDICT: REPRODUCED

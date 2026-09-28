@@ -1,0 +1,92 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `RunnerBuilder.runnerForClass` return type | `@Nullable` | The overridden method is implemented by `AnnotatedBuilder`, which can return `null`, so the base contract must allow a nullable `Runner`. |
+| `AnnotatedBuilder.runnerForClass` return type | `@Nullable` | This method explicitly returns `null` when no `@RunWith` annotation is found on the class hierarchy. |
+
+B) Cause of the warning
+
+The warning is triggered at `AnnotatedBuilder.java:18`, the `return null;` statement. The method is declared as `public Runner runnerForClass(...)`, and because the return type is not annotated as nullable, NullAway treats it as `@NonNull`. Returning the literal `null` is therefore unsafe. Annotating the return type as `@Nullable`—and also annotating the overridden abstract method so the override remains nullability-compatible—tells NullAway that returning `null` is permitted here.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/builders/AnnotatedBuilder.java ===
+package org.junit.internal.builders;
+
+import javax.annotation.Nullable;
+import org.junit.runner.RunWith;
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class AnnotatedBuilder extends RunnerBuilder {
+
+  @Nullable
+  public Runner runnerForClass(Class<?> testClass) throws Exception {
+    for (Class<?> currentTestClass = testClass;
+        currentTestClass != null;
+        currentTestClass = getEnclosingClassForNonStaticMemberClass(currentTestClass)) {
+      RunWith annotation = currentTestClass.getAnnotation(RunWith.class);
+      if (annotation != null) {
+        return buildRunner(annotation.value(), testClass);
+      }
+    }
+    return null;
+  }
+
+  private Class<?> getEnclosingClassForNonStaticMemberClass(Class<?> currentTestClass) {
+    throw new java.lang.Error();
+  }
+
+  public Runner buildRunner(Class<? extends Runner> runnerClass, Class<?> testClass)
+      throws Exception {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/RunWith.java ===
+package org.junit.runner;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Inherited
+public @interface RunWith {
+
+  Class<? extends Runner> value();
+}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public abstract class RunnerBuilder {
+
+  @Nullable
+  public abstract Runner runnerForClass(Class<?> testClass) throws Throwable;
+}
+```

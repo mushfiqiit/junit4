@@ -1,0 +1,62 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `TestMethod.getExpectedException()` return type | `@Nullable` | This method explicitly returns `null` when there is no `@Test` annotation or when `expected()` is the sentinel `None.class`. |
+
+No parameter or field involved in this warning needs an annotation.
+
+## B) Cause of the warning
+
+The warning points to the `return null;` statement in `getExpectedException()`. Under NullAway’s default assumptions, an unannotated return type is treated as `@Nonnull`, while a `null` literal is `@Nullable`. Therefore, NullAway reports that the method is returning a `@Nullable` expression from a `@NonNull` return type.
+
+Marking the return type of `getExpectedException()` as `@Nullable` resolves the warning because it accurately records that callers may receive `null`.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/Test.java ===
+package org.junit;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+public @interface Test {
+
+  static class None extends Throwable {}
+
+  Class<? extends Throwable> expected() default None.class;
+
+  long timeout() default 0L;
+}
+
+
+// === org/junit/internal/runners/TestMethod.java ===
+package org.junit.internal.runners;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Method;
+import org.junit.Test;
+import org.junit.Test.None;
+
+@Deprecated
+public class TestMethod {
+
+  private final Method method;
+
+  protected @Nullable Class<? extends Throwable> getExpectedException() {
+    Test annotation = method.getAnnotation(Test.class);
+    if (annotation == null || annotation.expected() == None.class) {
+      return null;
+    } else {
+      return annotation.expected();
+    }
+  }
+}
+```

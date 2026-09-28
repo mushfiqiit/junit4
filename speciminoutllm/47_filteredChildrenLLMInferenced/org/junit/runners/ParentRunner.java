@@ -1,0 +1,13 @@
+package org.junit.runners;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
+
+  @Nullable
+  private volatile List<T> filteredChildren = null;
+}

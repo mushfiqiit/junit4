@@ -1,0 +1,33 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `Assert.assertNotNull(String message, Object object)` parameter `message` | `@Nullable` | The reported call passes `null` as the optional message, so this parameter must be allowed to be null. |
+| `Assert.assertNotNull(String message, Object object)` parameter `object` | unannotated (`@Nonnull` by default) | This parameter is not the source of the reported warning, so no annotation change is needed. |
+| `Assert.assertNotNull(Object object)` parameter `object` and return type | unannotated | These locations are not implicated by the specific `null` literal warning. |
+
+B) Cause of the warning
+
+The warning is triggered by the `null` literal in `assertNotNull(null, object)` inside the one-argument overload. NullAway treats unannotated method parameters as `@Nonnull` by default, so the `String message` parameter of the two-argument `assertNotNull` is assumed to require a non-null value. Passing the `null` literal to it is therefore considered unsafe. Annotating `message` as `@Nullable` explicitly states that the message may be absent, which allows the `null` literal and fixes the warning without changing program logic.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertNotNull(@Nullable String message, Object object) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertNotNull(Object object) {
+    assertNotNull(null, object);
+  }
+}
+```

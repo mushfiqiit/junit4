@@ -1,0 +1,2 @@
+Slice: 82_getExcludedCategory
+VERDICT: SKIPPED -- no warning.txt found in this folder

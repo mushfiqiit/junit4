@@ -1,0 +1,85 @@
+
+
+```java
+// A) Annotation decisions
+//
+// | location | inferred annotation | one-sentence reason |
+// | --- | --- | --- |
+// | org.junit.runner.Result#serializedForm (field) | @Nullable | The reduced constructor never assigns this field, so it is not guaranteed to be non-null and therefore must be treated as nullable. |
+
+// B) Cause of the warning
+//
+// The warning points to the Result constructor on line 31, which is the initializer for the field
+// serializedForm declared on line 29. Under NullAway, fields are non-null by default, so every
+// initializer method must assign every non-null field. The constructor body never assigns
+// serializedForm, so NullAway cannot guarantee the field is non-null after initialization.
+// Annotating the field @Nullable tells NullAway that a null value is permitted, resolving the
+// uninitialized non-null field warning.
+
+// C) Corrected annotated code
+
+// === org/junit/runner/Result.java ===
+package org.junit.runner;
+
+import javax.annotation.Nullable;
+import java.io.ObjectStreamField;
+import java.io.Serializable;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import org.junit.runner.notification.Failure;
+
+public class Result implements Serializable {
+
+  private static final long serialVersionUID = 0L;
+
+  private static final ObjectStreamField[] serialPersistentFields;
+
+  private final AtomicInteger count;
+
+  private final AtomicInteger ignoreCount;
+
+  private final AtomicInteger assumptionFailureCount;
+
+  private final CopyOnWriteArrayList<Failure> failures;
+
+  private final AtomicLong runTime;
+
+  private final AtomicLong startTime;
+
+  @Nullable
+  private SerializedForm serializedForm;
+
+  private Result(SerializedForm serializedForm) {
+    count = serializedForm.fCount;
+    ignoreCount = serializedForm.fIgnoreCount;
+    assumptionFailureCount = serializedForm.assumptionFailureCount;
+    failures = new CopyOnWriteArrayList<Failure>(serializedForm.fFailures);
+    runTime = new AtomicLong(serializedForm.fRunTime);
+    startTime = new AtomicLong(serializedForm.fStartTime);
+  }
+
+  private static class SerializedForm implements Serializable {
+
+    private final AtomicInteger fCount;
+
+    private final AtomicInteger fIgnoreCount;
+
+    private final AtomicInteger assumptionFailureCount;
+
+    private final List<Failure> fFailures;
+
+    private final long fRunTime = 0L;
+
+    private final long fStartTime = 0L;
+  }
+}
+
+// === org/junit/runner/notification/Failure.java ===
+package org.junit.runner.notification;
+
+import java.io.Serializable;
+
+public class Failure implements Serializable {}
+```

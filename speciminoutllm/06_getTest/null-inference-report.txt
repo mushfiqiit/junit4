@@ -1,0 +1,113 @@
+
+
+**A) Annotation decisions**
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `junit.runner.BaseTestRunner#getTest` return type | `@Nullable` | The method explicitly returns `null` on failure paths, including the flagged line, so its return type must be declared nullable. |
+
+No other parameters or fields need annotations to fix this warning; they remain unannotated and are treated as non-null by NullAway.
+
+**B) Cause of the warning**
+
+The warning is triggered by the `return null;` statement in `BaseTestRunner.getTest(String)`. The method’s return type is the unannotated type `Test`, which NullAway treats as `@NonNull`. The literal `null` is inherently `@Nullable`, so returning it violates the method’s `@NonNull` return contract. Annotating the return type of `getTest` as `@Nullable` makes returning `null` allowed and fixes the warning.
+
+**C) Corrected annotated code**
+
+```java
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {}
+
+
+// === junit/framework/TestListener.java ===
+package junit.framework;
+
+public interface TestListener {}
+
+
+// === junit/framework/TestSuite.java ===
+package junit.framework;
+
+public class TestSuite implements Test {
+
+  public TestSuite(final Class<?> theClass) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === junit/runner/BaseTestRunner.java ===
+package junit.runner;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import javax.annotation.Nullable;
+import junit.framework.Test;
+import junit.framework.TestListener;
+import junit.framework.TestSuite;
+
+public abstract class BaseTestRunner implements TestListener {
+
+  public static final String SUITE_METHODNAME;
+
+  public @Nullable Test getTest(String suiteClassName) {
+    if (suiteClassName.length() <= 0) {
+      clearStatus();
+      return null;
+    }
+    Class<?> testClass = null;
+    try {
+      testClass = loadSuiteClass(suiteClassName);
+    } catch (ClassNotFoundException e) {
+      String clazz = e.getMessage();
+      if (clazz == null) {
+        clazz = suiteClassName;
+      }
+      runFailed("Class not found \"" + clazz + "\"");
+      return null;
+    } catch (Exception e) {
+      runFailed("Error: " + e.toString());
+      return null;
+    }
+    Method suiteMethod = null;
+    try {
+      suiteMethod = testClass.getMethod(SUITE_METHODNAME);
+    } catch (Exception e) {
+      clearStatus();
+      return new TestSuite(testClass);
+    }
+    if (!Modifier.isStatic(suiteMethod.getModifiers())) {
+      runFailed("Suite() method must be static");
+      return null;
+    }
+    Test test = null;
+    try {
+      test = (Test) suiteMethod.invoke(null);
+      if (test == null) {
+        return test;
+      }
+    } catch (InvocationTargetException e) {
+      runFailed("Failed to invoke suite():" + e.getTargetException().toString());
+      return null;
+    } catch (IllegalAccessException e) {
+      runFailed("Failed to invoke suite():" + e.toString());
+      return null;
+    }
+    clearStatus();
+    return test;
+  }
+
+  protected abstract void runFailed(String message);
+
+  protected Class<?> loadSuiteClass(String suiteClassName) throws ClassNotFoundException {
+    throw new java.lang.Error();
+  }
+
+  protected void clearStatus() {
+    throw new java.lang.Error();
+  }
+}
+```

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/76_Suite/org/junit/runners/Suite.java:13: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

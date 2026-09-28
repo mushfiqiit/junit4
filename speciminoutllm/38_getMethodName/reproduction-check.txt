@@ -1,0 +1,12 @@
+Slice: 38_getMethodName
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:319: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/38_getMethodName/org/junit/runner/Description.java:8: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/38_getMethodName/org/junit/runner/Description.java:8: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  file name matches : Description.java == Description.java
+  message matches   : yes (exact)
+  line differs      : 319 -> 8
+VERDICT: REPRODUCED

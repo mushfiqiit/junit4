@@ -1,0 +1,65 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.internal.management.ReflectiveThreadMXBean.Holder#getThreadCpuTimeMethod` | `@Nullable` | This field may legitimately remain `null` when reflection of the `ThreadMXBean` methods fails, so declaring it `@Nullable` tells NullAway that a null value is permitted. |
+| All other parameters, return types, and fields in the provided code | unchanged | They are not the specific source of the reported warning and do not need annotation changes to resolve this one NullAway diagnostic. |
+
+## B) Cause of the warning
+
+The warning points to the declaration of `getThreadCpuTimeMethod` on line 10 of `ReflectiveThreadMXBean.java`. Under NullAway’s default assumptions, an unannotated `static final Method` field is treated as `@Nonnull`, so NullAway expects it to be definitely initialized with a non-null value. In the static initializer, `threadCpuTime` starts as `null` and is only assigned inside the `try` block; if any of the caught exceptions occurs, it remains `null`. Therefore, the assignment `getThreadCpuTimeMethod = threadCpuTime;` may assign `null` to what NullAway considers a non-null static final field, producing the “not initialized” warning. Annotating the field `@Nullable` resolves this by explicitly allowing the field to hold `null`.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/internal/Classes.java ===
+package org.junit.internal;
+
+public class Classes {
+
+  public static Class<?> getClass(String className) throws ClassNotFoundException {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/management/ReflectiveThreadMXBean.java ===
+package org.junit.internal.management;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Method;
+import org.junit.internal.Classes;
+
+final class ReflectiveThreadMXBean implements ThreadMXBean {
+
+  private static final class Holder {
+
+    @Nullable static final Method getThreadCpuTimeMethod;
+
+    static final Method isThreadCpuTimeSupportedMethod;
+
+    static {
+      Method threadCpuTime = null;
+      Method threadCpuTimeSupported = null;
+      try {
+        Class<?> threadMXBeanClass = Classes.getClass("java.lang.management.ThreadMXBean");
+        threadCpuTime = threadMXBeanClass.getMethod("getThreadCpuTime", long.class);
+        threadCpuTimeSupported = threadMXBeanClass.getMethod("isThreadCpuTimeSupported");
+      } catch (ClassNotFoundException e) {
+      } catch (NoSuchMethodException e) {
+      } catch (SecurityException e) {
+      }
+      getThreadCpuTimeMethod = threadCpuTime;
+      isThreadCpuTimeSupportedMethod = threadCpuTimeSupported;
+    }
+  }
+}
+
+
+// === org/junit/internal/management/ThreadMXBean.java ===
+package org.junit.internal.management;
+
+public interface ThreadMXBean {}
+```

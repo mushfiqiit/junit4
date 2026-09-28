@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/89_runnerForClass/org/junit/internal/builders/IgnoredBuilder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

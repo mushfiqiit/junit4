@@ -1,0 +1,13 @@
+Slice: 95_getInputArgumentsMethod
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveRuntimeMXBean.java:17: warning: [NullAway] @NonNull static field ReflectiveRuntimeMXBean$Holder.getInputArgumentsMethod not initialized
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/95_getInputArgumentsMethod/org/junit/internal/management/ReflectiveRuntimeMXBean.java:10: warning: [NullAway] @NonNull static field ReflectiveRuntimeMXBean$Holder.getInputArgumentsMethod not initialized
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/95_getInputArgumentsMethod/org/junit/internal/management/ReflectiveRuntimeMXBean.java:21: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/95_getInputArgumentsMethod/org/junit/internal/management/ReflectiveRuntimeMXBean.java:10: warning: [NullAway] @NonNull static field ReflectiveRuntimeMXBean$Holder.getInputArgumentsMethod not initialized
+  file name matches : ReflectiveRuntimeMXBean.java == ReflectiveRuntimeMXBean.java
+  message matches   : yes (exact)
+  line differs      : 17 -> 10
+VERDICT: REPRODUCED

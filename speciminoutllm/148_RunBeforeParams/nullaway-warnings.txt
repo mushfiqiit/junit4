@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/148_RunBeforeParams/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:14: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

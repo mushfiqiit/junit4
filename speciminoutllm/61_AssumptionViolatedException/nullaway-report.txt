@@ -1,0 +1,25 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:10: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private final String fAssumption = null;
+                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:14: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private final Object fValue = null;
+                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:16: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private final Matcher<?> fMatcher = null;
+                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:26: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    this(null, true, value, matcher);
+         ^
+    (see http://t.uber.com/nullaway )
+4 warnings
+
+BUILD SUCCESSFUL in 5s
+2 actionable tasks: 1 executed, 1 up-to-date

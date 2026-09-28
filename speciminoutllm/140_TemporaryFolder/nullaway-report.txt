@@ -1,0 +1,17 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/140_TemporaryFolder/org/junit/rules/TemporaryFolder.java:17: warning: [NullAway] initializer method does not guarantee @NonNull field folder (line 11) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+  public TemporaryFolder(File parentFolder) {
+         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/140_TemporaryFolder/org/junit/rules/TemporaryFolder.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  private static final String TMP_PREFIX = null;
+                              ^
+    (see http://t.uber.com/nullaway )
+2 warnings
+
+BUILD SUCCESSFUL in 5s
+2 actionable tasks: 1 executed, 1 up-to-date

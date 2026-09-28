@@ -1,0 +1,13 @@
+Slice: 145_createTemporaryFolderWithFileApi
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:291: warning: [NullAway] dereferenced expression createdFolder is @Nullable
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/145_createTemporaryFolderWithFileApi/org/junit/rules/TemporaryFolder.java:10: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/145_createTemporaryFolderWithFileApi/org/junit/rules/TemporaryFolder.java:33: warning: [NullAway] dereferenced expression createdFolder is @Nullable
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/145_createTemporaryFolderWithFileApi/org/junit/rules/TemporaryFolder.java:33: warning: [NullAway] dereferenced expression createdFolder is @Nullable
+  file name matches : TemporaryFolder.java == TemporaryFolder.java
+  message matches   : yes (exact)
+  line differs      : 291 -> 33
+VERDICT: REPRODUCED

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:12: warning: [NullAway] @NonNull static field ManagementFactory$FactoryHolder.MANAGEMENT_FACTORY_CLASS not initialized

@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/68_constructLeafRequest/org/junit/experimental/max/MaxCore.java:23: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/68_constructLeafRequest/org/junit/experimental/max/MaxCore.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

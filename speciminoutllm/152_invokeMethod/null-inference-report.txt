@@ -1,0 +1,139 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| First parameter `target` of `org.junit.runners.model.FrameworkMethod.invokeExplosively(Object target, Object... params)` | `@Nullable` | The call on line 15 deliberately passes `null` as the target object, which is valid for invoking static methods reflectively, so this parameter must be nullable. |
+
+B) Cause of the warning
+
+The warning occurs on line 15 of `BlockJUnit4ClassRunnerWithParameters.java` in the call:
+
+```java
+method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+```
+
+The literal `null` is passed as the first argument, corresponding to the `target` parameter of `FrameworkMethod.invokeExplosively`. Since the parameter is unannotated, NullAway treats it as `@NonNull`, so passing the `@Nullable` literal `null` is reported as unsafe. In reflection-based invocation, the target may legitimately be `null` when invoking a static method, so the correct nullability for `target` is `@Nullable`. Adding `@Nullable` to that parameter resolves the reported warning.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/runners/statements/RunAfters.java ===
+package org.junit.internal.runners.statements;
+
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+
+public class RunAfters extends Statement {
+
+  protected void invokeMethod(FrameworkMethod method) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/BlockJUnit4ClassRunner.java ===
+package org.junit.runners;
+
+import org.junit.runners.model.FrameworkMethod;
+
+public class BlockJUnit4ClassRunner extends ParentRunner<FrameworkMethod> {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {}
+
+
+// === org/junit/runners/model/Annotatable.java ===
+package org.junit.runners.model;
+
+public interface Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMember.java ===
+package org.junit.runners.model;
+
+public abstract class FrameworkMember<T extends FrameworkMember<T>> implements Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMethod.java ===
+package org.junit.runners.model;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Method;
+
+public class FrameworkMethod extends FrameworkMember<FrameworkMethod> {
+
+  public Method getMethod() {
+    throw new java.lang.Error();
+  }
+
+  public Object invokeExplosively(@Nullable final Object target, final Object... params) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+
+
+// === org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java ===
+package org.junit.runners.parameterized;
+
+import org.junit.internal.runners.statements.RunAfters;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.model.FrameworkMethod;
+
+public class BlockJUnit4ClassRunnerWithParameters extends BlockJUnit4ClassRunner {
+
+  private final Object[] parameters;
+
+  private class RunAfterParams extends RunAfters {
+
+    protected void invokeMethod(FrameworkMethod method) throws Throwable {
+      int paramCount = method.getMethod().getParameterTypes().length;
+      method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+    }
+  }
+}
+```

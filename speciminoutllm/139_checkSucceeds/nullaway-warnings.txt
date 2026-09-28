@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/139_checkSucceeds/org/junit/rules/ErrorCollector.java:19: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/139_checkSucceeds/org/junit/rules/ErrorCollector.java:22: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

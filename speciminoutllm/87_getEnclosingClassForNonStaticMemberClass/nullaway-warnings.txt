@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/87_getEnclosingClassForNonStaticMemberClass/org/junit/internal/builders/AnnotatedBuilder.java:12: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

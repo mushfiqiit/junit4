@@ -1,0 +1,31 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `Assert.assertNotEquals(String message, Object unexpected, Object actual)` parameter `message` | `@Nullable` | The two-argument overload calls this method with the `null` message, and JUnit’s message parameter is intended to be optional/nullable. |
+
+B) Cause of the warning
+
+The warning is on the call `assertNotEquals(null, unexpected, actual)` in the two-argument overload. NullAway treats the literal `null` as a `@Nullable` expression, while the first parameter of the three-argument `assertNotEquals` method is unannotated and therefore treated as `@NonNull`. Annotating that `message` parameter as `@Nullable` tells NullAway that a `null` message is permitted, resolving the warning.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertNotEquals(@Nullable String message, Object unexpected, Object actual) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertNotEquals(Object unexpected, Object actual) {
+    assertNotEquals(null, unexpected, actual);
+  }
+}
+```

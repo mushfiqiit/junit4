@@ -1,0 +1,14 @@
+Slice: 153_invokeMethod
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:186: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+
+nullaway-warnings.txt: 3 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/153_invokeMethod/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:9: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/153_invokeMethod/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:15: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/153_invokeMethod/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:15: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/153_invokeMethod/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:15: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+  file name matches : BlockJUnit4ClassRunnerWithParameters.java == BlockJUnit4ClassRunnerWithParameters.java
+  message matches   : yes (exact)
+  line differs      : 186 -> 15
+VERDICT: REPRODUCED

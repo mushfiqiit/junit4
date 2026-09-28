@@ -1,0 +1,12 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `Suite.java` → `protected Suite(Class<?> klass, List<Runner> runners)` → parameter `klass` | `@Nullable` | A suite built from multiple runners can be constructed without a single test class, so `Suite` intentionally passes `null` here. |
+| `ParentRunner.java` → `protected ParentRunner(Class<?> testClass)` → parameter `testClass` | `@Nullable` | The possibly-null `klass` from `Suite` is forwarded to `super`, so `ParentRunner` must also accept a null test class. |
+
+## B) Cause of the warning
+
+The warning points to the `null` literal in `this(null, builder.runners(null, classes));` on line 13 of `Suite.java`. Because `klass` in the protected `Suite` constructor is unannotated, NullAway treats it as `@NonNull`, so passing

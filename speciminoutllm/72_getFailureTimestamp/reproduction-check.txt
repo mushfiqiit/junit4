@@ -1,0 +1,13 @@
+Slice: 72_getFailureTimestamp
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:95: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/72_getFailureTimestamp/org/junit/experimental/max/MaxHistory.java:9: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/72_getFailureTimestamp/org/junit/experimental/max/MaxHistory.java:12: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/72_getFailureTimestamp/org/junit/experimental/max/MaxHistory.java:12: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : MaxHistory.java == MaxHistory.java
+  message matches   : yes (exact)
+  line differs      : 95 -> 12
+VERDICT: REPRODUCED

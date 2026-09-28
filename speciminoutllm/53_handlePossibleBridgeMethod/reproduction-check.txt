@@ -1,0 +1,12 @@
+Slice: 53_handlePossibleBridgeMethod
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMember.java:29: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/53_handlePossibleBridgeMethod/org/junit/runners/model/FrameworkMember.java:17: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/53_handlePossibleBridgeMethod/org/junit/runners/model/FrameworkMember.java:17: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : FrameworkMember.java == FrameworkMember.java
+  message matches   : yes (exact)
+  line differs      : 29 -> 17
+VERDICT: REPRODUCED

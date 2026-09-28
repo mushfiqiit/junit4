@@ -1,0 +1,31 @@
+
+
+### A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `message` parameter of `assertEquals(String, float, float, float)` | `@Nullable` | The `message` argument is optional and is explicitly passed as `null` by the overloaded `assertEquals(float, float, float)` method. |
+
+### B) Cause of the warning
+
+The warning occurs on line 10 at the call `assertEquals(null, expected, actual, delta)`. NullAway treats the unannotated `String message` parameter of the 4-argument `assertEquals` method as `@NonNull` by default, but the 3-argument overload passes the `null` literal for it. Marking the `message` parameter `@Nullable` tells NullAway that this parameter may receive `null`, which resolves the warning.
+
+### C) Corrected annotated code
+
+```java
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertEquals(@Nullable String message, float expected, float actual, float delta) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertEquals(float expected, float actual, float delta) {
+    assertEquals(null, expected, actual, delta);
+  }
+}
+```

@@ -1,0 +1,47 @@
+
+
+### A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `MaxHistory#getFailureTimestamp` return type | `@Nullable` | `Map#get` may return `null` when no timestamp is stored for the given description, so this method can legitimately return `null`. |
+| `MaxHistory#getFailureTimestamp(Description key)` parameter `key` | unannotated, i.e. default `@Nonnull` | `key.toString()` requires a non-null description, and no parameter annotation is needed to fix the reported warning. |
+| `MaxHistory#fFailureTimestamps` field | unannotated, i.e. default `@Nonnull` | The map itself is expected to be non-null; only the result of calling `get` on it may be null. |
+
+### B) Cause of the warning
+
+The warning is reported on the `return fFailureTimestamps.get(key.toString());` line because `Map#get` can return `null` when the requested key is absent. NullAway treats the unannotated return type `Long` as `@NonNull` by default, so returning the `@Nullable` result of `Map#get` is considered unsafe. Marking `getFailureTimestamp`’s return type as `@Nullable` tells NullAway that this method may return `null`, resolving the warning without changing the logic.
+
+### C) Corrected annotated code
+
+```java
+// === org/junit/experimental/max/MaxHistory.java ===
+package org.junit.experimental.max;
+
+import java.io.Serializable;
+import java.util.Map;
+import javax.annotation.Nullable;
+import org.junit.runner.Description;
+
+public class MaxHistory implements Serializable {
+
+  private final Map<String, Long> fFailureTimestamps;
+
+  @Nullable Long getFailureTimestamp(Description key) {
+    return fFailureTimestamps.get(key.toString());
+  }
+}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {
+
+  public String toString() {
+    throw new java.lang.Error();
+  }
+}
+```

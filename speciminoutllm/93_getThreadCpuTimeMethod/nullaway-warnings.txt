@@ -1,0 +1,4 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:10: warning: [NullAway] @NonNull static field ReflectiveThreadMXBean$Holder.getThreadCpuTimeMethod not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:12: warning: [NullAway] @NonNull static field ReflectiveThreadMXBean$Holder.isThreadCpuTimeSupportedMethod not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:25: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/93_getThreadCpuTimeMethod/org/junit/internal/management/ReflectiveThreadMXBean.java:26: warning: [NullAway] assigning @Nullable expression to @NonNull field

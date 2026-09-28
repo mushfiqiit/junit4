@@ -1,0 +1,13 @@
+Slice: 102_getExpectedException
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:45: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/102_getExpectedException/org/junit/internal/runners/TestMethod.java:10: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/102_getExpectedException/org/junit/internal/runners/TestMethod.java:15: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/102_getExpectedException/org/junit/internal/runners/TestMethod.java:15: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : TestMethod.java == TestMethod.java
+  message matches   : yes (exact)
+  line differs      : 45 -> 15
+VERDICT: REPRODUCED

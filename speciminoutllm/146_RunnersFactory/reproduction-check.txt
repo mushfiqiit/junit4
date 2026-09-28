@@ -1,0 +1,13 @@
+Slice: 146_RunnersFactory
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Parameterized.java:382: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+nullaway-warnings.txt: 2 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/146_RunnersFactory/org/junit/runners/Parameterized.java:23: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/146_RunnersFactory/org/junit/runners/Parameterized.java:48: warning: [NullAway] assigning @Nullable expression to @NonNull field
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/146_RunnersFactory/org/junit/runners/Parameterized.java:23: warning: [NullAway] assigning @Nullable expression to @NonNull field
+  file name matches : Parameterized.java == Parameterized.java
+  message matches   : yes (exact)
+  line differs      : 382 -> 23
+VERDICT: REPRODUCED

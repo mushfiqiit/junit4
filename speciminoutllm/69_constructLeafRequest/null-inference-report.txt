@@ -1,0 +1,150 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `ErrorReportingRunner.ErrorReportingRunner` parameter `Class<?> testClass` | `@Nullable` | The call at the warning site, `new ErrorReportingRunner(null, e)`, intentionally passes `null` for the test class, so this parameter must be nullable. |
+| `ErrorReportingRunner.ErrorReportingRunner` parameter `Throwable cause` | no annotation, i.e. default `@Nonnull` | The call passes the caught exception `e`, which is non-null, and the reported warning is not about this argument. |
+
+## B) Cause of the warning
+
+The warning is caused by the call `new ErrorReportingRunner(null, e)` in `MaxCore.constructLeafRequest`. NullAway treats an unannotated constructor parameter as `@Nonnull` by default, but the first argument is the literal `null`, which is `@Nullable`. Annotating the `testClass` parameter of `ErrorReportingRunner` as `@Nullable` makes this `null` argument type-correct and resolves the reported warning.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/experimental/max/MaxCore.java ===
+package org.junit.experimental.max;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.internal.runners.ErrorReportingRunner;
+import org.junit.runner.Description;
+import org.junit.runner.Request;
+import org.junit.runner.Runner;
+import org.junit.runners.Suite;
+import org.junit.runners.model.InitializationError;
+
+public class MaxCore {
+
+  private Request constructLeafRequest(List<Description> leaves) {
+    final List<Runner> runners = new ArrayList<Runner>();
+    for (Description each : leaves) {
+      runners.add(buildRunner(each));
+    }
+    return new Request() {
+
+      public Runner getRunner() {
+        try {
+          return new Suite((Class<?>) null, runners) {};
+        } catch (InitializationError e) {
+          return new ErrorReportingRunner(null, e);
+        }
+      }
+    };
+  }
+
+  private Runner buildRunner(Description each) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/runners/ErrorReportingRunner.java ===
+package org.junit.internal.runners;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public class ErrorReportingRunner extends Runner {
+
+  public ErrorReportingRunner(@Nullable Class<?> testClass, Throwable cause) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {}
+
+
+// === org/junit/runner/Request.java ===
+package org.junit.runner;
+
+public abstract class Request {
+
+  public abstract Runner getRunner();
+}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+import org.junit.runners.model.InitializationError;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
+
+  protected ParentRunner(Class<?> testClass) throws InitializationError {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/Suite.java ===
+package org.junit.runners;
+
+import java.util.List;
+import org.junit.runner.Runner;
+import org.junit.runners.model.InitializationError;
+
+public class Suite extends ParentRunner<Runner> {
+
+  protected Suite(Class<?> klass, List<Runner> runners) throws InitializationError {
+    super(klass);
+  }
+}
+
+
+// === org/junit/runners/model/InitializationError.java ===
+package org.junit.runners.model;
+
+public class InitializationError extends Exception {}
+```

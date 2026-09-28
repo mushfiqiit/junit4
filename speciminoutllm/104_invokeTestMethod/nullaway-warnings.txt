@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/104_invokeTestMethod/org/junit/internal/runners/JUnit4ClassRunner.java:24: warning: [NullAway] passing @Nullable parameter 'e.getCause()' where @NonNull is required

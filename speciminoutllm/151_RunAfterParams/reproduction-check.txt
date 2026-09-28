@@ -1,0 +1,12 @@
+Slice: 151_RunAfterParams
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:180: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/151_RunAfterParams/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:14: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/151_RunAfterParams/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:14: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+  file name matches : BlockJUnit4ClassRunnerWithParameters.java == BlockJUnit4ClassRunnerWithParameters.java
+  message matches   : yes (exact)
+  line differs      : 180 -> 14
+VERDICT: REPRODUCED

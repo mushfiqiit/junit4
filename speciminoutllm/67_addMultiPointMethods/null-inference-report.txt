@@ -1,0 +1,161 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.runners.model.FrameworkMethod.invokeExplosively(...)` — first parameter `Object target` | `@Nullable` | This parameter may be `null` when invoking a static method, and the reported warning comes from explicitly passing `null` as the `target` argument. |
+
+## B) Cause of the warning
+
+The warning is caused by the `null` literal passed to `dataPointsMethod.invokeExplosively(null)` in `AllMembersSupplier.java`. Under NullAway, the unannotated `Object target` parameter of `FrameworkMethod.invokeExplosively` is treated as `@NonNull`, so passing a `null` literal is unsafe. Since `FrameworkMethod.invokeExplosively` can legitimately be invoked with a `null` target for static methods, annotating the `target` parameter as `@Nullable` resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/experimental/theories/DataPoints.java ===
+package org.junit.experimental.theories;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD, METHOD})
+public @interface DataPoints {
+
+  String[] value() default {};
+
+  Class<? extends Throwable>[] ignoredExceptions() default {};
+}
+
+
+// === org/junit/experimental/theories/ParameterSignature.java ===
+package org.junit.experimental.theories;
+
+public class ParameterSignature {
+
+  public boolean canPotentiallyAcceptType(Class<?> candidate) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/experimental/theories/ParameterSupplier.java ===
+package org.junit.experimental.theories;
+
+public abstract class ParameterSupplier {}
+
+
+// === org/junit/experimental/theories/PotentialAssignment.java ===
+package org.junit.experimental.theories;
+
+public abstract class PotentialAssignment {}
+
+
+// === org/junit/experimental/theories/internal/AllMembersSupplier.java ===
+package org.junit.experimental.theories.internal;
+
+import java.util.Collection;
+import java.util.List;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.ParameterSignature;
+import org.junit.experimental.theories.ParameterSupplier;
+import org.junit.experimental.theories.PotentialAssignment;
+import org.junit.runners.model.FrameworkMethod;
+
+public class AllMembersSupplier extends ParameterSupplier {
+
+  private void addMultiPointMethods(ParameterSignature sig, List<PotentialAssignment> list)
+      throws Throwable {
+    for (FrameworkMethod dataPointsMethod : getDataPointsMethods(sig)) {
+      Class<?> returnType = dataPointsMethod.getReturnType();
+      if ((returnType.isArray() && sig.canPotentiallyAcceptType(returnType.getComponentType()))
+          || Iterable.class.isAssignableFrom(returnType)) {
+        try {
+          addDataPointsValues(
+              returnType,
+              sig,
+              dataPointsMethod.getName(),
+              list,
+              dataPointsMethod.invokeExplosively(null));
+        } catch (Throwable throwable) {
+          DataPoints annotation = dataPointsMethod.getAnnotation(DataPoints.class);
+          if (annotation != null
+              && isAssignableToAnyOf(annotation.ignoredExceptions(), throwable)) {
+            return;
+          } else {
+            throw throwable;
+          }
+        }
+      }
+    }
+  }
+
+  private void addDataPointsValues(
+      Class<?> type,
+      ParameterSignature sig,
+      String name,
+      List<PotentialAssignment> list,
+      Object value) {
+    throw new java.lang.Error();
+  }
+
+  private static boolean isAssignableToAnyOf(Class<?>[] typeArray, Object target) {
+    throw new java.lang.Error();
+  }
+
+  protected Collection<FrameworkMethod> getDataPointsMethods(ParameterSignature sig) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/model/Annotatable.java ===
+package org.junit.runners.model;
+
+import java.lang.annotation.Annotation;
+
+public interface Annotatable {
+
+  <T extends Annotation> T getAnnotation(Class<T> annotationType);
+}
+
+
+// === org/junit/runners/model/FrameworkMember.java ===
+package org.junit.runners.model;
+
+public abstract class FrameworkMember<T extends FrameworkMember<T>> implements Annotatable {
+
+  public abstract String getName();
+}
+
+
+// === org/junit/runners/model/FrameworkMethod.java ===
+package org.junit.runners.model;
+
+import java.lang.annotation.Annotation;
+import javax.annotation.Nullable;
+
+public class FrameworkMethod extends FrameworkMember<FrameworkMethod> {
+
+  public Object invokeExplosively(final @Nullable Object target, final Object... params) throws Throwable {
+    throw new java.lang.Error();
+  }
+
+  public String getName() {
+    throw new java.lang.Error();
+  }
+
+  public Class<?> getReturnType() {
+    throw new java.lang.Error();
+  }
+
+  public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
+    throw new java.lang.Error();
+  }
+}
+```

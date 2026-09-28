@@ -1,0 +1,12 @@
+Slice: 101_initGetSuppressed
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:114: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/101_initGetSuppressed/org/junit/internal/Throwables.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/101_initGetSuppressed/org/junit/internal/Throwables.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+  file name matches : Throwables.java == Throwables.java
+  message matches   : yes (exact)
+  line differs      : 114 -> 11
+VERDICT: REPRODUCED

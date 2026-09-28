@@ -1,0 +1,133 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.internal.runners.statements.RunBefores#RunBefores(Statement, List, Object)` — `target` parameter | `@Nullable` | `ParentRunner.withBeforeClasses` explicitly passes `null` as the target for class-level `@BeforeClass` setup, so this constructor parameter can legally be null. |
+
+## B) Cause of the warning
+
+The warning is triggered on line 19 of `ParentRunner.java`, where `withBeforeClasses` returns `new RunBefores(statement, befores, null)`. The third argument, `null`, is passed to the `target` parameter of `RunBefores`. Since `RunBefores` has no nullness annotations, NullAway assumes its `Object target` parameter is `@NonNull` by default, so passing a literal `null` is reported as unsafe. Annotating `target` as `@Nullable` declares that this constructor argument may be null, matching the actual JUnit usage and resolving the warning.
+
+```java
+// === org/junit/BeforeClass.java ===
+package org.junit;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface BeforeClass {}
+
+
+// === org/junit/internal/runners/statements/RunBefores.java ===
+package org.junit.internal.runners.statements;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+
+public class RunBefores extends Statement {
+
+  public RunBefores(Statement next, List<FrameworkMethod> befores, @Nullable Object target) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.internal.runners.statements.RunBefores;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
+
+  private final TestClass testClass;
+
+  protected Statement withBeforeClasses(Statement statement) {
+    List<FrameworkMethod> befores = testClass.getAnnotatedMethods(BeforeClass.class);
+    return befores.isEmpty() ? statement : new RunBefores(statement, befores, null);
+  }
+}
+
+
+// === org/junit/runners/model/Annotatable.java ===
+package org.junit.runners.model;
+
+public interface Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMember.java ===
+package org.junit.runners.model;
+
+public abstract class FrameworkMember<T extends FrameworkMember<T>> implements Annotatable {}
+
+
+// === org/junit/runners/model/FrameworkMethod.java ===
+package org.junit.runners.model;
+
+public class FrameworkMethod extends FrameworkMember<FrameworkMethod> {}
+
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+
+
+// === org/junit/runners/model/TestClass.java ===
+package org.junit.runners.model;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+
+public class TestClass implements Annotatable {
+
+  public List<FrameworkMethod> getAnnotatedMethods(Class<? extends Annotation> annotationClass) {
+    throw new java.lang.Error();
+  }
+}
+```

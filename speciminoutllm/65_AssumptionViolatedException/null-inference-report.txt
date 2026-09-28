@@ -1,0 +1,67 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `AssumptionViolatedException(String, boolean, Object, Matcher<?>)` parameter `value` | `@Nullable` | The two-argument constructor explicitly passes `null` for this value, indicating that no value is present in that case. |
+| `AssumptionViolatedException(String, boolean, Object, Matcher<?>)` parameter `matcher` | `@Nullable` | The same two-argument constructor explicitly passes `null` for this matcher, indicating that no matcher is present in that case. |
+| Other parameters/fields in the reduced code | left unannotated, i.e. `@Nonnull` by default | They are not part of the reported line-26 null-passing warning, so no annotation is needed to fix this warning. |
+
+## B) Cause of the warning
+
+The warning is produced by the call on line 26:
+
+```java
+this(assumption, false, null, null);
+```
+
+This call passes `null` for the `value` and `matcher` arguments of the four-argument constructor. Because those parameters were unannotated, NullAway treats them as `@Nonnull`, while a `null` literal is `@Nullable`. Annotating the `value` and `matcher` parameters as `@Nullable` accurately states that these optional arguments may be absent, which resolves the unsafe `null`-to-`@Nonnull` mismatch.
+
+## C) Corrected annotated code
+
+```java
+// === org/hamcrest/Matcher.java ===
+package org.hamcrest;
+
+public interface Matcher<T> extends SelfDescribing {}
+
+
+// === org/hamcrest/SelfDescribing.java ===
+package org.hamcrest;
+
+public interface SelfDescribing {}
+
+
+// === org/junit/internal/AssumptionViolatedException.java ===
+package org.junit.internal;
+
+import org.hamcrest.Matcher;
+import org.hamcrest.SelfDescribing;
+import javax.annotation.Nullable;
+
+public class AssumptionViolatedException extends RuntimeException implements SelfDescribing {
+
+  private static final long serialVersionUID = 0L;
+
+  private final String fAssumption;
+
+  private final boolean fValueMatcher = false;
+
+  private final Object fValue;
+
+  private final Matcher<?> fMatcher;
+
+  @Deprecated
+  public AssumptionViolatedException(
+      String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
+    throw new java.lang.Error();
+  }
+
+  @Deprecated
+  public AssumptionViolatedException(String assumption, Throwable e) {
+    this(assumption, false, null, null);
+    initCause(e);
+  }
+}
+```

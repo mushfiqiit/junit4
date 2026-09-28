@@ -1,0 +1,40 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `AnnotatedBuilder.getEnclosingClassForNonStaticMemberClass` return type | `@Nullable` | The method has an explicit `return null;` branch, so its return value may be null. |
+| `AnnotatedBuilder.getEnclosingClassForNonStaticMemberClass(Class<?> currentTestClass)` parameter | `@Nonnull` by default, left unannotated | The parameter is dereferenced directly and is expected to be a non-null `Class<?>`; no annotation change is needed for this warning. |
+| fields | none | No field is involved in this warning. |
+
+B) Cause of the warning
+
+The warning points to the `return null;` statement. The method’s return type `Class<?>` is non-null by default under NullAway, so NullAway treats `null` as a `@Nullable` expression being returned from a `@NonNull` method. Marking the method return type `@Nullable` accurately documents that this method may return null, making both `return currentTestClass.getEnclosingClass();` and `return null;` safe.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/internal/builders/AnnotatedBuilder.java ===
+package org.junit.internal.builders;
+
+import java.lang.reflect.Modifier;
+import javax.annotation.Nullable;
+import org.junit.runners.model.RunnerBuilder;
+
+public class AnnotatedBuilder extends RunnerBuilder {
+
+  private @Nullable Class<?> getEnclosingClassForNonStaticMemberClass(Class<?> currentTestClass) {
+    if (currentTestClass.isMemberClass() && !Modifier.isStatic(currentTestClass.getModifiers())) {
+      return currentTestClass.getEnclosingClass();
+    } else {
+      return null;
+    }
+  }
+}
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+public abstract class RunnerBuilder {}
+```

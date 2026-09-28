@@ -1,0 +1,32 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `junit.framework.Assert.assertEquals(String message, long expected, long actual)` — parameter `message` | `@Nullable` | The no-message overload intentionally calls this method with `null`, so the message parameter must be allowed to be null. |
+
+B) Cause of the warning
+
+The warning occurs at line 11 in `assertEquals(long expected, long actual)`, where the code calls `assertEquals(null, expected, actual)`. NullAway assumes the `String message` parameter of the three-argument `assertEquals` is non-null because it is unannotated, so passing the literal `null` is reported as unsafe. Annotating that parameter as `@Nullable` tells NullAway that `null` is a valid value for this parameter, which resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertEquals(@Nullable String message, long expected, long actual) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertEquals(long expected, long actual) {
+    assertEquals(null, expected, actual);
+  }
+}
+```

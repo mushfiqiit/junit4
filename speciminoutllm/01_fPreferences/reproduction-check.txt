@@ -1,0 +1,12 @@
+Slice: 01_fPreferences
+Original warning (warning.txt):
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:32: warning: [NullAway] @NonNull static field fPreferences not initialized
+
+nullaway-warnings.txt: 1 finding(s)
+  /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/01_fPreferences/junit/runner/BaseTestRunner.java:8: warning: [NullAway] @NonNull static field fPreferences not initialized
+
+Matched finding: /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/01_fPreferences/junit/runner/BaseTestRunner.java:8: warning: [NullAway] @NonNull static field fPreferences not initialized
+  file name matches : BaseTestRunner.java == BaseTestRunner.java
+  message matches   : yes (exact)
+  line differs      : 32 -> 8
+VERDICT: REPRODUCED

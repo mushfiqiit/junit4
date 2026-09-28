@@ -1,0 +1,58 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `TemporaryFolder.folder` field | `@Nullable` | This field is not initialized in the constructor and may legitimately be null until a temporary folder is actually created, so it cannot be treated as `@NonNull`. |
+
+B) Cause of the warning
+
+NullAway treats the constructor `TemporaryFolder(Builder builder)` as an initializer method for instance fields. The field `folder` is declared as an unannotated `File`, which NullAway interprets as `@NonNull` by default. Because the constructor does not assign to `folder` and there is no field initializer, NullAway reports that the field may remain null after construction. Annotating `folder` as `@Nullable` tells NullAway that null is an allowed state for this field, which resolves the field-initialization warning.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/rules/ExternalResource.java ===
+package org.junit.rules;
+
+public abstract class ExternalResource implements TestRule {}
+
+
+// === org/junit/rules/TemporaryFolder.java ===
+package org.junit.rules;
+
+import java.io.File;
+import javax.annotation.Nullable;
+
+public class TemporaryFolder extends ExternalResource {
+
+  private final File parentFolder;
+
+  private final boolean assureDeletion;
+
+  @Nullable private File folder;
+
+  private static final int TEMP_DIR_ATTEMPTS = 0;
+
+  private static final String TMP_PREFIX;
+
+  protected TemporaryFolder(Builder builder) {
+    this.parentFolder = builder.parentFolder;
+    this.assureDeletion = builder.assureDeletion;
+  }
+
+  public static class Builder {
+
+    private File parentFolder;
+
+    private boolean assureDeletion;
+  }
+}
+
+
+// === org/junit/rules/TestRule.java ===
+package org.junit.rules;
+
+public interface TestRule {}
+```

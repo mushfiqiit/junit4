@@ -1,0 +1,44 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `junit.framework.TestCase.fName` | `@Nullable` | The constructor assigns `null` to `fName`, so the field is allowed to hold a null value. |
+
+## B) Cause of the warning
+
+The warning is reported on the assignment `fName = null;` inside `TestCase`’s constructor. NullAway treats unannotated fields as `@Nonnull` by default, so assigning the null literal to `fName` is considered unsafe. Annotating `fName` with `@Nullable` tells NullAway that this field is allowed to be null, which resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+@Deprecated
+public class Assert {}
+
+
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {}
+
+
+// === junit/framework/TestCase.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@SuppressWarnings("deprecation")
+public abstract class TestCase extends Assert implements Test {
+
+  @Nullable
+  private String fName;
+
+  public TestCase() {
+    fName = null;
+  }
+}
+```

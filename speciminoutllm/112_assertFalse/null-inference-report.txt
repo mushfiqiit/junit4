@@ -1,0 +1,29 @@
+
+
+```java
+// A) Annotation decisions
+// location | inferred annotation | one-sentence reason
+// message parameter of Assert.assertFalse(String, boolean) | @Nullable | The one-argument overload legitimately passes null to indicate that no assertion message is provided, so this parameter must accept null.
+
+// B) Cause of the warning
+// Line 10 calls assertFalse(null, condition), passing the null literal to the String message parameter of the two-argument assertFalse method.
+// That parameter was unannotated, so NullAway treats it as @NonNull and therefore flags the null argument as unsafe.
+// Marking the message parameter @Nullable declares that null is a valid value for this parameter, resolving the warning.
+
+// C) Corrected annotated code
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertFalse(@Nullable String message, boolean condition) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertFalse(boolean condition) {
+    assertFalse(null, condition);
+  }
+}
+```

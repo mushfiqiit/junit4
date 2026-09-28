@@ -1,0 +1,17 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/69_constructLeafRequest/org/junit/experimental/max/MaxCore.java:23: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+          return new Suite((Class<?>) null, runners) {};
+                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/69_constructLeafRequest/org/junit/experimental/max/MaxCore.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+          return new ErrorReportingRunner(null, e);
+                                          ^
+    (see http://t.uber.com/nullaway )
+2 warnings
+
+BUILD SUCCESSFUL in 5s
+2 actionable tasks: 1 executed, 1 up-to-date

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/105_getCauses/org/junit/internal/runners/ErrorReportingRunner.java:16: warning: [NullAway] passing @Nullable parameter 'cause.getCause()' where @NonNull is required
