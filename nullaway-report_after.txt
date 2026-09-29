@@ -7,531 +7,379 @@ cache executionHistory.bin (/Users/mushfiqurrahmanchowdhury/Documents/junit4/.nu
 warning: [options] source value 8 is obsolete and will be removed in a future release
 warning: [options] target value 8 is obsolete and will be removed in a future release
 warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:24: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:6: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:3: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestFailure.java:4: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:3: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:11: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:18: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/notification/Failure.java:7: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:14: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/BlockJUnit4ClassRunner.java:38: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:52: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMethod.java:10: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMember.java:5: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/Annotatable.java:4: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/TestClass.java:25: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:12: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/RuleContainer.java:15: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:10: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:19: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:18: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:17: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:17: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:3: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AnnotatedBuilder.java:9: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java:8: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveThreadMXBean.java:7: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveRuntimeMXBean.java:9: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:6: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/ClassRequest.java:7: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/MemoizingRequest.java:8: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:14: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:13: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit4ClassRunner.java:21: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/ErrorReportingRunner.java:14: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:18: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunBefores.java:7: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunAfters.java:9: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:9: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TestName.java:4: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/ErrorCollector.java:14: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:12: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Parameterized.java:28: error: cannot find symbol
-import javax.annotation.Nullable;
-                       ^
-  symbol:   class Nullable
-  location: package javax.annotation
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestFailure.java:58: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class TestFailure
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:82: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class TestCase
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:22: error: cannot find symbol
-    public static void assertTrue(@Nullable String message, boolean condition) {
-                                   ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:40: error: cannot find symbol
-    public static void assertFalse(@Nullable String message, boolean condition) {
-                                    ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:55: error: cannot find symbol
-    public static void fail(@Nullable String message) {
-                             ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:73: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, Object expected, Object actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:94: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, String expected, String actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:117: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, double expected, double actual, double delta) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:139: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, float expected, float actual, float delta) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:160: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, long expected, long actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:175: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, boolean expected, boolean actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:190: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, byte expected, byte actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:205: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, char expected, char actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:220: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, short expected, short actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:235: error: cannot find symbol
-    public static void assertEquals(@Nullable String message, int expected, int actual) {
-                                     ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:257: error: cannot find symbol
-    public static void assertNotNull(@Nullable String message, Object object) {
-                                      ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:286: error: cannot find symbol
-    public static void assertSame(@Nullable String message, Object expected, Object actual) {
-                                   ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:306: error: cannot find symbol
-    public static void assertNotSame(@Nullable String message, Object expected, Object actual) {
-                                      ^
-  symbol:   class Nullable
-  location: class Assert
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:33: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class BaseTestRunner
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:97: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class BaseTestRunner
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:158: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class BaseTestRunner
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:24: error: cannot find symbol
-    public String compact(@Nullable String message) {
-                           ^
-  symbol:   class Nullable
-  location: class ComparisonCompactor
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:162: error: cannot find symbol
-    private Description(@Nullable Class<?> clazz, String displayName, Annotation... annotations) {
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/textui/TestRunner.java:183: warning: [NullAway] passing @Nullable parameter 'suite' where @NonNull is required
+            return doRun(suite, wait);
                          ^
-  symbol:   class Nullable
-  location: class Description
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:166: error: cannot find symbol
-    private Description(@Nullable Class<?> testClass, String displayName, Serializable uniqueId, Annotation... annotations) {
-                         ^
-  symbol:   class Nullable
-  location: class Description
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:271: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class Description
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:292: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class Description
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:326: error: cannot find symbol
-            @Nullable String defaultString) {
-             ^
-  symbol:   class Nullable
-  location: class Description
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/notification/Failure.java:88: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class Failure
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:38: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class Result
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:54: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class RunnerBuilder
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:108: error: cannot find symbol
-    public List<Runner> runners(@Nullable Class<?> parent, Class<?>[] children)
-                                 ^
-  symbol:   class Nullable
-  location: class RunnerBuilder
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:108: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class ParameterSignature
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:128: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class ParameterSignature
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/TestClass.java:220: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class TestClass
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/BlockJUnit4ClassRunner.java:442: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class BlockJUnit4ClassRunner
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/RuleContainer.java:108: error: cannot find symbol
-        RuleEntry(Object rule, int type, @Nullable Integer order) {
-                                          ^
-  symbol:   class Nullable
-  location: class RuleEntry
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMethod.java:55: error: cannot find symbol
-    public Object invokeExplosively(@Nullable final Object target, @Nullable final Object... params)
-                                     ^
-  symbol:   class Nullable
-  location: class FrameworkMethod
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMethod.java:55: error: cannot find symbol
-    public Object invokeExplosively(@Nullable final Object target, @Nullable final Object... params)
-                                                                    ^
-  symbol:   class Nullable
-  location: class FrameworkMethod
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMember.java:16: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class FrameworkMember<T>
-  where T is a type-variable:
-    T extends FrameworkMember<T> declared in class FrameworkMember
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/Annotatable.java:20: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: interface Annotatable
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:76: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class ParentRunner<T>
-  where T is a type-variable:
-    T extends Object declared in class ParentRunner
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:92: error: cannot find symbol
-    protected ParentRunner(@Nullable Class<?> testClass) throws InitializationError {
-                            ^
-  symbol:   class Nullable
-  location: class ParentRunner<T>
-  where T is a type-variable:
-    T extends Object declared in class ParentRunner
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:36: error: cannot find symbol
-    public AssumptionViolatedException(@Nullable String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:163: warning: [NullAway] passing @Nullable parameter 'fName' where @NonNull is required
+        assertNotNull("TestCase.fName cannot be null", fName); // Some VMs crash when calling getMethod(null,null);
+                                                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:174: warning: [NullAway] dereferenced expression runMethod is @Nullable
+        if (!Modifier.isPublic(runMethod.getModifiers())) {
                                         ^
-  symbol:   class Nullable
-  location: class AssumptionViolatedException
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:36: error: cannot find symbol
-    public AssumptionViolatedException(@Nullable String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
-                                                                                       ^
-  symbol:   class Nullable
-  location: class AssumptionViolatedException
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:36: error: cannot find symbol
-    public AssumptionViolatedException(@Nullable String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
-                                                                                                               ^
-  symbol:   class Nullable
-  location: class AssumptionViolatedException
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:151: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class MaxCore
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:175: error: cannot find symbol
-    private void findLeaves(@Nullable Description parent, Description description, List<Description> results) {
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:500: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return fName;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:80: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        failNotEquals(message, expected, actual);
+                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:122: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failNotEquals(message, Double.valueOf(expected), Double.valueOf(actual));
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:144: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failNotEquals(message, Float.valueOf(expected), Float.valueOf(actual));
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:290: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        failNotSame(message, expected, actual);
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:308: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failSame(message);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:26: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            return Assert.format(message, fExpected, fActual);
+                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:33: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        return Assert.format(message, expected, actual);
                              ^
-  symbol:   class Nullable
-  location: class MaxCore
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:95: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class MaxHistory
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:108: error: cannot find symbol
-    @Nullable
-     ^
-  symbol:   class Nullable
-  location: class MaxHistory
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:91: error: cannot find symbol
-    protected Suite(@Nullable Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
-                     ^
-  symbol:   class Nullable
-  location: class Suite
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:102: error: cannot find symbol
-    protected Suite(RunnerBuilder builder, @Nullable Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:166: warning: [NullAway] initializer method does not guarantee @NonNull field fTestClass (line 160) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    private Description(@Nullable Class<?> testClass, String displayName, Serializable uniqueId, Annotation... annotations) {
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:175: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.fTestClass = testClass;
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:328: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return matcher.matches() ? matcher.group(group) : defaultString;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:126: warning: [NullAway] passing @Nullable parameter 'serializedForm' where @NonNull is required
+        return new Result(serializedForm);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:108: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TestSuite() {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:161: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TestSuite(String name) {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:170: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TestSuite(Class<?>... classes) {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Computer.java:50: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return builder.runnerForClass(testClass);
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:76: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return runner;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:110: warning: [NullAway] passing @Nullable parameter 'parent' where @NonNull is required
+        addParent(parent);
+                  ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:115: warning: [NullAway] passing @Nullable parameter 'parent' where @NonNull is required
+            removeParent(parent);
+                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:93: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required
+        this.testClass = createTestClass(testClass);
+                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:281: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        testClass.collectAnnotatedMethodValues(null, ClassRule.class, TestRule.class, collector);
+                                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:282: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        testClass.collectAnnotatedFieldValues(null, ClassRule.class, TestRule.class, collector);
+                                              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:105: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return findDeepAnnotation(annotations2, annotationType, 3);
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/MethodSorters.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    JVM(null),
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:37: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.fAssumption = assumption;
+                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:38: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.fValue = value;
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:39: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.fMatcher = matcher;
+                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/suppliers/TestedOnSupplier.java:19: warning: [NullAway] dereferenced expression testedOn is @Nullable
+        int[] ints = testedOn.ints();
+                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:25: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
+        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
+                                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:42: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
+        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
+                                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:59: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
+        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
+                                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:76: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
+        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
+                                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:138: warning: [NullAway] passing @Nullable parameter 'getMalformedTestClass(each)' where @NonNull is required
+            return new JUnit38ClassRunner(new TestSuite(getMalformedTestClass(each)));
+                                                                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:131: warning: [NullAway] unboxing of a @Nullable value
+            long start = starts.get(description);
+                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:159: warning: [NullAway] dereferenced expression getTestDuration(o1) is @Nullable
+                    : getTestDuration(o1).compareTo(getTestDuration(o2));
+                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:163: warning: [NullAway] passing @Nullable parameter 'includes' where @NonNull is required
+            included = copyAndRefine(includes);
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:164: warning: [NullAway] passing @Nullable parameter 'excludes' where @NonNull is required
+            excluded = copyAndRefine(excludes);
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:171: warning: [NullAway] passing @Nullable parameter 'inclusions' where @NonNull is required
+            included = createSet(inclusions);
+                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:172: warning: [NullAway] passing @Nullable parameter 'exclusions' where @NonNull is required
+            excluded = createSet(exclusions);
+                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:281: warning: [NullAway] passing @Nullable parameter 'parentDescription(description)' where @NonNull is required
+            Collections.addAll(categories, directCategories(parentDescription(description)));
+                                                                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:326: warning: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
+        return createSet(annotation == null ? null : annotation.value());
                                             ^
-  symbol:   class Nullable
-  location: class Suite
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:112: error: cannot find symbol
-    protected Suite(@Nullable Class<?> klass, List<Runner> runners) throws InitializationError {
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:336: warning: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
+        return createSet(annotation == null ? null : annotation.value());
+                                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:99: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+                return Assert.format(message, expected, actual);
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:104: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+                return Assert.format(message,
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/NullBuilder.java:9: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/IgnoredBuilder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/JUnit3Builder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/SuiteMethodBuilder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:49: warning: [NullAway] passing @Nullable parameter 'FactoryHolder.getBeanObject("getRuntimeMXBean")' where @NonNull is required
+        getBean(FactoryHolder.getBeanObject("getRuntimeMXBean"));
+                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:59: warning: [NullAway] passing @Nullable parameter 'FactoryHolder.getBeanObject("getThreadMXBean")' where @NonNull is required
+        getBean(FactoryHolder.getBeanObject("getThreadMXBean"));
+                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/ClassRequest.java:49: warning: [NullAway] method returns @Nullable, but superclass method org.junit.internal.builders.SuiteMethodBuilder.runnerForClass(java.lang.Class<?>) returns @NonNull
+        public Runner runnerForClass(Class<?> testClass) throws Throwable {
+                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:110: warning: [NullAway] assigning @Nullable expression to @NonNull field
+    private static final Method getSuppressed = initGetSuppressed();
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:54: warning: [NullAway] dereferenced expression getExpectedException() is @Nullable
+        return !getExpectedException().isAssignableFrom(exception.getClass());
+                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:65: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+                        return null;
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:110: warning: [NullAway] dereferenced expression testMethod.getExpectedException() is @Nullable
+                addFailure(new AssertionError("Expected exception: " + testMethod.getExpectedException().getName()));
+                                                                                                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:119: warning: [NullAway] dereferenced expression testMethod.getExpectedException() is @Nullable
+                String message = "Unexpected exception, expected<" + testMethod.getExpectedException().getName() + "> but was<"
+                                                                                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit4ClassRunner.java:105: warning: [NullAway] passing @Nullable parameter 'e' where @NonNull is required
+        notifier.fireTestFailure(new Failure(description, e));
+                                                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/ErrorReportingRunner.java:22: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required
+        this(cause, testClass);
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunBefores.java:19: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.target = target;
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunAfters.java:21: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.target = target;
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:121: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failNotEquals(message, expected, actual);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:164: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failEquals(message, actual);
+                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:202: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failEquals(message, Long.valueOf(actual));
+                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:235: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failEquals(message, Double.valueOf(actual));
+                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:286: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        internalArrayEquals(message, expecteds, actuals);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:317: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        internalArrayEquals(message, expecteds, actuals);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:344: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        internalArrayEquals(message, expecteds, actuals);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:369: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        internalArrayEquals(message, expecteds, actuals);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:394: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        internalArrayEquals(message, expecteds, actuals);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:419: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        internalArrayEquals(message, expecteds, actuals);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:444: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        internalArrayEquals(message, expecteds, actuals);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:472: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);
+                                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:503: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);
+                                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:556: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failNotEquals(message, Double.valueOf(expected), Double.valueOf(actual));
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:578: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failNotEquals(message, Float.valueOf(expected), Float.valueOf(actual));
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:600: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failEquals(message, Float.valueOf(actual));
+                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:648: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failNotEquals(message, Long.valueOf(expected), Long.valueOf(actual));
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:739: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        failNotNull(message, object);
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:773: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        failNotSame(message, expected, actual);
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:800: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+            failSame(message);
                      ^
-  symbol:   class Nullable
-  location: class Suite
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:159: error: cannot find symbol
-        protected CategoryFilter(boolean matchAnyIncludes, @Nullable Set<Class<?>> includes,
-                                                            ^
-  symbol:   class Nullable
-  location: class CategoryFilter
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:160: error: cannot find symbol
-                                 boolean matchAnyExcludes, @Nullable Set<Class<?>> excludes) {
-                                                            ^
-  symbol:   class Nullable
-  location: class CategoryFilter
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:167: error: cannot find symbol
-        private CategoryFilter(boolean matchAnyIncludes, @Nullable Class<?>[] inclusions,
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:1017: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+                String mismatchMessage = buildPrefix(message)
+                                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:1026: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        String notThrownMessage = buildPrefix(message) + String
+                                              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TestName.java:41: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return name;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:71: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.parentFolder = parentFolder;
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:80: warning: [NullAway] assigning @Nullable expression to @NonNull field
+        this.parentFolder = builder.parentFolder;
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:226: warning: [NullAway] dereferenced expression relativePath is @Nullable
+                    "a folder with the path \'" + relativePath.getPath() + "\' already exists");
+                                                              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:294: warning: [NullAway] dereferenced expression createdFolder is @Nullable
+            + "Last attempted to create: " + createdFolder.toString());
                                                           ^
-  symbol:   class Nullable
-  location: class CategoryFilter
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:168: error: cannot find symbol
-                               boolean matchAnyExcludes, @Nullable Class<?>[] exclusions) {
-                                                          ^
-  symbol:   class Nullable
-  location: class CategoryFilter
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:285: error: cannot find symbol
-        @Nullable
-         ^
-  symbol:   class Nullable
-  location: class CategoryFilter
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:97: error: cannot find symbol
-        public String compact(@Nullable String message) {
-                               ^
-  symbol:   class Nullable
-  location: class ComparisonCompactor
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:168: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+            method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+                                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:186: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+            method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+                                                           ^
+    (see http://t.uber.com/nullaway )
 Note: /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/extensions/TestDecorator.java uses or overrides a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 Note: /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/matchers/JUnitMatchers.java uses unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
-100 errors
-3 warnings
-only showing the first 100 errors, of 154 total; use -Xmaxerrs if you would like to see more
+95 warnings
 
-> Task :compileJava FAILED
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':compileJava'.
-> Compilation failed; see the compiler error output for details.
-
-* Try:
-> Run with --info option to get more log output.
-> Run with --scan to get full insights.
-
-BUILD FAILED in 5s
+BUILD SUCCESSFUL in 7s
 2 actionable tasks: 2 executed
