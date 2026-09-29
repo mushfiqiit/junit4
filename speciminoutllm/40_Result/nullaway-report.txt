@@ -1,33 +1,34 @@
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
 Daemon will be stopped at the end of the build 
-> Task :clean UP-TO-DATE
+> Task :clean
 
-> Task :compileJava
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:31: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 29) is initialized along all control-flow paths (remember to check for exceptions or early returns).
-  private Result(SerializedForm serializedForm) {
-          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:15: warning: [NullAway] assigning @Nullable expression to @NonNull field
-  private static final ObjectStreamField[] serialPersistentFields = null;
+> Task :compileJava FAILED
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/40_Result/org/junit/runner/Result.java:42: error: variable fCount not initialized in the default constructor
+    private final AtomicInteger fCount;
+                                ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/40_Result/org/junit/runner/Result.java:44: error: variable fIgnoreCount not initialized in the default constructor
+    private final AtomicInteger fIgnoreCount;
+                                ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/40_Result/org/junit/runner/Result.java:46: error: variable assumptionFailureCount not initialized in the default constructor
+    private final AtomicInteger assumptionFailureCount;
+                                ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/40_Result/org/junit/runner/Result.java:48: error: variable fFailures not initialized in the default constructor
+    private final List<Failure> fFailures;
+                                ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/40_Result/org/junit/runner/Result.java:15: error: variable serialPersistentFields might not have been initialized
+  private static final ObjectStreamField[] serialPersistentFields;
                                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:42: warning: [NullAway] assigning @Nullable expression to @NonNull field
-    private final AtomicInteger fCount = null;
-                                ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:44: warning: [NullAway] assigning @Nullable expression to @NonNull field
-    private final AtomicInteger fIgnoreCount = null;
-                                ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:46: warning: [NullAway] assigning @Nullable expression to @NonNull field
-    private final AtomicInteger assumptionFailureCount = null;
-                                ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/40_Result/org/junit/runner/Result.java:48: warning: [NullAway] assigning @Nullable expression to @NonNull field
-    private final List<Failure> fFailures = null;
-                                ^
-    (see http://t.uber.com/nullaway )
-6 warnings
+5 errors
 
-BUILD SUCCESSFUL in 5s
-2 actionable tasks: 1 executed, 1 up-to-date
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 5s
+2 actionable tasks: 2 executed

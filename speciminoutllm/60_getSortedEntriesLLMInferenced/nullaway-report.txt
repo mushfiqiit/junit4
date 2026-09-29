@@ -1,0 +1,31 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean UP-TO-DATE
+
+> Task :compileJava FAILED
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/60_getSortedEntriesLLMInferenced/org/junit/runners/RuleContainer.java:20: error: variable ENTRY_COMPARATOR might not have been initialized
+  static final Comparator<RuleEntry> ENTRY_COMPARATOR;
+                                     ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/60_getSortedEntriesLLMInferenced/org/junit/runners/RuleContainer.java:14: error: variable orderValues not initialized in the default constructor
+  private final IdentityHashMap<Object, Integer> orderValues;
+                                                 ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/60_getSortedEntriesLLMInferenced/org/junit/runners/RuleContainer.java:16: error: variable testRules not initialized in the default constructor
+  private final List<TestRule> testRules;
+                               ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/60_getSortedEntriesLLMInferenced/org/junit/runners/RuleContainer.java:18: error: variable methodRules not initialized in the default constructor
+  private final List<MethodRule> methodRules;
+                                 ^
+4 errors
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 5s
+2 actionable tasks: 1 executed, 1 up-to-date

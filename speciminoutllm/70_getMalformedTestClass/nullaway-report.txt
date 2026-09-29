@@ -1,17 +1,22 @@
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
 Daemon will be stopped at the end of the build 
-> Task :clean UP-TO-DATE
+> Task :clean
 
-> Task :compileJava
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/70_getMalformedTestClass/org/junit/experimental/max/MaxCore.java:7: warning: [NullAway] assigning @Nullable expression to @NonNull field
-  private static final String MALFORMED_JUNIT_3_TEST_CLASS_PREFIX = null;
+> Task :compileJava FAILED
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/70_getMalformedTestClass/org/junit/experimental/max/MaxCore.java:7: error: variable MALFORMED_JUNIT_3_TEST_CLASS_PREFIX might not have been initialized
+  private static final String MALFORMED_JUNIT_3_TEST_CLASS_PREFIX;
                               ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/70_getMalformedTestClass/org/junit/experimental/max/MaxCore.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-      return null;
-      ^
-    (see http://t.uber.com/nullaway )
-2 warnings
+1 error
 
-BUILD SUCCESSFUL in 5s
-2 actionable tasks: 1 executed, 1 up-to-date
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 4s
+2 actionable tasks: 2 executed

@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/85_getMessageLLMInferenced/org/junit/ComparisonFailure.java:9: warning: [NullAway] @NonNull field fExpected not initialized
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/85_getMessageLLMInferenced/org/junit/ComparisonFailure.java:11: warning: [NullAway] @NonNull field fActual not initialized

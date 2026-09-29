@@ -1,14 +1,17 @@
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
 Daemon will be stopped at the end of the build 
-> Task :clean UP-TO-DATE
+> Task :clean
 
 > Task :compileJava FAILED
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/52_accept/org/junit/ClassRule.java:12: error: cannot find symbol
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/52_accept/org/junit/ClassRule.java:12: error: cannot find symbol
   int order() default Rule.DEFAULT_ORDER;
                       ^
   symbol:   variable Rule
   location: @interface ClassRule
-1 error
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/52_accept/org/junit/runners/ParentRunner.java:16: error: variable entries not initialized in the default constructor
+    final List<RuleContainer.RuleEntry> entries;
+                                        ^
+2 errors
 
 FAILURE: Build failed with an exception.
 
@@ -20,5 +23,5 @@ Execution failed for task ':compileJava'.
 > Run with --info option to get more log output.
 > Run with --scan to get full insights.
 
-BUILD FAILED in 5s
-2 actionable tasks: 1 executed, 1 up-to-date
+BUILD FAILED in 4s
+2 actionable tasks: 2 executed
