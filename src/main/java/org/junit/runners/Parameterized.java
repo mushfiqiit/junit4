@@ -25,6 +25,7 @@ import org.junit.runners.model.TestClass;
 import org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParametersFactory;
 import org.junit.runners.parameterized.ParametersRunnerFactory;
 import org.junit.runners.parameterized.TestWithParameters;
+import javax.annotation.Nullable;
 
 /**
  * The custom runner <code>Parameterized</code> implements parameterized tests.
@@ -364,6 +365,7 @@ public class Parameterized extends Suite {
         private final FrameworkMethod parametersMethod;
         private final List<Object> allParameters;
         private final int parameterCount;
+        @Nullable
         private final Runner runnerOverride;
 
         private RunnersFactory(Class<?> klass) throws Throwable {

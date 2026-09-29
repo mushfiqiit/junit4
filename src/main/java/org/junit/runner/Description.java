@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 
 /**
  * A <code>Description</code> describes a test which is to be run or has been run. <code>Descriptions</code>
@@ -158,11 +159,11 @@ public class Description implements Serializable {
     private final Annotation[] fAnnotations;
     private volatile /* write-once */ Class<?> fTestClass;
 
-    private Description(Class<?> clazz, String displayName, Annotation... annotations) {
+    private Description(@Nullable Class<?> clazz, String displayName, Annotation... annotations) {
         this(clazz, displayName, displayName, annotations);
     }
 
-    private Description(Class<?> testClass, String displayName, Serializable uniqueId, Annotation... annotations) {
+    private Description(@Nullable Class<?> testClass, String displayName, Serializable uniqueId, Annotation... annotations) {
         if ((displayName == null) || (displayName.length() == 0)) {
             throw new IllegalArgumentException(
                     "The display name must not be empty.");
@@ -267,6 +268,7 @@ public class Description implements Serializable {
      * @return the annotation of type annotationType that is attached to this description node,
      *         or null if none exists
      */
+    @Nullable
     public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         for (Annotation each : fAnnotations) {
             if (each.annotationType().equals(annotationType)) {
@@ -287,6 +289,7 @@ public class Description implements Serializable {
      * @return If this describes a method invocation,
      *         the class of the test instance.
      */
+    @Nullable
     public Class<?> getTestClass() {
         if (fTestClass != null) {
             return fTestClass;
@@ -320,7 +323,7 @@ public class Description implements Serializable {
     }
 
     private String methodAndClassNamePatternGroupOrDefault(int group,
-            String defaultString) {
+            @Nullable String defaultString) {
         Matcher matcher = METHOD_AND_CLASS_NAME_PATTERN.matcher(toString());
         return matcher.matches() ? matcher.group(group) : defaultString;
     }

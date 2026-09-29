@@ -35,6 +35,7 @@ import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.junit.validator.PublicClassValidator;
 import org.junit.validator.TestClassValidator;
+import javax.annotation.Nullable;
 
 /**
  * Implements the JUnit 4 standard test case class model, as defined by the
@@ -438,6 +439,7 @@ public class BlockJUnit4ClassRunner extends ParentRunner<FrameworkMethod> {
         return collector.result;
     }
 
+    @Nullable
     private Class<? extends Throwable> getExpectedException(Test annotation) {
         if (annotation == null || annotation.expected() == None.class) {
             return null;

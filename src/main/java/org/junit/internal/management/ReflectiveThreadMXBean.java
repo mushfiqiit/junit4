@@ -4,6 +4,7 @@ import org.junit.internal.Classes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import javax.annotation.Nullable;
 
 /**
  * Implementation of {@link ThreadMXBean} using the JVM reflectively.
@@ -13,7 +14,9 @@ final class ReflectiveThreadMXBean implements ThreadMXBean {
 
 
   private static final class Holder {
+    @Nullable
     static final Method getThreadCpuTimeMethod;
+    @Nullable
     static final Method isThreadCpuTimeSupportedMethod;
 
     private static final String FAILURE_MESSAGE = "Unable to access ThreadMXBean";

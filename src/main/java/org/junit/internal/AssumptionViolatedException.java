@@ -7,6 +7,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.SelfDescribing;
 import org.hamcrest.StringDescription;
+import javax.annotation.Nullable;
 
 /**
  * An exception class used to implement <i>assumptions</i> (state in which a given test
@@ -32,7 +33,7 @@ public class AssumptionViolatedException extends RuntimeException implements Sel
      * @deprecated Please use {@link org.junit.AssumptionViolatedException} instead.
      */
     @Deprecated
-    public AssumptionViolatedException(String assumption, boolean hasValue, Object value, Matcher<?> matcher) {
+    public AssumptionViolatedException(@Nullable String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
         this.fAssumption = assumption;
         this.fValue = value;
         this.fMatcher = matcher;

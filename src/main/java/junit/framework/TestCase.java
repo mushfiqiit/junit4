@@ -3,6 +3,7 @@ package junit.framework;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import javax.annotation.Nullable;
 
 /**
  * A test case defines the fixture to run multiple tests. To define a test case<br/>
@@ -78,6 +79,7 @@ public abstract class TestCase extends Assert implements Test {
     /**
      * the name of the test case
      */
+    @Nullable
     private String fName;
 
     /**

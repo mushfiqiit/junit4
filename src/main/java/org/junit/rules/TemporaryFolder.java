@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.junit.Rule;
+import javax.annotation.Nullable;
 
 /**
  * The TemporaryFolder Rule allows creation of files and folders that should
@@ -45,6 +46,7 @@ import org.junit.Rule;
 public class TemporaryFolder extends ExternalResource {
     private final File parentFolder;
     private final boolean assureDeletion;
+    @Nullable
     private File folder;
 
     private static final int TEMP_DIR_ATTEMPTS = 10000;
@@ -65,7 +67,7 @@ public class TemporaryFolder extends ExternalResource {
      * @param parentFolder folder where temporary resources will be created.
      * If {@code null} then system default temporary-file directory is used.
      */
-    public TemporaryFolder(File parentFolder) {
+    public TemporaryFolder(@Nullable File parentFolder) {
         this.parentFolder = parentFolder;
         this.assureDeletion = false;
     }
@@ -94,6 +96,7 @@ public class TemporaryFolder extends ExternalResource {
      * @since 4.13
      */
     public static class Builder {
+        @Nullable
         private File parentFolder;
         private boolean assureDeletion;
 

@@ -5,9 +5,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.junit.runner.Request;
 import org.junit.runner.Runner;
+import javax.annotation.Nullable;
 
 abstract class MemoizingRequest extends Request {
     private final Lock runnerLock = new ReentrantLock();
+    @Nullable
     private volatile Runner runner;
 
     @Override

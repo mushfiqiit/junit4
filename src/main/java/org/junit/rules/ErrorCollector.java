@@ -11,6 +11,7 @@ import org.junit.internal.AssumptionViolatedException;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.junit.runners.model.MultipleFailureException;
+import javax.annotation.Nullable;
 
 /**
  * The ErrorCollector rule allows execution of a test to continue after the
@@ -85,6 +86,7 @@ public class ErrorCollector extends Verifier {
      * Execution continues, but the test will fail at the end if
      * {@code callable} threw an exception.
      */
+    @Nullable
     public <T> T checkSucceeds(Callable<T> callable) {
         try {
             return callable.call();

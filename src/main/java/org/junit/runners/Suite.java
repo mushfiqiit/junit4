@@ -14,6 +14,7 @@ import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
+import javax.annotation.Nullable;
 
 /**
  * Using <code>Suite</code> as a runner allows you to manually
@@ -87,7 +88,7 @@ public class Suite extends ParentRunner<Runner> {
      * @param klass the root of the suite
      * @param suiteClasses the classes in the suite
      */
-    protected Suite(Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
+    protected Suite(@Nullable Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
         this(new AllDefaultPossibilitiesBuilder(), klass, suiteClasses);
     }
 
@@ -98,7 +99,7 @@ public class Suite extends ParentRunner<Runner> {
      * @param klass the root of the suite
      * @param suiteClasses the classes in the suite
      */
-    protected Suite(RunnerBuilder builder, Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
+    protected Suite(RunnerBuilder builder, @Nullable Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
         this(klass, builder.runners(klass, suiteClasses));
     }
 
@@ -108,7 +109,7 @@ public class Suite extends ParentRunner<Runner> {
      * @param klass root of the suite
      * @param runners for each class in the suite, a {@link Runner}
      */
-    protected Suite(Class<?> klass, List<Runner> runners) throws InitializationError {
+    protected Suite(@Nullable Class<?> klass, List<Runner> runners) throws InitializationError {
         super(klass);
         this.runners = Collections.unmodifiableList(runners);
     }

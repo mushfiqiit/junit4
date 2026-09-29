@@ -22,6 +22,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.internal.MethodSorter;
+import javax.annotation.Nullable;
 
 /**
  * Wraps a class to be run, providing method validation and annotation searching
@@ -216,6 +217,7 @@ public class TestClass implements Annotatable {
         return clazz.getAnnotations();
     }
 
+    @Nullable
     public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         if (clazz == null) {
             return null;

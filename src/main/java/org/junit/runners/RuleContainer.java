@@ -12,6 +12,7 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
+import javax.annotation.Nullable;
 
 /**
  * Data structure for ordering of {@link TestRule}/{@link MethodRule} instances.
@@ -104,7 +105,7 @@ class RuleContainer {
         final int type;
         final int order;
 
-        RuleEntry(Object rule, int type, Integer order) {
+        RuleEntry(Object rule, int type, @Nullable Integer order) {
             this.rule = rule;
             this.type = type;
             this.order = order != null ? order.intValue() : Rule.DEFAULT_ORDER;

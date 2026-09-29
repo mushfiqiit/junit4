@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
+import javax.annotation.Nullable;
 
 /**
  * A <code>Result</code> collects and summarizes information from running multiple tests.
@@ -34,6 +35,7 @@ public class Result implements Serializable {
     private final AtomicLong startTime;
 
     /** Only set during deserialization process. */
+    @Nullable
     private SerializedForm serializedForm;
 
     public Result() {

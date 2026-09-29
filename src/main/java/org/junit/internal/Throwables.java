@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Miscellaneous functions dealing with {@code Throwable}.
@@ -42,6 +43,7 @@ public final class Throwables {
      * @return does not return anything
      * @since 4.12
      */
+    @Nullable
     public static Exception rethrowAsException(Throwable e) throws Exception {
         Throwables.<Exception>rethrow(e);
         return null; // we never get here
@@ -107,6 +109,7 @@ public final class Throwables {
 
     private static final Method getSuppressed = initGetSuppressed();
 
+    @Nullable
     private static Method initGetSuppressed() {
         try {
             return Throwable.class.getMethod("getSuppressed");

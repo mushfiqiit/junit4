@@ -16,6 +16,7 @@ import org.junit.runner.Result;
 import org.junit.runner.Runner;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
+import javax.annotation.Nullable;
 
 /**
  * A replacement for JUnitCore, which keeps track of runtime and failure history, and reorders tests
@@ -147,6 +148,7 @@ public class MaxCore {
         return Request.method(type, methodName).getRunner();
     }
 
+    @Nullable
     private Class<?> getMalformedTestClass(Description each) {
         try {
             return Class.forName(each.toString().replace(MALFORMED_JUNIT_3_TEST_CLASS_PREFIX, ""));
@@ -170,7 +172,7 @@ public class MaxCore {
         return results;
     }
 
-    private void findLeaves(Description parent, Description description, List<Description> results) {
+    private void findLeaves(@Nullable Description parent, Description description, List<Description> results) {
         if (description.getChildren().isEmpty()) {
             if (description.toString().equals("warning(junit.framework.TestSuite$1)")) {
                 results.add(Description.createSuiteDescription(MALFORMED_JUNIT_3_TEST_CLASS_PREFIX + parent));

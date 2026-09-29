@@ -2,6 +2,7 @@ package org.junit.runners.model;
 
 import java.lang.reflect.Modifier;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Parent class for {@link FrameworkField} and {@link FrameworkMethod}
@@ -12,6 +13,7 @@ public abstract class FrameworkMember<T extends FrameworkMember<T>> implements
         Annotatable {
     abstract boolean isShadowedBy(T otherMember);
 
+    @Nullable
     T handlePossibleBridgeMethod(List<T> members) {
         for (int i = members.size() - 1; i >=0; i--) {
             T otherMember = members.get(i);

@@ -1,5 +1,7 @@
 package junit.framework;
 
+import javax.annotation.Nullable;
+
 /**
  * A set of assert methods.  Messages are only displayed when an assert fails.
  *
@@ -17,7 +19,7 @@ public class Assert {
      * Asserts that a condition is true. If it isn't it throws
      * an AssertionFailedError with the given message.
      */
-    public static void assertTrue(String message, boolean condition) {
+    public static void assertTrue(@Nullable String message, boolean condition) {
         if (!condition) {
             fail(message);
         }
@@ -35,7 +37,7 @@ public class Assert {
      * Asserts that a condition is false. If it isn't it throws
      * an AssertionFailedError with the given message.
      */
-    public static void assertFalse(String message, boolean condition) {
+    public static void assertFalse(@Nullable String message, boolean condition) {
         assertTrue(message, !condition);
     }
 
@@ -50,7 +52,7 @@ public class Assert {
     /**
      * Fails a test with the given message.
      */
-    public static void fail(String message) {
+    public static void fail(@Nullable String message) {
         if (message == null) {
             throw new AssertionFailedError();
         }
@@ -68,7 +70,7 @@ public class Assert {
      * Asserts that two objects are equal. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertEquals(String message, Object expected, Object actual) {
+    public static void assertEquals(@Nullable String message, Object expected, Object actual) {
         if (expected == null && actual == null) {
             return;
         }
@@ -89,7 +91,7 @@ public class Assert {
     /**
      * Asserts that two Strings are equal.
      */
-    public static void assertEquals(String message, String expected, String actual) {
+    public static void assertEquals(@Nullable String message, String expected, String actual) {
         if (expected == null && actual == null) {
             return;
         }
@@ -112,7 +114,7 @@ public class Assert {
      * an AssertionFailedError is thrown with the given message.  If the expected
      * value is infinity then the delta value is ignored.
      */
-    public static void assertEquals(String message, double expected, double actual, double delta) {
+    public static void assertEquals(@Nullable String message, double expected, double actual, double delta) {
         if (Double.compare(expected, actual) == 0) {
             return;
         }
@@ -134,7 +136,7 @@ public class Assert {
      * are not an AssertionFailedError is thrown with the given message. If the
      * expected value is infinity then the delta value is ignored.
      */
-    public static void assertEquals(String message, float expected, float actual, float delta) {
+    public static void assertEquals(@Nullable String message, float expected, float actual, float delta) {
         if (Float.compare(expected, actual) == 0) {
             return;
         }
@@ -155,7 +157,7 @@ public class Assert {
      * Asserts that two longs are equal. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertEquals(String message, long expected, long actual) {
+    public static void assertEquals(@Nullable String message, long expected, long actual) {
         assertEquals(message, Long.valueOf(expected), Long.valueOf(actual));
     }
 
@@ -170,7 +172,7 @@ public class Assert {
      * Asserts that two booleans are equal. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertEquals(String message, boolean expected, boolean actual) {
+    public static void assertEquals(@Nullable String message, boolean expected, boolean actual) {
         assertEquals(message, Boolean.valueOf(expected), Boolean.valueOf(actual));
     }
 
@@ -185,7 +187,7 @@ public class Assert {
      * Asserts that two bytes are equal. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertEquals(String message, byte expected, byte actual) {
+    public static void assertEquals(@Nullable String message, byte expected, byte actual) {
         assertEquals(message, Byte.valueOf(expected), Byte.valueOf(actual));
     }
 
@@ -200,7 +202,7 @@ public class Assert {
      * Asserts that two chars are equal. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertEquals(String message, char expected, char actual) {
+    public static void assertEquals(@Nullable String message, char expected, char actual) {
         assertEquals(message, Character.valueOf(expected), Character.valueOf(actual));
     }
 
@@ -215,7 +217,7 @@ public class Assert {
      * Asserts that two shorts are equal. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertEquals(String message, short expected, short actual) {
+    public static void assertEquals(@Nullable String message, short expected, short actual) {
         assertEquals(message, Short.valueOf(expected), Short.valueOf(actual));
     }
 
@@ -230,7 +232,7 @@ public class Assert {
      * Asserts that two ints are equal. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertEquals(String message, int expected, int actual) {
+    public static void assertEquals(@Nullable String message, int expected, int actual) {
         assertEquals(message, Integer.valueOf(expected), Integer.valueOf(actual));
     }
 
@@ -252,7 +254,7 @@ public class Assert {
      * Asserts that an object isn't null. If it is
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertNotNull(String message, Object object) {
+    public static void assertNotNull(@Nullable String message, Object object) {
         assertTrue(message, object != null);
     }
 
@@ -281,7 +283,7 @@ public class Assert {
      * Asserts that two objects refer to the same object. If they are not
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertSame(String message, Object expected, Object actual) {
+    public static void assertSame(@Nullable String message, Object expected, Object actual) {
         if (expected == actual) {
             return;
         }
@@ -301,7 +303,7 @@ public class Assert {
      * refer to the same object an AssertionFailedError is thrown with the
      * given message.
      */
-    public static void assertNotSame(String message, Object expected, Object actual) {
+    public static void assertNotSame(@Nullable String message, Object expected, Object actual) {
         if (expected == actual) {
             failSame(message);
         }

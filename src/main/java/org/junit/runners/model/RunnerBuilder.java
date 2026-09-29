@@ -11,6 +11,7 @@ import org.junit.runner.OrderWith;
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.InvalidOrderingException;
 import org.junit.runner.manipulation.Ordering;
+import javax.annotation.Nullable;
 
 /**
  * A RunnerBuilder is a strategy for constructing runners for classes.
@@ -50,6 +51,7 @@ public abstract class RunnerBuilder {
      * @return a Runner
      * @throws Throwable if a runner cannot be constructed
      */
+    @Nullable
     public abstract Runner runnerForClass(Class<?> testClass) throws Throwable;
 
     /**
@@ -103,7 +105,7 @@ public abstract class RunnerBuilder {
      * this builder will throw an exception if it is requested for another
      * runner for {@code parent} before this call completes.
      */
-    public List<Runner> runners(Class<?> parent, Class<?>[] children)
+    public List<Runner> runners(@Nullable Class<?> parent, Class<?>[] children)
             throws InitializationError {
         addParent(parent);
 

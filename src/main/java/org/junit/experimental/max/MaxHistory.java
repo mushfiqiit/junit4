@@ -15,6 +15,7 @@ import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
+import javax.annotation.Nullable;
 
 /**
  * Stores a subset of the history of each test:
@@ -91,6 +92,7 @@ public class MaxHistory implements Serializable {
         }
     }
 
+    @Nullable
     Long getFailureTimestamp(Description key) {
         return fFailureTimestamps.get(key.toString());
     }
@@ -103,6 +105,7 @@ public class MaxHistory implements Serializable {
         return !fDurations.containsKey(key.toString());
     }
 
+    @Nullable
     Long getTestDuration(Description key) {
         return fDurations.get(key.toString());
     }

@@ -4,6 +4,7 @@ import org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
 import org.junit.internal.builders.SuiteMethodBuilder;
 import org.junit.runner.Runner;
 import org.junit.runners.model.RunnerBuilder;
+import javax.annotation.Nullable;
 
 public class ClassRequest extends MemoizingRequest {
     /*
@@ -44,6 +45,7 @@ public class ClassRequest extends MemoizingRequest {
     private class CustomSuiteMethodBuilder extends SuiteMethodBuilder {
 
         @Override
+        @Nullable
         public Runner runnerForClass(Class<?> testClass) throws Throwable {
             if (testClass == fTestClass && !canUseSuiteMethod) {
                 return null;

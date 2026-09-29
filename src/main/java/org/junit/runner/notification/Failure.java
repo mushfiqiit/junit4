@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.junit.internal.Throwables;
 import org.junit.runner.Description;
+import javax.annotation.Nullable;
 
 /**
  * A <code>Failure</code> holds a description of the failed test and the
@@ -84,6 +85,7 @@ public class Failure implements Serializable {
      *
      * @return the message of the thrown exception
      */
+    @Nullable
     public String getMessage() {
         return getException().getMessage();
     }

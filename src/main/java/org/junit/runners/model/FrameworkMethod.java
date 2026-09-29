@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import org.junit.internal.runners.model.ReflectiveCallable;
+import javax.annotation.Nullable;
 
 /**
  * Represents a method on a test class to be invoked at the appropriate point in
@@ -51,7 +52,7 @@ public class FrameworkMethod extends FrameworkMember<FrameworkMethod> {
      * parameters {@code params}. {@link InvocationTargetException}s thrown are
      * unwrapped, and their causes rethrown.
      */
-    public Object invokeExplosively(final Object target, final Object... params)
+    public Object invokeExplosively(@Nullable final Object target, @Nullable final Object... params)
             throws Throwable {
         return new ReflectiveCallable() {
             @Override

@@ -3,12 +3,14 @@ package org.junit.internal.management;
 import org.junit.internal.Classes;
 
 import java.lang.reflect.InvocationTargetException;
+import javax.annotation.Nullable;
 
 /**
  * Reflective wrapper around {@link java.lang.management.ManagementFactory}
  */
 public class ManagementFactory {
   private static final class FactoryHolder {
+    @Nullable
     private static final Class<?> MANAGEMENT_FACTORY_CLASS;
 
     static {
@@ -21,6 +23,7 @@ public class ManagementFactory {
       MANAGEMENT_FACTORY_CLASS = managementFactoryClass;
     }
 
+    @Nullable
     static Object getBeanObject(String methodName) {
       if (MANAGEMENT_FACTORY_CLASS != null) {
         try {

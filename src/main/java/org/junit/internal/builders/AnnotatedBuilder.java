@@ -6,6 +6,7 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 
 import java.lang.reflect.Modifier;
+import javax.annotation.Nullable;
 
 
 /**
@@ -78,6 +79,7 @@ public class AnnotatedBuilder extends RunnerBuilder {
     }
 
     @Override
+    @Nullable
     public Runner runnerForClass(Class<?> testClass) throws Exception {
         for (Class<?> currentTestClass = testClass; currentTestClass != null;
              currentTestClass = getEnclosingClassForNonStaticMemberClass(currentTestClass)) {
@@ -90,6 +92,7 @@ public class AnnotatedBuilder extends RunnerBuilder {
         return null;
     }
 
+    @Nullable
     private Class<?> getEnclosingClassForNonStaticMemberClass(Class<?> currentTestClass) {
         if (currentTestClass.isMemberClass() && !Modifier.isStatic(currentTestClass.getModifiers())) {
             return currentTestClass.getEnclosingClass();
