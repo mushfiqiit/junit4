@@ -1,0 +1,537 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :clean
+cache executionHistory.bin (/Users/mushfiqurrahmanchowdhury/Documents/junit4/.nullaway-build/.gradle/8.7/executionHistory/executionHistory.bin) is corrupt. Discarding.
+
+> Task :compileJava
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:24: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:6: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:3: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestFailure.java:4: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:3: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:11: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:18: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/notification/Failure.java:7: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:14: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/BlockJUnit4ClassRunner.java:38: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:52: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMethod.java:10: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMember.java:5: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/Annotatable.java:4: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/TestClass.java:25: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:12: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/RuleContainer.java:15: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:10: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:19: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:18: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:17: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:17: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:3: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AnnotatedBuilder.java:9: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java:8: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveThreadMXBean.java:7: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveRuntimeMXBean.java:9: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:6: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/ClassRequest.java:7: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/MemoizingRequest.java:8: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:14: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:13: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit4ClassRunner.java:21: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/ErrorReportingRunner.java:14: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:18: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunBefores.java:7: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunAfters.java:9: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:9: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TestName.java:4: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/ErrorCollector.java:14: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:12: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Parameterized.java:28: error: cannot find symbol
+import javax.annotation.Nullable;
+                       ^
+  symbol:   class Nullable
+  location: package javax.annotation
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestFailure.java:58: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class TestFailure
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:82: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class TestCase
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:22: error: cannot find symbol
+    public static void assertTrue(@Nullable String message, boolean condition) {
+                                   ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:40: error: cannot find symbol
+    public static void assertFalse(@Nullable String message, boolean condition) {
+                                    ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:55: error: cannot find symbol
+    public static void fail(@Nullable String message) {
+                             ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:73: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, Object expected, Object actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:94: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, String expected, String actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:117: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, double expected, double actual, double delta) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:139: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, float expected, float actual, float delta) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:160: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, long expected, long actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:175: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, boolean expected, boolean actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:190: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, byte expected, byte actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:205: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, char expected, char actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:220: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, short expected, short actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:235: error: cannot find symbol
+    public static void assertEquals(@Nullable String message, int expected, int actual) {
+                                     ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:257: error: cannot find symbol
+    public static void assertNotNull(@Nullable String message, Object object) {
+                                      ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:286: error: cannot find symbol
+    public static void assertSame(@Nullable String message, Object expected, Object actual) {
+                                   ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:306: error: cannot find symbol
+    public static void assertNotSame(@Nullable String message, Object expected, Object actual) {
+                                      ^
+  symbol:   class Nullable
+  location: class Assert
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:33: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class BaseTestRunner
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:97: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class BaseTestRunner
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:158: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class BaseTestRunner
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:24: error: cannot find symbol
+    public String compact(@Nullable String message) {
+                           ^
+  symbol:   class Nullable
+  location: class ComparisonCompactor
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:162: error: cannot find symbol
+    private Description(@Nullable Class<?> clazz, String displayName, Annotation... annotations) {
+                         ^
+  symbol:   class Nullable
+  location: class Description
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:166: error: cannot find symbol
+    private Description(@Nullable Class<?> testClass, String displayName, Serializable uniqueId, Annotation... annotations) {
+                         ^
+  symbol:   class Nullable
+  location: class Description
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:271: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class Description
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:292: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class Description
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:326: error: cannot find symbol
+            @Nullable String defaultString) {
+             ^
+  symbol:   class Nullable
+  location: class Description
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/notification/Failure.java:88: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class Failure
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:38: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class Result
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:54: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class RunnerBuilder
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:108: error: cannot find symbol
+    public List<Runner> runners(@Nullable Class<?> parent, Class<?>[] children)
+                                 ^
+  symbol:   class Nullable
+  location: class RunnerBuilder
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:108: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class ParameterSignature
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:128: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class ParameterSignature
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/TestClass.java:220: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class TestClass
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/BlockJUnit4ClassRunner.java:442: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class BlockJUnit4ClassRunner
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/RuleContainer.java:108: error: cannot find symbol
+        RuleEntry(Object rule, int type, @Nullable Integer order) {
+                                          ^
+  symbol:   class Nullable
+  location: class RuleEntry
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMethod.java:55: error: cannot find symbol
+    public Object invokeExplosively(@Nullable final Object target, @Nullable final Object... params)
+                                     ^
+  symbol:   class Nullable
+  location: class FrameworkMethod
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMethod.java:55: error: cannot find symbol
+    public Object invokeExplosively(@Nullable final Object target, @Nullable final Object... params)
+                                                                    ^
+  symbol:   class Nullable
+  location: class FrameworkMethod
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMember.java:16: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class FrameworkMember<T>
+  where T is a type-variable:
+    T extends FrameworkMember<T> declared in class FrameworkMember
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/Annotatable.java:20: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: interface Annotatable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:76: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class ParentRunner<T>
+  where T is a type-variable:
+    T extends Object declared in class ParentRunner
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:92: error: cannot find symbol
+    protected ParentRunner(@Nullable Class<?> testClass) throws InitializationError {
+                            ^
+  symbol:   class Nullable
+  location: class ParentRunner<T>
+  where T is a type-variable:
+    T extends Object declared in class ParentRunner
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:36: error: cannot find symbol
+    public AssumptionViolatedException(@Nullable String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
+                                        ^
+  symbol:   class Nullable
+  location: class AssumptionViolatedException
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:36: error: cannot find symbol
+    public AssumptionViolatedException(@Nullable String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
+                                                                                       ^
+  symbol:   class Nullable
+  location: class AssumptionViolatedException
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:36: error: cannot find symbol
+    public AssumptionViolatedException(@Nullable String assumption, boolean hasValue, @Nullable Object value, @Nullable Matcher<?> matcher) {
+                                                                                                               ^
+  symbol:   class Nullable
+  location: class AssumptionViolatedException
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:151: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class MaxCore
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:175: error: cannot find symbol
+    private void findLeaves(@Nullable Description parent, Description description, List<Description> results) {
+                             ^
+  symbol:   class Nullable
+  location: class MaxCore
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:95: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class MaxHistory
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:108: error: cannot find symbol
+    @Nullable
+     ^
+  symbol:   class Nullable
+  location: class MaxHistory
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:91: error: cannot find symbol
+    protected Suite(@Nullable Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
+                     ^
+  symbol:   class Nullable
+  location: class Suite
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:102: error: cannot find symbol
+    protected Suite(RunnerBuilder builder, @Nullable Class<?> klass, Class<?>[] suiteClasses) throws InitializationError {
+                                            ^
+  symbol:   class Nullable
+  location: class Suite
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:112: error: cannot find symbol
+    protected Suite(@Nullable Class<?> klass, List<Runner> runners) throws InitializationError {
+                     ^
+  symbol:   class Nullable
+  location: class Suite
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:159: error: cannot find symbol
+        protected CategoryFilter(boolean matchAnyIncludes, @Nullable Set<Class<?>> includes,
+                                                            ^
+  symbol:   class Nullable
+  location: class CategoryFilter
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:160: error: cannot find symbol
+                                 boolean matchAnyExcludes, @Nullable Set<Class<?>> excludes) {
+                                                            ^
+  symbol:   class Nullable
+  location: class CategoryFilter
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:167: error: cannot find symbol
+        private CategoryFilter(boolean matchAnyIncludes, @Nullable Class<?>[] inclusions,
+                                                          ^
+  symbol:   class Nullable
+  location: class CategoryFilter
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:168: error: cannot find symbol
+                               boolean matchAnyExcludes, @Nullable Class<?>[] exclusions) {
+                                                          ^
+  symbol:   class Nullable
+  location: class CategoryFilter
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:285: error: cannot find symbol
+        @Nullable
+         ^
+  symbol:   class Nullable
+  location: class CategoryFilter
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:97: error: cannot find symbol
+        public String compact(@Nullable String message) {
+                               ^
+  symbol:   class Nullable
+  location: class ComparisonCompactor
+Note: /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/extensions/TestDecorator.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/matchers/JUnitMatchers.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+100 errors
+3 warnings
+only showing the first 100 errors, of 154 total; use -Xmaxerrs if you would like to see more
+
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 5s
+2 actionable tasks: 2 executed
