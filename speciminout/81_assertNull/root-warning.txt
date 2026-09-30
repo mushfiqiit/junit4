@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/81_assertNull/org/junit/Assert.java:11: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required

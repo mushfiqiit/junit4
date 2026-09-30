@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/58_runTestMethod/org/junit/internal/runners/MethodRoadie.java:19: warning: [NullAway] dereferenced expression testMethod.getExpectedException() is @Nullable

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/88_TemporaryFolder/org/junit/rules/TemporaryFolder.java:16: warning: [NullAway] assigning @Nullable expression to @NonNull field

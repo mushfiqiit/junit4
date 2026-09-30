@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/21_runners/org/junit/runners/model/RunnerBuilder.java:19: warning: [NullAway] passing @Nullable parameter 'parent' where @NonNull is required
