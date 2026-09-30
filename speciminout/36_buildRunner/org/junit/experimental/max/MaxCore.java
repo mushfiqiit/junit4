@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
 
 public class MaxCore {
 
-  private static final String MALFORMED_JUNIT_3_TEST_CLASS_PREFIX = null;
+  private static final String MALFORMED_JUNIT_3_TEST_CLASS_PREFIX;
 
   private Runner buildRunner(Description each) {
     if (each.toString().equals("TestSuite with 0 tests")) {

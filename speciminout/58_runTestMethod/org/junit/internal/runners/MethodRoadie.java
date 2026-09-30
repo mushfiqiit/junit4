@@ -6,7 +6,7 @@ import org.junit.internal.AssumptionViolatedException;
 @Deprecated
 public class MethodRoadie {
 
-  private final Object test = null;
+  private final Object test;
 
   private TestMethod testMethod;
 

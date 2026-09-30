@@ -13,7 +13,7 @@ public class TemporaryFolder extends ExternalResource {
 
   private static final int TEMP_DIR_ATTEMPTS = 0;
 
-  private static final String TMP_PREFIX = null;
+  private static final String TMP_PREFIX;
 
   public TemporaryFolder(@Nullable File parentFolder) {
     this.parentFolder = parentFolder;

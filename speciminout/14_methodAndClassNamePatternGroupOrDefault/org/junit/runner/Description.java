@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 public class Description implements Serializable {
 
-  private static final Pattern METHOD_AND_CLASS_NAME_PATTERN = null;
+  private static final Pattern METHOD_AND_CLASS_NAME_PATTERN;
 
   public String toString() {
     throw new java.lang.Error();

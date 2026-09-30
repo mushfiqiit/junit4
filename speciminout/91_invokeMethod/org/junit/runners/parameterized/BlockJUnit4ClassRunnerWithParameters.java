@@ -6,7 +6,7 @@ import org.junit.runners.model.FrameworkMethod;
 
 public class BlockJUnit4ClassRunnerWithParameters extends BlockJUnit4ClassRunner {
 
-  private final Object[] parameters = null;
+  private final Object[] parameters;
 
   private class RunBeforeParams extends RunBefores {
 

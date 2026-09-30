@@ -6,9 +6,9 @@ public class ComparisonFailure extends AssertionError {
 
   private static class ComparisonCompactor {
 
-    private final String expected = null;
+    private final String expected;
 
-    private final String actual = null;
+    private final String actual;
 
     public String compact(@Nullable String message) {
       if (expected == null || actual == null || expected.equals(actual)) {

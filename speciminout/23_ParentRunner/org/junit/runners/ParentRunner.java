@@ -13,9 +13,9 @@ import org.junit.validator.TestClassValidator;
 
 public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
 
-  private static final List<TestClassValidator> VALIDATORS = null;
+  private static final List<TestClassValidator> VALIDATORS;
 
-  private final Lock childrenLock = null;
+  private final Lock childrenLock;
 
   private final TestClass testClass;
 

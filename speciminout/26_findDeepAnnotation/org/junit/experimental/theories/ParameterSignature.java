@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 
 public class ParameterSignature {
 
-  private final Annotation[] annotations = null;
+  private final Annotation[] annotations;
 
   public <T extends Annotation> T findDeepAnnotation(Class<T> annotationType) {
     Annotation[] annotations2 = annotations;
