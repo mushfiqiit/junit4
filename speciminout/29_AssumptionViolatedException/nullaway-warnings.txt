@@ -1,0 +1,3 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/29_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:25: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/29_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:26: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/29_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:27: warning: [NullAway] assigning @Nullable expression to @NonNull field

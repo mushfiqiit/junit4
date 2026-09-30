@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit4ClassRunner.java:105: warning: [NullAway] passing @Nullable parameter 'e' where @NonNull is required

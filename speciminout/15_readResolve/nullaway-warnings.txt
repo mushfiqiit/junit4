@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/15_readResolve/org/junit/runner/Result.java:15: warning: [NullAway] passing @Nullable parameter 'serializedForm' where @NonNull is required

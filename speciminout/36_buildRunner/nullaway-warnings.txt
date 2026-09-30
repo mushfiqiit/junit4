@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/36_buildRunner/org/junit/experimental/max/MaxCore.java:13: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/36_buildRunner/org/junit/experimental/max/MaxCore.java:20: warning: [NullAway] passing @Nullable parameter 'getMalformedTestClass(each)' where @NonNull is required

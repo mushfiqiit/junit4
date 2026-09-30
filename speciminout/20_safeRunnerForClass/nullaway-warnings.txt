@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/20_safeRunnerForClass/org/junit/runners/model/RunnerBuilder.java:19: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

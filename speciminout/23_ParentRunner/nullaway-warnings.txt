@@ -1,0 +1,4 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/23_ParentRunner/org/junit/runners/ParentRunner.java:26: warning: [NullAway] initializer method does not guarantee @NonNull field scheduler (line 24) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/23_ParentRunner/org/junit/runners/ParentRunner.java:16: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/23_ParentRunner/org/junit/runners/ParentRunner.java:18: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/23_ParentRunner/org/junit/runners/ParentRunner.java:27: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required

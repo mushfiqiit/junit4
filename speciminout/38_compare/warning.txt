@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:159: warning: [NullAway] dereferenced expression getTestDuration(o1) is @Nullable

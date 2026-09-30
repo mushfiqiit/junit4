@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/54_getAnnotation/org/junit/runners/model/TestClass.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

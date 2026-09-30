@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/63_RunAfters/org/junit/internal/runners/statements/RunAfters.java:19: warning: [NullAway] assigning @Nullable expression to @NonNull field

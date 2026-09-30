@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_CategoryFilter/org/junit/experimental/categories/Categories.java:27: warning: [NullAway] passing @Nullable parameter 'inclusions' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/42_CategoryFilter/org/junit/experimental/categories/Categories.java:28: warning: [NullAway] passing @Nullable parameter 'exclusions' where @NonNull is required

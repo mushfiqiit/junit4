@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/89_newFolder/org/junit/rules/TemporaryFolder.java:36: warning: [NullAway] dereferenced expression relativePath is @Nullable
