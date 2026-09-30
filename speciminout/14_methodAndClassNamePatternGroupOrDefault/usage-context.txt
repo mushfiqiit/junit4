@@ -1,0 +1,22 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method methodAndClassNamePatternGroupOrDefault(int, String) (org.junit.runner.Description): the method returning @Nullable (how callers use its result)
+
+## method methodAndClassNamePatternGroupOrDefault(int, String) (org.junit.runner.Description)
+# org/junit/runner/Description.java (declaration)
+    325:     private String methodAndClassNamePatternGroupOrDefault(int group,
+    326:             @Nullable String defaultString) {
+  ---
+# org/junit/runner/Description.java (uses)
+    313:     public String getClassName() {
+    314:         return fTestClass != null ? fTestClass.getName() : methodAndClassNamePatternGroupOrDefault(2, toString());
+    315:     }
+  ---
+    321:     public String getMethodName() {
+    322:         return methodAndClassNamePatternGroupOrDefault(1, null);
+    323:     }
+  ---

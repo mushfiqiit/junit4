@@ -1,0 +1,29 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'suite' where @NonNull is required
+Members of interest:
+  - method doRun(Test, boolean) (junit.textui.TestRunner): receives the @Nullable argument as parameter 0
+
+## method doRun(Test, boolean) (junit.textui.TestRunner)
+# junit/textui/TestRunner.java (declaration, and uses of parameter 'suite' in its body)
+    112:     public TestResult doRun(Test suite, boolean wait) {
+  ---
+    115:         long startTime = System.currentTimeMillis();
+    116:         suite.run(result);
+    117:         long endTime = System.currentTimeMillis();
+  ---
+# junit/textui/TestRunner.java (uses)
+     85:         TestRunner aTestRunner = new TestRunner();
+     86:         aTestRunner.doRun(suite, true);
+     87:     }
+  ---
+    108:     public TestResult doRun(Test test) {
+    109:         return doRun(test, false);
+    110:     }
+  ---
+    191:         Test test = TestSuite.createTest(testClass, method);
+    192:         return doRun(test, wait);
+    193:     }
+  ---

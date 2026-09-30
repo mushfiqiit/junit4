@@ -1,0 +1,53 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'fName' where @NonNull is required
+Members of interest:
+  - method assertNotNull(String, Object) (junit.framework.TestCase): receives the @Nullable argument as parameter 1
+  - field fName (junit.framework.TestCase): the @Nullable argument
+
+## method assertNotNull(String, Object) (junit.framework.TestCase)
+# junit/framework/TestCase.java (declaration, and uses of parameter 'object' in its body)
+    400:     public static void assertNotNull(String message, Object object) {
+    401:         Assert.assertNotNull(message, object);
+    402:     }
+  ---
+# junit/framework/TestCase.java (uses)
+    400:     public static void assertNotNull(String message, Object object) {
+    401:         Assert.assertNotNull(message, object);
+    402:     }
+  ---
+# junit/framework/Assert.java (uses)
+    249:     public static void assertNotNull(Object object) {
+    250:         assertNotNull(null, object);
+    251:     }
+  ---
+# org/junit/Assert.java (uses)
+    723:     public static void assertNotNull(Object object) {
+    724:         assertNotNull(null, object);
+    725:     }
+  ---
+
+## field fName (junit.framework.TestCase)
+# junit/framework/TestCase.java (declaration)
+     82:     @Nullable
+     83:     private String fName;
+  ---
+# junit/framework/TestCase.java (uses)
+     89:     public TestCase() {
+     90:         fName = null;
+     91:     }
+  ---
+     96:     public TestCase(String name) {
+     97:         fName = name;
+     98:     }
+  ---
+    499:     public String getName() {
+    500:         return fName;
+    501:     }
+  ---
+    508:     public void setName(String name) {
+    509:         fName = name;
+    510:     }
+  ---

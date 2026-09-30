@@ -1,0 +1,41 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'testClass' where @NonNull is required
+Members of interest:
+  - constructor ErrorReportingRunner(Throwable, Class<?>...) (org.junit.internal.runners.ErrorReportingRunner): receives the @Nullable argument as parameter 1
+
+## constructor ErrorReportingRunner(Throwable, Class<?>...) (org.junit.internal.runners.ErrorReportingRunner)
+# org/junit/internal/runners/ErrorReportingRunner.java (declaration, and uses of parameter 'testClasses' in its body)
+     25:     public ErrorReportingRunner(Throwable cause, Class<?>... testClasses) {
+     26:         if (testClasses == null || testClasses.length == 0) {
+     27:             throw new NullPointerException("Test classes cannot be null or empty");
+     28:         }
+     29:         for (Class<?> testClass : testClasses) {
+     30:             if (testClass == null) {
+  ---
+     33:         }
+     34:         classNames = getClassNames(testClasses);
+     35:         causes = getCauses(cause);
+  ---
+# org/junit/experimental/max/MaxCore.java (uses)
+    122:                 } catch (InitializationError e) {
+    123:                     return new ErrorReportingRunner(null, e);
+    124:                 }
+  ---
+# org/junit/internal/requests/FilterRequest.java (uses)
+     39:         } catch (NoTestsRemainException e) {
+     40:             return new ErrorReportingRunner(Filter.class, new Exception(String
+     41:                     .format("No tests found matching %s from %s", fFilter
+  ---
+# org/junit/internal/requests/OrderingRequest.java (uses)
+     24:         } catch (InvalidOrderingException e) {
+     25:             return new ErrorReportingRunner(ordering.getClass(), e);
+     26:         }
+  ---
+# org/junit/runner/Request.java (uses)
+     79:         } catch (InitializationError e) {
+     80:             return runner(new ErrorReportingRunner(e, classes));
+     81:         }
+  ---

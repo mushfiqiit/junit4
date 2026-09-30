@@ -1,0 +1,17 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: unboxing of a @Nullable value
+Members of interest:
+  - field starts (org.junit.experimental.max.MaxHistory.RememberingListener): appears on the warning line
+
+## field starts (org.junit.experimental.max.MaxHistory.RememberingListener)
+# org/junit/experimental/max/MaxHistory.java (declaration)
+    120:         private Map<Description, Long> starts = new HashMap<Description, Long>();
+  ---
+# org/junit/experimental/max/MaxHistory.java (uses)
+    123:         public void testStarted(Description description) throws Exception {
+    124:             starts.put(description, System.nanoTime()); // Get most accurate
+    125:             // possible time
+  ---

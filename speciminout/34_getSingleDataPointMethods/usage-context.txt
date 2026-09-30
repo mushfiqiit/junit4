@@ -1,0 +1,78 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
+Members of interest:
+  - method getAnnotation(Class<T>) (org.junit.experimental.theories.ParameterSignature): its @Nullable result is dereferenced at the warning line
+
+## method getAnnotation(Class<T>) (org.junit.experimental.theories.ParameterSignature)
+# org/junit/experimental/theories/ParameterSignature.java (declaration)
+    128:     @Nullable
+    129:     public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
+  ---
+# org/junit/experimental/theories/ParameterSignature.java (uses)
+     99:     public boolean hasAnnotation(Class<? extends Annotation> type) {
+    100:         return getAnnotation(type) != null;
+    101:     }
+  ---
+# org/junit/experimental/theories/Theories.java (uses)
+     91:         for (Field field : fields) {
+     92:             if (field.getAnnotation(DataPoint.class) == null && field.getAnnotation(DataPoints.class) == null) {
+     93:                 continue;
+  ---
+    107:         for (Method method : methods) {
+    108:             if (method.getAnnotation(DataPoint.class) == null && method.getAnnotation(DataPoints.class) == null) {
+    109:                 continue;
+  ---
+    127:         for (FrameworkMethod each : computeTestMethods()) {
+    128:             if (each.getAnnotation(Theory.class) != null) {
+    129:                 each.validatePublicVoid(false, errors);
+  ---
+    195:             //if this test method is not annotated with Theory, then no successes is a valid case
+    196:             boolean hasTheoryAnnotation = testMethod.getAnnotation(Theory.class) != null;
+    197:             if (successes == 0 && hasTheoryAnnotation) {
+  ---
+    297:         private boolean nullsOk() {
+    298:             Theory annotation = testMethod.getMethod().getAnnotation(
+    299:                     Theory.class);
+  ---
+# org/junit/experimental/theories/internal/AllMembersSupplier.java (uses)
+     41:             } catch (Throwable throwable) {
+     42:                 DataPoint annotation = method.getAnnotation(DataPoint.class);
+     43:                 Assume.assumeTrue(annotation == null || !isAssignableToAnyOf(annotation.ignoredExceptions(), throwable));
+  ---
+     85:                 } catch (Throwable throwable) {
+     86:                     DataPoints annotation = dataPointsMethod.getAnnotation(DataPoints.class);
+     87:                     if (annotation != null && isAssignableToAnyOf(annotation.ignoredExceptions(), throwable)) {
+  ---
+# org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java (uses)
+     24:         Collection<Field> fields = super.getSingleDataPointFields(sig);        
+     25:         String requestedName = sig.getAnnotation(FromDataPoints.class).value();
+     26: 
+  ---
+     29:         for (Field field : fields) {
+     30:             String[] fieldNames = field.getAnnotation(DataPoint.class).value();
+     31:             if (Arrays.asList(fieldNames).contains(requestedName)) {
+  ---
+     41:         Collection<Field> fields = super.getDataPointsFields(sig);        
+     42:         String requestedName = sig.getAnnotation(FromDataPoints.class).value();
+     43:         
+  ---
+     46:         for (Field field : fields) {
+     47:             String[] fieldNames = field.getAnnotation(DataPoints.class).value();
+     48:             if (Arrays.asList(fieldNames).contains(requestedName)) {
+  ---
+     75:         Collection<FrameworkMethod> methods = super.getDataPointsMethods(sig);
+     76:         String requestedName = sig.getAnnotation(FromDataPoints.class).value();
+     77:         
+  ---
+     80:         for (FrameworkMethod method : methods) {
+     81:             String[] methodNames = method.getAnnotation(DataPoints.class).value();
+     82:             if (Arrays.asList(methodNames).contains(requestedName)) {
+  ---
+# org/junit/experimental/theories/suppliers/TestedOnSupplier.java (uses)
+     17:         List<PotentialAssignment> list = new ArrayList<PotentialAssignment>();
+     18:         TestedOn testedOn = sig.getAnnotation(TestedOn.class);
+     19:         int[] ints = testedOn.ints();
+  ---

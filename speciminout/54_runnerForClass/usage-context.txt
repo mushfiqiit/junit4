@@ -1,0 +1,58 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: method returns @Nullable, but superclass method org.junit.internal.builders.SuiteMethodBuilder.runnerForClass(java.lang.Class<?>) returns @NonNull
+Members of interest:
+  - method runnerForClass(Class<?>) (org.junit.internal.builders.AllDefaultPossibilitiesBuilder, org.junit.internal.builders.AnnotatedBuilder, org.junit.internal.builders.IgnoredBuilder, org.junit.internal.builders.JUnit3Builder, org.junit.internal.builders.JUnit4Builder, org.junit.internal.builders.NullBuilder, org.junit.internal.builders.SuiteMethodBuilder, org.junit.internal.requests.ClassRequest.CustomSuiteMethodBuilder, org.junit.runners.model.RunnerBuilder): overridden method named in the warning
+
+## method runnerForClass(Class<?>) (org.junit.internal.builders.AllDefaultPossibilitiesBuilder, org.junit.internal.builders.AnnotatedBuilder, org.junit.internal.builders.IgnoredBuilder, org.junit.internal.builders.JUnit3Builder, org.junit.internal.builders.JUnit4Builder, org.junit.internal.builders.NullBuilder, org.junit.internal.builders.SuiteMethodBuilder, org.junit.internal.requests.ClassRequest.CustomSuiteMethodBuilder, org.junit.runners.model.RunnerBuilder)
+# org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java (declaration)
+     28:     @Override
+     29:     @Nullable
+     30:     public Runner runnerForClass(Class<?> testClass) throws Throwable {
+  ---
+# org/junit/internal/builders/AnnotatedBuilder.java (declaration)
+     81:     @Override
+     82:     @Nullable
+     83:     public Runner runnerForClass(Class<?> testClass) throws Exception {
+  ---
+# org/junit/internal/builders/IgnoredBuilder.java (declaration)
+      8:     @Override
+      9:     public Runner runnerForClass(Class<?> testClass) {
+  ---
+# org/junit/internal/builders/JUnit3Builder.java (declaration)
+      8:     @Override
+      9:     public Runner runnerForClass(Class<?> testClass) throws Throwable {
+  ---
+# org/junit/internal/builders/JUnit4Builder.java (declaration)
+      8:     @Override
+      9:     public Runner runnerForClass(Class<?> testClass) throws Throwable {
+  ---
+# org/junit/internal/builders/NullBuilder.java (declaration)
+      7:     @Override
+      8:     public Runner runnerForClass(Class<?> each) throws Throwable {
+  ---
+# org/junit/internal/builders/SuiteMethodBuilder.java (declaration)
+      8:     @Override
+      9:     public Runner runnerForClass(Class<?> each) throws Throwable {
+  ---
+# org/junit/internal/requests/ClassRequest.java (declaration)
+     47:         @Override
+     48:         @Nullable
+     49:         public Runner runnerForClass(Class<?> testClass) throws Throwable {
+  ---
+# org/junit/runners/model/RunnerBuilder.java (declaration)
+     54:     @Nullable
+     55:     public abstract Runner runnerForClass(Class<?> testClass) throws Throwable;
+  ---
+# org/junit/runners/model/RunnerBuilder.java (uses)
+     71:         try {
+     72:             Runner runner = runnerForClass(testClass);
+     73:             if (runner != null) {
+  ---
+# org/junit/runner/Computer.java (uses)
+     49:     protected Runner getRunner(RunnerBuilder builder, Class<?> testClass) throws Throwable {
+     50:         return builder.runnerForClass(testClass);
+     51:     }
+  ---

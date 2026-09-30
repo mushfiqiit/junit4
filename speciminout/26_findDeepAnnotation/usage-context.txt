@@ -1,0 +1,27 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method findDeepAnnotation(Class<T>) (org.junit.experimental.theories.ParameterSignature): the method returning @Nullable (how callers use its result)
+
+## method findDeepAnnotation(Class<T>) (org.junit.experimental.theories.ParameterSignature)
+# org/junit/experimental/theories/ParameterSignature.java (declaration)
+    103:     public <T extends Annotation> T findDeepAnnotation(Class<T> annotationType) {
+  ---
+# org/junit/experimental/theories/ParameterSignature.java (uses)
+    117:             }
+    118:             Annotation candidate = findDeepAnnotation(each.annotationType()
+    119:                     .getAnnotations(), annotationType, depth - 1);
+  ---
+# org/junit/experimental/theories/Theories.java (uses)
+    135:             for (ParameterSignature signature : ParameterSignature.signatures(each.getMethod())) {
+    136:                 ParametersSuppliedBy annotation = signature.findDeepAnnotation(ParametersSuppliedBy.class);
+    137:                 if (annotation != null) {
+  ---
+# org/junit/experimental/theories/internal/Assignments.java (uses)
+    100:         ParametersSuppliedBy annotation = unassigned
+    101:                 .findDeepAnnotation(ParametersSuppliedBy.class);
+    102:         
+  ---

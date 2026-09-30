@@ -1,0 +1,17 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: assigning @Nullable expression to @NonNull field
+Members of interest:
+  - field target (org.junit.internal.runners.statements.RunAfters): assigned at the warning line
+
+## field target (org.junit.internal.runners.statements.RunAfters)
+# org/junit/internal/runners/statements/RunAfters.java (declaration)
+     14:     private final Object target;
+  ---
+# org/junit/internal/runners/statements/RunAfters.java (uses)
+     46:     protected void invokeMethod(FrameworkMethod method) throws Throwable {
+     47:         method.invokeExplosively(target);
+     48:     }
+  ---

@@ -1,0 +1,98 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+Members of interest:
+  - method invokeExplosively(Object, Object...) (org.junit.runners.model.FrameworkMethod): receives the @Nullable argument as parameter 1
+  - field parameters (org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters): the @Nullable argument
+
+## method invokeExplosively(Object, Object...) (org.junit.runners.model.FrameworkMethod)
+# org/junit/runners/model/FrameworkMethod.java (declaration, and uses of parameter 'params' in its body)
+     55:     public Object invokeExplosively(@Nullable final Object target, @Nullable final Object... params)
+     56:             throws Throwable {
+  ---
+     59:             protected Object runReflectiveCall() throws Throwable {
+     60:                 return method.invoke(target, params);
+     61:             }
+  ---
+# org/junit/experimental/theories/Theories.java (uses)
+    278:                     
+    279:                     method.invokeExplosively(freshInstance, values);
+    280:                 }
+  ---
+# org/junit/experimental/theories/internal/AllMembersSupplier.java (uses)
+     33:             try {
+     34:                 return method.invokeExplosively(null);
+     35:             } catch (IllegalArgumentException e) {
+  ---
+     83:                     addDataPointsValues(returnType, sig, dataPointsMethod.getName(), list, 
+     84:                             dataPointsMethod.invokeExplosively(null));
+     85:                 } catch (Throwable throwable) {
+  ---
+# org/junit/internal/runners/statements/InvokeMethod.java (uses)
+     16:     public void evaluate() throws Throwable {
+     17:         testMethod.invokeExplosively(target);
+     18:     }
+  ---
+# org/junit/internal/runners/statements/RunAfters.java (uses)
+     46:     protected void invokeMethod(FrameworkMethod method) throws Throwable {
+     47:         method.invokeExplosively(target);
+     48:     }
+  ---
+# org/junit/internal/runners/statements/RunBefores.java (uses)
+     33:     protected void invokeMethod(FrameworkMethod method) throws Throwable {
+     34:         method.invokeExplosively(target);
+     35:     }
+  ---
+# org/junit/runners/Parameterized.java (uses)
+    425:                 TestClass testClass, FrameworkMethod parametersMethod) throws Throwable {
+    426:             Object parameters = parametersMethod.invokeExplosively(null);
+    427:             if (parameters instanceof List) {
+  ---
+# org/junit/runners/model/TestClass.java (uses)
+    293:                 if (valueClass.isAssignableFrom(each.getReturnType())) {
+    294:                     Object fieldValue = each.invokeExplosively(test);
+    295:                     consumer.accept(each, valueClass.cast(fieldValue));
+  ---
+# org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java (uses)
+    185:             int paramCount = method.getMethod().getParameterTypes().length;
+    186:             method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+    187:         }
+  ---
+
+## field parameters (org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters)
+# org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java (declaration)
+     29:     private final Object[] parameters;
+  ---
+# org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java (uses)
+     35:         super(test.getTestClass());
+     36:         parameters = test.getParameters().toArray(
+     37:                 new Object[test.getParameters().size()]);
+  ---
+     55:     private Object createTestUsingConstructorInjection() throws Exception {
+     56:         return getTestClass().getOnlyConstructor().newInstance(parameters);
+     57:     }
+  ---
+     60:         List<FrameworkField> annotatedFieldsByParameter = getAnnotatedFieldsByParameter();
+     61:         if (annotatedFieldsByParameter.size() != parameters.length) {
+     62:             throw new Exception(
+  ---
+     65:                             + annotatedFieldsByParameter.size()
+     66:                             + ", available parameters: " + parameters.length
+     67:                             + ".");
+  ---
+     74:             try {
+     75:                 field.set(testClassInstance, parameters[index]);
+     76:             } catch (IllegalAccessException e) {
+  ---
+     85:                         + ": Trying to set " + field.getName()
+     86:                         + " with the value " + parameters[index]
+     87:                         + " that is not the right type ("
+     88:                         + parameters[index].getClass().getSimpleName()
+     89:                         + " instead of " + field.getType().getSimpleName()
+  ---
+    185:             int paramCount = method.getMethod().getParameterTypes().length;
+    186:             method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+    187:         }
+  ---

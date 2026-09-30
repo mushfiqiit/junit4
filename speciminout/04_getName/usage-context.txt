@@ -1,0 +1,179 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method getName() (junit.framework.TestCase): the method returning @Nullable (how callers use its result)
+
+## method getName() (junit.framework.TestCase)
+# junit/framework/TestCase.java (declaration)
+    499:     public String getName() {
+  ---
+# junit/framework/TestCase.java (uses)
+    490:     public String toString() {
+    491:         return getName() + "(" + getClass().getName() + ")";
+    492:     }
+  ---
+# junit/framework/JUnit4TestAdapter.java (uses)
+     87:     public String toString() {
+     88:         return fNewTestClass.getName();
+     89:     }
+  ---
+# junit/framework/TestSuite.java (uses)
+     53:         } catch (NoSuchMethodException e) {
+     54:             return warning("Class " + theClass.getName() + " has no public constructor TestCase(String name) or TestCase()");
+     55:         }
+  ---
+    121:     private void addTestsFromTestCase(final Class<?> theClass) {
+    122:         fName = theClass.getName();
+    123:         try {
+  ---
+    125:         } catch (NoSuchMethodException e) {
+    126:             addTest(warning("Class " + theClass.getName() + " has no public constructor TestCase(String name) or TestCase()"));
+    127:             return;
+  ---
+    130:         if (!Modifier.isPublic(theClass.getModifiers())) {
+    131:             addTest(warning("Class " + theClass.getName() + " is not public"));
+    132:             return;
+  ---
+    143:         if (fTests.size() == 0) {
+    144:             addTest(warning("No tests found in " + theClass.getName()));
+    145:         }
+  ---
+    277:     public String toString() {
+    278:         if (getName() != null) {
+    279:             return getName();
+    280:         }
+  ---
+    284:     private void addTestMethod(Method m, List<String> names, Class<?> theClass) {
+    285:         String name = m.getName();
+    286:         if (names.contains(name)) {
+  ---
+    290:             if (isTestMethod(m)) {
+    291:                 addTest(warning("Test method isn't public: " + m.getName() + "(" + theClass.getCanonicalName() + ")"));
+    292:             }
+  ---
+    304:         return m.getParameterTypes().length == 0 &&
+    305:                 m.getName().startsWith("test") &&
+    306:                 m.getReturnType().equals(Void.TYPE);
+  ---
+# org/junit/Assert.java (uses)
+    857:         String className = value.getCanonicalName();
+    858:         return className == null ? value.getName() : className;
+    859:     }
+  ---
+    861:     private static String formatClassAndValue(Object value, String valueString) {
+    862:         String className = value == null ? "null" : value.getClass().getName();
+    863:         return className + "<" + valueString + ">";
+  ---
+# org/junit/experimental/theories/Theories.java (uses)
+     95:             if (!Modifier.isStatic(field.getModifiers())) {
+     96:                 errors.add(new Error("DataPoint field " + field.getName() + " must be static"));
+     97:             }
+     98:             if (!Modifier.isPublic(field.getModifiers())) {
+     99:                 errors.add(new Error("DataPoint field " + field.getName() + " must be public"));
+    100:             }
+  ---
+    111:             if (!Modifier.isStatic(method.getModifiers())) {
+    112:                 errors.add(new Error("DataPoint method " + method.getName() + " must be static"));
+    113:             }
+    114:             if (!Modifier.isPublic(method.getModifiers())) {
+    115:                 errors.add(new Error("DataPoint method " + method.getName() + " must be public"));
+    116:             }
+  ---
+    147:         if (constructors.length != 1) {
+    148:             errors.add(new Error("ParameterSupplier " + supplierClass.getName() + 
+    149:                                  " must have only one constructor (either empty or taking only a TestClass)"));
+  ---
+    152:             if (!(paramTypes.length == 0) && !paramTypes[0].equals(TestClass.class)) {
+    153:                 errors.add(new Error("ParameterSupplier " + supplierClass.getName() + 
+    154:                                      " constructor must take either nothing or a single TestClass instance"));
+  ---
+    292:             }
+    293:             throw new ParameterizedAssertionError(e, testMethod.getName(),
+    294:                     params);
+  ---
+# org/junit/internal/ComparisonCriteria.java (uses)
+    122:         } else {
+    123:             return componentType.getName();
+    124:         }
+  ---
+# org/junit/internal/runners/JUnit38ClassRunner.java (uses)
+     63:             if (test instanceof TestCase) {
+     64:                 return ((TestCase) test).getName();
+     65:             } else {
+  ---
+    104:             TestCase tc = (TestCase) test;
+    105:             return Description.createTestDescription(tc.getClass(), tc.getName(),
+    106:                     getAnnotations(tc));
+  ---
+    108:             TestSuite ts = (TestSuite) test;
+    109:             String name = ts.getName() == null ? createSuiteDescription(ts) : ts.getName();
+    110:             Description description = Description.createSuiteDescription(name);
+  ---
+    134:         try {
+    135:             Method m = test.getClass().getMethod(test.getName());
+    136:             return m.getDeclaredAnnotations();
+  ---
+    154:             TestSuite suite = (TestSuite) getTest();
+    155:             TestSuite filtered = new TestSuite(suite.getName());
+    156:             int n = suite.testCount();
+  ---
+# org/junit/internal/runners/MethodValidator.java (uses)
+     75:                 String state = isStatic ? "should" : "should not";
+     76:                 errors.add(new Exception("Method " + each.getName() + "() "
+     77: 						+ state + " be static"));
+  ---
+     79:             if (!Modifier.isPublic(each.getDeclaringClass().getModifiers())) {
+     80:                 errors.add(new Exception("Class " + each.getDeclaringClass().getName()
+     81: 						+ " should be public"));
+  ---
+     83:             if (!Modifier.isPublic(each.getModifiers())) {
+     84:                 errors.add(new Exception("Method " + each.getName()
+     85: 						+ " should be public"));
+  ---
+     87:             if (each.getReturnType() != Void.TYPE) {
+     88:                 errors.add(new Exception("Method " + each.getName()
+     89: 						+ "should have a return type of void"));
+  ---
+     91:             if (each.getParameterTypes().length != 0) {
+     92:                 errors.add(new Exception("Method " + each.getName()
+     93: 						+ " should have no parameters"));
+  ---
+# org/junit/internal/runners/SuiteMethod.java (uses)
+     32:             if (!Modifier.isStatic(suiteMethod.getModifiers())) {
+     33:                 throw new Exception(klass.getName() + ".suite() must be static");
+     34:             }
+  ---
+# org/junit/internal/runners/TestClass.java (uses)
+     72:     private boolean isShadowed(Method current, Method previous) {
+     73:         if (!previous.getName().equals(current.getName())) {
+     74:             return false;
+  ---
+    105:     public String getName() {
+    106:         return klass.getName();
+    107:     }
+  ---
+# org/junit/runners/BlockJUnit4ClassRunner.java (uses)
+    167:         if (getTestClass().isANonStaticInnerClass()) {
+    168:             String gripe = "The inner class " + getTestClass().getName()
+    169:                     + " is not static.";
+  ---
+    268:     protected String testName(FrameworkMethod method) {
+    269:         return method.getName();
+    270:     }
+  ---
+# org/junit/runners/model/TestClass.java (uses)
+    195:         }
+    196:         return clazz.getName();
+    197:     }
+  ---
+    298:                 throw new RuntimeException(
+    299:                         "Exception in " + each.getName(), e);
+    300:             }
+  ---
+    336:         public int compare(Field left, Field right) {
+    337:             return left.getName().compareTo(right.getName());
+    338:         }
+  ---

@@ -1,0 +1,23 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: assigning @Nullable expression to @NonNull field
+Members of interest:
+  - field fMatcher (org.junit.internal.AssumptionViolatedException): assigned at the warning line
+
+## field fMatcher (org.junit.internal.AssumptionViolatedException)
+# org/junit/internal/AssumptionViolatedException.java (declaration)
+     30:     private final Matcher<?> fMatcher;
+  ---
+# org/junit/internal/AssumptionViolatedException.java (uses)
+    108: 
+    109:             if (fMatcher != null) {
+    110:                 description.appendText(", expected: ");
+    111:                 description.appendDescriptionOf(fMatcher);
+    112:             }
+  ---
+    129:         // We have to wrap the matcher into a serializable form.
+    130:         putField.put("fMatcher", SerializableMatcherDescription.asSerializableMatcher(fMatcher));
+    131: 
+  ---

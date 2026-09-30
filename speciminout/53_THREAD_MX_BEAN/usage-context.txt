@@ -1,0 +1,38 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'FactoryHolder.getBeanObject("getThreadMXBean")' where @NonNull is required
+Members of interest:
+  - method getBean(Object) (org.junit.internal.management.ManagementFactory.RuntimeHolder, org.junit.internal.management.ManagementFactory.ThreadHolder): receives the @Nullable argument as parameter 0
+  - method getBeanObject(String) (org.junit.internal.management.ManagementFactory.FactoryHolder): returns the @Nullable argument
+
+## method getBean(Object) (org.junit.internal.management.ManagementFactory.RuntimeHolder, org.junit.internal.management.ManagementFactory.ThreadHolder)
+# org/junit/internal/management/ManagementFactory.java (declaration, and uses of parameter 'runtimeMxBean' in its body)
+     51:     private static final RuntimeMXBean getBean(Object runtimeMxBean) {
+     52:       return runtimeMxBean != null
+     53:           ? new ReflectiveRuntimeMXBean(runtimeMxBean) : new FakeRuntimeMXBean();
+     54:     }
+  ---
+# org/junit/internal/management/ManagementFactory.java (declaration, and uses of parameter 'threadMxBean' in its body)
+     61:     private static final ThreadMXBean getBean(Object threadMxBean) {
+     62:       return threadMxBean != null
+     63:           ? new ReflectiveThreadMXBean(threadMxBean) : new FakeThreadMXBean();
+     64:     }
+  ---
+# org/junit/internal/management/ManagementFactory.java (uses)
+     48:     private static final RuntimeMXBean RUNTIME_MX_BEAN =
+     49:         getBean(FactoryHolder.getBeanObject("getRuntimeMXBean"));
+     50: 
+  ---
+
+## method getBeanObject(String) (org.junit.internal.management.ManagementFactory.FactoryHolder)
+# org/junit/internal/management/ManagementFactory.java (declaration)
+     26:     @Nullable
+     27:     static Object getBeanObject(String methodName) {
+  ---
+# org/junit/internal/management/ManagementFactory.java (uses)
+     48:     private static final RuntimeMXBean RUNTIME_MX_BEAN =
+     49:         getBean(FactoryHolder.getBeanObject("getRuntimeMXBean"));
+     50: 
+  ---

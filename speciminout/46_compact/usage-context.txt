@@ -1,0 +1,60 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'message' where @NonNull is required
+Members of interest:
+  - method format(String, Object, Object) (junit.framework.Assert, org.junit.Assert): receives the @Nullable argument as parameter 0
+
+## method format(String, Object, Object) (junit.framework.Assert, org.junit.Assert)
+# junit/framework/Assert.java (declaration, and uses of parameter 'message' in its body)
+    334:     public static String format(String message, Object expected, Object actual) {
+    335:         String formatted = "";
+    336:         if (message != null && message.length() > 0) {
+    337:             formatted = message + " ";
+    338:         }
+  ---
+# org/junit/Assert.java (declaration, and uses of parameter 'message' in its body)
+    839:     static String format(String message, Object expected, Object actual) {
+    840:         String formatted = "";
+    841:         if (message != null && !"".equals(message)) {
+    842:             formatted = message + " ";
+    843:         }
+  ---
+# junit/framework/Assert.java (uses)
+    330:     public static void failNotEquals(String message, Object expected, Object actual) {
+    331:         fail(format(message, expected, actual));
+    332:     }
+  ---
+# org/junit/Assert.java (uses)
+    835:             Object actual) {
+    836:         fail(format(message, expected, actual));
+    837:     }
+  ---
+   1017:                 String mismatchMessage = buildPrefix(message)
+   1018:                         + format("unexpected exception type thrown;", expected, actual);
+   1019: 
+  ---
+   1026:         String notThrownMessage = buildPrefix(message) + String
+   1027:                 .format("expected %s to be thrown, but nothing was thrown",
+   1028:                         formatClass(expectedThrowable));
+  ---
+# junit/framework/ComparisonCompactor.java (uses)
+     25:         if (fExpected == null || fActual == null || areStringsEqual()) {
+     26:             return Assert.format(message, fExpected, fActual);
+     27:         }
+  ---
+     32:         String actual = compactString(fActual);
+     33:         return Assert.format(message, expected, actual);
+     34:     }
+  ---
+# junit/framework/TestCase.java (uses)
+    468:     public static String format(String message, Object expected, Object actual) {
+    469:         return Assert.format(message, expected, actual);
+    470:     }
+  ---
+# org/junit/rules/ExpectedException.java (uses)
+    282:         String expectation= StringDescription.toString(matcherBuilder.build());
+    283:         return format(missingExceptionMessage, expectation);
+    284:     }
+  ---

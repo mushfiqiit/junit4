@@ -1,0 +1,27 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'message' where @NonNull is required
+Members of interest:
+  - method failNotSame(String, Object, Object) (org.junit.Assert): receives the @Nullable argument as parameter 0
+
+## method failNotSame(String, Object, Object) (org.junit.Assert)
+# org/junit/Assert.java (declaration, and uses of parameter 'message' in its body)
+    824:     private static void failNotSame(String message, Object expected,
+    825:             Object actual) {
+    826:         String formatted = "";
+    827:         if (message != null) {
+    828:             formatted = message + " ";
+    829:         }
+  ---
+# junit/framework/Assert.java (uses)
+    289:         }
+    290:         failNotSame(message, expected, actual);
+    291:     }
+  ---
+# junit/framework/TestCase.java (uses)
+    460:     public static void failNotSame(String message, Object expected, Object actual) {
+    461:         Assert.failNotSame(message, expected, actual);
+    462:     }
+  ---
