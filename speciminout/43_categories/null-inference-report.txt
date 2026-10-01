@@ -1,0 +1,123 @@
+
+
+```java
+/*
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `Categories.CategoryFilter.parentDescription(Description)` return type | `@Nullable` (keep existing) | The parent description may not exist, so this method can return null and the call site must treat the result as nullable. |
+| `Categories.CategoryFilter.directCategories(Description)` parameter `description` | `@Nullable` | The original implementation explicitly checks `description == null`, so this parameter is intended to accept null. |
+
+B) Cause of the warning
+
+The warning is on the call `directCategories(parentDescription(description))` in `categories`.
+`parentDescription` is annotated to return `@Nullable Description`, but `directCategories`
+has an unannotated `Description` parameter, which NullAway treats as `@Nonnull` by default.
+Passing the possibly-null return value of `parentDescription` to that parameter is therefore
+unsafe. Annotating the `directCategories` parameter with `@Nullable` matches the original
+null-checking behavior and resolves the warning.
+*/
+
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/experimental/categories/Categories.java ===
+package org.junit.experimental.categories;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import javax.annotation.Nullable;
+import org.junit.runner.Description;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runners.Suite;
+
+public class Categories extends Suite {
+
+  public static class CategoryFilter extends Filter {
+
+    private static Set<Class<?>> categories(Description description) {
+      Set<Class<?>> categories = new HashSet<Class<?>>();
+      Collections.addAll(categories, directCategories(description));
+      Collections.addAll(categories, directCategories(parentDescription(description)));
+      return categories;
+    }
+
+    @Nullable
+    private static Description parentDescription(Description description) {
+      throw new java.lang.Error();
+    }
+
+    private static Class<?>[] directCategories(@Nullable Description description) {
+      throw new java.lang.Error();
+    }
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filter.java ===
+package org.junit.runner.manipulation;
+
+public abstract class Filter {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {}
+
+
+// === org/junit/runners/Suite.java ===
+package org.junit.runners;
+
+import org.junit.runner.Runner;
+
+public class Suite extends ParentRunner<Runner> {}
+```

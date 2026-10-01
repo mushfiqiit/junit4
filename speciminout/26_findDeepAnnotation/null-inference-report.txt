@@ -1,0 +1,45 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| Return type of `public <T extends Annotation> T findDeepAnnotation(Class<T> annotationType)` in `ParameterSignature` | `@Nullable` | Original callers null-check the result, and the public method simply delegates to a private helper that is already declared `@Nullable`, so the result can be null. |
+| Return type of `private <T extends Annotation> T findDeepAnnotation(Annotation[], Class<T>, int)` in `ParameterSignature` | `@Nullable` already present; keep it | This helper represents the actual annotation lookup and may return null when no matching annotation is found. |
+
+## B) Cause of the warning
+
+The warning is on line 12, where the public `findDeepAnnotation(Class<T>)` method returns the result of the private `findDeepAnnotation(Annotation[], Class<T>, int)` helper. The private helper is annotated `@Nullable`, but the public method has no nullability annotation, so NullAway treats its return type `T` as `@NonNull` by default. Returning a `@Nullable` expression from a `@NonNull` return type is therefore unsafe. Annotating the public method’s return type as `@Nullable` matches the actual behavior shown by the original usage sites and resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/experimental/theories/ParameterSignature.java ===
+package org.junit.experimental.theories;
+
+import java.lang.annotation.Annotation;
+import javax.annotation.Nullable;
+
+public class ParameterSignature {
+
+  private final Annotation[] annotations;
+
+  public <T extends Annotation> @Nullable T findDeepAnnotation(Class<T> annotationType) {
+    Annotation[] annotations2 = annotations;
+    return findDeepAnnotation(annotations2, annotationType, 3);
+  }
+
+  @Nullable
+  private <T extends Annotation> T findDeepAnnotation(
+      Annotation[] annotations, Class<T> annotationType, int depth) {
+    throw new java.lang.Error();
+  }
+}
+```

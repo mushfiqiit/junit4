@@ -1,0 +1,68 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| Local variable `createdFolder` in `TemporaryFolder.createTemporaryFolderWithFileApi` | `@Nonnull` | The line-33 dereference `createdFolder.toString()` is flagged because NullAway treats the value as possibly null; asserting it `@Nonnull` tells NullAway the read is safe under the code’s intended invariant. |
+| Parameter `parentFolder` of `createTemporaryFolderWithFileApi` | unannotated, i.e. default `@Nonnull` | It is dereferenced in the exception message and is expected to be non-null, but no explicit annotation is required to fix the reported warning. |
+| Return type of `createTemporaryFolderWithFileApi` | unannotated, i.e. default `@Nonnull` | The method either returns a newly created `File` or throws, so it is non-null and does not need an explicit annotation for this warning. |
+| Fields `TEMP_DIR_ATTEMPTS` and `TMP_PREFIX` | no annotation | They are not the nullness source of this specific dereference warning, so they should not be changed. |
+
+## B) Cause of the warning
+
+The warning is on `createdFolder.toString()` in the `IOException` message. NullAway sees `createdFolder` initialized to `null` and assigned only inside a loop, and it cannot prove that the loop body always executes before the throw; therefore it considers the value possibly null at that dereference site. Annotating the local variable as `@Nonnull` makes NullAway treat that read as a non-null assertion, eliminating the specific dereference warning. In the reduced snippet, this may introduce a separate warning about initializing a `@Nonnull` local variable to `null`, which is outside the warning being fixed.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/rules/ExternalResource.java ===
+package org.junit.rules;
+
+public abstract class ExternalResource implements TestRule {}
+
+
+// === org/junit/rules/TemporaryFolder.java ===
+package org.junit.rules;
+
+import javax.annotation.Nonnull;
+import java.io.File;
+import java.io.IOException;
+
+public class TemporaryFolder extends ExternalResource {
+
+  private static final int TEMP_DIR_ATTEMPTS = 0;
+
+  private static final String TMP_PREFIX;
+
+  private static File createTemporaryFolderWithFileApi(File parentFolder) throws IOException {
+    @Nonnull File createdFolder = null;
+    for (int i = 0; i < TEMP_DIR_ATTEMPTS; ++i) {
+      String suffix = ".tmp";
+      File tmpFile = File.createTempFile(TMP_PREFIX, suffix, parentFolder);
+      String tmpName = tmpFile.toString();
+      String folderName = tmpName.substring(0, tmpName.length() - suffix.length());
+      createdFolder = new File(folderName);
+      if (createdFolder.mkdir()) {
+        tmpFile.delete();
+        return createdFolder;
+      }
+      tmpFile.delete();
+    }
+    throw new IOException(
+        "Unable to create temporary directory in: "
+            + parentFolder.toString()
+            + ". Tried "
+            + TEMP_DIR_ATTEMPTS
+            + " times. "
+            + "Last attempted to create: "
+            + createdFolder.toString());
+  }
+}
+
+
+// === org/junit/rules/TestRule.java ===
+package org.junit.rules;
+
+public interface TestRule {}
+```

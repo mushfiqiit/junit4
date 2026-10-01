@@ -1,0 +1,69 @@
+
+
+```java
+// A) Annotation decisions
+//
+// | location | inferred annotation | one-sentence reason |
+// | --- | --- | --- |
+// | org.junit.internal.runners.statements.RunAfters field `target` | `@Nullable` | The constructor parameter is already marked `@Nullable`, so the value stored in the field may legitimately be null. |
+// | org.junit.internal.runners.statements.RunAfters constructor parameter `target` | `@Nullable` already present; no change | The reduced source explicitly indicates that this parameter can be null. |
+
+// B) Cause of the warning
+//
+// NullAway reports the warning at the constructor assignment `this.target = target`
+// because the right-hand side is a `@Nullable Object` parameter, while the field
+// `private final Object target;` is unannotated and therefore treated as `@NonNull`
+// under NullAway's default nullability policy. Marking the field `target` as
+// `@Nullable` makes the field's declared nullability consistent with the nullable
+// value assigned to it, resolving the unsafe-assignment warning.
+
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+// === org/junit/internal/runners/statements/RunAfters.java ===
+package org.junit.internal.runners.statements;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+
+public class RunAfters extends Statement {
+
+  private final Statement next;
+
+  @Nullable
+  private final Object target;
+
+  private final List<FrameworkMethod> afters;
+
+  public RunAfters(Statement next, List<FrameworkMethod> afters, @Nullable Object target) {
+    this.next = next;
+    this.afters = afters;
+    this.target = target;
+  }
+}
+
+// === org/junit/runners/model/Annotatable.java ===
+package org.junit.runners.model;
+
+public interface Annotatable {}
+
+// === org/junit/runners/model/FrameworkMember.java ===
+package org.junit.runners.model;
+
+public abstract class FrameworkMember<T extends FrameworkMember<T>> implements Annotatable {}
+
+// === org/junit/runners/model/FrameworkMethod.java ===
+package org.junit.runners.model;
+
+public class FrameworkMethod extends FrameworkMember<FrameworkMethod> {}
+
+// === org/junit/runners/model/Statement.java ===
+package org.junit.runners.model;
+
+public abstract class Statement {}
+```

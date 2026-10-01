@@ -1,0 +1,51 @@
+
+
+```java
+// A) Annotation decisions
+//
+// | location | inferred annotation | reason |
+// |---|---|---|
+// | `junit.framework.Assert.failNotEquals(String, Object, Object)` parameter `message` | `@Nullable` | `assertEquals` passes its `@Nullable` message to `failNotEquals`, and the original method treats the message as an optional part of the failure description. |
+//
+// B) Cause of the warning
+//
+// The warning is reported at the call `failNotEquals(message, expected, actual)` in
+// `junit.framework.Assert.assertEquals`. The `message` argument is declared
+// `@Nullable` in `assertEquals`, but `failNotEquals` declares its first parameter
+// without a nullness annotation, so NullAway treats it as `@NonNull`. Passing a
+// possibly-null `message` to that parameter is therefore unsafe. Annotating the
+// `message` parameter of `failNotEquals` as `@Nullable` tells NullAway that the
+// callee accepts null messages, resolving the warning.
+//
+// C) Corrected annotated code
+//
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertEquals(@Nullable String message, Object expected, Object actual) {
+    if (expected == null && actual == null) {
+      return;
+    }
+    if (expected != null && expected.equals(actual)) {
+      return;
+    }
+    failNotEquals(message, expected, actual);
+  }
+
+  public static void failNotEquals(@Nullable String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+}
+```

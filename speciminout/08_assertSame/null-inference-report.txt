@@ -1,0 +1,45 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `junit.framework.Assert.failNotSame` parameter `message` | `@Nullable` | The original `failNotSame` implementation explicitly checks `message != null`, so it is designed to accept a null message. |
+| `junit.framework.Assert.assertSame` parameter `message` | `@Nullable` / unchanged | This message is already nullable and is simply forwarded to `failNotSame`, so it must remain `@Nullable`. |
+
+No `@Nonnull` annotation is needed to fix this specific warning.
+
+B) Cause of the warning
+
+The warning is on the call `failNotSame(message, expected, actual)` inside `assertSame`. NullAway sees that `assertSame`’s `message` parameter is annotated `@Nullable`, but `failNotSame`’s `message` parameter is unannotated and therefore treated as non-null by default. Because the reduced code has no JUnit nullness annotations, the safest fix is to mark the `failNotSame` `message` parameter `@Nullable`, which matches the original implementation that guards against a null message.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertSame(@Nullable String message, Object expected, Object actual) {
+    if (expected == actual) {
+      return;
+    }
+    failNotSame(message, expected, actual);
+  }
+
+  public static void failNotSame(@Nullable String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+}
+```

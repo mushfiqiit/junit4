@@ -1,0 +1,46 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | reason |
+|---|---:|---|
+| `TestMethod.getExpectedException()` method result | `javax.annotation.Nonnull` | The call in `isUnexpected` dereferences this result without a null check, so the result must be declared non-null to make this specific NullAway warning go away. |
+
+B) Cause of the warning
+
+The warning is on the line where `isUnexpected` calls:
+
+```java
+getExpectedException().isAssignableFrom(exception.getClass())
+```
+
+`getExpectedException()` is annotated `@Nullable`, so NullAway treats the method result as possibly null. Immediately calling `.isAssignableFrom(...)` on that result could therefore cause a `NullPointerException`. Replacing the `@Nullable` result annotation with `@Nonnull` tells NullAway that the returned `Class` object is guaranteed non-null, so the dereference is accepted.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/internal/runners/TestMethod.java ===
+package org.junit.internal.runners;
+
+import javax.annotation.Nonnull;
+
+@Deprecated
+public class TestMethod {
+
+  @Nonnull
+  protected Class<? extends Throwable> getExpectedException() {
+    throw new java.lang.Error();
+  }
+
+  boolean isUnexpected(Throwable exception) {
+    return !getExpectedException().isAssignableFrom(exception.getClass());
+  }
+}
+```

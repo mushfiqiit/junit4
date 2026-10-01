@@ -1,0 +1,105 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.runners.model.RunnerBuilder.runnerForClass` return type | `@Nullable` | The abstract API already documents that a runner builder may return `null` when it does not handle the class. |
+| `org.junit.internal.builders.SuiteMethodBuilder.runnerForClass` return type | `@Nullable` | This immediate superclass method must also be `@Nullable` because it implements the `@Nullable` abstract method and may not produce a runner. |
+| `org.junit.internal.requests.ClassRequest.CustomSuiteMethodBuilder.runnerForClass` return type | `@Nullable` | This overriding method explicitly returns `null` in the `!canUseSuiteMethod` branch. |
+| `Class<?>` parameters of `runnerForClass` | `@Nonnull` / unannotated | The class arguments are assumed non-null by the API and are not relevant to fixing this nullability override warning. |
+
+B) Cause of the warning
+
+The warning points to the `@Nullable public Runner runnerForClass(...)` declaration inside `ClassRequest.CustomSuiteMethodBuilder`. NullAway sees that this method overrides `SuiteMethodBuilder.runnerForClass(...)`, but in the reduced code `SuiteMethodBuilder` has no `@Nullable` annotation on its return type, so NullAway treats it as returning `@Nonnull`. An override may not have a more nullable return type than the overridden method, because callers using the superclass reference could assume the result is non-null and then dereference it. Adding `@Nullable` to `SuiteMethodBuilder.runnerForClass(...)` makes the immediate superclass return type nullable, matching `RunnerBuilder.runnerForClass(...)` and allowing the `@Nullable` override in `CustomSuiteMethodBuilder`.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/internal/builders/SuiteMethodBuilder.java ===
+package org.junit.internal.builders;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class SuiteMethodBuilder extends RunnerBuilder {
+
+  @Nullable
+  public Runner runnerForClass(Class<?> each) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/requests/ClassRequest.java ===
+package org.junit.internal.requests;
+
+import javax.annotation.Nullable;
+import org.junit.internal.builders.SuiteMethodBuilder;
+import org.junit.runner.Runner;
+
+public class ClassRequest extends MemoizingRequest {
+
+  private final Class<?> fTestClass;
+
+  private final boolean canUseSuiteMethod = false;
+
+  private class CustomSuiteMethodBuilder extends SuiteMethodBuilder {
+
+    @Nullable
+    public Runner runnerForClass(Class<?> testClass) throws Throwable {
+      if (testClass == fTestClass && !canUseSuiteMethod) {
+        return null;
+      }
+      return super.runnerForClass(testClass);
+    }
+  }
+}
+
+
+// === org/junit/internal/requests/MemoizingRequest.java ===
+package org.junit.internal.requests;
+
+import org.junit.runner.Request;
+
+abstract class MemoizingRequest extends Request {}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Request.java ===
+package org.junit.runner;
+
+public abstract class Request {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public abstract class RunnerBuilder {
+
+  @Nullable
+  public abstract Runner runnerForClass(Class<?> testClass) throws Throwable;
+}
+```

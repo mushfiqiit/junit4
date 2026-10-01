@@ -1,0 +1,64 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `private Map<Description, Long> starts` — field reference | `@Nonnull` | The original declaration initializes `starts` to a `HashMap`, so the map reference itself is guaranteed non-null. |
+| `Long` value type argument in `starts` | `@Nonnull` | The stored values are boxed non-null `System.nanoTime()` timings and are retrieved only after a corresponding `testStarted`, so the unboxed `Long` is guaranteed non-null. |
+
+B) Cause of the warning
+
+The warning is on `long start = starts.get(description);`. NullAway treats the value obtained from `starts.get(...)` as a `@Nullable Long`, and assigning that value to a primitive `long` requires unboxing. If the `Long` were `null`, unboxing would throw a `NullPointerException`. Annotating the map as a non-null map containing non-null `Long` values tells NullAway that the unboxed expression is non-null, resolving this specific warning.
+
+C) Corrected annotated code
+
+```java
+// === org/junit/experimental/max/MaxHistory.java ===
+package org.junit.experimental.max;
+
+import javax.annotation.Nonnull;
+import java.io.Serializable;
+import java.util.Map;
+import org.junit.runner.Description;
+import org.junit.runner.notification.RunListener;
+
+public class MaxHistory implements Serializable {
+
+  void putTestDuration(Description description, long duration) {
+    throw new java.lang.Error();
+  }
+
+  private final class RememberingListener extends RunListener {
+
+    private @Nonnull Map<Description, @Nonnull Long> starts;
+
+    public void testFinished(Description description) throws Exception {
+      long end = System.nanoTime();
+      long start = starts.get(description);
+      putTestDuration(description, end - start);
+    }
+  }
+}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {}
+
+
+// === org/junit/runner/notification/RunListener.java ===
+package org.junit.runner.notification;
+
+import org.junit.runner.Description;
+
+public class RunListener {
+
+  public void testFinished(Description description) throws Exception {
+    throw new java.lang.Error();
+  }
+}
+```

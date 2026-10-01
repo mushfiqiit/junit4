@@ -1,0 +1,83 @@
+
+
+```java
+/*
+A) Annotation decisions
+
+location | inferred annotation | reason
+org.junit.Assert.assertThrows(Class<T>, ThrowingRunnable) parameter 1, `message` | @Nullable (already present; no change) | The public API intentionally allows a null failure message, and the reduced code already marks this parameter @Nullable.
+org.junit.Assert.buildPrefix(String) parameter 1, `message` | @Nullable | The original `buildPrefix` body explicitly checks `message != null` before dereferencing it, so the helper intentionally accepts a nullable message.
+
+B) Cause of the warning
+
+The warning is reported at the call `buildPrefix(message)` inside `assertThrows`. The `message` parameter of `assertThrows` is annotated `@Nullable`, but the parameter of `buildPrefix` was unannotated, so NullAway treats it as `@NonNull`. Passing a `@Nullable` expression to that `@NonNull` parameter is therefore flagged. Annotating `buildPrefix`'s `message` parameter as `@Nullable` records that the helper accepts null, matching the original null-checking implementation and resolving the warning.
+*/
+
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+import org.junit.function.ThrowingRunnable;
+
+public class Assert {
+
+  static String format(String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+
+  private static String formatClass(Class<?> value) {
+    throw new java.lang.Error();
+  }
+
+  public static <T extends Throwable> T assertThrows(
+      @Nullable String message, Class<T> expectedThrowable, ThrowingRunnable runnable) {
+    try {
+      runnable.run();
+    } catch (Throwable actualThrown) {
+      if (expectedThrowable.isInstance(actualThrown)) {
+        @SuppressWarnings("unchecked")
+        T retVal = (T) actualThrown;
+        return retVal;
+      } else {
+        String expected = formatClass(expectedThrowable);
+        Class<? extends Throwable> actualThrowable = actualThrown.getClass();
+        String actual = formatClass(actualThrowable);
+        if (expected.equals(actual)) {
+          expected += "@" + Integer.toHexString(System.identityHashCode(expectedThrowable));
+          actual += "@" + Integer.toHexString(System.identityHashCode(actualThrowable));
+        }
+        String mismatchMessage =
+            buildPrefix(message) + format("unexpected exception type thrown;", expected, actual);
+        AssertionError assertionError = new AssertionError(mismatchMessage);
+        assertionError.initCause(actualThrown);
+        throw assertionError;
+      }
+    }
+    String notThrownMessage =
+        buildPrefix(message)
+            + String.format(
+                "expected %s to be thrown, but nothing was thrown", formatClass(expectedThrowable));
+    throw new AssertionError(notThrownMessage);
+  }
+
+  private static String buildPrefix(@Nullable String message) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/function/ThrowingRunnable.java ===
+package org.junit.function;
+
+public interface ThrowingRunnable {
+
+  void run() throws Throwable;
+}
+```

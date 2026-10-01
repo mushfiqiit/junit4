@@ -1,0 +1,53 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.runner.Result.serializedForm` field | `@Nonnull` (change from `@Nullable`) | In the deserialization flow used by `readResolve`, this field is populated before being passed to the constructor, and the constructor requires a non-null `SerializedForm`. |
+| `org.junit.runner.Result` constructor parameter `SerializedForm serializedForm` | `@Nonnull` / leave unannotated | The original constructor immediately dereferences this parameter, so it must be treated as non-null. |
+
+No other parameters, return types, or fields need annotation changes for this warning.
+
+## B) Cause of the warning
+
+The warning is on line 15 in `readResolve()`:
+
+```java
+return new Result(serializedForm);
+```
+
+Here, `serializedForm` is a field annotated `@Nullable`, while the constructor parameter `SerializedForm serializedForm` is unannotated and therefore `@NonNull` by default under NullAway. NullAway therefore reports that a `@Nullable` value is being passed where a `@NonNull` value is required. Marking the `serializedForm` field `@Nonnull` tells NullAway that the value passed from `readResolve()` to the constructor is non-null, so the call satisfies the constructor’s nullability requirement.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/runner/Result.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
+
+public class Result implements Serializable {
+
+  @Nonnull private SerializedForm serializedForm;
+
+  private Result(SerializedForm serializedForm) {
+    throw new java.lang.Error();
+  }
+
+  private Object readResolve() {
+    return new Result(serializedForm);
+  }
+
+  private static class SerializedForm implements Serializable {}
+}
+```

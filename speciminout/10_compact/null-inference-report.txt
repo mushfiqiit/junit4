@@ -1,0 +1,83 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `junit.framework.Assert.format` parameter `message` | `@Nullable` | The original `format` implementations explicitly check `message != null` before using it, so this parameter is allowed to be null. |
+| `junit.framework.ComparisonCompactor.compact` parameter `message` | `@Nullable` (already present) | This is the already-annotated nullable source of the value being passed to `Assert.format`. |
+
+## B) Cause of the warning
+
+The warning is reported on:
+
+```java
+return Assert.format(message, fExpected, fActual);
+```
+
+inside `ComparisonCompactor.compact`. The `message` parameter of `compact` is annotated `@Nullable`, so NullAway knows it may be null. However, the `message` parameter of `junit.framework.Assert.format` is unannotated, so NullAway treats it as `@NonNull`. Passing a possibly-null `message` to that unannotated `@NonNull` parameter causes the warning. Annotating `Assert.format`'s `message` parameter as `@Nullable` matches the actual behavior of the original method and resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static String format(@Nullable String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === junit/framework/ComparisonCompactor.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+public class ComparisonCompactor {
+
+  private String fExpected;
+
+  private String fActual;
+
+  @SuppressWarnings("deprecation")
+  public String compact(@Nullable String message) {
+    if (fExpected == null || fActual == null || areStringsEqual()) {
+      return Assert.format(message, fExpected, fActual);
+    }
+    findCommonPrefix();
+    findCommonSuffix();
+    String expected = compactString(fExpected);
+    String actual = compactString(fActual);
+    return Assert.format(message, expected, actual);
+  }
+
+  private String compactString(String source) {
+    throw new java.lang.Error();
+  }
+
+  private void findCommonPrefix() {
+    throw new java.lang.Error();
+  }
+
+  private void findCommonSuffix() {
+    throw new java.lang.Error();
+  }
+
+  private boolean areStringsEqual() {
+    throw new java.lang.Error();
+  }
+}
+```

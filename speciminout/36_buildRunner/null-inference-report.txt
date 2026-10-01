@@ -1,0 +1,190 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `junit.framework.TestSuite` constructor parameter `theClass` in `TestSuite(Class<?>)` | `@Nullable` | This constructor is invoked at `MaxCore.java:20` with `getMalformedTestClass(each)`, which is `@Nullable` and may be null, so the parameter must accept null. |
+| `MaxCore.getMalformedTestClass` return type | `@Nullable` (kept) | The method is already annotated `@Nullable` and can plausibly return null when the malformed test class cannot be resolved. |
+
+B) Cause of the warning
+
+At line 20 of `MaxCore.java`, the expression `getMalformedTestClass(each)` is a `@Nullable Class<?>`. The `TestSuite(Class<?>)` constructor parameter is unannotated, so NullAway treats it as `@Nonnull`. Therefore, passing the nullable result of `getMalformedTestClass(each)` to that constructor is unsafe. Annotating the `TestSuite(Class<?>)` parameter as `@Nullable` makes the parameter contract match this call site and fixes the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {}
+
+
+// === junit/framework/TestSuite.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+public class TestSuite implements Test {
+
+  public TestSuite(@Nullable final Class<?> theClass) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/experimental/max/MaxCore.java ===
+package org.junit.experimental.max;
+
+import javax.annotation.Nullable;
+import junit.framework.TestSuite;
+import org.junit.internal.runners.JUnit38ClassRunner;
+import org.junit.runner.Description;
+import org.junit.runner.Request;
+import org.junit.runner.Runner;
+import org.junit.runners.Suite;
+
+public class MaxCore {
+
+  private static final String MALFORMED_JUNIT_3_TEST_CLASS_PREFIX;
+
+  private Runner buildRunner(Description each) {
+    if (each.toString().equals("TestSuite with 0 tests")) {
+      return Suite.emptySuite();
+    }
+    if (each.toString().startsWith(MALFORMED_JUNIT_3_TEST_CLASS_PREFIX)) {
+      return new JUnit38ClassRunner(new TestSuite(getMalformedTestClass(each)));
+    }
+    Class<?> type = each.getTestClass();
+    if (type == null) {
+      throw new RuntimeException("Can't build a runner from description [" + each + "]");
+    }
+    String methodName = each.getMethodName();
+    if (methodName == null) {
+      return Request.aClass(type).getRunner();
+    }
+    return Request.method(type, methodName).getRunner();
+  }
+
+  @Nullable
+  private Class<?> getMalformedTestClass(Description each) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/runners/JUnit38ClassRunner.java ===
+package org.junit.internal.runners;
+
+import junit.framework.Test;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public class JUnit38ClassRunner extends Runner implements Filterable, Orderable {
+
+  public JUnit38ClassRunner(Test test) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+import javax.annotation.Nullable;
+
+public class Description implements Serializable {
+
+  public String toString() {
+    throw new java.lang.Error();
+  }
+
+  @Nullable
+  public Class<?> getTestClass() {
+    throw new java.lang.Error();
+  }
+
+  public String getMethodName() {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Request.java ===
+package org.junit.runner;
+
+public abstract class Request {
+
+  public static Request method(Class<?> clazz, String methodName) {
+    throw new java.lang.Error();
+  }
+
+  public static Request aClass(Class<?> clazz) {
+    throw new java.lang.Error();
+  }
+
+  public abstract Runner getRunner();
+}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {}
+
+
+// === org/junit/runners/Suite.java ===
+package org.junit.runners;
+
+import org.junit.runner.Runner;
+
+public class Suite extends ParentRunner<Runner> {
+
+  public static Runner emptySuite() {
+    throw new java.lang.Error();
+  }
+}
+```

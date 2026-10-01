@@ -1,0 +1,71 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `ErrorReportingRunner(@Nullable Class<?> testClass, Throwable cause)` parameter `testClass` | `@Nullable` (kept) | Existing call sites such as `new ErrorReportingRunner(null, e)` show that this class argument can really be null. |
+| `ErrorReportingRunner(Throwable cause, Class<?>... testClasses)` varargs parameter `testClasses`, element type | `@Nullable` | This constructor receives the nullable `testClass` from the other constructor, so its varargs element type must be allowed to be null. |
+
+No other fields, return types, or parameters need annotations to fix this specific warning; under NullAway, unannotated types remain `@NonNull` by default.
+
+## B) Cause of the warning
+
+The warning points to the constructor delegation:
+
+```java
+this(cause, testClass);
+```
+
+Here, `testClass` is declared as `@Nullable Class<?>`. The called constructor has a varargs parameter:
+
+```java
+Class<?>... testClasses
+```
+
+Because the varargs element type is unannotated, NullAway treats each element as `@NonNull`. Passing the potentially null `testClass` as one of the varargs elements is therefore reported as unsafe. Annotating the varargs element type as `@Nullable Class<?>... testClasses` tells NullAway that null class values are accepted in that array, which resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/internal/runners/ErrorReportingRunner.java ===
+package org.junit.internal.runners;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public class ErrorReportingRunner extends Runner {
+
+  private final List<Throwable> causes;
+
+  private final String classNames;
+
+  public ErrorReportingRunner(@Nullable Class<?> testClass, Throwable cause) {
+    this(cause, testClass);
+  }
+
+  public ErrorReportingRunner(Throwable cause, @Nullable Class<?>... testClasses) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+```

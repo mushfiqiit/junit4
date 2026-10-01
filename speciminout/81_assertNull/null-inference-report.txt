@@ -1,0 +1,41 @@
+
+
+### A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.Assert.failNotNull(String message, Object actual)` parameter `message` | `@Nullable` | The original `failNotNull` body explicitly handles a null `message` with `if (message != null)`, and JUnit assertion messages are optional. |
+
+### B) Cause of the warning
+
+The warning is on the call `failNotNull(message, object)` inside `assertNull`. `assertNull` declares its `message` parameter as `@Nullable`, but `failNotNull` declares its `message` parameter without a nullability annotation, so NullAway treats it as `@NonNull`. Passing the `@Nullable` `message` argument to that `@NonNull` parameter is unsafe under NullAway’s contract. Annotating `failNotNull`’s `message` parameter as `@Nullable` matches its actual usage and resolves the warning.
+
+### C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertNull(@Nullable String message, Object object) {
+    if (object == null) {
+      return;
+    }
+    failNotNull(message, object);
+  }
+
+  private static void failNotNull(@Nullable String message, Object actual) {
+    throw new java.lang.Error();
+  }
+}
+```

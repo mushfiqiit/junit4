@@ -1,0 +1,118 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.internal.runners.TestMethod#getExpectedException()` return type | `@Nonnull` | The reported warning is caused by NullAway treating the result of `testMethod.getExpectedException()` as `@Nullable` when it is dereferenced, so the annotation-only fix is to assert that this method returns a non-null value in this reduced nullness model. |
+| Other fields, parameters, and return types in the reduced slice | leave unannotated / non-null by default | They are not the direct cause of the reported dereference warning. |
+
+B) Cause of the warning
+
+The warning points to the receiver of `.getName()` on line 19 of `MethodRoadie.java`:
+
+```java
+"Expected exception: " + testMethod.getExpectedException().getName()
+```
+
+`TestMethod.getExpectedException()` is annotated as returning `@Nullable`, so NullAway cannot assume the call result is non-null before `.getName()` is invoked. Although the surrounding code checks `testMethod.expectsException()`, NullAway does not infer from that boolean method that `getExpectedException()` must be non-null. Changing the return type of `getExpectedException()` to `@Nonnull` removes the `@Nullable` result from NullAway's perspective, so the dereference is accepted.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/hamcrest/SelfDescribing.java ===
+package org.hamcrest;
+
+public interface SelfDescribing {}
+
+
+// === org/junit/internal/AssumptionViolatedException.java ===
+package org.junit.internal;
+
+import org.hamcrest.SelfDescribing;
+
+public class AssumptionViolatedException extends RuntimeException implements SelfDescribing {}
+
+
+// === org/junit/internal/runners/MethodRoadie.java ===
+package org.junit.internal.runners;
+
+import java.lang.reflect.InvocationTargetException;
+import org.junit.internal.AssumptionViolatedException;
+
+@Deprecated
+public class MethodRoadie {
+
+  private final Object test;
+
+  private TestMethod testMethod;
+
+  protected void runTestMethod() {
+    try {
+      testMethod.invoke(test);
+      if (testMethod.expectsException()) {
+        addFailure(
+            new AssertionError(
+                "Expected exception: " + testMethod.getExpectedException().getName()));
+      }
+    } catch (InvocationTargetException e) {
+      Throwable actual = e.getTargetException();
+      if (actual instanceof AssumptionViolatedException) {
+        return;
+      } else if (!testMethod.expectsException()) {
+        addFailure(actual);
+      } else if (testMethod.isUnexpected(actual)) {
+        String message =
+            "Unexpected exception, expected<"
+                + testMethod.getExpectedException().getName()
+                + "> but was<"
+                + actual.getClass().getName()
+                + ">";
+        addFailure(new Exception(message, actual));
+      }
+    } catch (Throwable e) {
+      addFailure(e);
+    }
+  }
+
+  protected void addFailure(Throwable e) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/runners/TestMethod.java ===
+package org.junit.internal.runners;
+
+import java.lang.reflect.InvocationTargetException;
+import javax.annotation.Nonnull;
+
+@Deprecated
+public class TestMethod {
+
+  @Nonnull
+  protected Class<? extends Throwable> getExpectedException() {
+    throw new java.lang.Error();
+  }
+
+  boolean isUnexpected(Throwable exception) {
+    throw new java.lang.Error();
+  }
+
+  boolean expectsException() {
+    throw new java.lang.Error();
+  }
+
+  public void invoke(Object test)
+      throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+    throw new java.lang.Error();
+  }
+}
+```

@@ -1,0 +1,47 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `Assert.assertEquals` parameter `message` | `@Nullable` unchanged | The message may legitimately be null and is already declared nullable at the public API entry point. |
+| `Assert.failNotEquals` parameter `message` | `@Nullable` | This private helper receives the nullable message from `assertEquals`, so its `message` parameter must also be nullable. |
+| `Assert.failNotEquals` parameters `expected`, `actual` | unannotated / `@Nonnull` default | These receive non-null boxed doubles in the relevant call and are not involved in the reported warning. |
+
+B) Cause of the warning
+
+The warning occurs at the call `failNotEquals(message, Double.valueOf(expected), Double.valueOf(actual))` inside `assertEquals`. The local argument `message` is declared `@Nullable`, but the callee `failNotEquals` declares its `message` parameter as an unannotated `String`, which NullAway treats as `@NonNull` by default. NullAway therefore reports that a nullable value is being passed where a non-null value is required. Annotating `failNotEquals`’s `message` parameter as `@Nullable` makes the callee accept a nullable message and resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertEquals(
+      @Nullable String message, double expected, double actual, double delta) {
+    if (doubleIsDifferent(expected, actual, delta)) {
+      failNotEquals(message, Double.valueOf(expected), Double.valueOf(actual));
+    }
+  }
+
+  private static boolean doubleIsDifferent(double d1, double d2, double delta) {
+    throw new java.lang.Error();
+  }
+
+  private static void failNotEquals(@Nullable String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+}
+```

@@ -1,0 +1,61 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.rules.TestName.name` | `@Nullable` | The field is initialized to `null` and may remain `null` until `starting` assigns a value. |
+| `org.junit.rules.TestName.getMethodName()` return type | `@Nullable` | The method returns the `@Nullable` field directly, so its result can legitimately be `null`. |
+
+B) Cause of the warning
+
+The warning is reported on `return name;` in `TestName.getMethodName()`. NullAway treats the unannotated `String` return type as `@NonNull`, but the returned field `name` is explicitly `@Nullable`. Therefore, returning `name` violates the method’s non-null return contract. Annotating the method return type as `@Nullable` makes the method’s nullability contract match the expression being returned, so the warning is resolved.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+
+@java.lang.annotation.Target({
+    java.lang.annotation.ElementType.TYPE_USE,
+    java.lang.annotation.ElementType.TYPE,
+    java.lang.annotation.ElementType.FIELD,
+    java.lang.annotation.ElementType.METHOD,
+    java.lang.annotation.ElementType.PARAMETER,
+    java.lang.annotation.ElementType.CONSTRUCTOR,
+    java.lang.annotation.ElementType.LOCAL_VARIABLE,
+    java.lang.annotation.ElementType.ANNOTATION_TYPE,
+    java.lang.annotation.ElementType.PACKAGE,
+    java.lang.annotation.ElementType.TYPE_PARAMETER
+})
+public @interface Nullable {
+}
+
+
+// === org/junit/rules/TestName.java ===
+package org.junit.rules;
+
+import javax.annotation.Nullable;
+
+public class TestName extends TestWatcher {
+
+  @Nullable private volatile String name;
+
+  public @Nullable String getMethodName() {
+    return name;
+  }
+}
+
+
+// === org/junit/rules/TestRule.java ===
+package org.junit.rules;
+
+public interface TestRule {}
+
+
+// === org/junit/rules/TestWatcher.java ===
+package org.junit.rules;
+
+public abstract class TestWatcher implements TestRule {}
+```

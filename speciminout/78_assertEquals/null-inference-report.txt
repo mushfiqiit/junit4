@@ -1,0 +1,46 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.Assert.assertEquals(@Nullable String message, ...)` parameter `message` | `@Nullable` | This public JUnit assertion method accepts an optional message, so `null` is a valid input. |
+| `org.junit.Assert.failNotEquals(String message, Object expected, Object actual)` parameter `message` | `@Nullable` | This private helper is called with the nullable `message` from `assertEquals` and must therefore accept a null message. |
+
+B) Cause of the warning
+
+The warning occurs at the call `failNotEquals(message, Float.valueOf(expected), Float.valueOf(actual))` because `message` is declared `@Nullable` in `assertEquals`, while the first parameter of `failNotEquals` is unannotated and therefore treated by NullAway as `@NonNull`. Passing a potentially null value to that parameter is reported as unsafe. Annotating `failNotEquals`’s `message` parameter as `@Nullable` tells NullAway that the helper accepts a null message, resolving the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  public static void assertEquals(
+      @Nullable String message, float expected, float actual, float delta) {
+    if (floatIsDifferent(expected, actual, delta)) {
+      failNotEquals(message, Float.valueOf(expected), Float.valueOf(actual));
+    }
+  }
+
+  private static boolean floatIsDifferent(float f1, float f2, float delta) {
+    throw new java.lang.Error();
+  }
+
+  private static void failNotEquals(@Nullable String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+}
+```

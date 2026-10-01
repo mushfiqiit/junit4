@@ -1,0 +1,74 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `RunnerBuilder.runners` parameter `parent` | `@Nullable` (keep) | This is the nullable argument at the call site, and the original parent-management code treats a null parent as permissible. |
+| `RunnerBuilder.addParent` parameter `parent` | `@Nullable` | The reported warning is caused by passing this nullable `parent` to `addParent`, so `addParent` must accept null. |
+| `RunnerBuilder.removeParent` parameter `klass` | `@Nullable` | The same nullable `parent` is passed to `removeParent`, and the original body `parents.remove(klass)` is valid for a null argument. |
+
+B) Cause of the warning
+
+The warning points to the `addParent(parent)` call in `runners`. The parameter `parent` is declared `@Nullable Class<?>`, while `addParent`'s parameter is unannotated and therefore treated by NullAway as `@NonNull`. Passing a possibly-null value to a non-null parameter is unsafe because the callee might dereference it. Marking `addParent`'s parameter `@Nullable` tells NullAway that this callee accepts null, resolving the reported warning. The `removeParent` parameter is also marked `@Nullable` because it receives the same nullable argument and the original implementation shows that null is safe there.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runners/model/InitializationError.java ===
+package org.junit.runners.model;
+
+public class InitializationError extends Exception {}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public abstract class RunnerBuilder {
+
+  Class<?> addParent(@Nullable Class<?> parent) throws InitializationError {
+    throw new java.lang.Error();
+  }
+
+  void removeParent(@Nullable Class<?> klass) {
+    throw new java.lang.Error();
+  }
+
+  public List<Runner> runners(@Nullable Class<?> parent, Class<?>[] children)
+      throws InitializationError {
+    addParent(parent);
+    try {
+      return runners(children);
+    } finally {
+      removeParent(parent);
+    }
+  }
+
+  private List<Runner> runners(Class<?>[] children) {
+    throw new java.lang.Error();
+  }
+}
+```

@@ -1,0 +1,76 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.Assert#assertArrayEquals(String, int[], int[])` parameter `message` | `@Nullable` | This is the public assertion-message parameter and is already correctly marked nullable because the message may be omitted. |
+| `org.junit.Assert#internalArrayEquals(String, Object, Object)` parameter `message` | `@Nullable` | This private helper is called with the public method’s nullable `message`, so it must also accept `null` to avoid the NullAway error. |
+
+No other annotations are required for this warning.
+
+## B) Cause of the warning
+
+The warning occurs at the call:
+
+```java
+internalArrayEquals(message, expecteds, actuals);
+```
+
+Inside `assertArrayEquals`, the local parameter `message` is annotated `@Nullable`, so NullAway knows it may be `null`. However, the private helper `internalArrayEquals` declares its first parameter as:
+
+```java
+String message
+```
+
+With no annotation, NullAway treats it as `@Nonnull` by default. Therefore, passing the nullable `message` to it is unsafe.
+
+Adding `@Nullable` to the `message` parameter of `internalArrayEquals` tells NullAway that this helper intentionally accepts a null message, which matches how the original JUnit assertion-message API behaves and resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+
+@java.lang.annotation.Target({
+    java.lang.annotation.ElementType.TYPE_USE,
+    java.lang.annotation.ElementType.TYPE,
+    java.lang.annotation.ElementType.FIELD,
+    java.lang.annotation.ElementType.METHOD,
+    java.lang.annotation.ElementType.PARAMETER,
+    java.lang.annotation.ElementType.CONSTRUCTOR,
+    java.lang.annotation.ElementType.LOCAL_VARIABLE,
+    java.lang.annotation.ElementType.ANNOTATION_TYPE,
+    java.lang.annotation.ElementType.PACKAGE,
+    java.lang.annotation.ElementType.TYPE_PARAMETER
+})
+public @interface Nullable {
+}
+
+
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+import org.junit.internal.ArrayComparisonFailure;
+
+public class Assert {
+
+  public static void assertArrayEquals(@Nullable String message, int[] expecteds, int[] actuals)
+      throws ArrayComparisonFailure {
+    internalArrayEquals(message, expecteds, actuals);
+  }
+
+  private static void internalArrayEquals(@Nullable String message, Object expecteds, Object actuals)
+      throws ArrayComparisonFailure {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/ArrayComparisonFailure.java ===
+package org.junit.internal;
+
+public class ArrayComparisonFailure extends AssertionError {}
+```

@@ -1,0 +1,88 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.Assert.format` parameter `message` | `@Nullable` | The original implementation explicitly checks `message != null` before using it, so this parameter is intended to accept null. |
+| `org.junit.ComparisonFailure.ComparisonCompactor.compact` parameter `message` | `@Nullable` | This argument is already treated as potentially null in the reduced slice and is passed directly to `Assert.format`, so the callee must also accept null. |
+
+B) Cause of the warning
+
+The warning is triggered at `ComparisonFailure.java:15`, where `message` is passed to `Assert.format(message, expected, actual)`. In `ComparisonCompactor.compact`, the parameter `message` is annotated `@Nullable`, but `Assert.format`'s first parameter `message` is unannotated, so NullAway treats it as `@NonNull`. Passing a potentially null value to that required non-null parameter causes the warning. Annotating `Assert.format`'s `message` parameter as `@Nullable` tells NullAway that the callee accepts null, matching the original JUnit implementation and resolving the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/Assert.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class Assert {
+
+  static String format(@Nullable String message, Object expected, Object actual) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/ComparisonFailure.java ===
+package org.junit;
+
+import javax.annotation.Nullable;
+
+public class ComparisonFailure extends AssertionError {
+
+  private static class ComparisonCompactor {
+
+    private final String expected;
+
+    private final String actual;
+
+    public String compact(@Nullable String message) {
+      if (expected == null || actual == null || expected.equals(actual)) {
+        return Assert.format(message, expected, actual);
+      } else {
+        DiffExtractor extractor = new DiffExtractor();
+        String compactedPrefix = extractor.compactPrefix();
+        String compactedSuffix = extractor.compactSuffix();
+        return Assert.format(
+            message,
+            compactedPrefix + extractor.expectedDiff() + compactedSuffix,
+            compactedPrefix + extractor.actualDiff() + compactedSuffix);
+      }
+    }
+
+    private class DiffExtractor {
+
+      private DiffExtractor() {
+        throw new java.lang.Error();
+      }
+
+      public String expectedDiff() {
+        throw new java.lang.Error();
+      }
+
+      public String actualDiff() {
+        throw new java.lang.Error();
+      }
+
+      public String compactPrefix() {
+        throw new java.lang.Error();
+      }
+
+      public String compactSuffix() {
+        throw new java.lang.Error();
+      }
+    }
+  }
+}
+```

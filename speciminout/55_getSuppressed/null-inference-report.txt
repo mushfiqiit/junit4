@@ -1,0 +1,46 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.internal.Throwables.getSuppressed` field | `@Nullable` | The original code explicitly null-checks `getSuppressed` before invoking it, showing that this field can be null. |
+| `org.junit.internal.Throwables.initGetSuppressed()` return type | `@Nullable` | The helper is already nullable because it may return `null` when the `getSuppressed` method is unavailable. |
+
+B) Cause of the warning
+
+The warning is reported on the field declaration:
+
+```java
+private static final Method getSuppressed = initGetSuppressed();
+```
+
+NullAway treats an unannotated field as `@NonNull` by default, but `initGetSuppressed()` is annotated to return `@Nullable Method`. Therefore, NullAway sees an assignment from a potentially null expression to a field it believes must be non-null. Marking `getSuppressed` as `@Nullable` makes the declared nullability match the actual behavior, as confirmed by the original null check `if (getSuppressed == null)`.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/internal/Throwables.java ===
+package org.junit.internal;
+
+import java.lang.reflect.Method;
+import javax.annotation.Nullable;
+
+public final class Throwables {
+
+  @Nullable
+  private static final Method getSuppressed = initGetSuppressed();
+
+  @Nullable
+  private static Method initGetSuppressed() {
+    throw new java.lang.Error();
+  }
+}
+```
