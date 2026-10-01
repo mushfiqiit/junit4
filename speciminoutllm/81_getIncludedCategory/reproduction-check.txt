@@ -1,2 +1,0 @@
-Slice: 81_getIncludedCategory
-VERDICT: SKIPPED -- no warning.txt found in this folder

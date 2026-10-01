@@ -1,2 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/109_getStuckThread/org/junit/internal/runners/statements/FailOnTimeout.java:11: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/109_getStuckThread/org/junit/internal/runners/statements/FailOnTimeout.java:24: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

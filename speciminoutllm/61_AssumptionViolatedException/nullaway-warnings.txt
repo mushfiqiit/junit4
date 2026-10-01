@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/61_AssumptionViolatedException/org/junit/internal/AssumptionViolatedException.java:26: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

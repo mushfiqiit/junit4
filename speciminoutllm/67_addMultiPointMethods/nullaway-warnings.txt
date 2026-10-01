@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/67_addMultiPointMethods/org/junit/experimental/theories/internal/AllMembersSupplier.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required

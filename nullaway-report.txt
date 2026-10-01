@@ -7,49 +7,17 @@ cache executionHistory.bin (/Users/mushfiqurrahmanchowdhury/Documents/junit4/.nu
 warning: [options] source value 8 is obsolete and will be removed in a future release
 warning: [options] target value 8 is obsolete and will be removed in a future release
 warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/textui/TestRunner.java:183: warning: [NullAway] passing @Nullable parameter 'suite' where @NonNull is required
-            return doRun(suite, wait);
-                         ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:163: warning: [NullAway] passing @Nullable parameter 'fName' where @NonNull is required
-        assertNotNull("TestCase.fName cannot be null", fName); // Some VMs crash when calling getMethod(null,null);
-                                                       ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/textui/TestRunner.java:117: warning: [NullAway] dereferenced expression suite is @Nullable
+        suite.run(result);
+             ^
     (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:174: warning: [NullAway] dereferenced expression runMethod is @Nullable
         if (!Modifier.isPublic(runMethod.getModifiers())) {
                                         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:500: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-        return fName;
-        ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:80: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        failNotEquals(message, expected, actual);
-                      ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:122: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failNotEquals(message, Double.valueOf(expected), Double.valueOf(actual));
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:144: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failNotEquals(message, Float.valueOf(expected), Float.valueOf(actual));
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:290: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        failNotSame(message, expected, actual);
-                    ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:308: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failSame(message);
-                     ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:26: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            return Assert.format(message, fExpected, fActual);
-                                 ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonCompactor.java:33: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        return Assert.format(message, expected, actual);
-                             ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:401: warning: [NullAway] passing @Nullable parameter 'object' where @NonNull is required
+        Assert.assertNotNull(message, object);
+                                      ^
     (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:166: warning: [NullAway] initializer method does not guarantee @NonNull field fTestClass (line 160) is initialized along all control-flow paths (remember to check for exceptions or early returns).
     private Description(@Nullable Class<?> testClass, String displayName, Serializable uniqueId, Annotation... annotations) {
@@ -59,45 +27,61 @@ warning: [options] To suppress warnings about obsolete options, use -Xlint:-opti
         this.fTestClass = testClass;
                         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:328: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-        return matcher.matches() ? matcher.group(group) : defaultString;
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:314: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return fTestClass != null ? fTestClass.getName() : methodAndClassNamePatternGroupOrDefault(2, toString());
         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:126: warning: [NullAway] passing @Nullable parameter 'serializedForm' where @NonNull is required
-        return new Result(serializedForm);
-                          ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:322: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return methodAndClassNamePatternGroupOrDefault(1, null);
+        ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:108: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:42: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 39) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public Result() {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:51: warning: [NullAway] initializer method does not guarantee @NonNull field serializedForm (line 39) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    private Result(SerializedForm serializedForm) {
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:109: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 102) is initialized along all control-flow paths (remember to check for exceptions or early returns).
     public TestSuite() {
            ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:161: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:162: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 102) is initialized along all control-flow paths (remember to check for exceptions or early returns).
     public TestSuite(String name) {
            ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:170: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:171: warning: [NullAway] initializer method does not guarantee @NonNull field fName (line 102) is initialized along all control-flow paths (remember to check for exceptions or early returns).
     public TestSuite(Class<?>... classes) {
            ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Computer.java:50: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-        return builder.runnerForClass(testClass);
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:119: warning: [NullAway] passing @Nullable parameter 'theClass' where @NonNull is required
+        addTestsFromTestCase(theClass);
+                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/ParallelComputer.java:65: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return methods ? parallelize(runner) : runner;
         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:76: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-            return runner;
-            ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/ParallelComputer.java:65: warning: [NullAway] passing @Nullable parameter 'runner' where @NonNull is required
+        return methods ? parallelize(runner) : runner;
+                                     ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:110: warning: [NullAway] passing @Nullable parameter 'parent' where @NonNull is required
-        addParent(parent);
-                  ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Computer.java:32: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+                return getRunner(builder, testClass);
+                ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:115: warning: [NullAway] passing @Nullable parameter 'parent' where @NonNull is required
-            removeParent(parent);
-                         ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:94: warning: [NullAway] dereferenced expression parent is @Nullable
+            throw new InitializationError(String.format("class '%s' (possibly indirectly) contains itself as a SuiteClass", parent.getName()));
+                                                                                                                                  ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:93: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required
-        this.testClass = createTestClass(testClass);
-                                         ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/RunnerBuilder.java:96: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return parent;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:113: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required
+        return new TestClass(testClass);
+                             ^
     (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:281: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
         testClass.collectAnnotatedMethodValues(null, ClassRule.class, TestRule.class, collector);
@@ -107,93 +91,29 @@ warning: [options] To suppress warnings about obsolete options, use -Xlint:-opti
         testClass.collectAnnotatedFieldValues(null, ClassRule.class, TestRule.class, collector);
                                               ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:105: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-        return findDeepAnnotation(annotations2, annotationType, 3);
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:137: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
         ^
     (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/MethodSorters.java:25: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
     JVM(null),
         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:37: warning: [NullAway] assigning @Nullable expression to @NonNull field
-        this.fAssumption = assumption;
-                         ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:133: warning: [NullAway] passing @Nullable parameter 'fMatcher' where @NonNull is required
+        putField.put("fMatcher", SerializableMatcherDescription.asSerializableMatcher(fMatcher));
+                                                                                      ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:38: warning: [NullAway] assigning @Nullable expression to @NonNull field
-        this.fValue = value;
-                    ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:139: warning: [NullAway] passing @Nullable parameter 'fValue' where @NonNull is required
+        putField.put("fValue", SerializableValueDescription.asSerializableValue(fValue));
+                                                                                ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:39: warning: [NullAway] assigning @Nullable expression to @NonNull field
-        this.fMatcher = matcher;
-                      ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:111: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return fDurations.get(key.toString());
+        ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/suppliers/TestedOnSupplier.java:19: warning: [NullAway] dereferenced expression testedOn is @Nullable
-        int[] ints = testedOn.ints();
-                             ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:25: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
-        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
-                                                                      ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:42: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
-        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
-                                                                      ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:59: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
-        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
-                                                                      ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:76: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable
-        String requestedName = sig.getAnnotation(FromDataPoints.class).value();
-                                                                      ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:138: warning: [NullAway] passing @Nullable parameter 'getMalformedTestClass(each)' where @NonNull is required
-            return new JUnit38ClassRunner(new TestSuite(getMalformedTestClass(each)));
-                                                                             ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:131: warning: [NullAway] unboxing of a @Nullable value
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:133: warning: [NullAway] unboxing of a @Nullable value
             long start = starts.get(description);
                                    ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:159: warning: [NullAway] dereferenced expression getTestDuration(o1) is @Nullable
-                    : getTestDuration(o1).compareTo(getTestDuration(o2));
-                                         ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:163: warning: [NullAway] passing @Nullable parameter 'includes' where @NonNull is required
-            included = copyAndRefine(includes);
-                                     ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:164: warning: [NullAway] passing @Nullable parameter 'excludes' where @NonNull is required
-            excluded = copyAndRefine(excludes);
-                                     ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:171: warning: [NullAway] passing @Nullable parameter 'inclusions' where @NonNull is required
-            included = createSet(inclusions);
-                                 ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:172: warning: [NullAway] passing @Nullable parameter 'exclusions' where @NonNull is required
-            excluded = createSet(exclusions);
-                                 ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:281: warning: [NullAway] passing @Nullable parameter 'parentDescription(description)' where @NonNull is required
-            Collections.addAll(categories, directCategories(parentDescription(description)));
-                                                                             ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:326: warning: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
-        return createSet(annotation == null ? null : annotation.value());
-                                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:336: warning: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
-        return createSet(annotation == null ? null : annotation.value());
-                                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:99: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-                return Assert.format(message, expected, actual);
-                                     ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:104: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-                return Assert.format(message,
-                                     ^
     (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/NullBuilder.java:9: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
         return null;
@@ -207,163 +127,47 @@ warning: [options] To suppress warnings about obsolete options, use -Xlint:-opti
         return null;
         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/SuiteMethodBuilder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-        return null;
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/ComparisonCriteria.java:29: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
+        arrayEquals(message, expecteds, actuals, true);
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/ClassRequest.java:29: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return new CustomAllDefaultPossibilitiesBuilder().safeRunnerForClass(fTestClass);
         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:49: warning: [NullAway] passing @Nullable parameter 'FactoryHolder.getBeanObject("getRuntimeMXBean")' where @NonNull is required
-        getBean(FactoryHolder.getBeanObject("getRuntimeMXBean"));
-                                           ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:59: warning: [NullAway] passing @Nullable parameter 'FactoryHolder.getBeanObject("getThreadMXBean")' where @NonNull is required
-        getBean(FactoryHolder.getBeanObject("getThreadMXBean"));
-                                           ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/ClassRequest.java:49: warning: [NullAway] method returns @Nullable, but superclass method org.junit.internal.builders.SuiteMethodBuilder.runnerForClass(java.lang.Class<?>) returns @NonNull
-        public Runner runnerForClass(Class<?> testClass) throws Throwable {
-                      ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:110: warning: [NullAway] assigning @Nullable expression to @NonNull field
-    private static final Method getSuppressed = initGetSuppressed();
-                                ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:54: warning: [NullAway] dereferenced expression getExpectedException() is @Nullable
-        return !getExpectedException().isAssignableFrom(exception.getClass());
-                                      ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:48: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
     (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:65: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
                         return null;
                         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:110: warning: [NullAway] dereferenced expression testMethod.getExpectedException() is @Nullable
-                addFailure(new AssertionError("Expected exception: " + testMethod.getExpectedException().getName()));
-                                                                                                        ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit38ClassRunner.java:64: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+                return ((TestCase) test).getName();
+                ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:119: warning: [NullAway] dereferenced expression testMethod.getExpectedException() is @Nullable
-                String message = "Unexpected exception, expected<" + testMethod.getExpectedException().getName() + "> but was<"
-                                                                                                      ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit38ClassRunner.java:105: warning: [NullAway] passing @Nullable parameter 'tc.getName()' where @NonNull is required
+            return Description.createTestDescription(tc.getClass(), tc.getName(),
+                                                                              ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit4ClassRunner.java:105: warning: [NullAway] passing @Nullable parameter 'e' where @NonNull is required
-        notifier.fireTestFailure(new Failure(description, e));
-                                                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/ErrorReportingRunner.java:22: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required
-        this(cause, testClass);
-                    ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit4ClassRunner.java:93: warning: [NullAway] passing @Nullable parameter 'e.getCause()' where @NonNull is required
+            testAborted(notifier, description, e.getCause());
+                                                         ^
     (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunBefores.java:19: warning: [NullAway] assigning @Nullable expression to @NonNull field
         this.target = target;
                     ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/RunAfters.java:21: warning: [NullAway] assigning @Nullable expression to @NonNull field
-        this.target = target;
-                    ^
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:154: warning: [NullAway] passing @Nullable parameter 'parentFolder' where @NonNull is required
+        folder = createTemporaryFolderIn(parentFolder);
+                                         ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:121: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failNotEquals(message, expected, actual);
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:164: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failEquals(message, actual);
-                       ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:202: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failEquals(message, Long.valueOf(actual));
-                       ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:235: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failEquals(message, Double.valueOf(actual));
-                       ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:286: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        internalArrayEquals(message, expecteds, actuals);
-                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:317: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        internalArrayEquals(message, expecteds, actuals);
-                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:344: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        internalArrayEquals(message, expecteds, actuals);
-                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:369: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        internalArrayEquals(message, expecteds, actuals);
-                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:394: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        internalArrayEquals(message, expecteds, actuals);
-                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:419: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        internalArrayEquals(message, expecteds, actuals);
-                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:444: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        internalArrayEquals(message, expecteds, actuals);
-                            ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:472: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);
-                                                         ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:503: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);
-                                                         ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:556: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failNotEquals(message, Double.valueOf(expected), Double.valueOf(actual));
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:578: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failNotEquals(message, Float.valueOf(expected), Float.valueOf(actual));
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:600: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failEquals(message, Float.valueOf(actual));
-                       ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:648: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failNotEquals(message, Long.valueOf(expected), Long.valueOf(actual));
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:739: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        failNotNull(message, object);
-                    ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:773: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        failNotSame(message, expected, actual);
-                    ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:800: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-            failSame(message);
-                     ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:1017: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-                String mismatchMessage = buildPrefix(message)
-                                                     ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:1026: warning: [NullAway] passing @Nullable parameter 'message' where @NonNull is required
-        String notThrownMessage = buildPrefix(message) + String
-                                              ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TestName.java:41: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
-        return name;
-        ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:71: warning: [NullAway] assigning @Nullable expression to @NonNull field
-        this.parentFolder = parentFolder;
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:80: warning: [NullAway] assigning @Nullable expression to @NonNull field
-        this.parentFolder = builder.parentFolder;
-                          ^
-    (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:226: warning: [NullAway] dereferenced expression relativePath is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:227: warning: [NullAway] dereferenced expression relativePath is @Nullable
                     "a folder with the path \'" + relativePath.getPath() + "\' already exists");
                                                               ^
     (see http://t.uber.com/nullaway )
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:294: warning: [NullAway] dereferenced expression createdFolder is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:295: warning: [NullAway] dereferenced expression createdFolder is @Nullable
             + "Last attempted to create: " + createdFolder.toString());
                                                           ^
     (see http://t.uber.com/nullaway )
@@ -379,7 +183,7 @@ Note: /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/exten
 Note: Recompile with -Xlint:deprecation for details.
 Note: /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/matchers/JUnitMatchers.java uses unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
-95 warnings
+46 warnings
 
 BUILD SUCCESSFUL in 7s
 2 actionable tasks: 2 executed

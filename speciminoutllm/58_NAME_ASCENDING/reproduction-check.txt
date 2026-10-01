@@ -1,2 +1,0 @@
-Slice: 58_NAME_ASCENDING
-VERDICT: SKIPPED -- no warning.txt found in this folder

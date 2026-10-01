@@ -1,2 +1,0 @@
-Slice: 45_TestSuite
-VERDICT: SKIPPED -- no warning.txt found in this folder

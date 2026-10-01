@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminoutllm/100_rethrowAsException/org/junit/internal/Throwables.java:7: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
