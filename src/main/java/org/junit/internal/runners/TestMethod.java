@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.Test.None;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 /**
  * @deprecated Included for backwards compatibility with JUnit 4.4. Will be
@@ -40,7 +41,7 @@ public class TestMethod {
         return timeout;
     }
 
-    @Nullable
+@Nonnull
     protected Class<? extends Throwable> getExpectedException() {
         Test annotation = method.getAnnotation(Test.class);
         if (annotation == null || annotation.expected() == None.class) {

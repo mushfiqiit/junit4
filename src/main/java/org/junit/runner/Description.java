@@ -322,6 +322,7 @@ public class Description implements Serializable {
         return methodAndClassNamePatternGroupOrDefault(1, null);
     }
 
+    @Nullable
     private String methodAndClassNamePatternGroupOrDefault(int group,
             @Nullable String defaultString) {
         Matcher matcher = METHOD_AND_CLASS_NAME_PATTERN.matcher(toString());

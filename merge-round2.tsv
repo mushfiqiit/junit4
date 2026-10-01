@@ -1,0 +1,105 @@
+status	file	declaration	annotation	slices
+already present	junit/framework/Assert.java	Assert#method:assertEquals(String,Object,Object)#param:0	@Nullable	@Nullable: 05_assertEquals
+already present	junit/framework/Assert.java	Assert#method:assertEquals(String,double,double,double)#param:0	@Nullable	@Nullable: 06_assertEquals
+already present	junit/framework/Assert.java	Assert#method:assertEquals(String,float,float,float)#param:0	@Nullable	@Nullable: 07_assertEquals
+already present	junit/framework/Assert.java	Assert#method:assertNotNull(String,Object)#param:0	@Nullable	@Nullable: 02_runTest, 03_runTest
+already present	junit/framework/Assert.java	Assert#method:assertNotSame(String,Object,Object)#param:0	@Nullable	@Nullable: 09_assertNotSame
+already present	junit/framework/Assert.java	Assert#method:assertSame(String,Object,Object)#param:0	@Nullable	@Nullable: 08_assertSame
+already present	junit/framework/Assert.java	Assert#method:fail(String)#param:0	@Nullable	@Nullable: 02_runTest, 03_runTest
+added	junit/framework/Assert.java	Assert#method:failNotEquals(String,Object,Object)#param:0	@Nullable	@Nullable: 05_assertEquals, 06_assertEquals, 07_assertEquals
+added	junit/framework/Assert.java	Assert#method:failNotSame(String,Object,Object)#param:0	@Nullable	@Nullable: 08_assertSame
+added	junit/framework/Assert.java	Assert#method:failSame(String)#param:0	@Nullable	@Nullable: 09_assertNotSame
+added	junit/framework/Assert.java	Assert#method:format(String,Object,Object)#param:0	@Nullable	@Nullable: 10_compact, 11_compact
+already present	junit/framework/ComparisonCompactor.java	ComparisonCompactor#method:compact(String)#param:0	@Nullable	@Nullable: 10_compact, 11_compact
+already present	junit/framework/TestCase.java	TestCase#field:fName	@Nullable	@Nullable: 02_runTest, 03_runTest, 04_getName
+added	junit/framework/TestCase.java	TestCase#method:assertNotNull(String,Object)#param:1	@Nullable	@Nullable: 02_runTest
+added	junit/framework/TestCase.java	TestCase#method:getName()	@Nullable	@Nullable: 04_getName
+added	junit/framework/TestSuite.java	TestSuite#ctor(Class)#param:0	@Nullable	@Nullable: 36_buildRunner
+already present	junit/runner/BaseTestRunner.java	BaseTestRunner#method:getTest(String)	@Nullable	@Nullable: 01_start
+added	junit/textui/TestRunner.java	TestRunner#method:doRun(Test,boolean)#param:0	@Nullable	@Nullable: 01_start
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,Object[],Object[])#param:0	@Nullable	@Nullable: 68_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,boolean[],boolean[])#param:0	@Nullable	@Nullable: 69_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,byte[],byte[])#param:0	@Nullable	@Nullable: 70_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,char[],char[])#param:0	@Nullable	@Nullable: 71_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,double[],double[],double)#param:0	@Nullable	@Nullable: 75_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,float[],float[],float)#param:0	@Nullable	@Nullable: 76_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,int[],int[])#param:0	@Nullable	@Nullable: 73_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,long[],long[])#param:0	@Nullable	@Nullable: 74_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertArrayEquals(String,short[],short[])#param:0	@Nullable	@Nullable: 72_assertArrayEquals
+already present	org/junit/Assert.java	Assert#method:assertEquals(String,Object,Object)#param:0	@Nullable	@Nullable: 64_assertEquals
+already present	org/junit/Assert.java	Assert#method:assertEquals(String,double,double,double)#param:0	@Nullable	@Nullable: 77_assertEquals
+already present	org/junit/Assert.java	Assert#method:assertEquals(String,float,float,float)#param:0	@Nullable	@Nullable: 78_assertEquals
+already present	org/junit/Assert.java	Assert#method:assertEquals(String,long,long)#param:0	@Nullable	@Nullable: 80_assertEquals
+already present	org/junit/Assert.java	Assert#method:assertNotEquals(String,Object,Object)#param:0	@Nullable	@Nullable: 65_assertNotEquals
+already present	org/junit/Assert.java	Assert#method:assertNotEquals(String,double,double,double)#param:0	@Nullable	@Nullable: 67_assertNotEquals
+already present	org/junit/Assert.java	Assert#method:assertNotEquals(String,float,float,float)#param:0	@Nullable	@Nullable: 79_assertNotEquals
+already present	org/junit/Assert.java	Assert#method:assertNotEquals(String,long,long)#param:0	@Nullable	@Nullable: 66_assertNotEquals
+already present	org/junit/Assert.java	Assert#method:assertNotSame(String,Object,Object)#param:0	@Nullable	@Nullable: 83_assertNotSame
+already present	org/junit/Assert.java	Assert#method:assertNull(String,Object)#param:0	@Nullable	@Nullable: 81_assertNull
+already present	org/junit/Assert.java	Assert#method:assertSame(String,Object,Object)#param:0	@Nullable	@Nullable: 82_assertSame
+already present	org/junit/Assert.java	Assert#method:assertThrows(String,Class,ThrowingRunnable)#param:0	@Nullable	@Nullable: 84_assertThrows, 85_assertThrows
+added	org/junit/Assert.java	Assert#method:buildPrefix(String)#param:0	@Nullable	@Nullable: 84_assertThrows, 85_assertThrows
+added	org/junit/Assert.java	Assert#method:failEquals(String,Object)#param:0	@Nullable	@Nullable: 65_assertNotEquals, 66_assertNotEquals, 67_assertNotEquals, 79_assertNotEquals
+added	org/junit/Assert.java	Assert#method:failNotEquals(String,Object,Object)#param:0	@Nullable	@Nullable: 64_assertEquals, 77_assertEquals, 78_assertEquals, 80_assertEquals
+added	org/junit/Assert.java	Assert#method:failNotNull(String,Object)#param:0	@Nullable	@Nullable: 81_assertNull
+added	org/junit/Assert.java	Assert#method:failNotSame(String,Object,Object)#param:0	@Nullable	@Nullable: 82_assertSame
+added	org/junit/Assert.java	Assert#method:failSame(String)#param:0	@Nullable	@Nullable: 83_assertNotSame
+added	org/junit/Assert.java	Assert#method:format(String,Object,Object)#param:0	@Nullable	@Nullable: 46_compact, 47_compact
+added	org/junit/Assert.java	Assert#method:internalArrayEquals(String,Object,Object)#param:0	@Nullable	@Nullable: 68_assertArrayEquals, 69_assertArrayEquals, 70_assertArrayEquals, 71_assertArrayEquals, 72_assertArrayEquals, 73_assertArrayEquals, 74_assertArrayEquals
+already present	org/junit/ComparisonFailure.java	ComparisonFailure.ComparisonCompactor#method:compact(String)#param:0	@Nullable	@Nullable: 46_compact, 47_compact
+added	org/junit/experimental/categories/Categories.java	Categories#method:createSet(Class[])#param:0	@Nullable	@Nullable: 41_CategoryFilter, 42_CategoryFilter
+already present	org/junit/experimental/categories/Categories.java	Categories.CategoryFilter#ctor(boolean,Class[],boolean,Class[])#param:1	@Nullable	@Nullable: 41_CategoryFilter, 42_CategoryFilter
+already present	org/junit/experimental/categories/Categories.java	Categories.CategoryFilter#ctor(boolean,Class[],boolean,Class[])#param:3	@Nullable	@Nullable: 41_CategoryFilter, 42_CategoryFilter
+already present	org/junit/experimental/categories/Categories.java	Categories.CategoryFilter#ctor(boolean,Set,boolean,Set)#param:1	@Nullable	@Nullable: 39_CategoryFilter, 40_CategoryFilter
+already present	org/junit/experimental/categories/Categories.java	Categories.CategoryFilter#ctor(boolean,Set,boolean,Set)#param:3	@Nullable	@Nullable: 39_CategoryFilter, 40_CategoryFilter
+added	org/junit/experimental/categories/Categories.java	Categories.CategoryFilter#method:copyAndRefine(Set)#param:0	@Nullable	@Nullable: 39_CategoryFilter, 40_CategoryFilter
+added	org/junit/experimental/categories/Categories.java	Categories.CategoryFilter#method:directCategories(Description)#param:0	@Nullable	@Nullable: 43_categories
+already present	org/junit/experimental/categories/Categories.java	Categories.CategoryFilter#method:parentDescription(Description)	@Nullable	@Nullable: 43_categories
+already present	org/junit/experimental/max/MaxCore.java	MaxCore#method:getMalformedTestClass(Description)	@Nullable	@Nullable: 36_buildRunner
+replaced	org/junit/experimental/max/MaxHistory.java	MaxHistory#method:getTestDuration(Description)	@Nonnull	@Nonnull: 38_compare
+added	org/junit/experimental/max/MaxHistory.java	MaxHistory.RememberingListener#field:starts	@Nonnull	@Nonnull: 37_testFinished
+already present	org/junit/experimental/theories/ParameterSignature.java	ParameterSignature#method:findDeepAnnotation(Annotation[],Class,int)	@Nullable	@Nullable: 26_findDeepAnnotation
+added	org/junit/experimental/theories/ParameterSignature.java	ParameterSignature#method:findDeepAnnotation(Class)	@Nullable	@Nullable: 26_findDeepAnnotation
+replaced	org/junit/experimental/theories/ParameterSignature.java	ParameterSignature#method:getAnnotation(Class)	@Nonnull	@Nonnull: 31_getValueSources, 32_getSingleDataPointFields, 33_getDataPointsFields, 34_getSingleDataPointMethods, 35_getDataPointsMethods
+already present	org/junit/internal/AssumptionViolatedException.java	AssumptionViolatedException#ctor(String,boolean,Object,Matcher)#param:0	@Nullable	@Nullable: 28_AssumptionViolatedException, 29_AssumptionViolatedException, 30_AssumptionViolatedException
+already present	org/junit/internal/AssumptionViolatedException.java	AssumptionViolatedException#ctor(String,boolean,Object,Matcher)#param:2	@Nullable	@Nullable: 28_AssumptionViolatedException, 29_AssumptionViolatedException, 30_AssumptionViolatedException
+already present	org/junit/internal/AssumptionViolatedException.java	AssumptionViolatedException#ctor(String,boolean,Object,Matcher)#param:3	@Nullable	@Nullable: 28_AssumptionViolatedException, 29_AssumptionViolatedException, 30_AssumptionViolatedException
+added	org/junit/internal/AssumptionViolatedException.java	AssumptionViolatedException#field:fAssumption	@Nullable	@Nullable: 28_AssumptionViolatedException
+added	org/junit/internal/AssumptionViolatedException.java	AssumptionViolatedException#field:fMatcher	@Nullable	@Nullable: 30_AssumptionViolatedException
+added	org/junit/internal/AssumptionViolatedException.java	AssumptionViolatedException#field:fValue	@Nullable	@Nullable: 29_AssumptionViolatedException
+added	org/junit/internal/ComparisonCriteria.java	ComparisonCriteria#method:arrayEquals(String,Object,Object)#param:0	@Nullable	@Nullable: 75_assertArrayEquals, 76_assertArrayEquals
+added	org/junit/internal/Throwables.java	Throwables#field:getSuppressed	@Nullable	@Nullable: 55_getSuppressed
+already present	org/junit/internal/Throwables.java	Throwables#method:initGetSuppressed()	@Nullable	@Nullable: 55_getSuppressed
+added	org/junit/internal/builders/SuiteMethodBuilder.java	SuiteMethodBuilder#method:runnerForClass(Class)	@Nullable	@Nullable: 54_runnerForClass
+already present	org/junit/internal/management/ManagementFactory.java	ManagementFactory.FactoryHolder#method:getBeanObject(String)	@Nullable	@Nullable: 52_RUNTIME_MX_BEAN, 53_THREAD_MX_BEAN
+added	org/junit/internal/management/ManagementFactory.java	ManagementFactory.RuntimeHolder#method:getBean(Object)#param:0	@Nullable	@Nullable: 52_RUNTIME_MX_BEAN
+added	org/junit/internal/management/ManagementFactory.java	ManagementFactory.ThreadHolder#method:getBean(Object)#param:0	@Nullable	@Nullable: 53_THREAD_MX_BEAN
+already present	org/junit/internal/requests/ClassRequest.java	ClassRequest.CustomSuiteMethodBuilder#method:runnerForClass(Class)	@Nullable	@Nullable: 54_runnerForClass
+already present	org/junit/internal/runners/ErrorReportingRunner.java	ErrorReportingRunner#ctor(Class,Throwable)#param:0	@Nullable	@Nullable: 20_safeRunnerForClass, 61_ErrorReportingRunner
+added	org/junit/internal/runners/ErrorReportingRunner.java	ErrorReportingRunner#ctor(Throwable,Class[])#param:1	@Nullable	@Nullable: 61_ErrorReportingRunner
+replaced	org/junit/internal/runners/JUnit4ClassRunner.java	JUnit4ClassRunner#method:testAborted(RunNotifier,Description,Throwable)#param:2	@Nonnull	@Nonnull: 60_testAborted
+replaced	org/junit/internal/runners/TestMethod.java	TestMethod#method:getExpectedException()	@Nonnull	@Nonnull: 56_isUnexpected, 59_runTestMethod
+already present	org/junit/internal/runners/statements/RunAfters.java	RunAfters#ctor(Statement,List,Object)#param:2	@Nullable	@Nullable: 63_RunAfters
+added	org/junit/internal/runners/statements/RunAfters.java	RunAfters#field:target	@Nullable	@Nullable: 63_RunAfters
+already present	org/junit/rules/TemporaryFolder.java	TemporaryFolder#ctor(File)#param:0	@Nullable	@Nullable: 87_TemporaryFolder
+already present	org/junit/rules/TemporaryFolder.java	TemporaryFolder#field:folder	@Nullable	@Nullable: 87_TemporaryFolder, 88_TemporaryFolder
+added	org/junit/rules/TemporaryFolder.java	TemporaryFolder#field:parentFolder	@Nullable	@Nullable: 87_TemporaryFolder, 88_TemporaryFolder
+already present	org/junit/rules/TemporaryFolder.java	TemporaryFolder.Builder#field:parentFolder	@Nullable	@Nullable: 88_TemporaryFolder
+already present	org/junit/rules/TestName.java	TestName#field:name	@Nullable	@Nullable: 86_getMethodName
+added	org/junit/rules/TestName.java	TestName#method:getMethodName()	@Nullable	@Nullable: 86_getMethodName
+added	org/junit/runner/Computer.java	Computer#method:getRunner(RunnerBuilder,Class)	@Nullable	@Nullable: 19_getRunner
+already present	org/junit/runner/Description.java	Description#method:getTestClass()	@Nullable	@Nullable: 36_buildRunner
+added	org/junit/runner/Description.java	Description#method:methodAndClassNamePatternGroupOrDefault(int,String)	@Nullable	@Nullable: 14_methodAndClassNamePatternGroupOrDefault
+already present	org/junit/runner/Description.java	Description#method:methodAndClassNamePatternGroupOrDefault(int,String)#param:1	@Nullable	@Nullable: 14_methodAndClassNamePatternGroupOrDefault
+replaced	org/junit/runner/Result.java	Result#field:serializedForm	@Nonnull	@Nonnull: 15_readResolve
+already present	org/junit/runners/ParentRunner.java	ParentRunner#ctor(Class)#param:0	@Nullable	@Nullable: 23_ParentRunner
+already present	org/junit/runners/ParentRunner.java	ParentRunner#field:filteredChildren	@Nullable	@Nullable: 23_ParentRunner
+added	org/junit/runners/ParentRunner.java	ParentRunner#method:createTestClass(Class)#param:0	@Nullable	@Nullable: 23_ParentRunner
+already present	org/junit/runners/model/Annotatable.java	Annotatable#method:getAnnotation(Class)	@Nullable	@Nullable: 34_getSingleDataPointMethods, 35_getDataPointsMethods
+already present	org/junit/runners/model/FrameworkMethod.java	FrameworkMethod#method:invokeExplosively(Object,Object[])#param:0	@Nullable	@Nullable: 91_invokeMethod, 92_invokeMethod
+already present	org/junit/runners/model/FrameworkMethod.java	FrameworkMethod#method:invokeExplosively(Object,Object[])#param:1	@Nullable	@Nullable: 91_invokeMethod, 92_invokeMethod
+added	org/junit/runners/model/RunnerBuilder.java	RunnerBuilder#method:addParent(Class)#param:0	@Nullable	@Nullable: 21_runners, 22_runners
+added	org/junit/runners/model/RunnerBuilder.java	RunnerBuilder#method:removeParent(Class)#param:0	@Nullable	@Nullable: 22_runners
+already present	org/junit/runners/model/RunnerBuilder.java	RunnerBuilder#method:runnerForClass(Class)	@Nullable	@Nullable: 19_getRunner, 20_safeRunnerForClass, 54_runnerForClass
+already present	org/junit/runners/model/RunnerBuilder.java	RunnerBuilder#method:runners(Class,Class[])#param:0	@Nullable	@Nullable: 21_runners, 22_runners
+added	org/junit/runners/model/RunnerBuilder.java	RunnerBuilder#method:safeRunnerForClass(Class)	@Nullable	@Nullable: 20_safeRunnerForClass

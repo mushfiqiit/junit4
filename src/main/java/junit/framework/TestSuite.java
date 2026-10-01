@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import org.junit.internal.MethodSorter;
 import org.junit.internal.Throwables;
+import javax.annotation.Nullable;
 
 /**
  * A <code>TestSuite</code> is a <code>Composite</code> of Tests.
@@ -114,7 +115,7 @@ public class TestSuite implements Test {
      * Parts of this method were written at 2337 meters in the Hueffihuette,
      * Kanton Uri
      */
-    public TestSuite(final Class<?> theClass) {
+    public TestSuite(@Nullable final Class<?> theClass) {
         addTestsFromTestCase(theClass);
     }
 

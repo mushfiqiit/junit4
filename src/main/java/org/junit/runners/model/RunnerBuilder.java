@@ -67,6 +67,7 @@ public abstract class RunnerBuilder {
      * @param testClass class to be run
      * @return a Runner
      */
+    @Nullable
     public Runner safeRunnerForClass(Class<?> testClass) {
         try {
             Runner runner = runnerForClass(testClass);
@@ -88,14 +89,14 @@ public abstract class RunnerBuilder {
         }
     }
 
-    Class<?> addParent(Class<?> parent) throws InitializationError {
+    Class<?> addParent(@Nullable Class<?> parent) throws InitializationError {
         if (!parents.add(parent)) {
             throw new InitializationError(String.format("class '%s' (possibly indirectly) contains itself as a SuiteClass", parent.getName()));
         }
         return parent;
     }
 
-    void removeParent(Class<?> klass) {
+    void removeParent(@Nullable Class<?> klass) {
         parents.remove(klass);
     }
 

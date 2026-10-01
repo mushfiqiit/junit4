@@ -317,21 +317,21 @@ public class Assert {
         assertNotSame(null, expected, actual);
     }
 
-    public static void failSame(String message) {
+    public static void failSame(@Nullable String message) {
         String formatted = (message != null) ? message + " " : "";
         fail(formatted + "expected not same");
     }
 
-    public static void failNotSame(String message, Object expected, Object actual) {
+    public static void failNotSame(@Nullable String message, Object expected, Object actual) {
         String formatted = (message != null) ? message + " " : "";
         fail(formatted + "expected same:<" + expected + "> was not:<" + actual + ">");
     }
 
-    public static void failNotEquals(String message, Object expected, Object actual) {
+    public static void failNotEquals(@Nullable String message, Object expected, Object actual) {
         fail(format(message, expected, actual));
     }
 
-    public static String format(String message, Object expected, Object actual) {
+    public static String format(@Nullable String message, Object expected, Object actual) {
         String formatted = "";
         if (message != null && message.length() > 0) {
             formatted = message + " ";

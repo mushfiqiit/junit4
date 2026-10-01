@@ -3,9 +3,11 @@ package org.junit.internal.builders;
 import org.junit.internal.runners.SuiteMethod;
 import org.junit.runner.Runner;
 import org.junit.runners.model.RunnerBuilder;
+import javax.annotation.Nullable;
 
 public class SuiteMethodBuilder extends RunnerBuilder {
     @Override
+    @Nullable
     public Runner runnerForClass(Class<?> each) throws Throwable {
         if (hasSuiteMethod(each)) {
             return new SuiteMethod(each);

@@ -24,9 +24,12 @@ public class AssumptionViolatedException extends RuntimeException implements Sel
      * serialization compatibility. 
      * See https://github.com/junit-team/junit4/issues/976
      */
+    @Nullable
     private final String fAssumption;
     private final boolean fValueMatcher;
+    @Nullable
     private final Object fValue;
+    @Nullable
     private final Matcher<?> fMatcher;
 
     /**

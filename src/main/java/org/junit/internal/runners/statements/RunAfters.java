@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 public class RunAfters extends Statement {
     private final Statement next;
 
+    @Nullable
     private final Object target;
 
     private final List<FrameworkMethod> afters;

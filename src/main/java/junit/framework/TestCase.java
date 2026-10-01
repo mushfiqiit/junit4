@@ -397,7 +397,7 @@ public abstract class TestCase extends Assert implements Test {
      * Asserts that an object isn't null. If it is
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertNotNull(String message, Object object) {
+    public static void assertNotNull(String message, @Nullable Object object) {
         Assert.assertNotNull(message, object);
     }
 
@@ -496,6 +496,7 @@ public abstract class TestCase extends Assert implements Test {
      *
      * @return the name of the TestCase
      */
+    @Nullable
     public String getName() {
         return fName;
     }

@@ -44,6 +44,7 @@ import javax.annotation.Nullable;
  * @since 4.7
  */
 public class TemporaryFolder extends ExternalResource {
+    @Nullable
     private final File parentFolder;
     private final boolean assureDeletion;
     @Nullable

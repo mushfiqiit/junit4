@@ -19,6 +19,7 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 /**
  * @deprecated Included for backwards compatibility with JUnit 4.4. Will be
@@ -100,7 +101,7 @@ public class JUnit4ClassRunner extends Runner implements Filterable, Sortable {
     }
 
     private void testAborted(RunNotifier notifier, Description description,
-            @Nullable Throwable e) {
+            @Nonnull Throwable e) {
         notifier.fireTestStarted(description);
         notifier.fireTestFailure(new Failure(description, e));
         notifier.fireTestFinished(description);

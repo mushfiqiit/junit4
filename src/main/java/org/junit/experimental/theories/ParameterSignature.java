@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 public class ParameterSignature {
     
@@ -100,6 +101,7 @@ public class ParameterSignature {
         return getAnnotation(type) != null;
     }
 
+    @Nullable
     public <T extends Annotation> T findDeepAnnotation(Class<T> annotationType) {
         Annotation[] annotations2 = annotations;
         return findDeepAnnotation(annotations2, annotationType, 3);
@@ -125,7 +127,7 @@ public class ParameterSignature {
         return null;
     }
 
-    @Nullable
+@Nonnull
     public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         for (Annotation each : getAnnotations()) {
             if (annotationType.isInstance(each)) {

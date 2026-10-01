@@ -22,7 +22,7 @@ public class ErrorReportingRunner extends Runner {
         this(cause, testClass);
     }
     
-    public ErrorReportingRunner(Throwable cause, Class<?>... testClasses) {
+    public ErrorReportingRunner(Throwable cause, @Nullable Class<?>... testClasses) {
         if (testClasses == null || testClasses.length == 0) {
             throw new NullPointerException("Test classes cannot be null or empty");
         }

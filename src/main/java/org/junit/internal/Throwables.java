@@ -107,6 +107,7 @@ public final class Throwables {
         return Collections.emptyList();
     }
 
+    @Nullable
     private static final Method getSuppressed = initGetSuppressed();
 
     @Nullable

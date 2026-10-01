@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import org.junit.Assert;
+import javax.annotation.Nullable;
 
 /**
  * Defines criteria for finding two items "equal enough". Concrete subclasses
@@ -23,7 +24,7 @@ public abstract class ComparisonCriteria {
      * @param actuals Object array or array of arrays (multi-dimensional array) with
      * actual values
      */
-    public void arrayEquals(String message, Object expecteds, Object actuals)
+    public void arrayEquals(@Nullable String message, Object expecteds, Object actuals)
             throws ArrayComparisonFailure {
         arrayEquals(message, expecteds, actuals, true);
     }
