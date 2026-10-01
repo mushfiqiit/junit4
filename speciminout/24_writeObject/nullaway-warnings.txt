@@ -1,0 +1,2 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/24_writeObject/org/junit/internal/AssumptionViolatedException.java:23: warning: [NullAway] passing @Nullable parameter 'fMatcher' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/24_writeObject/org/junit/internal/AssumptionViolatedException.java:24: warning: [NullAway] passing @Nullable parameter 'fValue' where @NonNull is required
