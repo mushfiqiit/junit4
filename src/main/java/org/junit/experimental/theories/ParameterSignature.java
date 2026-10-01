@@ -127,7 +127,7 @@ public class ParameterSignature {
         return null;
     }
 
-@Nonnull
+@Nullable
     public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         for (Annotation each : getAnnotations()) {
             if (annotationType.isInstance(each)) {

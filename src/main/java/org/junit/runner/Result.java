@@ -36,7 +36,7 @@ public class Result implements Serializable {
     private final AtomicLong startTime;
 
     /** Only set during deserialization process. */
-@Nonnull
+@Nullable
     private SerializedForm serializedForm;
 
     public Result() {

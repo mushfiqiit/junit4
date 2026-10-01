@@ -106,7 +106,7 @@ public class MaxHistory implements Serializable {
         return !fDurations.containsKey(key.toString());
     }
 
-@Nonnull
+@Nullable
     Long getTestDuration(Description key) {
         return fDurations.get(key.toString());
     }

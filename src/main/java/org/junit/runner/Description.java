@@ -83,7 +83,7 @@ public class Description implements Serializable {
      * @param annotations meta-data about the test, for downstream interpreters
      * @return a <code>Description</code> named <code>name</code>
      */
-    public static Description createTestDescription(Class<?> clazz, String name, Annotation... annotations) {
+    public static Description createTestDescription(Class<?> clazz, @Nullable String name, Annotation... annotations) {
         return new Description(clazz, formatDisplayName(name, clazz.getName()), annotations);
     }
 
@@ -310,6 +310,7 @@ public class Description implements Serializable {
      * @return If this describes a method invocation,
      *         the name of the class of the test instance
      */
+    @Nullable
     public String getClassName() {
         return fTestClass != null ? fTestClass.getName() : methodAndClassNamePatternGroupOrDefault(2, toString());
     }
@@ -318,6 +319,7 @@ public class Description implements Serializable {
      * @return If this describes a method invocation,
      *         the name of the method (or null if not)
      */
+    @Nullable
     public String getMethodName() {
         return methodAndClassNamePatternGroupOrDefault(1, null);
     }

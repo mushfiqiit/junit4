@@ -41,7 +41,7 @@ public class TestMethod {
         return timeout;
     }
 
-@Nonnull
+@Nullable
     protected Class<? extends Throwable> getExpectedException() {
         Test annotation = method.getAnnotation(Test.class);
         if (annotation == null || annotation.expected() == None.class) {

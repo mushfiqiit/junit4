@@ -10,6 +10,7 @@ import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 import org.junit.runners.model.RunnerScheduler;
+import javax.annotation.Nullable;
 
 public class ParallelComputer extends Computer {
     private final boolean classes;
@@ -29,7 +30,7 @@ public class ParallelComputer extends Computer {
         return new ParallelComputer(false, true);
     }
 
-    private static Runner parallelize(Runner runner) {
+    private static Runner parallelize(@Nullable Runner runner) {
         if (runner instanceof ParentRunner) {
             ((ParentRunner<?>) runner).setScheduler(new RunnerScheduler() {
                 private final ExecutorService fService = Executors.newCachedThreadPool();

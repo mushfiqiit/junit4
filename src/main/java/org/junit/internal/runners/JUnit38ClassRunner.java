@@ -23,6 +23,7 @@ import org.junit.runner.manipulation.Sortable;
 import org.junit.runner.manipulation.Sorter;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
+import javax.annotation.Nullable;
 
 public class JUnit38ClassRunner extends Runner implements Filterable, Orderable {
     private static final class OldTestClassAdaptingListener implements
@@ -59,6 +60,7 @@ public class JUnit38ClassRunner extends Runner implements Filterable, Orderable 
             return test.getClass();
         }
 
+        @Nullable
         private String getName(Test test) {
             if (test instanceof TestCase) {
                 return ((TestCase) test).getName();

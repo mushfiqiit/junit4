@@ -101,7 +101,7 @@ public class JUnit4ClassRunner extends Runner implements Filterable, Sortable {
     }
 
     private void testAborted(RunNotifier notifier, Description description,
-            @Nonnull Throwable e) {
+            @Nullable Throwable e) {
         notifier.fireTestStarted(description);
         notifier.fireTestFailure(new Failure(description, e));
         notifier.fireTestFinished(description);

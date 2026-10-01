@@ -254,7 +254,7 @@ public class Assert {
      * Asserts that an object isn't null. If it is
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertNotNull(@Nullable String message, Object object) {
+    public static void assertNotNull(@Nullable String message, @Nullable Object object) {
         assertTrue(message, object != null);
     }
 

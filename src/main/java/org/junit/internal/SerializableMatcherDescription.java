@@ -6,6 +6,7 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
+import javax.annotation.Nullable;
 
 /**
  * This class exists solely to provide a serializable description of a matcher to be serialized as a field in
@@ -37,7 +38,8 @@ class SerializableMatcherDescription<T> extends BaseMatcher<T> implements Serial
      * @return The provided matcher if it is null or already serializable,
      * the SerializableMatcherDescription representation of it if it is not.
      */
-    static <T> Matcher<T> asSerializableMatcher(Matcher<T> matcher) {
+    @Nullable
+    static <T> Matcher<T> asSerializableMatcher(@Nullable Matcher<T> matcher) {
         if (matcher == null || matcher instanceof Serializable) {
             return matcher;
         } else {

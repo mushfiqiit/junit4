@@ -28,5 +28,6 @@ abstract class MemoizingRequest extends Request {
     }
 
     /** Creates the {@link Runner} to return from {@link #getRunner()}. Called at most once. */
+    @Nullable
     protected abstract Runner createRunner();
 }

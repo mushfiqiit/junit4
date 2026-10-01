@@ -25,6 +25,7 @@ public class ClassRequest extends MemoizingRequest {
     }
 
     @Override
+    @Nullable
     protected Runner createRunner() {
         return new CustomAllDefaultPossibilitiesBuilder().safeRunnerForClass(fTestClass);
     }

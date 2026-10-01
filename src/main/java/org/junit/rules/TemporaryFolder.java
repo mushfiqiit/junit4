@@ -236,7 +236,7 @@ public class TemporaryFolder extends ExternalResource {
         return createTemporaryFolderIn(getRoot());
     }
 
-    private static File createTemporaryFolderIn(File parentFolder) throws IOException {
+    private static File createTemporaryFolderIn(@Nullable File parentFolder) throws IOException {
         try {
             return createTemporaryFolderWithNioApi(parentFolder);
         } catch (ClassNotFoundException ignore) {

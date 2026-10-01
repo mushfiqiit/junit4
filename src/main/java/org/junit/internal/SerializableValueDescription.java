@@ -1,6 +1,7 @@
 package org.junit.internal;
 
 import java.io.Serializable;
+import javax.annotation.Nullable;
 
 /**
  * This class exists solely to provide a serializable description of a value to be serialized as a field in
@@ -23,7 +24,7 @@ class SerializableValueDescription implements Serializable {
      * @return The provided value if it is null or already serializable,
      * the SerializableValueDescription representation of it if it is not.
      */
-    static Object asSerializableValue(Object value) {
+    static Object asSerializableValue(@Nullable Object value) {
         if (value == null || value instanceof Serializable) {
             return value;
         } else {
