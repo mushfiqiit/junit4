@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/35_getDataPointsMethods/org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java:16: warning: [NullAway] dereferenced expression sig.getAnnotation(FromDataPoints.class) is @Nullable

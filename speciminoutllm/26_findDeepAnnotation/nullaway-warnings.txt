@@ -1,2 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/26_findDeepAnnotation/org/junit/experimental/theories/ParameterSignature.java:8: warning: [NullAway] assigning @Nullable expression to @NonNull field
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/26_findDeepAnnotation/org/junit/experimental/theories/ParameterSignature.java:12: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

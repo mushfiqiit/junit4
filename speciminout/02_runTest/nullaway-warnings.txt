@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_runTest/junit/framework/TestCase.java:21: warning: [NullAway] dereferenced expression runMethod is @Nullable

@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/61_ErrorReportingRunner/org/junit/internal/runners/ErrorReportingRunner.java:14: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required

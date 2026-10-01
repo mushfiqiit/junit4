@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/31_getValueSources/org/junit/experimental/theories/suppliers/TestedOnSupplier.java:14: warning: [NullAway] dereferenced expression testedOn is @Nullable

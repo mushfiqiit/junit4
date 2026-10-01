@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:138: warning: [NullAway] passing @Nullable parameter 'getMalformedTestClass(each)' where @NonNull is required

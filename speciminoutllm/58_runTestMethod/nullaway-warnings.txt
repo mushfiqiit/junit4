@@ -1,4 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/58_runTestMethod/org/junit/internal/runners/MethodRoadie.java:11: warning: [NullAway] @NonNull field testMethod not initialized
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/58_runTestMethod/org/junit/internal/runners/MethodRoadie.java:9: warning: [NullAway] assigning @Nullable expression to @NonNull field
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/58_runTestMethod/org/junit/internal/runners/MethodRoadie.java:19: warning: [NullAway] dereferenced expression testMethod.getExpectedException() is @Nullable
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/58_runTestMethod/org/junit/internal/runners/MethodRoadie.java:30: warning: [NullAway] dereferenced expression testMethod.getExpectedException() is @Nullable

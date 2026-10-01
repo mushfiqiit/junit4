@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:49: warning: [NullAway] passing @Nullable parameter 'FactoryHolder.getBeanObject("getRuntimeMXBean")' where @NonNull is required

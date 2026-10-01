@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/51_runnerForClass/org/junit/internal/builders/SuiteMethodBuilder.java:13: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

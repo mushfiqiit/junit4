@@ -3,15 +3,11 @@ Daemon will be stopped at the end of the build
 > Task :clean UP-TO-DATE
 
 > Task :compileJava
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_runTest/junit/framework/TestCase.java:14: warning: [NullAway] passing @Nullable parameter 'fName' where @NonNull is required
-    assertNotNull("TestCase.fName cannot be null", fName);
-                                                   ^
-    (see http://t.uber.com/nullaway )
 /Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/02_runTest/junit/framework/TestCase.java:21: warning: [NullAway] dereferenced expression runMethod is @Nullable
     if (!Modifier.isPublic(runMethod.getModifiers())) {
                                     ^
     (see http://t.uber.com/nullaway )
-2 warnings
+1 warning
 
-BUILD SUCCESSFUL in 7s
+BUILD SUCCESSFUL in 6s
 2 actionable tasks: 1 executed, 1 up-to-date

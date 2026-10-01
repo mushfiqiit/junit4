@@ -36,7 +36,7 @@ public abstract class TestCase extends Assert implements Test {
     throw new java.lang.Error();
   }
 
-  public static void assertNotNull(String message, Object object) {
+  public static void assertNotNull(String message, @Nullable Object object) {
     throw new java.lang.Error();
   }
 }

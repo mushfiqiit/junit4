@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:54: warning: [NullAway] dereferenced expression getExpectedException() is @Nullable

@@ -1,1 +1,0 @@
-/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/23_ParentRunner/org/junit/runners/ParentRunner.java:27: warning: [NullAway] passing @Nullable parameter 'testClass' where @NonNull is required
