@@ -1,0 +1,67 @@
+
+
+```java
+// A) Annotation decisions
+// | location | inferred annotation | one-sentence reason |
+// | --- | --- | --- |
+// | `TestMethod.getExpectedException()` return type | `javax.annotation.Nullable` | The method explicitly returns `null` when no expected exception is configured, and callers such as `expectsException()` check the result for null, so the return value is genuinely nullable. |
+
+// B) Cause of the warning
+// The warning points to `return null;` in `TestMethod.getExpectedException()`.
+// NullAway considers `null` to be a @Nullable expression, but the method was
+// declared with a @Nonnull return type, so returning null could cause a null
+// dereference in callers. Changing the return type to @Nullable makes the
+// method's nullness contract match its actual behavior and resolves the warning.
+
+// === javax/annotation/Nonnull.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nonnull {
+}
+
+
+// === org/junit/Test.java ===
+package org.junit;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+public @interface Test {
+
+  static class None extends Throwable {}
+
+  Class<? extends Throwable> expected() default None.class;
+
+  long timeout() default 0L;
+}
+
+
+// === org/junit/internal/runners/TestMethod.java ===
+package org.junit.internal.runners;
+
+import java.lang.reflect.Method;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.junit.Test;
+import org.junit.Test.None;
+
+@Deprecated
+public class TestMethod {
+
+  private final Method method;
+
+  @Nullable
+  protected Class<? extends Throwable> getExpectedException() {
+    Test annotation = method.getAnnotation(Test.class);
+    if (annotation == null || annotation.expected() == None.class) {
+      return null;
+    } else {
+      return annotation.expected();
+    }
+  }
+}
+```

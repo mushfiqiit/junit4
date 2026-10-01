@@ -1,0 +1,22 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: dereferenced expression parent is @Nullable
+Members of interest:
+  - method addParent(Class<?>) (org.junit.runners.model.RunnerBuilder): dereferenced at the warning line; 'parent' is parameter 0 of the enclosing method, so its callers supply the value
+
+## method addParent(Class<?>) (org.junit.runners.model.RunnerBuilder)
+# org/junit/runners/model/RunnerBuilder.java (declaration, and uses of parameter 'parent' in its body)
+     92:     Class<?> addParent(@Nullable Class<?> parent) throws InitializationError {
+     93:         if (!parents.add(parent)) {
+     94:             throw new InitializationError(String.format("class '%s' (possibly indirectly) contains itself as a SuiteClass", parent.getName()));
+     95:         }
+     96:         return parent;
+     97:     }
+  ---
+# org/junit/runners/model/RunnerBuilder.java (uses)
+    110:             throws InitializationError {
+    111:         addParent(parent);
+    112: 
+  ---

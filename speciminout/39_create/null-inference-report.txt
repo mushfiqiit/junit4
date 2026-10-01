@@ -1,0 +1,66 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `TemporaryFolder.parentFolder` field | `@Nullable` unchanged | The original class explicitly declares this field as `@Nullable`, and it may be absent when no parent folder is configured. |
+| `TemporaryFolder.createTemporaryFolderIn(File parentFolder)` parameter | `@Nullable` add | The caller passes the nullable `parentFolder` field, and the original implementation handles a null directory before using it. |
+| `TemporaryFolder.createTemporaryFolderIn(...)` return type | left unannotated, i.e. `@Nonnull` by NullAway default | The method returns a created folder or throws, so its return value is non-null, and no return-type annotation is needed to fix this warning. |
+
+## B) Cause of the warning
+
+The warning points to the call:
+
+```java
+folder = createTemporaryFolderIn(parentFolder);
+```
+
+NullAway knows that the `parentFolder` field is `@Nullable` because it is annotated that way. The parameter of `createTemporaryFolderIn` is unannotated, so NullAway treats it as `@NonNull` by default. Therefore, passing the nullable field value to the unannotated parameter is reported as unsafe.
+
+Marking the `createTemporaryFolderIn` parameter `@Nullable` tells NullAway that the method accepts a nullable `File`, matching the original JUnit implementation, which explicitly handles a null parent folder.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/rules/ExternalResource.java ===
+package org.junit.rules;
+
+public abstract class ExternalResource implements TestRule {}
+
+
+// === org/junit/rules/TemporaryFolder.java ===
+package org.junit.rules;
+
+import java.io.File;
+import java.io.IOException;
+import javax.annotation.Nullable;
+
+public class TemporaryFolder extends ExternalResource {
+
+  @Nullable private final File parentFolder;
+
+  @Nullable private File folder;
+
+  public void create() throws IOException {
+    folder = createTemporaryFolderIn(parentFolder);
+  }
+
+  private static File createTemporaryFolderIn(@Nullable File parentFolder) throws IOException {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/rules/TestRule.java ===
+package org.junit.rules;
+
+public interface TestRule {}
+```

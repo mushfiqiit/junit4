@@ -1,0 +1,103 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `junit.textui.TestRunner.doRun(Test, boolean)` parameter `suite` | `@Nonnull` (left unannotated in code) | The method immediately dereferences `suite` with `suite.run(result)`, and all original callers pass a real `Test` object, so `suite` is guaranteed non-null. |
+
+B) Cause of the warning
+
+The warning is reported on `suite.run(result)` because the `suite` parameter is annotated `@Nullable`. NullAway therefore treats the receiver of the method invocation as possibly null and flags the dereference as unsafe. Since JUnit 4’s `doRun` is expected to receive a valid test suite and does not perform a null check, the correct nullability is non-null. Removing the incorrect `@Nullable` annotation makes NullAway treat the parameter as non-null by default, which resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {
+
+  public abstract void run(TestResult result);
+}
+
+
+// === junit/framework/TestListener.java ===
+package junit.framework;
+
+public interface TestListener {}
+
+
+// === junit/framework/TestResult.java ===
+package junit.framework;
+
+public class TestResult {
+
+  public synchronized void addListener(TestListener listener) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === junit/runner/BaseTestRunner.java ===
+package junit.runner;
+
+import junit.framework.TestListener;
+
+public abstract class BaseTestRunner implements TestListener {}
+
+
+// === junit/textui/ResultPrinter.java ===
+package junit.textui;
+
+import junit.framework.TestListener;
+import junit.framework.TestResult;
+
+public class ResultPrinter implements TestListener {
+
+  synchronized void print(TestResult result, long runTime) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === junit/textui/TestRunner.java ===
+package junit.textui;
+
+import javax.annotation.Nullable;
+import junit.framework.Test;
+import junit.framework.TestResult;
+import junit.runner.BaseTestRunner;
+
+public class TestRunner extends BaseTestRunner {
+
+  private ResultPrinter fPrinter;
+
+  protected TestResult createTestResult() {
+    throw new java.lang.Error();
+  }
+
+  public TestResult doRun(Test suite, boolean wait) {
+    TestResult result = createTestResult();
+    result.addListener(fPrinter);
+    long startTime = System.currentTimeMillis();
+    suite.run(result);
+    long endTime = System.currentTimeMillis();
+    long runTime = endTime - startTime;
+    fPrinter.print(result, runTime);
+    pause(wait);
+    return result;
+  }
+
+  protected void pause(boolean wait) {
+    throw new java.lang.Error();
+  }
+}
+```

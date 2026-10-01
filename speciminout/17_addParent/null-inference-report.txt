@@ -1,0 +1,55 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `RunnerBuilder.addParent` parameter `parent` | `@Nonnull` | The method dereferences `parent` in the cycle-detection branch, so the parameter must be non-null for that dereference to be safe without adding a null check. |
+| `RunnerBuilder.addParent` return type | non-null by default, no explicit annotation required | The method returns the non-null `parent` argument, so NullAway’s default non-null return contract is correct. |
+
+## B) Cause of the warning
+
+The warning points to `parent.getName()` inside `addParent`, where `parent` is declared as `@Nullable`. NullAway therefore assumes `parent` might be null and flags the method invocation as an unsafe dereference. Changing the parameter contract from `@Nullable` to `@Nonnull` tells NullAway that callers must supply a non-null class, making the dereference safe and resolving the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/runners/model/InitializationError.java ===
+package org.junit.runners.model;
+
+public class InitializationError extends Exception {
+
+  public InitializationError(String string) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import java.util.Set;
+import javax.annotation.Nonnull;
+
+public abstract class RunnerBuilder {
+
+  private final Set<Class<?>> parents;
+
+  Class<?> addParent(@Nonnull Class<?> parent) throws InitializationError {
+    if (!parents.add(parent)) {
+      throw new InitializationError(
+          String.format(
+              "class '%s' (possibly indirectly) contains itself as a SuiteClass",
+              parent.getName()));
+    }
+    return parent;
+  }
+}
+```

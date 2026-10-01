@@ -1,0 +1,34 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'object' where @NonNull is required
+Members of interest:
+  - method assertNotNull(String, Object) (junit.framework.Assert, org.junit.Assert): receives the @Nullable argument as parameter 1
+
+## method assertNotNull(String, Object) (junit.framework.Assert, org.junit.Assert)
+# junit/framework/Assert.java (declaration, and uses of parameter 'object' in its body)
+    257:     public static void assertNotNull(@Nullable String message, Object object) {
+    258:         assertTrue(message, object != null);
+    259:     }
+  ---
+# org/junit/Assert.java (declaration, and uses of parameter 'object' in its body)
+    713:     public static void assertNotNull(@Nullable String message, Object object) {
+    714:         assertTrue(message, object != null);
+    715:     }
+  ---
+# junit/framework/Assert.java (uses)
+    249:     public static void assertNotNull(Object object) {
+    250:         assertNotNull(null, object);
+    251:     }
+  ---
+# org/junit/Assert.java (uses)
+    723:     public static void assertNotNull(Object object) {
+    724:         assertNotNull(null, object);
+    725:     }
+  ---
+# junit/framework/TestCase.java (uses)
+    162:     protected void runTest() throws Throwable {
+    163:         assertNotNull("TestCase.fName cannot be null", fName); // Some VMs crash when calling getMethod(null,null);
+    164:         Method runMethod = null;
+  ---

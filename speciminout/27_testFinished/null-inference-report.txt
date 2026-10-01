@@ -1,0 +1,80 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.experimental.max.MaxHistory.RememberingListener.starts` field | keep as `@Nonnull` | The map itself is always allocated and dereferenced, so it is non-null. |
+| value type of `starts` map, i.e. `Map<Description, ...>` | `@Nonnull` on the `Long` value type, making the field type `@Nonnull Map<Description, @Nonnull Long>` | The map’s values are only autoboxed `System.nanoTime()` results, and in this JUnit listener flow the relevant `testFinished` entry is expected to have a prior non-null `testStarted` value, so the `Long` returned by `get` can be treated as non-null. |
+| other parameters/returns in this slice | unchanged / non-null by default | They are not the source of this specific unboxing warning, and `Description` parameters are non-null by default under NullAway. |
+
+B) Cause of the warning
+
+The warning is caused by line 21:
+
+```java
+long start = starts.get(description);
+```
+
+`starts.get(description)` returns a `Long` object, but the target variable `start` is a primitive `long`, so the returned value is unboxed. NullAway treats the value obtained from `Map.get` as potentially `@Nullable` because a map lookup may not contain a value for the given key; unboxing such a value could therefore produce a `NullPointerException`.
+
+Annotating the map’s value type as `@Nonnull Long` tells NullAway that this particular map is only used with non-null `Long` values, so the `Long` returned from `starts.get(description)` is considered non-null. That makes the unboxing on line 21 safe for this warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nonnull.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nonnull {
+}
+
+
+// === org/junit/experimental/max/MaxHistory.java ===
+package org.junit.experimental.max;
+
+import java.io.Serializable;
+import java.util.Map;
+import javax.annotation.Nonnull;
+import org.junit.runner.Description;
+import org.junit.runner.notification.RunListener;
+
+public class MaxHistory implements Serializable {
+
+  void putTestDuration(Description description, long duration) {
+    throw new java.lang.Error();
+  }
+
+  private final class RememberingListener extends RunListener {
+
+    @Nonnull private Map<Description, @Nonnull Long> starts;
+
+    public void testFinished(Description description) throws Exception {
+      long end = System.nanoTime();
+      long start = starts.get(description);
+      putTestDuration(description, end - start);
+    }
+  }
+}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {}
+
+
+// === org/junit/runner/notification/RunListener.java ===
+package org.junit.runner.notification;
+
+import org.junit.runner.Description;
+
+public class RunListener {
+
+  public void testFinished(Description description) throws Exception {
+    throw new java.lang.Error();
+  }
+}
+```

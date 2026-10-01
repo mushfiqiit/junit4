@@ -1,0 +1,73 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.runner.Result.serializedForm` field | `@Nullable` | The public constructor does not initialize this field, so a normally constructed `Result` can have `serializedForm == null`; it is only assigned during deserialization before `readResolve` uses it. |
+
+B) Cause of the warning
+
+NullAway checks that every `@Nonnull` instance field is definitely assigned in every constructor or initializer path. In the reduced code, the only constructor, `Result()`, initializes the other fields but never initializes `serializedForm`, so NullAway reports that the initializer does not guarantee the `@Nonnull` field is non-null after construction. Changing the field annotation to `@Nullable` makes the uninitialized state explicitly legal, so the constructor no longer violates the field’s nullness contract.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nonnull.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nonnull {
+}
+
+
+// === org/junit/runner/Result.java ===
+package org.junit.runner;
+
+import java.io.ObjectStreamField;
+import java.io.Serializable;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import javax.annotation.Nullable;
+import org.junit.runner.notification.Failure;
+
+public class Result implements Serializable {
+
+  private static final long serialVersionUID = 0L;
+
+  private static final ObjectStreamField[] serialPersistentFields;
+
+  private final AtomicInteger count;
+
+  private final AtomicInteger ignoreCount;
+
+  private final AtomicInteger assumptionFailureCount;
+
+  private final CopyOnWriteArrayList<Failure> failures;
+
+  private final AtomicLong runTime;
+
+  private final AtomicLong startTime;
+
+  @Nullable private SerializedForm serializedForm;
+
+  public Result() {
+    count = new AtomicInteger();
+    ignoreCount = new AtomicInteger();
+    assumptionFailureCount = new AtomicInteger();
+    failures = new CopyOnWriteArrayList<Failure>();
+    runTime = new AtomicLong();
+    startTime = new AtomicLong();
+  }
+
+  private static class SerializedForm implements Serializable {}
+}
+
+
+// === org/junit/runner/notification/Failure.java ===
+package org.junit.runner.notification;
+
+import java.io.Serializable;
+
+public class Failure implements Serializable {}
+```

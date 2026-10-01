@@ -1,0 +1,93 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| Local variable `runMethod` in `TestCase.runTest()` | `@Nonnull` | At the dereference point, `runMethod` can only be non-null if `getMethod` succeeded, and the `NoSuchMethodException` path calls `fail`, which is intended to terminate before reaching the dereference. |
+
+## B) Cause of the warning
+
+NullAway sees `Method runMethod = null;` and therefore tracks `runMethod` as possibly null. In the `catch` block, `fail(...)` is not annotated as a does-not-return method, so NullAway assumes that the catch block may complete normally, leaving `runMethod` still null. The later expression `runMethod.getModifiers()` then dereferences an expression that NullAway considers possibly null, producing the warning.
+
+Marking the local variable `runMethod` as `@Nonnull` tells NullAway that the value at the dereference point is guaranteed non-null under the intended control-flow semantics, resolving the reported dereference warning without adding null checks.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void fail(@Nullable String message) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertNotNull(@Nullable String message, Object object) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {}
+
+
+// === junit/framework/TestCase.java ===
+package junit.framework;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+@SuppressWarnings("deprecation")
+public abstract class TestCase extends Assert implements Test {
+
+  @Nullable private String fName;
+
+  protected void runTest() throws Throwable {
+    assertNotNull("TestCase.fName cannot be null", fName);
+    @Nonnull Method runMethod = null;
+    try {
+      runMethod = getClass().getMethod(fName, (Class[]) null);
+    } catch (NoSuchMethodException e) {
+      fail("Method \"" + fName + "\" not found");
+    }
+    if (!Modifier.isPublic(runMethod.getModifiers())) {
+      fail("Method \"" + fName + "\" should be public");
+    }
+    try {
+      runMethod.invoke(this);
+    } catch (InvocationTargetException e) {
+      e.fillInStackTrace();
+      throw e.getTargetException();
+    } catch (IllegalAccessException e) {
+      e.fillInStackTrace();
+      throw e;
+    }
+  }
+
+  public static void fail(String message) {
+    throw new java.lang.Error();
+  }
+
+  public static void assertNotNull(String message, @Nullable Object object) {
+    throw new java.lang.Error();
+  }
+}
+```

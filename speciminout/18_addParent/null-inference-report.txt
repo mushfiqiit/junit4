@@ -1,0 +1,56 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `RunnerBuilder.addParent` return type | `@Nullable` | The method directly returns the `@Nullable` parameter `parent`, so the method can return null. |
+| `RunnerBuilder.addParent` parameter `parent` | `@Nullable` unchanged | The provided declaration/context treats `parent` as possibly null, so it should remain nullable. |
+| `RunnerBuilder.parents` | no annotation / non-null by default | This field is dereferenced and is not part of the specific return-type warning, so no annotation change is needed. |
+
+B) Cause of the warning
+
+The warning is on `return parent;` in `RunnerBuilder.addParent`. The parameter `parent` is annotated `@Nullable`, but the method return type `Class<?>` is unannotated, which NullAway treats as `@NonNull`. Since the method can return `parent` unchanged—including a null value when `parents.add(parent)` succeeds—NullAway reports that a `@Nullable` expression is being returned from a `@NonNull` method. Annotating the return type as `@Nullable` makes the declared return type match the possible return value and resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/runners/model/InitializationError.java ===
+package org.junit.runners.model;
+
+public class InitializationError extends Exception {
+
+  public InitializationError(String string) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import java.util.Set;
+import javax.annotation.Nullable;
+
+public abstract class RunnerBuilder {
+
+  private final Set<Class<?>> parents;
+
+  @Nullable Class<?> addParent(@Nullable Class<?> parent) throws InitializationError {
+    if (!parents.add(parent)) {
+      throw new InitializationError(
+          String.format(
+              "class '%s' (possibly indirectly) contains itself as a SuiteClass",
+              parent.getName()));
+    }
+    return parent;
+  }
+}
+```

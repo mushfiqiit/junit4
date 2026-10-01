@@ -1,0 +1,56 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `junit.framework.Assert.assertNotNull` parameter `object` | `@Nullable` | This parameter is intended to receive a possibly-null value because the method’s purpose is to assert that the value is not null. |
+| `junit.framework.TestCase.assertNotNull` parameter `object` | `@Nullable` | This parameter should remain nullable because it forwards a possibly-null value to the same `assertNotNull` contract. |
+
+B) Cause of the warning
+
+The warning is on `TestCase.java:9`, where `TestCase.assertNotNull` passes its `@Nullable Object object` argument to `Assert.assertNotNull(message, object)`. In the reduced `Assert` class, the second parameter `object` is unannotated `Object`, so NullAway treats it as `@NonNull`. Passing a `@Nullable` expression to that `@NonNull` parameter causes the warning. Marking the `object` parameter of `junit.framework.Assert.assertNotNull` as `@Nullable` makes the callee accept a null value, which matches the intended `assertNotNull` contract and resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@Deprecated
+public class Assert {
+
+  public static void assertNotNull(@Nullable String message, @Nullable Object object) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {}
+
+
+// === junit/framework/TestCase.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@SuppressWarnings("deprecation")
+public abstract class TestCase extends Assert implements Test {
+
+  public static void assertNotNull(String message, @Nullable Object object) {
+    Assert.assertNotNull(message, object);
+  }
+}
+```

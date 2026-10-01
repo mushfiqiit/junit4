@@ -1,0 +1,61 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'testClass' where @NonNull is required
+Members of interest:
+  - constructor TestClass(Class<?>) (org.junit.runners.model.TestClass): receives the @Nullable argument as parameter 0
+
+## constructor TestClass(Class<?>) (org.junit.runners.model.TestClass)
+# org/junit/runners/model/TestClass.java (declaration, and uses of parameter 'clazz' in its body)
+     46:     public TestClass(Class<?> clazz) {
+     47:         this.clazz = clazz;
+     48:         if (clazz != null && clazz.getConstructors().length > 1) {
+     49:             throw new IllegalArgumentException(
+  ---
+# org/junit/experimental/theories/Theories.java (uses)
+     72:     public Theories(Class<?> klass) throws InitializationError {
+     73:         super(klass);
+     74:     }
+  ---
+     77:     protected Theories(TestClass testClass) throws InitializationError {
+     78:         super(testClass);
+     79:     }
+  ---
+# org/junit/experimental/theories/internal/SpecificDataPointsSupplier.java (uses)
+     18:     public SpecificDataPointsSupplier(TestClass testClass) {
+     19:         super(testClass);
+     20:     }
+  ---
+# org/junit/internal/runners/JUnit4ClassRunner.java (uses)
+     34:     public JUnit4ClassRunner(Class<?> klass) throws InitializationError {
+     35:         testClass = new TestClass(klass);
+     36:         testMethods = getTestMethods();
+  ---
+# org/junit/runners/BlockJUnit4ClassRunner.java (uses)
+     74:     public BlockJUnit4ClassRunner(Class<?> testClass) throws InitializationError {
+     75:         super(testClass);
+     76:     }
+  ---
+     84:     protected BlockJUnit4ClassRunner(TestClass testClass) throws InitializationError {
+     85:         super(testClass);
+     86:     }
+  ---
+# org/junit/runners/JUnit4.java (uses)
+     22:     public JUnit4(Class<?> klass) throws InitializationError {
+     23:         super(new TestClass(klass));
+     24:     }
+  ---
+# org/junit/runners/Parameterized.java (uses)
+    303:     public Parameterized(Class<?> klass) throws Throwable {
+    304:         this(klass, new RunnersFactory(klass));
+    305:     }
+  ---
+    307:     private Parameterized(Class<?> klass, RunnersFactory runnersFactory) throws Exception {
+    308:         super(klass, runnersFactory.createRunners());
+    309:         validateBeforeParamAndAfterParamMethods(runnersFactory.parameterCount);
+  ---
+    371:         private RunnersFactory(Class<?> klass) throws Throwable {
+    372:             testClass = new TestClass(klass);
+    373:             parametersMethod = getParametersMethod(testClass);
+  ---

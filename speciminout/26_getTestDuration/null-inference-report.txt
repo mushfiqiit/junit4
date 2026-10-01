@@ -1,0 +1,61 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `MaxHistory.getTestDuration(Description)` return type | `@Nullable` | `fDurations.get(key.toString())` is a `Map#get` result, which may be null when the key is absent, so the method must not claim a non-null return. |
+| `MaxHistory.fDurations` | `@Nonnull` by default / no explicit annotation | The map is dereferenced as the history container and should be non-null, but annotating it is not required to fix this warning. |
+| `getTestDuration` parameter `key` | `@Nonnull` by default / no explicit annotation | `key.toString()` is called, so the parameter must be non-null, and NullAway already treats unannotated parameters as non-null. |
+
+B) Cause of the warning
+
+The warning points to the `return` statement on line 14:
+
+```java
+return fDurations.get(key.toString());
+```
+
+NullAway treats `Map#get` as returning a `@Nullable` value, but the method was declared with a `@Nonnull` return type. Therefore, returning the `Map#get` result is unsafe because it may be null. Changing the return type to `@Nullable` makes the method contract match the expression being returned, which resolves the warning.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nonnull.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nonnull {
+}
+
+
+// === org/junit/experimental/max/MaxHistory.java ===
+package org.junit.experimental.max;
+
+import java.io.Serializable;
+import java.util.Map;
+import javax.annotation.Nullable;
+import org.junit.runner.Description;
+
+public class MaxHistory implements Serializable {
+
+  private final Map<String, Long> fDurations;
+
+  @Nullable
+  Long getTestDuration(Description key) {
+    return fDurations.get(key.toString());
+  }
+}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {
+
+  public String toString() {
+    throw new java.lang.Error();
+  }
+}
+```

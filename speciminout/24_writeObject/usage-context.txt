@@ -1,0 +1,35 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'fMatcher' where @NonNull is required
+Members of interest:
+  - method asSerializableMatcher(Matcher<T>) (org.junit.internal.SerializableMatcherDescription): receives the @Nullable argument as parameter 0
+  - field fMatcher (org.junit.internal.AssumptionViolatedException): the @Nullable argument
+
+## method asSerializableMatcher(Matcher<T>) (org.junit.internal.SerializableMatcherDescription)
+# org/junit/internal/SerializableMatcherDescription.java (declaration, and uses of parameter 'matcher' in its body)
+     40:     static <T> Matcher<T> asSerializableMatcher(Matcher<T> matcher) {
+     41:         if (matcher == null || matcher instanceof Serializable) {
+     42:             return matcher;
+     43:         } else {
+     44:             return new SerializableMatcherDescription<T>(matcher);
+     45:         }
+  ---
+
+## field fMatcher (org.junit.internal.AssumptionViolatedException)
+# org/junit/internal/AssumptionViolatedException.java (declaration)
+     32:     @Nullable
+     33:     private final Matcher<?> fMatcher;
+  ---
+# org/junit/internal/AssumptionViolatedException.java (uses)
+     41:         this.fValue = value;
+     42:         this.fMatcher = matcher;
+     43:         this.fValueMatcher = hasValue;
+  ---
+    111: 
+    112:             if (fMatcher != null) {
+    113:                 description.appendText(", expected: ");
+    114:                 description.appendDescriptionOf(fMatcher);
+    115:             }
+  ---

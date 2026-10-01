@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/33_getExpectedException/org/junit/internal/runners/TestMethod.java:17: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

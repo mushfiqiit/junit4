@@ -1,0 +1,96 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'parentFolder' where @NonNull is required
+Members of interest:
+  - method createTemporaryFolderIn(File) (org.junit.rules.TemporaryFolder): receives the @Nullable argument as parameter 0
+  - field parentFolder (org.junit.rules.TemporaryFolder, org.junit.rules.TemporaryFolder.Builder): the @Nullable argument
+
+## method createTemporaryFolderIn(File) (org.junit.rules.TemporaryFolder)
+# org/junit/rules/TemporaryFolder.java (declaration, and uses of parameter 'parentFolder' in its body)
+    239:     private static File createTemporaryFolderIn(File parentFolder) throws IOException {
+    240:         try {
+    241:             return createTemporaryFolderWithNioApi(parentFolder);
+    242:         } catch (ClassNotFoundException ignore) {
+    243:             // Fallback for Java 5 and 6
+    244:             return createTemporaryFolderWithFileApi(parentFolder);
+    245:         } catch (InvocationTargetException e) {
+  ---
+    252:             }
+    253:             IOException exception = new IOException("Failed to create temporary folder in " + parentFolder);
+    254:             exception.initCause(cause);
+  ---
+    256:         } catch (Exception e) {
+    257:             throw new RuntimeException("Failed to create temporary folder in " + parentFolder, e);
+    258:         }
+  ---
+# org/junit/rules/TemporaryFolder.java (uses)
+    235:     public File newFolder() throws IOException {
+    236:         return createTemporaryFolderIn(getRoot());
+    237:     }
+  ---
+
+## field parentFolder (org.junit.rules.TemporaryFolder, org.junit.rules.TemporaryFolder.Builder)
+# org/junit/rules/TemporaryFolder.java (declaration)
+     47:     @Nullable
+     48:     private final File parentFolder;
+  ---
+# org/junit/rules/TemporaryFolder.java (declaration)
+    100:         @Nullable
+    101:         private File parentFolder;
+  ---
+# org/junit/rules/TemporaryFolder.java (uses)
+     70:      */
+     71:     public TemporaryFolder(@Nullable File parentFolder) {
+     72:         this.parentFolder = parentFolder;
+     73:         this.assureDeletion = false;
+  ---
+     80:     protected TemporaryFolder(Builder builder) {
+     81:         this.parentFolder = builder.parentFolder;
+     82:         this.assureDeletion = builder.assureDeletion;
+  ---
+    112:          */
+    113:         public Builder parentFolder(File parentFolder) {
+    114:             this.parentFolder = parentFolder;
+    115:             return this;
+  ---
+    238: 
+    239:     private static File createTemporaryFolderIn(File parentFolder) throws IOException {
+    240:         try {
+    241:             return createTemporaryFolderWithNioApi(parentFolder);
+    242:         } catch (ClassNotFoundException ignore) {
+    243:             // Fallback for Java 5 and 6
+    244:             return createTemporaryFolderWithFileApi(parentFolder);
+    245:         } catch (InvocationTargetException e) {
+  ---
+    252:             }
+    253:             IOException exception = new IOException("Failed to create temporary folder in " + parentFolder);
+    254:             exception.initCause(cause);
+  ---
+    256:         } catch (Exception e) {
+    257:             throw new RuntimeException("Failed to create temporary folder in " + parentFolder, e);
+    258:         }
+  ---
+    260: 
+    261:     private static File createTemporaryFolderWithNioApi(File parentFolder) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    262:         Class<?> filesClass = Class.forName("java.nio.file.Files");
+  ---
+    265:         Object tempDir;
+    266:         if (parentFolder != null) {
+    267:             Method createTempDirectoryMethod = filesClass.getDeclaredMethod("createTempDirectory", pathClass, String.class, fileAttributeArray.getClass());
+    268:             Object parentPath = File.class.getDeclaredMethod("toPath").invoke(parentFolder);
+    269:             tempDir = createTempDirectoryMethod.invoke(null, parentPath, TMP_PREFIX, fileAttributeArray);
+  ---
+    276: 
+    277:     private static File createTemporaryFolderWithFileApi(File parentFolder) throws IOException {
+    278:         File createdFolder = null;
+  ---
+    281:             String suffix = ".tmp";
+    282:             File tmpFile = File.createTempFile(TMP_PREFIX, suffix, parentFolder);
+    283:             String tmpName = tmpFile.toString();
+  ---
+    293:         throw new IOException("Unable to create temporary directory in: "
+    294:             + parentFolder.toString() + ". Tried " + TEMP_DIR_ATTEMPTS + " times. "
+    295:             + "Last attempted to create: " + createdFolder.toString());
+  ---

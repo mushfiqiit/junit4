@@ -1,0 +1,105 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `org.junit.internal.requests.MemoizingRequest#createRunner()` return type | `@Nullable` | The abstract factory method can return null because implementations, such as `ClassRequest`, may return the nullable result of `safeRunnerForClass`. |
+| `org.junit.internal.requests.ClassRequest#createRunner()` return type | `@Nullable` | This method directly returns `safeRunnerForClass(fTestClass)`, which is declared to return `@Nullable Runner`. |
+| `org.junit.runners.model.RunnerBuilder#safeRunnerForClass()` return type | `@Nullable` (unchanged) | The existing annotation already indicates that the builder may be unable to create a runner. |
+| `ClassRequest.fTestClass` and the `safeRunnerForClass` parameter | unannotated, i.e. default `@Nonnull` | There is no evidence in this warning context that these values are null, and they are not the source of the reported return-type warning. |
+
+## B) Cause of the warning
+
+The warning is on the `return` statement in `ClassRequest.createRunner()`:
+
+```java
+return new CustomAllDefaultPossibilitiesBuilder().safeRunnerForClass(fTestClass);
+```
+
+`RunnerBuilder.safeRunnerForClass` is annotated with `@Nullable` return type, so NullAway treats the returned `Runner` expression as possibly null. However, `createRunner()` is unannotated, so NullAway treats its return type as `@Nonnull Runner`. Returning a possibly-null expression from a method declared to return non-null is therefore unsafe. Annotating `createRunner()` as `@Nullable` — and the abstract method it overrides, so the override remains consistent — makes the declared return type nullable and resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java ===
+package org.junit.internal.builders;
+
+import org.junit.runners.model.RunnerBuilder;
+
+public class AllDefaultPossibilitiesBuilder extends RunnerBuilder {}
+
+
+// === org/junit/internal/requests/ClassRequest.java ===
+package org.junit.internal.requests;
+
+import javax.annotation.Nullable;
+import org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
+import org.junit.runner.Runner;
+
+public class ClassRequest extends MemoizingRequest {
+
+  private final Class<?> fTestClass;
+
+  @Nullable
+  protected Runner createRunner() {
+    return new CustomAllDefaultPossibilitiesBuilder().safeRunnerForClass(fTestClass);
+  }
+
+  private class CustomAllDefaultPossibilitiesBuilder extends AllDefaultPossibilitiesBuilder {}
+}
+
+
+// === org/junit/internal/requests/MemoizingRequest.java ===
+package org.junit.internal.requests;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Request;
+import org.junit.runner.Runner;
+
+abstract class MemoizingRequest extends Request {
+
+  @Nullable
+  protected abstract Runner createRunner();
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Request.java ===
+package org.junit.runner;
+
+public abstract class Request {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public abstract class RunnerBuilder {
+
+  @Nullable
+  public Runner safeRunnerForClass(Class<?> testClass) {
+    throw new java.lang.Error();
+  }
+}
+```

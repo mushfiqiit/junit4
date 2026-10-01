@@ -1,0 +1,142 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `JUnit4ClassRunner.testAborted(RunNotifier, Description, Throwable)` third parameter `e` | `javax.annotation.Nullable` | This parameter is called with `e.getCause()`, which is `@Nullable` according to `Throwable`/JDK stubs, so the receiving parameter must be allowed to accept a null value. |
+| Other parameters/returns/fields in the reduced slice | no annotation change | They are not involved in this specific NullAway warning and should remain non-null by default. |
+
+## B) Cause of the warning
+
+The warning is on the call:
+
+```java
+testAborted(notifier, description, e.getCause());
+```
+
+`e.getCause()` comes from `Throwable.getCause()`, which NullAway treats as `@Nullable` because a `Throwable` may have no cause. However, the called method `testAborted` declares its third parameter as `@Nonnull Throwable e`, so NullAway reports that a potentially null value is being passed where a non-null value is required. Changing that parameter to `@Nullable Throwable e` makes the method contract accept the possibly-null cause and resolves the warning without changing program logic.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nonnull.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nonnull {
+}
+
+
+// === org/junit/internal/runners/JUnit4ClassRunner.java ===
+package org.junit.internal.runners;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import javax.annotation.Nullable;
+import org.junit.runner.Description;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Sortable;
+import org.junit.runner.notification.RunNotifier;
+
+@Deprecated
+public class JUnit4ClassRunner extends Runner implements Filterable, Sortable {
+
+  protected Object createTest() throws Exception {
+    throw new java.lang.Error();
+  }
+
+  protected void invokeTestMethod(Method method, RunNotifier notifier) {
+    Description description = methodDescription(method);
+    Object test;
+    try {
+      test = createTest();
+    } catch (InvocationTargetException e) {
+      testAborted(notifier, description, e.getCause());
+      return;
+    } catch (Exception e) {
+      testAborted(notifier, description, e);
+      return;
+    }
+    TestMethod testMethod = wrapMethod(method);
+    new MethodRoadie(test, testMethod, notifier, description).run();
+  }
+
+  private void testAborted(RunNotifier notifier, Description description, @Nullable Throwable e) {
+    throw new java.lang.Error();
+  }
+
+  protected TestMethod wrapMethod(Method method) {
+    throw new java.lang.Error();
+  }
+
+  protected Description methodDescription(Method method) {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/runners/MethodRoadie.java ===
+package org.junit.internal.runners;
+
+import org.junit.runner.Description;
+import org.junit.runner.notification.RunNotifier;
+
+@Deprecated
+public class MethodRoadie {
+
+  public MethodRoadie(
+      Object test, TestMethod method, RunNotifier notifier, Description description) {
+    throw new java.lang.Error();
+  }
+
+  public void run() {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/internal/runners/TestMethod.java ===
+package org.junit.internal.runners;
+
+@Deprecated
+public class TestMethod {}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+
+public class Description implements Serializable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runner/notification/RunNotifier.java ===
+package org.junit.runner.notification;
+
+public class RunNotifier {}
+```

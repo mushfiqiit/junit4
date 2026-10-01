@@ -1,0 +1,16 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'e.getCause()' where @NonNull is required
+Members of interest:
+  - method testAborted(RunNotifier, Description, Throwable) (org.junit.internal.runners.JUnit4ClassRunner): receives the @Nullable argument as parameter 2
+
+## method testAborted(RunNotifier, Description, Throwable) (org.junit.internal.runners.JUnit4ClassRunner)
+# org/junit/internal/runners/JUnit4ClassRunner.java (declaration, and uses of parameter 'e' in its body)
+    103:     private void testAborted(RunNotifier notifier, Description description,
+    104:             @Nonnull Throwable e) {
+    105:         notifier.fireTestStarted(description);
+    106:         notifier.fireTestFailure(new Failure(description, e));
+    107:         notifier.fireTestFinished(description);
+  ---

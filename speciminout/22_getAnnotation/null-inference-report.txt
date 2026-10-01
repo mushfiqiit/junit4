@@ -1,0 +1,49 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| Return type of `ParameterSignature#getAnnotation(Class<T>)` | `@Nullable` | The method intentionally returns `null` when no annotation of the requested type is present, and original callers test its result with `!= null`. |
+
+No other annotations are added because the only unsafe expression for this warning is the `return null;` from a method currently marked `@Nonnull`.
+
+## B) Cause of the warning
+
+The warning is caused by the `return null;` statement in `ParameterSignature#getAnnotation(...)`, which is at line 20. The method is annotated `@Nonnull`, so NullAway expects its return value to be non-null. Since the method can legitimately return `null` when the annotation is absent, marking the return type `@Nullable` makes the nullability contract match the actual behavior and resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nonnull.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nonnull {
+}
+
+
+// === org/junit/experimental/theories/ParameterSignature.java ===
+package org.junit.experimental.theories;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class ParameterSignature {
+
+  public List<Annotation> getAnnotations() {
+    throw new java.lang.Error();
+  }
+
+  @Nullable
+  public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
+    for (Annotation each : getAnnotations()) {
+      if (annotationType.isInstance(each)) {
+        return annotationType.cast(each);
+      }
+    }
+    return null;
+  }
+}
+```

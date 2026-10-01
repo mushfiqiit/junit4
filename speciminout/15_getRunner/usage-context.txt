@@ -1,0 +1,24 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'runner' where @NonNull is required
+Members of interest:
+  - method parallelize(Runner) (org.junit.experimental.ParallelComputer): receives the @Nullable argument as parameter 0
+
+## method parallelize(Runner) (org.junit.experimental.ParallelComputer)
+# org/junit/experimental/ParallelComputer.java (declaration, and uses of parameter 'runner' in its body)
+     32:     private static Runner parallelize(Runner runner) {
+     33:         if (runner instanceof ParentRunner) {
+     34:             ((ParentRunner<?>) runner).setScheduler(new RunnerScheduler() {
+     35:                 private final ExecutorService fService = Executors.newCachedThreadPool();
+  ---
+     50:         }
+     51:         return runner;
+     52:     }
+  ---
+# org/junit/experimental/ParallelComputer.java (uses)
+     57:         Runner suite = super.getSuite(builder, classes);
+     58:         return this.classes ? parallelize(suite) : suite;
+     59:     }
+  ---

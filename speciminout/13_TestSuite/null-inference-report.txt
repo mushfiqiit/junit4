@@ -1,0 +1,70 @@
+
+
+```java
+// A) Annotation decisions
+//
+// | location | inferred annotation | one-sentence reason |
+// |---|---|---|
+// | `junit.framework.TestSuite.TestSuite(Class<?>)` parameter `theClass` | `@Nonnull` (left unannotated) | The constructor forwards `theClass` to `addTestsFromTestCase`, which uses it without any null check, so the constructor must require a non-null class. |
+// | `junit.framework.TestSuite.addTestsFromTestCase(Class<?>)` parameter `theClass` | `@Nonnull` (left unannotated) | The original body calls `theClass.getName()` and `theClass.getModifiers()` unconditionally, so the parameter is treated as non-null. |
+//
+// B) Cause of the warning
+//
+// The warning occurs at the call `addTestsFromTestCase(theClass);` inside the constructor.
+// In the reduced slice, the constructor parameter `theClass` is annotated `@Nullable`, while
+// `addTestsFromTestCase`'s parameter is unannotated and therefore `@NonNull` by NullAway's
+// default. NullAway therefore reports that a nullable value is being passed where a non-null
+// value is required. The original usage shows that `addTestsFromTestCase` immediately
+// dereferences `theClass`, so the safe fix is to make the constructor parameter non-null
+// rather than to mark the callee parameter nullable. Removing the spurious `@Nullable`
+// annotation from the constructor parameter makes the passed expression `@NonNull` and
+// resolves the warning.
+//
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {}
+
+
+// === junit/framework/TestSuite.java ===
+package junit.framework;
+
+import java.util.Vector;
+import javax.annotation.Nullable;
+
+public class TestSuite implements Test {
+
+  private String fName;
+
+  private Vector<Test> fTests;
+
+  public TestSuite(final Class<?> theClass) {
+    addTestsFromTestCase(theClass);
+  }
+
+  private void addTestsFromTestCase(final Class<?> theClass) {
+    throw new java.lang.Error();
+  }
+
+  public TestSuite(Class<?>... classes) {
+    for (Class<?> each : classes) {
+      addTest(testCaseForClass(each));
+    }
+  }
+
+  private Test testCaseForClass(Class<?> each) {
+    throw new java.lang.Error();
+  }
+
+  public void addTest(Test test) {
+    throw new java.lang.Error();
+  }
+}
+```

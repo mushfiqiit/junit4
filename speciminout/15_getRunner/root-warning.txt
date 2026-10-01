@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/15_getRunner/org/junit/experimental/ParallelComputer.java:17: warning: [NullAway] passing @Nullable parameter 'runner' where @NonNull is required

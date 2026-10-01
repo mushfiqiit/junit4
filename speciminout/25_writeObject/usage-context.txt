@@ -1,0 +1,33 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'fValue' where @NonNull is required
+Members of interest:
+  - method asSerializableValue(Object) (org.junit.internal.SerializableValueDescription): receives the @Nullable argument as parameter 0
+  - field fValue (org.junit.internal.AssumptionViolatedException): the @Nullable argument
+
+## method asSerializableValue(Object) (org.junit.internal.SerializableValueDescription)
+# org/junit/internal/SerializableValueDescription.java (declaration, and uses of parameter 'value' in its body)
+     26:     static Object asSerializableValue(Object value) {
+     27:         if (value == null || value instanceof Serializable) {
+     28:             return value;
+     29:         } else {
+     30:             return new SerializableValueDescription(value);
+     31:         }
+  ---
+
+## field fValue (org.junit.internal.AssumptionViolatedException)
+# org/junit/internal/AssumptionViolatedException.java (declaration)
+     30:     @Nullable
+     31:     private final Object fValue;
+  ---
+# org/junit/internal/AssumptionViolatedException.java (uses)
+     40:         this.fAssumption = assumption;
+     41:         this.fValue = value;
+     42:         this.fMatcher = matcher;
+  ---
+    109:             description.appendText("got: ");
+    110:             description.appendValue(fValue);
+    111: 
+  ---

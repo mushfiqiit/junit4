@@ -1,0 +1,14 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `TemporaryFolder.newFolder` parameter `paths` | `@Nonnull` | The varargs array is dereferenced immediately via `paths.length`, and a non-null array is part of the precondition that the method can proceed to the folder-creation loop. |
+| `TemporaryFolder.newFolder` local variable `relativePath` | `@Nonnull` | At the reported dereference on line 36, `relativePath` is guaranteed non-null because an empty `paths` array throws and every loop iteration assigns a newly constructed `File`. |
+
+No return-type or field annotation is needed to fix this specific dereference warning.
+
+## B) Cause of the warning
+
+The warning points to `relativePath.getPath()` in the final `if (!lastMkdirsCallSuccessful)` block. `relativePath` is initialized to `null`, and NullAway does not infer that the subsequent loop must execute at least one time merely because `paths.length == 0` throws. Therefore, at the point

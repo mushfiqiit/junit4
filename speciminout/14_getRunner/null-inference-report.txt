@@ -1,0 +1,79 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| Return type of `org.junit.runner.Computer#getRunner(RunnerBuilder, Class<?>)` | `@Nonnull` | JUnit’s `getRunner` implementation is contractually expected to return a usable `Runner`, and the shown caller returns it directly from a non-null `Runner`-returning method. |
+| Return type of `org.junit.experimental.ParallelComputer#getRunner(RunnerBuilder, Class<?>)` | `@Nonnull`, left unannotated | Once `Computer#getRunner` is non-null, the expression returned by `ParallelComputer#getRunner` is non-null, so the default NullAway non-null return type is correct. |
+
+No parameter or field annotations are needed for this warning.
+
+## B) Cause of the warning
+
+The warning points to the `return` statement in `ParallelComputer.getRunner`. `runner` is assigned from `super.getRunner(builder, testClass)`, and in the reduced code `Computer.getRunner` is annotated `@Nullable`, so NullAway treats the returned value as possibly null. Because `ParallelComputer.getRunner` has an unannotated `Runner` return type, NullAway treats it as `@Nonnull`, and returning a possibly-null expression from it is unsafe. Changing `Computer.getRunner` to `@Nonnull` reflects JUnit’s non-null contract for this method and makes the returned expression non-null, resolving the warning without adding null checks.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/experimental/ParallelComputer.java ===
+package org.junit.experimental;
+
+import org.junit.runner.Computer;
+import org.junit.runner.Runner;
+import org.junit.runners.model.RunnerBuilder;
+
+public class ParallelComputer extends Computer {
+
+  private final boolean methods = false;
+
+  private static Runner parallelize(Runner runner) {
+    throw new java.lang.Error();
+  }
+
+  protected Runner getRunner(RunnerBuilder builder, Class<?> testClass) throws Throwable {
+    Runner runner = super.getRunner(builder, testClass);
+    return methods ? parallelize(runner) : runner;
+  }
+}
+
+
+// === org/junit/runner/Computer.java ===
+package org.junit.runner;
+
+import javax.annotation.Nonnull;
+import org.junit.runners.model.RunnerBuilder;
+
+public class Computer {
+
+  @Nonnull
+  protected Runner getRunner(RunnerBuilder builder, Class<?> testClass) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+public abstract class RunnerBuilder {}
+```

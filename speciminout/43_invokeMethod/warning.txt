@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:186: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required

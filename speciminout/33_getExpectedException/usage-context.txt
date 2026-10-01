@@ -1,0 +1,31 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method getExpectedException() (org.junit.internal.runners.TestMethod): the method returning @Nullable (how callers use its result)
+
+## method getExpectedException() (org.junit.internal.runners.TestMethod)
+# org/junit/internal/runners/TestMethod.java (declaration)
+     44: @Nonnull
+     45:     protected Class<? extends Throwable> getExpectedException() {
+  ---
+# org/junit/internal/runners/TestMethod.java (uses)
+     54:     boolean isUnexpected(Throwable exception) {
+     55:         return !getExpectedException().isAssignableFrom(exception.getClass());
+     56:     }
+  ---
+     58:     boolean expectsException() {
+     59:         return getExpectedException() != null;
+     60:     }
+  ---
+# org/junit/internal/runners/MethodRoadie.java (uses)
+    109:             if (testMethod.expectsException()) {
+    110:                 addFailure(new AssertionError("Expected exception: " + testMethod.getExpectedException().getName()));
+    111:             }
+  ---
+    118:             } else if (testMethod.isUnexpected(actual)) {
+    119:                 String message = "Unexpected exception, expected<" + testMethod.getExpectedException().getName() + "> but was<"
+    120:                         + actual.getClass().getName() + ">";
+  ---

@@ -1,0 +1,113 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `org.junit.internal.runners.JUnit38ClassRunner.OldTestClassAdaptingListener#getName(Test)` return type | `@Nullable` | This method can return `((TestCase) test).getName()`, which is `@Nullable`, so the method’s result is not guaranteed non-null. |
+| `junit.framework.TestCase#getName()` return type | `@Nullable` (unchanged) | The reduced JUnit 3.8 model does not guarantee a non-null test name, so the value returned by the adapter may be null. |
+
+B) Cause of the warning
+
+The warning is on the `return ((TestCase) test).getName();` line inside `OldTestClassAdaptingListener.getName(Test)`. NullAway treats the unannotated return type of `getName(Test)` as `@NonNull`, but the returned expression is `@Nullable` because `TestCase.getName()` is annotated `@Nullable`. By annotating the adapter method’s return type as `@Nullable`, its declared nullability matches the value it may return, resolving the warning without adding null checks.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === junit/framework/Assert.java ===
+package junit.framework;
+
+@Deprecated
+public class Assert {}
+
+
+// === junit/framework/Test.java ===
+package junit.framework;
+
+public interface Test {}
+
+
+// === junit/framework/TestCase.java ===
+package junit.framework;
+
+import javax.annotation.Nullable;
+
+@SuppressWarnings("deprecation")
+public abstract class TestCase extends Assert implements Test {
+
+  @Nullable
+  public String getName() {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === junit/framework/TestListener.java ===
+package junit.framework;
+
+public interface TestListener {}
+
+
+// === org/junit/internal/runners/JUnit38ClassRunner.java ===
+package org.junit.internal.runners;
+
+import javax.annotation.Nullable;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestListener;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+
+public class JUnit38ClassRunner extends Runner implements Filterable, Orderable {
+
+  private static final class OldTestClassAdaptingListener implements TestListener {
+
+    @Nullable
+    private String getName(Test test) {
+      if (test instanceof TestCase) {
+        return ((TestCase) test).getName();
+      } else {
+        return test.toString();
+      }
+    }
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+```

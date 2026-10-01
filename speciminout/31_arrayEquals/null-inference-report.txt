@@ -1,0 +1,49 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `ComparisonCriteria.arrayEquals(String message, Object expecteds, Object actuals, boolean outer)` parameter `message` | `@Nullable` | The private overload receives the public method’s `@Nullable message`, and the original body explicitly checks `message == null`, so it must accept null. |
+| `ComparisonCriteria.arrayEquals(String message, Object expecteds, Object actuals)` parameter `message` | `@Nullable` | This public entry point already accepts a null message and forwards it to the private overload. |
+
+No other annotations are needed to fix this specific warning.
+
+## B) Cause of the warning
+
+The warning is reported at the call to the private `arrayEquals(message, expecteds, actuals, true)` overload. The public method declares `message` as `@Nullable`, but the private overload declares its `message` parameter without an annotation, so NullAway treats it as `@NonNull`. Therefore, passing the nullable `message` value to the private method is considered unsafe. Annotating the private `message` parameter with `@Nullable` matches its actual null-handling behavior and resolves the warning.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/internal/ArrayComparisonFailure.java ===
+package org.junit.internal;
+
+public class ArrayComparisonFailure extends AssertionError {}
+
+
+// === org/junit/internal/ComparisonCriteria.java ===
+package org.junit.internal;
+
+import javax.annotation.Nullable;
+
+public abstract class ComparisonCriteria {
+
+  public void arrayEquals(@Nullable String message, Object expecteds, Object actuals)
+      throws ArrayComparisonFailure {
+    arrayEquals(message, expecteds, actuals, true);
+  }
+
+  private void arrayEquals(@Nullable String message, Object expecteds, Object actuals, boolean outer)
+      throws ArrayComparisonFailure {
+    throw new java.lang.Error();
+  }
+}
+```

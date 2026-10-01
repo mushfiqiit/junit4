@@ -1,0 +1,26 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'message' where @NonNull is required
+Members of interest:
+  - method arrayEquals(String, Object, Object, boolean) (org.junit.internal.ComparisonCriteria): receives the @Nullable argument as parameter 0
+
+## method arrayEquals(String, Object, Object, boolean) (org.junit.internal.ComparisonCriteria)
+# org/junit/internal/ComparisonCriteria.java (declaration, and uses of parameter 'message' in its body)
+     32:     private void arrayEquals(String message, Object expecteds, Object actuals, boolean outer)
+     33:             throws ArrayComparisonFailure {
+  ---
+     40:         }
+     41:         String header = message == null ? "" : message + ": ";
+     42: 
+  ---
+     66:                 try {
+     67:                     arrayEquals(message, expected, actual, false);
+     68:                 } catch (ArrayComparisonFailure e) {
+  ---
+# org/junit/internal/ComparisonCriteria.java (uses)
+     66:                 try {
+     67:                     arrayEquals(message, expected, actual, false);
+     68:                 } catch (ArrayComparisonFailure e) {
+  ---

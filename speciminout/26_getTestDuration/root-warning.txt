@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/26_getTestDuration/org/junit/experimental/max/MaxHistory.java:14: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

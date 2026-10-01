@@ -1,0 +1,89 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| `ParentRunner.createTestClass(Class<?>)` parameter `testClass` | `@Nullable` | It is already intentionally nullable and simply forwards the value to `TestClass`. |
+| `TestClass.<init>(Class<?>)` parameter `clazz` | `@Nullable` | The original constructor explicitly checks `clazz != null` before dereferencing, indicating that `null` is an acceptable argument. |
+
+## B) Cause of the warning
+
+The warning is reported on line 13 of `ParentRunner.java`, at the call `new TestClass(testClass)`. The variable `testClass` is declared `@Nullable`, but the `TestClass` constructor parameter `clazz` is unannotated, so NullAway treats it as `@NonNull`. Therefore NullAway flags passing a possibly-null argument to a non-null parameter. Marking the `TestClass` constructor parameter as `@Nullable` makes the call valid and matches the original null-checking behavior.
+
+## C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+import org.junit.runners.model.TestClass;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
+
+  @Deprecated
+  protected TestClass createTestClass(@Nullable Class<?> testClass) {
+    return new TestClass(testClass);
+  }
+}
+
+
+// === org/junit/runners/model/Annotatable.java ===
+package org.junit.runners.model;
+
+public interface Annotatable {}
+
+
+// === org/junit/runners/model/TestClass.java ===
+package org.junit.runners.model;
+
+import javax.annotation.Nullable;
+
+public class TestClass implements Annotatable {
+
+  public TestClass(@Nullable Class<?> clazz) {
+    throw new java.lang.Error();
+  }
+}
+```

@@ -1,0 +1,66 @@
+
+
+## A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---:|---|
+| local variable `createdFolder` in `createTemporaryFolderWithFileApi` | `@Nonnull` | The warning is a dereference of `createdFolder`, so the only annotation-only way to make NullAway accept that existing `toString()` call is to declare the local variable non-null at that point. |
+| other parameters, return types, and fields in the shown code | leave unannotated | They are not responsible for this specific `createdFolder` dereference warning. |
+
+## B) Cause of the warning
+
+The warning points to `createdFolder.toString()` in the `IOException` constructor expression. `createdFolder` is initialized to `null`, and NullAway’s flow analysis cannot prove that the assignment inside the `for` loop must have executed before the `throw`, so it treats `createdFolder` as possibly null at the dereference. Adding `@Nonnull` to the local variable supplies the missing non-null assertion for that expression, resolving the reported dereference warning without changing the control flow or adding null checks.
+
+## C) Corrected annotated code
+
+```java
+// === org/junit/rules/ExternalResource.java ===
+package org.junit.rules;
+
+public abstract class ExternalResource implements TestRule {}
+
+
+// === org/junit/rules/TemporaryFolder.java ===
+package org.junit.rules;
+
+import java.io.File;
+import java.io.IOException;
+import javax.annotation.Nonnull;
+
+public class TemporaryFolder extends ExternalResource {
+
+  private static final int TEMP_DIR_ATTEMPTS = 0;
+
+  private static final String TMP_PREFIX;
+
+  private static File createTemporaryFolderWithFileApi(File parentFolder) throws IOException {
+    @Nonnull File createdFolder = null;
+    for (int i = 0; i < TEMP_DIR_ATTEMPTS; ++i) {
+      String suffix = ".tmp";
+      File tmpFile = File.createTempFile(TMP_PREFIX, suffix, parentFolder);
+      String tmpName = tmpFile.toString();
+      String folderName = tmpName.substring(0, tmpName.length() - suffix.length());
+      createdFolder = new File(folderName);
+      if (createdFolder.mkdir()) {
+        tmpFile.delete();
+        return createdFolder;
+      }
+      tmpFile.delete();
+    }
+    throw new IOException(
+        "Unable to create temporary directory in: "
+            + parentFolder.toString()
+            + ". Tried "
+            + TEMP_DIR_ATTEMPTS
+            + " times. "
+            + "Last attempted to create: "
+            + createdFolder.toString());
+  }
+}
+
+
+// === org/junit/rules/TestRule.java ===
+package org.junit.rules;
+
+public interface TestRule {}
+```

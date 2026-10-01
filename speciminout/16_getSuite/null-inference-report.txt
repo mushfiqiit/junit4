@@ -1,0 +1,154 @@
+
+
+A) Annotation decisions
+
+| location | inferred annotation | one-sentence reason |
+|---|---|---|
+| `Computer.getSuite(...)` return type | `@Nonnull` by default, left unannotated | Callers in the original program use the returned `Runner` as non-null, and this return is not the nullable expression causing the warning. |
+| `Computer.getRunner(...)` return type | `@Nullable`, already present and unchanged | It represents a value that may be null because it ultimately wraps `RunnerBuilder.runnerForClass`, which is annotated `@Nullable`. |
+| Anonymous `RunnerBuilder.runnerForClass(...)` inside `Computer.getSuite`, return type | `@Nullable`, add this annotation | This override returns the `@Nullable` result of `getRunner(...)` and overrides the `@Nullable` `RunnerBuilder.runnerForClass` method, so its return type must also be `@Nullable`. |
+
+B) Cause of the warning
+
+The warning is on the `return getRunner(builder, testClass);` statement inside the anonymous `RunnerBuilder` created in `Computer.getSuite`. That anonymous `runnerForClass` method has an unannotated `Runner` return type, which NullAway treats as `@Nonnull`, but the expression being returned is `getRunner(...)`, whose return type is annotated `@Nullable`. Therefore NullAway reports that a possibly-null expression is being returned from a method with a non-null return type. Adding `@Nullable` to the anonymous method’s return type makes its nullability contract match both the nullable value being returned and the overridden `@Nullable RunnerBuilder.runnerForClass` method.
+
+C) Corrected annotated code
+
+```java
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/runner/Computer.java ===
+package org.junit.runner;
+
+import javax.annotation.Nullable;
+import org.junit.runners.Suite;
+import org.junit.runners.model.InitializationError;
+import org.junit.runners.model.RunnerBuilder;
+
+public class Computer {
+
+  public Runner getSuite(final RunnerBuilder builder, Class<?>[] classes)
+      throws InitializationError {
+    return new Suite(
+        new RunnerBuilder() {
+
+          public @Nullable Runner runnerForClass(Class<?> testClass) throws Throwable {
+            return getRunner(builder, testClass);
+          }
+        },
+        classes) {
+
+      protected String getName() {
+        return "classes";
+      }
+    };
+  }
+
+  @Nullable
+  protected Runner getRunner(RunnerBuilder builder, Class<?> testClass) throws Throwable {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runner/Describable.java ===
+package org.junit.runner;
+
+public interface Describable {}
+
+
+// === org/junit/runner/Runner.java ===
+package org.junit.runner;
+
+public abstract class Runner implements Describable {}
+
+
+// === org/junit/runner/manipulation/Filterable.java ===
+package org.junit.runner.manipulation;
+
+public interface Filterable {}
+
+
+// === org/junit/runner/manipulation/Orderable.java ===
+package org.junit.runner.manipulation;
+
+public interface Orderable extends Sortable {}
+
+
+// === org/junit/runner/manipulation/Sortable.java ===
+package org.junit.runner.manipulation;
+
+public interface Sortable {}
+
+
+// === org/junit/runners/ParentRunner.java ===
+package org.junit.runners;
+
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.Orderable;
+import org.junit.runners.model.InitializationError;
+
+public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
+
+  protected ParentRunner(@Nullable Class<?> testClass) throws InitializationError {
+    throw new java.lang.Error();
+  }
+
+  protected String getName() {
+    throw new java.lang.Error();
+  }
+}
+
+
+// === org/junit/runners/Suite.java ===
+package org.junit.runners;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+import org.junit.runners.model.InitializationError;
+import org.junit.runners.model.RunnerBuilder;
+
+public class Suite extends ParentRunner<Runner> {
+
+  public Suite(RunnerBuilder builder, Class<?>[] classes) throws InitializationError {
+    this(null, builder.runners(null, classes));
+  }
+
+  protected Suite(@Nullable Class<?> klass, List<Runner> runners) throws InitializationError {
+    super(klass);
+  }
+}
+
+
+// === org/junit/runners/model/InitializationError.java ===
+package org.junit.runners.model;
+
+public class InitializationError extends Exception {}
+
+
+// === org/junit/runners/model/RunnerBuilder.java ===
+package org.junit.runners.model;
+
+import java.util.List;
+import javax.annotation.Nullable;
+import org.junit.runner.Runner;
+
+public abstract class RunnerBuilder {
+
+  @Nullable
+  public abstract Runner runnerForClass(Class<?> testClass) throws Throwable;
+
+  public List<Runner> runners(@Nullable Class<?> parent, Class<?>[] children)
+      throws InitializationError {
+    throw new java.lang.Error();
+  }
+}
+```

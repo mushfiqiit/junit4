@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/03_assertNotNull/junit/framework/TestCase.java:9: warning: [NullAway] passing @Nullable parameter 'object' where @NonNull is required

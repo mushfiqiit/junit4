@@ -1,0 +1,48 @@
+
+
+```java
+// A) Annotation decisions
+//
+// | location | inferred annotation | one-sentence reason |
+// |----------|---------------------|---------------------|
+// | `org.junit.runner.Description.getClassName()` return type | `@Nullable` | The returned ternary can yield the `@Nullable` result of `methodAndClassNamePatternGroupOrDefault`, and original callers null-check the result. |
+//
+// B) Cause of the warning
+//
+// The warning is at the `return` statement in `getClassName()`. The ternary expression has a nullable type because the second branch calls `methodAndClassNamePatternGroupOrDefault`, which is declared to return `@Nullable String`. Since `getClassName()` had an unannotated `String` return type, NullAway treats it as `@NonNull`, so returning the nullable ternary is unsafe. Marking `getClassName()` as `@Nullable` declares the method result may be null, matching the original null-checking caller and resolving the warning.
+
+// === javax/annotation/Nullable.java ===
+package javax.annotation;
+@java.lang.annotation.Target({ java.lang.annotation.ElementType.TYPE_USE, java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.LOCAL_VARIABLE, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.PACKAGE, java.lang.annotation.ElementType.TYPE_PARAMETER})
+public @interface Nullable {
+}
+
+
+// === org/junit/runner/Description.java ===
+package org.junit.runner;
+
+import java.io.Serializable;
+import javax.annotation.Nullable;
+
+public class Description implements Serializable {
+
+  private volatile Class<?> fTestClass;
+
+  public String toString() {
+    throw new java.lang.Error();
+  }
+
+  @Nullable
+  public String getClassName() {
+    return fTestClass != null
+        ? fTestClass.getName()
+        : methodAndClassNamePatternGroupOrDefault(2, toString());
+  }
+
+  @Nullable
+  private String methodAndClassNamePatternGroupOrDefault(
+      int group, @Nullable String defaultString) {
+    throw new java.lang.Error();
+  }
+}
+```
