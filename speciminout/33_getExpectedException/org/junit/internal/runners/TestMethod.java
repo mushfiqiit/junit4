@@ -8,7 +8,7 @@ import org.junit.Test.None;
 @Deprecated
 public class TestMethod {
 
-  private final Method method = null;
+  private final Method method;
 
   @Nonnull
   protected Class<? extends Throwable> getExpectedException() {

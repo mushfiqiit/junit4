@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 public class TemporaryFolder extends ExternalResource {
 
-  @Nullable private final File parentFolder = null;
+  @Nullable private final File parentFolder;
 
   @Nullable private File folder;
 

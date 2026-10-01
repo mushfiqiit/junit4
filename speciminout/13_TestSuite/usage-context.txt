@@ -1,0 +1,35 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'theClass' where @NonNull is required
+Members of interest:
+  - method addTestsFromTestCase(Class<?>) (junit.framework.TestSuite): receives the @Nullable argument as parameter 0
+
+## method addTestsFromTestCase(Class<?>) (junit.framework.TestSuite)
+# junit/framework/TestSuite.java (declaration, and uses of parameter 'theClass' in its body)
+    122:     private void addTestsFromTestCase(final Class<?> theClass) {
+    123:         fName = theClass.getName();
+    124:         try {
+    125:             getTestConstructor(theClass); // Avoid generating multiple error messages
+    126:         } catch (NoSuchMethodException e) {
+    127:             addTest(warning("Class " + theClass.getName() + " has no public constructor TestCase(String name) or TestCase()"));
+    128:             return;
+  ---
+    130: 
+    131:         if (!Modifier.isPublic(theClass.getModifiers())) {
+    132:             addTest(warning("Class " + theClass.getName() + " is not public"));
+    133:             return;
+  ---
+    135: 
+    136:         Class<?> superClass = theClass;
+    137:         List<String> names = new ArrayList<String>();
+  ---
+    139:             for (Method each : MethodSorter.getDeclaredMethods(superClass)) {
+    140:                 addTestMethod(each, names, theClass);
+    141:             }
+  ---
+    144:         if (fTests.size() == 0) {
+    145:             addTest(warning("No tests found in " + theClass.getName()));
+    146:         }
+  ---

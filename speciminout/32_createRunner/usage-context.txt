@@ -1,0 +1,18 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method createRunner() (org.junit.internal.requests.ClassRequest): the method returning @Nullable (how callers use its result)
+
+## method createRunner() (org.junit.internal.requests.ClassRequest)
+# org/junit/internal/requests/ClassRequest.java (declaration)
+     27:     @Override
+     28:     protected Runner createRunner() {
+  ---
+# org/junit/internal/requests/MemoizingRequest.java (uses)
+     20:                 if (runner == null) {
+     21:                     runner = createRunner();
+     22:                 }
+  ---

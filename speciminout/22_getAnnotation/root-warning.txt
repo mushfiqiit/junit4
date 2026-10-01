@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/22_getAnnotation/org/junit/experimental/theories/ParameterSignature.java:20: warning: [NullAway] returning @Nullable expression from method with @NonNull return type

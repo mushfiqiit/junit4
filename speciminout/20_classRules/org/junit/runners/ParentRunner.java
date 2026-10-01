@@ -11,7 +11,7 @@ import org.junit.runners.model.TestClass;
 
 public abstract class ParentRunner<T> extends Runner implements Filterable, Orderable {
 
-  private final TestClass testClass = null;
+  private final TestClass testClass;
 
   protected List<TestRule> classRules() {
     ClassRuleCollector collector = new ClassRuleCollector();

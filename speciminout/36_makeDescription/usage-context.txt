@@ -1,0 +1,190 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: passing @Nullable parameter 'tc.getName()' where @NonNull is required
+Members of interest:
+  - method createTestDescription(Class<?>, String, Annotation...) / createTestDescription(String, String, Annotation...) / createTestDescription(String, String, Serializable) (org.junit.runner.Description): receives the @Nullable argument as parameter 1
+  - method getName() (junit.framework.TestCase): returns the @Nullable argument
+
+## method createTestDescription(Class<?>, String, Annotation...) / createTestDescription(String, String, Annotation...) / createTestDescription(String, String, Serializable) (org.junit.runner.Description)
+# org/junit/runner/Description.java (declaration, and uses of parameter 'name' in its body)
+     73:     public static Description createTestDescription(String className, String name, Annotation... annotations) {
+     74:         return new Description(null, formatDisplayName(name, className), annotations);
+     75:     }
+  ---
+# org/junit/runner/Description.java (declaration, and uses of parameter 'name' in its body)
+     86:     public static Description createTestDescription(Class<?> clazz, String name, Annotation... annotations) {
+     87:         return new Description(clazz, formatDisplayName(name, clazz.getName()), annotations);
+     88:     }
+  ---
+# org/junit/runner/Description.java (declaration, and uses of parameter 'name' in its body)
+    110:     public static Description createTestDescription(String className, String name, Serializable uniqueId) {
+    111:         return new Description(null, formatDisplayName(name, className), uniqueId);
+    112:     }
+  ---
+# org/junit/internal/runners/ErrorReportingRunner.java (uses)
+     87:     private Description describeCause() {
+     88:         return Description.createTestDescription(classNames, "initializationError");
+     89:     }
+  ---
+# org/junit/internal/runners/JUnit38ClassRunner.java (uses)
+     54:             }
+     55:             return Description.createTestDescription(getEffectiveClass(test), getName(test));
+     56:         }
+  ---
+# org/junit/internal/runners/JUnit4ClassRunner.java (uses)
+    118:     protected Description methodDescription(Method method) {
+    119:         return Description.createTestDescription(getTestClass().getJavaClass(), testName(method), testAnnotations(method));
+    120:     }
+  ---
+# org/junit/runner/Request.java (uses)
+     39:     public static Request method(Class<?> clazz, String methodName) {
+     40:         Description method = Description.createTestDescription(clazz, methodName);
+     41:         return Request.aClass(clazz).filterWith(method);
+  ---
+# org/junit/runners/BlockJUnit4ClassRunner.java (uses)
+    121:         if (description == null) {
+    122:             description = Description.createTestDescription(getTestClass().getJavaClass(),
+    123:                     testName(method), method.getAnnotations());
+  ---
+# org/junit/runners/Parameterized.java (uses)
+    344:             this.description = Description
+    345:                     .createTestDescription(testClass.getJavaClass(),
+    346:                             methodName + "() assumption violation");
+  ---
+
+## method getName() (junit.framework.TestCase)
+# junit/framework/TestCase.java (declaration)
+    499:     @Nullable
+    500:     public String getName() {
+  ---
+# junit/framework/TestCase.java (uses)
+    490:     public String toString() {
+    491:         return getName() + "(" + getClass().getName() + ")";
+    492:     }
+  ---
+# junit/framework/JUnit4TestAdapter.java (uses)
+     87:     public String toString() {
+     88:         return fNewTestClass.getName();
+     89:     }
+  ---
+# junit/framework/TestSuite.java (uses)
+     54:         } catch (NoSuchMethodException e) {
+     55:             return warning("Class " + theClass.getName() + " has no public constructor TestCase(String name) or TestCase()");
+     56:         }
+  ---
+    122:     private void addTestsFromTestCase(final Class<?> theClass) {
+    123:         fName = theClass.getName();
+    124:         try {
+  ---
+    126:         } catch (NoSuchMethodException e) {
+    127:             addTest(warning("Class " + theClass.getName() + " has no public constructor TestCase(String name) or TestCase()"));
+    128:             return;
+  ---
+    131:         if (!Modifier.isPublic(theClass.getModifiers())) {
+    132:             addTest(warning("Class " + theClass.getName() + " is not public"));
+    133:             return;
+  ---
+    144:         if (fTests.size() == 0) {
+    145:             addTest(warning("No tests found in " + theClass.getName()));
+    146:         }
+  ---
+    278:     public String toString() {
+    279:         if (getName() != null) {
+    280:             return getName();
+    281:         }
+  ---
+    285:     private void addTestMethod(Method m, List<String> names, Class<?> theClass) {
+    286:         String name = m.getName();
+    287:         if (names.contains(name)) {
+  ---
+    291:             if (isTestMethod(m)) {
+    292:                 addTest(warning("Test method isn't public: " + m.getName() + "(" + theClass.getCanonicalName() + ")"));
+    293:             }
+  ---
+    305:         return m.getParameterTypes().length == 0 &&
+    306:                 m.getName().startsWith("test") &&
+    307:                 m.getReturnType().equals(Void.TYPE);
+  ---
+# org/junit/Assert.java (uses)
+    857:         String className = value.getCanonicalName();
+    858:         return className == null ? value.getName() : className;
+    859:     }
+  ---
+    861:     private static String formatClassAndValue(Object value, String valueString) {
+    862:         String className = value == null ? "null" : value.getClass().getName();
+    863:         return className + "<" + valueString + ">";
+  ---
+# org/junit/experimental/theories/Theories.java (uses)
+     95:             if (!Modifier.isStatic(field.getModifiers())) {
+     96:                 errors.add(new Error("DataPoint field " + field.getName() + " must be static"));
+     97:             }
+     98:             if (!Modifier.isPublic(field.getModifiers())) {
+     99:                 errors.add(new Error("DataPoint field " + field.getName() + " must be public"));
+    100:             }
+  ---
+    111:             if (!Modifier.isStatic(method.getModifiers())) {
+    112:                 errors.add(new Error("DataPoint method " + method.getName() + " must be static"));
+    113:             }
+    114:             if (!Modifier.isPublic(method.getModifiers())) {
+    115:                 errors.add(new Error("DataPoint method " + method.getName() + " must be public"));
+    116:             }
+  ---
+    147:         if (constructors.length != 1) {
+    148:             errors.add(new Error("ParameterSupplier " + supplierClass.getName() + 
+    149:                                  " must have only one constructor (either empty or taking only a TestClass)"));
+  ---
+    152:             if (!(paramTypes.length == 0) && !paramTypes[0].equals(TestClass.class)) {
+    153:                 errors.add(new Error("ParameterSupplier " + supplierClass.getName() + 
+    154:                                      " constructor must take either nothing or a single TestClass instance"));
+  ---
+    292:             }
+    293:             throw new ParameterizedAssertionError(e, testMethod.getName(),
+    294:                     params);
+  ---
+# org/junit/internal/ComparisonCriteria.java (uses)
+    123:         } else {
+    124:             return componentType.getName();
+    125:         }
+  ---
+# org/junit/internal/runners/JUnit38ClassRunner.java (uses)
+     63:             if (test instanceof TestCase) {
+     64:                 return ((TestCase) test).getName();
+     65:             } else {
+  ---
+    134:         try {
+    135:             Method m = test.getClass().getMethod(test.getName());
+    136:             return m.getDeclaredAnnotations();
+  ---
+    154:             TestSuite suite = (TestSuite) getTest();
+    155:             TestSuite filtered = new TestSuite(suite.getName());
+    156:             int n = suite.testCount();
+  ---
+# org/junit/internal/runners/MethodValidator.java (uses)
+     75:                 String state = isStatic ? "should" : "should not";
+     76:                 errors.add(new Exception("Method " + each.getName() + "() "
+     77: 						+ state + " be static"));
+  ---
+     79:             if (!Modifier.isPublic(each.getDeclaringClass().getModifiers())) {
+     80:                 errors.add(new Exception("Class " + each.getDeclaringClass().getName()
+     81: 						+ " should be public"));
+  ---
+     83:             if (!Modifier.isPublic(each.getModifiers())) {
+     84:                 errors.add(new Exception("Method " + each.getName()
+     85: 						+ " should be public"));
+  ---
+     87:             if (each.getReturnType() != Void.TYPE) {
+     88:                 errors.add(new Exception("Method " + each.getName()
+     89: 						+ "should have a return type of void"));
+  ---
+     91:             if (each.getParameterTypes().length != 0) {
+     92:                 errors.add(new Exception("Method " + each.getName()
+     93: 						+ " should have no parameters"));
+  ---
+# org/junit/internal/runners/SuiteMethod.java (uses)
+     32:             if (!Modifier.isStatic(suiteMethod.getModifiers())) {
+     33:                 throw new Exception(klass.getName() + ".suite() must be static");
+     34:             }
+  ---
+(truncated at 120 excerpt lines)

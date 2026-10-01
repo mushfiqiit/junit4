@@ -8,13 +8,13 @@ import org.hamcrest.SelfDescribing;
 
 public class AssumptionViolatedException extends RuntimeException implements SelfDescribing {
 
-  @Nullable private final String fAssumption = null;
+  @Nullable private final String fAssumption;
 
   private final boolean fValueMatcher = false;
 
-  @Nullable private final Object fValue = null;
+  @Nullable private final Object fValue;
 
-  @Nullable private final Matcher<?> fMatcher = null;
+  @Nullable private final Matcher<?> fMatcher;
 
   private void writeObject(ObjectOutputStream objectOutputStream) throws IOException {
     ObjectOutputStream.PutField putField = objectOutputStream.putFields();

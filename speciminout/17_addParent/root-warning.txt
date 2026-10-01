@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/17_addParent/org/junit/runners/model/RunnerBuilder.java:15: warning: [NullAway] dereferenced expression parent is @Nullable

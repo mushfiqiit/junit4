@@ -1,0 +1,23 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method getSuite(RunnerBuilder, Class<?>[]) (org.junit.runner.Computer): the method returning @Nullable (how callers use its result)
+
+## method getSuite(RunnerBuilder, Class<?>[]) (org.junit.runner.Computer)
+# org/junit/runner/Computer.java (declaration)
+     27:     public Runner getSuite(final RunnerBuilder builder,
+     28:             Class<?>[] classes) throws InitializationError {
+  ---
+# org/junit/experimental/ParallelComputer.java (uses)
+     56:             throws InitializationError {
+     57:         Runner suite = super.getSuite(builder, classes);
+     58:         return this.classes ? parallelize(suite) : suite;
+  ---
+# org/junit/runner/Request.java (uses)
+     76:             AllDefaultPossibilitiesBuilder builder = new AllDefaultPossibilitiesBuilder();
+     77:             Runner suite = computer.getSuite(builder, classes);
+     78:             return runner(suite);
+  ---

@@ -1,0 +1,1 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/speciminout/01_doRun/junit/textui/TestRunner.java:20: warning: [NullAway] dereferenced expression suite is @Nullable

@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 
 public abstract class RunnerBuilder {
 
-  private final Set<Class<?>> parents = null;
+  private final Set<Class<?>> parents;
 
   Class<?> addParent(@Nullable Class<?> parent) throws InitializationError {
     if (!parents.add(parent)) {

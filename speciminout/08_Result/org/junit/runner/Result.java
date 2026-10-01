@@ -12,7 +12,7 @@ public class Result implements Serializable {
 
   private static final long serialVersionUID = 0L;
 
-  private static final ObjectStreamField[] serialPersistentFields = null;
+  private static final ObjectStreamField[] serialPersistentFields;
 
   private final AtomicInteger count;
 

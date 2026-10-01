@@ -1,0 +1,17 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method getClassName() (org.junit.runner.Description): the method returning @Nullable (how callers use its result)
+
+## method getClassName() (org.junit.runner.Description)
+# org/junit/runner/Description.java (declaration)
+    313:     public String getClassName() {
+  ---
+# org/junit/runner/Description.java (uses)
+    296:         }
+    297:         String name = getClassName();
+    298:         if (name == null) {
+  ---

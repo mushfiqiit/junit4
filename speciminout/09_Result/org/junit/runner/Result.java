@@ -13,7 +13,7 @@ public class Result implements Serializable {
 
   private static final long serialVersionUID = 0L;
 
-  private static final ObjectStreamField[] serialPersistentFields = null;
+  private static final ObjectStreamField[] serialPersistentFields;
 
   private final AtomicInteger count;
 
@@ -40,13 +40,13 @@ public class Result implements Serializable {
 
   private static class SerializedForm implements Serializable {
 
-    private final AtomicInteger fCount = null;
+    private final AtomicInteger fCount;
 
-    private final AtomicInteger fIgnoreCount = null;
+    private final AtomicInteger fIgnoreCount;
 
-    private final AtomicInteger assumptionFailureCount = null;
+    private final AtomicInteger assumptionFailureCount;
 
-    private final List<Failure> fFailures = null;
+    private final List<Failure> fFailures;
 
     private final long fRunTime = 0L;
 

@@ -5,7 +5,7 @@ import org.junit.runner.Runner;
 
 public class ClassRequest extends MemoizingRequest {
 
-  private final Class<?> fTestClass = null;
+  private final Class<?> fTestClass;
 
   protected Runner createRunner() {
     return new CustomAllDefaultPossibilitiesBuilder().safeRunnerForClass(fTestClass);

@@ -1,0 +1,18 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: returning @Nullable expression from method with @NonNull return type
+Members of interest:
+  - method getTestDuration(Description) (org.junit.experimental.max.MaxHistory): the method returning @Nullable (how callers use its result)
+
+## method getTestDuration(Description) (org.junit.experimental.max.MaxHistory)
+# org/junit/experimental/max/MaxHistory.java (declaration)
+    109: @Nonnull
+    110:     Long getTestDuration(Description key) {
+  ---
+# org/junit/experimental/max/MaxHistory.java (uses)
+    160:                     // Then shorter tests first
+    161:                     : getTestDuration(o1).compareTo(getTestDuration(o2));
+    162:         }
+  ---

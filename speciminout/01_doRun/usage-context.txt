@@ -1,0 +1,33 @@
+Read-only excerpts from the ORIGINAL program (outside this reduced slice) showing
+how the field(s)/method(s) involved in the NullAway warning below are declared and
+used elsewhere. Use them as evidence for nullability inference. Do NOT annotate or
+modify these excerpts.
+Warning: dereferenced expression suite is @Nullable
+Members of interest:
+  - method doRun(Test, boolean) (junit.textui.TestRunner): dereferenced at the warning line; 'suite' is parameter 0 of the enclosing method, so its callers supply the value
+
+## method doRun(Test, boolean) (junit.textui.TestRunner)
+# junit/textui/TestRunner.java (declaration, and uses of parameter 'suite' in its body)
+    113:     public TestResult doRun(@Nullable Test suite, boolean wait) {
+  ---
+    116:         long startTime = System.currentTimeMillis();
+    117:         suite.run(result);
+    118:         long endTime = System.currentTimeMillis();
+  ---
+# junit/textui/TestRunner.java (uses)
+     86:         TestRunner aTestRunner = new TestRunner();
+     87:         aTestRunner.doRun(suite, true);
+     88:     }
+  ---
+    109:     public TestResult doRun(Test test) {
+    110:         return doRun(test, false);
+    111:     }
+  ---
+    183:             Test suite = getTest(testCase);
+    184:             return doRun(suite, wait);
+    185:         } catch (Exception e) {
+  ---
+    192:         Test test = TestSuite.createTest(testClass, method);
+    193:         return doRun(test, wait);
+    194:     }
+  ---
