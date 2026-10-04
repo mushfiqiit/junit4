@@ -1,6 +1,7 @@
 package org.junit.runners.model;
 
 import java.lang.annotation.Annotation;
+import javax.annotation.Nullable;
 
 /**
  * A model element that may have annotations.
@@ -16,5 +17,5 @@ public interface Annotatable {
     /**
      * Returns the annotation on the model element of the given type, or @code{null}
      */
-    <T extends Annotation> T getAnnotation(Class<T> annotationType);
+    @Nullable <T extends Annotation> T getAnnotation(Class<T> annotationType);
 }

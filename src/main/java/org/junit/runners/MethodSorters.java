@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Comparator;
 
 import org.junit.internal.MethodSorter;
+import javax.annotation.Nullable;
 
 /**
  * Sort the methods into a specified execution order.
@@ -29,13 +30,13 @@ public enum MethodSorters {
      */
     DEFAULT(MethodSorter.DEFAULT);
 
-    private final Comparator<Method> comparator;
+    @Nullable private final Comparator<Method> comparator;
 
-    private MethodSorters(Comparator<Method> comparator) {
+    private MethodSorters(@Nullable Comparator<Method> comparator) {
         this.comparator = comparator;
     }
 
-    public Comparator<Method> getComparator() {
+    @Nullable public Comparator<Method> getComparator() {
         return comparator;
     }
 }

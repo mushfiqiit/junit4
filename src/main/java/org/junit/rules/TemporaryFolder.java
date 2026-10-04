@@ -9,6 +9,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.junit.Rule;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * The TemporaryFolder Rule allows creation of files and folders that should
@@ -43,9 +45,9 @@ import org.junit.Rule;
  * @since 4.7
  */
 public class TemporaryFolder extends ExternalResource {
-    private final File parentFolder;
+    @Nullable private final File parentFolder;
     private final boolean assureDeletion;
-    private File folder;
+    @Nullable private File folder;
 
     private static final int TEMP_DIR_ATTEMPTS = 10000;
     private static final String TMP_PREFIX = "junit";
@@ -65,7 +67,7 @@ public class TemporaryFolder extends ExternalResource {
      * @param parentFolder folder where temporary resources will be created.
      * If {@code null} then system default temporary-file directory is used.
      */
-    public TemporaryFolder(File parentFolder) {
+    public TemporaryFolder(@Nullable File parentFolder) {
         this.parentFolder = parentFolder;
         this.assureDeletion = false;
     }
@@ -94,7 +96,7 @@ public class TemporaryFolder extends ExternalResource {
      * @since 4.13
      */
     public static class Builder {
-        private File parentFolder;
+        @Nullable private File parentFolder;
         private boolean assureDeletion;
 
         protected Builder() {}
@@ -184,7 +186,7 @@ public class TemporaryFolder extends ExternalResource {
      * and a directory named {@code "child"} will be created under the newly-created
      * {@code "parent"} directory.
      */
-    public File newFolder(String... paths) throws IOException {
+    @NullUnmarked public File newFolder(String... paths) throws IOException {
         if (paths.length == 0) {
             throw new IllegalArgumentException("must pass at least one path");
         }
@@ -232,7 +234,7 @@ public class TemporaryFolder extends ExternalResource {
         return createTemporaryFolderIn(getRoot());
     }
 
-    private static File createTemporaryFolderIn(File parentFolder) throws IOException {
+    private static File createTemporaryFolderIn(@Nullable File parentFolder) throws IOException {
         try {
             return createTemporaryFolderWithNioApi(parentFolder);
         } catch (ClassNotFoundException ignore) {
@@ -254,7 +256,7 @@ public class TemporaryFolder extends ExternalResource {
         }
     }
 
-    private static File createTemporaryFolderWithNioApi(File parentFolder) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private static File createTemporaryFolderWithNioApi(@Nullable File parentFolder) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<?> filesClass = Class.forName("java.nio.file.Files");
         Object fileAttributeArray = Array.newInstance(Class.forName("java.nio.file.attribute.FileAttribute"), 0);
         Class<?> pathClass = Class.forName("java.nio.file.Path");
@@ -270,7 +272,7 @@ public class TemporaryFolder extends ExternalResource {
         return (File) pathClass.getDeclaredMethod("toFile").invoke(tempDir);
     }
 
-    private static File createTemporaryFolderWithFileApi(File parentFolder) throws IOException {
+    @NullUnmarked private static File createTemporaryFolderWithFileApi(@Nullable File parentFolder) throws IOException {
         File createdFolder = null;
         for (int i = 0; i < TEMP_DIR_ATTEMPTS; ++i) {
             // Use createTempFile to get a suitable folder name.

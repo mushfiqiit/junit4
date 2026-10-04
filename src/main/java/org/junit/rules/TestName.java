@@ -1,6 +1,7 @@
 package org.junit.rules;
 
 import org.junit.runner.Description;
+import javax.annotation.Nullable;
 
 /**
  * The TestName Rule makes the current test name available inside test methods:
@@ -25,7 +26,7 @@ import org.junit.runner.Description;
  * @since 4.7
  */
 public class TestName extends TestWatcher {
-    private volatile String name;
+    @Nullable private volatile String name;
 
     @Override
     protected void starting(Description d) {
@@ -35,7 +36,7 @@ public class TestName extends TestWatcher {
     /**
      * @return the name of the currently-running test method
      */
-    public String getMethodName() {
+    @Nullable public String getMethodName() {
         return name;
     }
 }

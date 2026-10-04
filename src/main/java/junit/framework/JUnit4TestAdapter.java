@@ -14,6 +14,7 @@ import org.junit.runner.manipulation.InvalidOrderingException;
 import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.manipulation.Orderable;
 import org.junit.runner.manipulation.Sorter;
+import javax.annotation.Nullable;
 
 /**
  * The JUnit4TestAdapter enables running JUnit-4-style tests using a JUnit-3-style test runner.

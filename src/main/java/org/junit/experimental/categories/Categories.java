@@ -14,6 +14,8 @@ import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * From a given set of test classes, runs only the classes and methods that are
@@ -118,7 +120,7 @@ public class Categories extends Suite {
         private final boolean includedAny;
         private final boolean excludedAny;
 
-        public static CategoryFilter include(boolean matchAny, Class<?>... categories) {
+        @NullUnmarked public static CategoryFilter include(boolean matchAny, Class<?>... categories) {
             return new CategoryFilter(matchAny, categories, true, null);
         }
 
@@ -130,7 +132,7 @@ public class Categories extends Suite {
             return include(true, categories);
         }
 
-        public static CategoryFilter exclude(boolean matchAny, Class<?>... categories) {
+        @NullUnmarked public static CategoryFilter exclude(boolean matchAny, Class<?>... categories) {
             return new CategoryFilter(true, null, matchAny, categories);
         }
 
@@ -155,8 +157,8 @@ public class Categories extends Suite {
             excluded = nullableClassToSet(excludedCategory);
         }
 
-        protected CategoryFilter(boolean matchAnyIncludes, Set<Class<?>> includes,
-                                 boolean matchAnyExcludes, Set<Class<?>> excludes) {
+        protected CategoryFilter(boolean matchAnyIncludes, @Nullable Set<Class<?>> includes,
+                                 boolean matchAnyExcludes, @Nullable Set<Class<?>> excludes) {
             includedAny = matchAnyIncludes;
             excludedAny = matchAnyExcludes;
             included = copyAndRefine(includes);
@@ -281,12 +283,12 @@ public class Categories extends Suite {
             return categories;
         }
 
-        private static Description parentDescription(Description description) {
+        @Nullable private static Description parentDescription(Description description) {
             Class<?> testClass= description.getTestClass();
             return testClass == null ? null : Description.createSuiteDescription(testClass);
         }
 
-        private static Class<?>[] directCategories(Description description) {
+        private static Class<?>[] directCategories(@Nullable Description description) {
             if (description == null) {
                 return new Class<?>[0];
             }
@@ -295,7 +297,7 @@ public class Categories extends Suite {
             return annotation == null ? new Class<?>[0] : annotation.value();
         }
 
-        private static Set<Class<?>> copyAndRefine(Set<Class<?>> classes) {
+        private static Set<Class<?>> copyAndRefine(@Nullable Set<Class<?>> classes) {
             Set<Class<?>> c= new LinkedHashSet<Class<?>>();
             if (classes != null) {
                 c.addAll(classes);
@@ -319,7 +321,7 @@ public class Categories extends Suite {
         }
     }
 
-    private static Set<Class<?>> getIncludedCategory(Class<?> klass) {
+    @NullUnmarked private static Set<Class<?>> getIncludedCategory(Class<?> klass) {
         IncludeCategory annotation= klass.getAnnotation(IncludeCategory.class);
         return createSet(annotation == null ? null : annotation.value());
     }
@@ -329,7 +331,7 @@ public class Categories extends Suite {
         return annotation == null || annotation.matchAny();
     }
 
-    private static Set<Class<?>> getExcludedCategory(Class<?> klass) {
+    @NullUnmarked private static Set<Class<?>> getExcludedCategory(Class<?> klass) {
         ExcludeCategory annotation= klass.getAnnotation(ExcludeCategory.class);
         return createSet(annotation == null ? null : annotation.value());
     }

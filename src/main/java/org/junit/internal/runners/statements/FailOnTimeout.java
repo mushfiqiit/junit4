@@ -15,6 +15,7 @@ import org.junit.internal.management.ThreadMXBean;
 import org.junit.runners.model.MultipleFailureException;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestTimedOutException;
+import javax.annotation.Nullable;
 
 public class FailOnTimeout extends Statement {
     private final Statement originalStatement;
@@ -131,7 +132,7 @@ public class FailOnTimeout extends Statement {
         }
     }
 
-    private ThreadGroup threadGroupForNewThread() {
+    @Nullable private ThreadGroup threadGroupForNewThread() {
         if (!lookForStuckThread) {
             // Use the default ThreadGroup (usually the one from the current
             // thread).
@@ -161,7 +162,7 @@ public class FailOnTimeout extends Statement {
      * test failed, an exception indicating a timeout if the test timed out, or
      * {@code null} if the test passed.
      */
-    private Throwable getResult(FutureTask<Throwable> task, Thread thread) {
+    @Nullable private Throwable getResult(FutureTask<Throwable> task, Thread thread) {
         try {
             if (timeout > 0) {
                 return task.get(timeout, timeUnit);
@@ -222,7 +223,7 @@ public class FailOnTimeout extends Statement {
      * problem or if the thread cannot be determined.  The return value is never equal 
      * to {@code mainThread}.
      */
-    private Thread getStuckThread(Thread mainThread) {
+    @Nullable private Thread getStuckThread(Thread mainThread) {
         List<Thread> threadsInGroup = getThreadsInGroup(mainThread.getThreadGroup());
         if (threadsInGroup.isEmpty()) {
             return null;
@@ -293,7 +294,7 @@ public class FailOnTimeout extends Statement {
     private class CallableStatement implements Callable<Throwable> {
         private final CountDownLatch startLatch = new CountDownLatch(1);
 
-        public Throwable call() throws Exception {
+        @Nullable public Throwable call() throws Exception {
             try {
                 startLatch.countDown();
                 originalStatement.evaluate();

@@ -1,6 +1,7 @@
 package org.junit.runners.model;
 
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Thrown by {@link org.junit.runner.Runner}s in case the class under test is not valid.

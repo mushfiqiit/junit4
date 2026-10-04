@@ -1,4 +1,5 @@
 package junit.framework;
+import javax.annotation.Nullable;
 
 public class ComparisonCompactor {
 
@@ -19,7 +20,7 @@ public class ComparisonCompactor {
     }
 
     @SuppressWarnings("deprecation")
-    public String compact(String message) {
+    public String compact(@Nullable String message) {
         if (fExpected == null || fActual == null || areStringsEqual()) {
             return Assert.format(message, fExpected, fActual);
         }

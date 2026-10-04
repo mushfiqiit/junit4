@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import org.junit.FixMethodOrder;
+import javax.annotation.Nullable;
 
 public class MethodSorter {
     /**
@@ -62,7 +63,7 @@ public class MethodSorter {
     private MethodSorter() {
     }
 
-    private static Comparator<Method> getSorter(FixMethodOrder fixMethodOrder) {
+    @Nullable private static Comparator<Method> getSorter(FixMethodOrder fixMethodOrder) {
         if (fixMethodOrder == null) {
             return DEFAULT;
         }

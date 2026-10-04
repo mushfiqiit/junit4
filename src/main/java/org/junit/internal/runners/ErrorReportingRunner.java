@@ -11,17 +11,18 @@ import org.junit.runners.model.InvalidTestClassError;
 import org.junit.runners.model.InitializationError;
 
 import static java.util.Collections.singletonList;
+import javax.annotation.Nullable;
 
 public class ErrorReportingRunner extends Runner {
     private final List<Throwable> causes;
 
     private final String classNames;
 
-    public ErrorReportingRunner(Class<?> testClass, Throwable cause) {
+    public ErrorReportingRunner(@Nullable Class<?> testClass, Throwable cause) {
         this(cause, testClass);
     }
     
-    public ErrorReportingRunner(Throwable cause, Class<?>... testClasses) {
+    public ErrorReportingRunner(Throwable cause, @Nullable Class<?>... testClasses) {
         if (testClasses == null || testClasses.length == 0) {
             throw new NullPointerException("Test classes cannot be null or empty");
         }
@@ -66,7 +67,7 @@ public class ErrorReportingRunner extends Runner {
     }
 
     @SuppressWarnings("deprecation")
-    private List<Throwable> getCauses(Throwable cause) {
+    private List<Throwable> getCauses(@Nullable Throwable cause) {
         if (cause instanceof InvocationTargetException) {
             return getCauses(cause.getCause());
         }

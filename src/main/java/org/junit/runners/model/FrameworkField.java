@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 import org.junit.runners.BlockJUnit4ClassRunner;
+import javax.annotation.Nullable;
 
 /**
  * Represents a field on a test class (currently used only for Rules in
@@ -88,7 +89,7 @@ public class FrameworkField extends FrameworkMember<FrameworkField> {
     /**
      * Attempts to retrieve the value of this field on {@code target}
      */
-    public Object get(Object target) throws IllegalArgumentException, IllegalAccessException {
+    public Object get(@Nullable Object target) throws IllegalArgumentException, IllegalAccessException {
         return field.get(target);
     }
 

@@ -7,6 +7,7 @@ import org.junit.internal.TextListener;
 import org.junit.internal.runners.JUnit38ClassRunner;
 import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.RunNotifier;
+import javax.annotation.Nullable;
 
 /**
  * <code>JUnitCore</code> is a facade for running tests. It supports running JUnit 4 tests,

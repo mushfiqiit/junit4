@@ -5,6 +5,7 @@ import org.junit.runner.Request;
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.InvalidOrderingException;
 import org.junit.runner.manipulation.Ordering;
+import javax.annotation.Nullable;
 
 /** @since 4.13 */
 public class OrderingRequest extends MemoizingRequest {

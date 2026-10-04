@@ -3,6 +3,8 @@ package org.junit.runner;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * Represents a strategy for computing runners and suites.
@@ -46,7 +48,7 @@ public class Computer {
     /**
      * Create a single-class runner for {@code testClass}, using {@code builder}
      */
-    protected Runner getRunner(RunnerBuilder builder, Class<?> testClass) throws Throwable {
+    @NullUnmarked protected Runner getRunner(RunnerBuilder builder, Class<?> testClass) throws Throwable {
         return builder.runnerForClass(testClass);
     }
 }

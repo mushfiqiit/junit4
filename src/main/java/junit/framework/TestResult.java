@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * A <code>TestResult</code> collects the results of executing

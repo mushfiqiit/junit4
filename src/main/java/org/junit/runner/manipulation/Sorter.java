@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.junit.runner.Description;
+import javax.annotation.Nullable;
 
 /**
  * A <code>Sorter</code> orders tests. In general you will not need

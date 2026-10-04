@@ -15,6 +15,8 @@ import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * Stores a subset of the history of each test:
@@ -91,7 +93,7 @@ public class MaxHistory implements Serializable {
         }
     }
 
-    Long getFailureTimestamp(Description key) {
+    @Nullable Long getFailureTimestamp(Description key) {
         return fFailureTimestamps.get(key.toString());
     }
 
@@ -103,7 +105,7 @@ public class MaxHistory implements Serializable {
         return !fDurations.containsKey(key.toString());
     }
 
-    Long getTestDuration(Description key) {
+    @Nullable Long getTestDuration(Description key) {
         return fDurations.get(key.toString());
     }
 
@@ -122,7 +124,7 @@ public class MaxHistory implements Serializable {
             // possible time
         }
 
-        @Override
+        @NullUnmarked @Override
         public void testFinished(Description description) throws Exception {
             long end = System.nanoTime();
             long start = starts.get(description);
@@ -141,7 +143,7 @@ public class MaxHistory implements Serializable {
     }
 
     private class TestComparator implements Comparator<Description> {
-        public int compare(Description o1, Description o2) {
+        @NullUnmarked public int compare(Description o1, Description o2) {
             // Always prefer new tests
             if (isNewTest(o1)) {
                 return -1;

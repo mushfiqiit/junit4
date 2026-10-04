@@ -22,6 +22,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.internal.MethodSorter;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * Wraps a class to be run, providing method validation and annotation searching
@@ -42,7 +44,7 @@ public class TestClass implements Annotatable {
      * an expensive process (we hope in future JDK's it will not be.) Therefore,
      * try to share instances of {@code TestClass} where possible.
      */
-    public TestClass(Class<?> clazz) {
+    @NullUnmarked public TestClass(@Nullable Class<?> clazz) {
         this.clazz = clazz;
         if (clazz != null && clazz.getConstructors().length > 1) {
             throw new IllegalArgumentException(
@@ -216,7 +218,7 @@ public class TestClass implements Annotatable {
         return clazz.getAnnotations();
     }
 
-    public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
+    @Nullable public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         if (clazz == null) {
             return null;
         }
@@ -241,7 +243,7 @@ public class TestClass implements Annotatable {
      *
      * @since 4.13
      */
-    public <T> void collectAnnotatedFieldValues(Object test,
+    public <T> void collectAnnotatedFieldValues(@Nullable Object test,
             Class<? extends Annotation> annotationClass, Class<T> valueClass,
             MemberValueConsumer<T> consumer) {
         for (FrameworkField each : getAnnotatedFields(annotationClass)) {
@@ -275,7 +277,7 @@ public class TestClass implements Annotatable {
      *
      * @since 4.13
      */
-    public <T> void collectAnnotatedMethodValues(Object test,
+    public <T> void collectAnnotatedMethodValues(@Nullable Object test,
             Class<? extends Annotation> annotationClass, Class<T> valueClass,
             MemberValueConsumer<T> consumer) {
         for (FrameworkMethod each : getAnnotatedMethods(annotationClass)) {

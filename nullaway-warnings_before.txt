@@ -1,0 +1,628 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:32: error: [NullAway] @NonNull static field 'fPreferences' not initialized
+    private static Properties fPreferences;
+                              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:98: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:109: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:112: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:124: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:134: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:137: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/runner/BaseTestRunner.java:173: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return suiteName;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:87: error: [NullAway] initializer method does not guarantee @NonNull field 'fName' (line 81) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TestCase() {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:88: error: [NullAway] assigning @Nullable expression to @NonNull field
+        fName = null;
+              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:172: error: [NullAway] dereferenced expression 'runMethod' is @Nullable
+        if (!Modifier.isPublic(runMethod.getModifiers())) {
+                                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:31: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertTrue(null, condition);
+                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:47: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertFalse(null, condition);
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:64: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        fail(null);
+             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:86: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:107: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:129: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual, delta);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:151: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual, delta);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:166: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:181: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:196: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:211: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:226: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:241: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:248: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotNull(null, object);
+                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:296: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertSame(null, expected, actual);
+                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/Assert.java:315: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotSame(null, expected, actual);
+                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestFailure.java:58: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return thrownException().getMessage();
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:45: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        return new Description(null, name, annotations);
+                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:58: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        return new Description(null, name, uniqueId, annotations);
+                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:73: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        return new Description(null, formatDisplayName(name, className), annotations);
+                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:110: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        return new Description(null, formatDisplayName(name, className), uniqueId);
+                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:141: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    public static final Description EMPTY = new Description(null, "No Tests");
+                                                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:148: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    public static final Description TEST_MECHANISM = new Description(null, "Test mechanism");
+                                                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:276: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:296: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:302: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Description.java:319: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        return methodAndClassNamePatternGroupOrDefault(1, null);
+                                                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:39: error: [NullAway] initializer method does not guarantee @NonNull field 'serializedForm' (line 37) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public Result() {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:48: error: [NullAway] initializer method does not guarantee @NonNull field 'serializedForm' (line 37) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    private Result(SerializedForm serializedForm) {
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/notification/Failure.java:88: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return getException().getMessage();
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/ComparisonFailure.java:36: error: [NullAway] passing @Nullable parameter 'super.getMessage()' where @NonNull is required
+        return new ComparisonCompactor(MAX_CONTEXT_LENGTH, fExpected, fActual).compact(super.getMessage());
+                                                                                                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:108: error: [NullAway] initializer method does not guarantee @NonNull field 'fName' (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TestSuite() {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:161: error: [NullAway] initializer method does not guarantee @NonNull field 'fName' (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TestSuite(String name) {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:170: error: [NullAway] initializer method does not guarantee @NonNull field 'fName' (line 101) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TestSuite(Class<?>... classes) {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/BlockJUnit4ClassRunner.java:443: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:75: error: [NullAway] assigning @Nullable expression to @NonNull field
+    private volatile List<T> filteredChildren = null;
+                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:241: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+                new RunBefores(statement, befores, null);
+                                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:255: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+                new RunAfters(statement, afters, null);
+                                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:279: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        testClass.collectAnnotatedMethodValues(null, ClassRule.class, TestRule.class, collector);
+                                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:280: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        testClass.collectAnnotatedFieldValues(null, ClassRule.class, TestRule.class, collector);
+                                              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/ParentRunner.java:570: error: [NullAway] passing @Nullable parameter 'rule != null ? rule.order() : null' where @NonNull is required
+                    rule != null ? rule.order() : null));
+                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/FrameworkMember.java:29: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+                return null;
+                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/TestClass.java:221: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:110: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:123: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:132: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/MethodSorters.java:25: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+    JVM(null),
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/RuleContainer.java:59: error: [NullAway] passing @Nullable parameter 'orderValues.get(rule)' where @NonNull is required
+            ruleEntries.add(new RuleEntry(rule, RuleEntry.TYPE_METHOD_RULE, orderValues.get(rule)));
+                                                                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/RuleContainer.java:62: error: [NullAway] passing @Nullable parameter 'orderValues.get(rule)' where @NonNull is required
+            ruleEntries.add(new RuleEntry(rule, RuleEntry.TYPE_TEST_RULE, orderValues.get(rule)));
+                                                                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:54: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        this(null, true, value, matcher);
+             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:75: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        this(assumption, false, null, null);
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:75: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        this(assumption, false, null, null);
+                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:85: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        this(assumption, false, null, null);
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/AssumptionViolatedException.java:85: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        this(assumption, false, null, null);
+                                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/AllMembersSupplier.java:34: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+                return method.invokeExplosively(null);
+                                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/AllMembersSupplier.java:84: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+                            dataPointsMethod.invokeExplosively(null));
+                                                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:119: error: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+                    return new Suite((Class<?>) null, runners) {
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:122: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+                    return new ErrorReportingRunner(null, e);
+                                                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:154: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxCore.java:169: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        findLeaves(null, request.getRunner().getDescription(), results);
+                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:95: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return fFailureTimestamps.get(key.toString());
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:107: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return fDurations.get(key.toString());
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:128: error: [NullAway] unboxing of a @Nullable expression 'starts.get(description)'
+            long start = starts.get(description);
+                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:33: error: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+            return new Suite((Class<?>) null, new Class<?>[0]);
+                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:81: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        this(null, builder.runners(null, classes));
+             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:81: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        this(null, builder.runners(null, classes));
+                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:122: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            return new CategoryFilter(matchAny, categories, true, null);
+                                                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:134: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            return new CategoryFilter(true, null, matchAny, categories);
+                                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:286: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return testClass == null ? null : Description.createSuiteDescription(testClass);
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:324: error: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
+        return createSet(annotation == null ? null : annotation.value());
+                                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:334: error: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
+        return createSet(annotation == null ? null : annotation.value());
+                                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/IncludeCategories.java:44: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            super(true, categories, true, null);
+                                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/ExcludeCategories.java:44: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            super(true, null, true, categories);
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/ComparisonFailure.java:49: error: [NullAway] passing @Nullable parameter 'super.getMessage()' where @NonNull is required
+        return new ComparisonCompactor(MAX_CONTEXT_LENGTH, fExpected, fActual).compact(super.getMessage());
+                                                                                                       ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AnnotatedBuilder.java:90: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AnnotatedBuilder.java:97: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/NullBuilder.java:9: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/IgnoredBuilder.java:13: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/AllDefaultPossibilitiesBuilder.java:42: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/JUnit3Builder.java:13: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/builders/SuiteMethodBuilder.java:13: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveThreadMXBean.java:16: error: [NullAway] @NonNull static field 'ReflectiveThreadMXBean$Holder.getThreadCpuTimeMethod' not initialized
+    static final Method getThreadCpuTimeMethod;
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveThreadMXBean.java:17: error: [NullAway] @NonNull static field 'ReflectiveThreadMXBean$Holder.isThreadCpuTimeSupportedMethod' not initialized
+    static final Method isThreadCpuTimeSupportedMethod;
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveThreadMXBean.java:35: error: [NullAway] assigning @Nullable expression to @NonNull field
+      getThreadCpuTimeMethod = threadCpuTime;
+                             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveThreadMXBean.java:36: error: [NullAway] assigning @Nullable expression to @NonNull field
+      isThreadCpuTimeSupportedMethod = threadCpuTimeSupported;
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveRuntimeMXBean.java:17: error: [NullAway] @NonNull static field 'ReflectiveRuntimeMXBean$Holder.getInputArgumentsMethod' not initialized
+    private static final Method getInputArgumentsMethod;
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ReflectiveRuntimeMXBean.java:30: error: [NullAway] assigning @Nullable expression to @NonNull field
+      getInputArgumentsMethod = inputArguments;
+                              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:12: error: [NullAway] @NonNull static field 'ManagementFactory$FactoryHolder.MANAGEMENT_FACTORY_CLASS' not initialized
+    private static final Class<?> MANAGEMENT_FACTORY_CLASS;
+                                  ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:21: error: [NullAway] assigning @Nullable expression to @NonNull field
+      MANAGEMENT_FACTORY_CLASS = managementFactoryClass;
+                               ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/management/ManagementFactory.java:40: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+      return null;
+      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/ClassRequest.java:49: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+                return null;
+                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/MemoizingRequest.java:11: error: [NullAway] @NonNull field 'runner' not initialized
+    private volatile Runner runner;
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:47: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return null; // we never get here
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/Throwables.java:114: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:45: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/MethodRoadie.java:65: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+                        return null;
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/JUnit4ClassRunner.java:91: error: [NullAway] passing @Nullable parameter 'e.getCause()' where @NonNull is required
+            testAborted(notifier, description, e.getCause());
+                                                         ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/ErrorReportingRunner.java:71: error: [NullAway] passing @Nullable parameter 'cause.getCause()' where @NonNull is required
+            return getCauses(cause.getCause());
+                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:138: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:175: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return e.getCause();
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:228: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:247: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+        return (stuckThread == mainThread) ? null : stuckThread;
+        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:305: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:53: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertTrue(null, condition);
+                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:75: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertFalse(null, condition);
+                    ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:96: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        fail(null);
+             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:146: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:177: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotEquals(null, unexpected, actual);
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:213: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotEquals(null, unexpected, actual);
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:251: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotEquals(null, unexpected, actual, delta);
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:267: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotEquals(null, unexpected, actual, delta);
+                        ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:300: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:329: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:354: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:379: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:404: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:429: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:454: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:485: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals, delta);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:516: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertArrayEquals(null, expecteds, actuals, delta);
+                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:633: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:658: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:685: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual, delta);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:701: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertEquals(null, expected, actual, delta);
+                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:723: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotNull(null, object);
+                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:748: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNull(null, object);
+                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:783: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertSame(null, expected, actual);
+                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:812: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        assertNotSame(null, unexpected, actual);
+                      ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/Assert.java:981: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+        return assertThrows(null, expectedThrowable, runnable);
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TestName.java:28: error: [NullAway] @NonNull field 'name' not initialized
+    private volatile String name;
+                            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/ErrorCollector.java:95: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/ErrorCollector.java:98: error: [NullAway] returning @Nullable expression from method with @NonNull return type
+            return null;
+            ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:68: error: [NullAway] initializer method does not guarantee @NonNull field 'folder' (line 48) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    public TemporaryFolder(File parentFolder) {
+           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:77: error: [NullAway] initializer method does not guarantee @NonNull field 'folder' (line 48) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+    protected TemporaryFolder(Builder builder) {
+              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:58: error: [NullAway] passing @Nullable parameter '(File) null' where @NonNull is required
+        this((File) null);
+             ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:100: error: [NullAway] initializer method does not guarantee @NonNull field 'parentFolder' (line 97) is initialized along all control-flow paths (remember to check for exceptions or early returns).
+        protected Builder() {}
+                  ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:223: error: [NullAway] dereferenced expression 'relativePath' is @Nullable
+                    "a folder with the path \'" + relativePath.getPath() + "\' already exists");
+                                                              ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:291: error: [NullAway] dereferenced expression 'createdFolder' is @Nullable
+            + "Last attempted to create: " + createdFolder.toString());
+                                                          ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Parameterized.java:382: error: [NullAway] assigning @Nullable expression to @NonNull field
+            runnerOverride = assumptionViolationRunner;
+                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Parameterized.java:424: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            Object parameters = parametersMethod.invokeExplosively(null);
+                                                                   ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:162: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            super(next, befores, null);
+                                 ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:168: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:168: error: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+            method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+                                                           ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:180: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            super(next, afters, null);
+                                ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:186: error: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+            method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+                                     ^
+    (see http://t.uber.com/nullaway )
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:186: error: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+            method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
+                                                           ^
+    (see http://t.uber.com/nullaway )

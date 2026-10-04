@@ -16,6 +16,7 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.TestTimedOutException;
+import javax.annotation.Nullable;
 
 /**
  * @deprecated Included for backwards compatibility with JUnit 4.4. Will be
@@ -60,7 +61,7 @@ public class MethodRoadie {
             public void run() {
                 ExecutorService service = Executors.newSingleThreadExecutor();
                 Callable<Object> callable = new Callable<Object>() {
-                    public Object call() throws Exception {
+                    @Nullable public Object call() throws Exception {
                         runTestMethod();
                         return null;
                     }

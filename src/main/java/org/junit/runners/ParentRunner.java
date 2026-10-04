@@ -49,6 +49,7 @@ import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.junit.validator.AnnotationsValidator;
 import org.junit.validator.TestClassValidator;
+import javax.annotation.Nullable;
 
 /**
  * Provides most of the functionality specific to a Runner that implements a
@@ -72,7 +73,7 @@ public abstract class ParentRunner<T> extends Runner implements Filterable,
     private final TestClass testClass;
 
     // Guarded by childrenLock
-    private volatile List<T> filteredChildren = null;
+    @Nullable private volatile List<T> filteredChildren = null;
 
     private volatile RunnerScheduler scheduler = new RunnerScheduler() {
         public void schedule(Runnable childStatement) {
@@ -87,7 +88,7 @@ public abstract class ParentRunner<T> extends Runner implements Filterable,
     /**
      * Constructs a new {@code ParentRunner} that will run {@code @TestClass}
      */
-    protected ParentRunner(Class<?> testClass) throws InitializationError {
+    protected ParentRunner(@Nullable Class<?> testClass) throws InitializationError {
         this.testClass = createTestClass(testClass);
         validate();
     }
@@ -107,7 +108,7 @@ public abstract class ParentRunner<T> extends Runner implements Filterable,
      * @since 4.12
      */
     @Deprecated
-    protected TestClass createTestClass(Class<?> testClass) {
+    protected TestClass createTestClass(@Nullable Class<?> testClass) {
         return new TestClass(testClass);
     }
 

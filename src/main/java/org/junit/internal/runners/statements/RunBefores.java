@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
+import javax.annotation.Nullable;
 
 public class RunBefores extends Statement {
     private final Statement next;
 
-    private final Object target;
+    @Nullable private final Object target;
 
     private final List<FrameworkMethod> befores;
 
-    public RunBefores(Statement next, List<FrameworkMethod> befores, Object target) {
+    public RunBefores(Statement next, List<FrameworkMethod> befores, @Nullable Object target) {
         this.next = next;
         this.befores = befores;
         this.target = target;

@@ -3,9 +3,10 @@ package org.junit.internal.builders;
 import org.junit.internal.runners.JUnit38ClassRunner;
 import org.junit.runner.Runner;
 import org.junit.runners.model.RunnerBuilder;
+import javax.annotation.Nullable;
 
 public class JUnit3Builder extends RunnerBuilder {
-    @Override
+    @Nullable @Override
     public Runner runnerForClass(Class<?> testClass) throws Throwable {
         if (isPre4Test(testClass)) {
             return new JUnit38ClassRunner(testClass);

@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Implementation of {@link RuntimeMXBean} using the JVM reflectively.
@@ -14,7 +15,7 @@ final class ReflectiveRuntimeMXBean implements RuntimeMXBean {
   private final Object runtimeMxBean;
 
   private static final class Holder {
-    private static final Method getInputArgumentsMethod;
+    @Nullable private static final Method getInputArgumentsMethod;
     static {
       Method inputArguments = null;
       try {

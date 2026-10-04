@@ -6,6 +6,7 @@ import org.junit.runner.Description;
 import org.junit.runner.Request;
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.Sorter;
+import javax.annotation.Nullable;
 
 public class SortingRequest extends Request {
     private final Request request;

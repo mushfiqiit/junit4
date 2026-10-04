@@ -11,6 +11,7 @@ import org.junit.internal.runners.ErrorReportingRunner;
 import org.junit.runner.manipulation.Filter;
 import org.junit.runner.manipulation.Ordering;
 import org.junit.runners.model.InitializationError;
+import javax.annotation.Nullable;
 
 /**
  * A <code>Request</code> is an abstract description of tests to be run. Older versions of

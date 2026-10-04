@@ -3,6 +3,8 @@ package junit.framework;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * A test case defines the fixture to run multiple tests. To define a test case<br/>
@@ -78,7 +80,7 @@ public abstract class TestCase extends Assert implements Test {
     /**
      * the name of the test case
      */
-    private String fName;
+    @Nullable private String fName;
 
     /**
      * No-arg constructor to enable serialization. This method
@@ -157,7 +159,7 @@ public abstract class TestCase extends Assert implements Test {
      *
      * @throws Throwable if any exception is thrown
      */
-    protected void runTest() throws Throwable {
+    @NullUnmarked protected void runTest() throws Throwable {
         assertNotNull("TestCase.fName cannot be null", fName); // Some VMs crash when calling getMethod(null,null);
         Method runMethod = null;
         try {
@@ -395,7 +397,7 @@ public abstract class TestCase extends Assert implements Test {
      * Asserts that an object isn't null. If it is
      * an AssertionFailedError is thrown with the given message.
      */
-    public static void assertNotNull(String message, Object object) {
+    public static void assertNotNull(String message, @Nullable Object object) {
         Assert.assertNotNull(message, object);
     }
 
@@ -494,7 +496,7 @@ public abstract class TestCase extends Assert implements Test {
      *
      * @return the name of the TestCase
      */
-    public String getName() {
+    @Nullable public String getName() {
         return fName;
     }
 

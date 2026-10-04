@@ -10,6 +10,7 @@ import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 import org.junit.runners.model.RunnerScheduler;
+import javax.annotation.Nullable;
 
 public class ParallelComputer extends Computer {
     private final boolean classes;

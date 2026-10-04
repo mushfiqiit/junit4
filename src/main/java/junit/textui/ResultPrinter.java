@@ -10,6 +10,7 @@ import junit.framework.TestFailure;
 import junit.framework.TestListener;
 import junit.framework.TestResult;
 import junit.runner.BaseTestRunner;
+import javax.annotation.Nullable;
 
 public class ResultPrinter implements TestListener {
     PrintStream fWriter;

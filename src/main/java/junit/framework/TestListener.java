@@ -1,4 +1,5 @@
 package junit.framework;
+import javax.annotation.Nullable;
 
 /**
  * A Listener for test progress

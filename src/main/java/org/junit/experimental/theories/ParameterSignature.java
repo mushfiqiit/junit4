@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 public class ParameterSignature {
     
@@ -99,12 +101,12 @@ public class ParameterSignature {
         return getAnnotation(type) != null;
     }
 
-    public <T extends Annotation> T findDeepAnnotation(Class<T> annotationType) {
+    @Nullable public <T extends Annotation> T findDeepAnnotation(Class<T> annotationType) {
         Annotation[] annotations2 = annotations;
         return findDeepAnnotation(annotations2, annotationType, 3);
     }
 
-    private <T extends Annotation> T findDeepAnnotation(
+    @Nullable private <T extends Annotation> T findDeepAnnotation(
             Annotation[] annotations, Class<T> annotationType, int depth) {
         if (depth == 0) {
             return null;
@@ -123,7 +125,7 @@ public class ParameterSignature {
         return null;
     }
 
-    public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
+    @NullUnmarked public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         for (Annotation each : getAnnotations()) {
             if (annotationType.isInstance(each)) {
                 return annotationType.cast(each);

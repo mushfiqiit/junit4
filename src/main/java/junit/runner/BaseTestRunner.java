@@ -21,6 +21,7 @@ import junit.framework.TestListener;
 import junit.framework.TestSuite;
 
 import org.junit.internal.Throwables;
+import javax.annotation.Nullable;
 
 /**
  * Base class for all test runners.
@@ -29,7 +30,7 @@ import org.junit.internal.Throwables;
 public abstract class BaseTestRunner implements TestListener {
     public static final String SUITE_METHODNAME = "suite";
 
-    private static Properties fPreferences;
+    @Nullable private static Properties fPreferences;
     static int fgMaxMessageLength = 500;
     static boolean fgFilterStack = true;
     boolean fLoading = true;
@@ -92,7 +93,7 @@ public abstract class BaseTestRunner implements TestListener {
      * Returns the Test corresponding to the given suite. This is
      * a template method, subclasses override runFailed(), clearStatus().
      */
-    public Test getTest(String suiteClassName) {
+    @Nullable public Test getTest(String suiteClassName) {
         if (suiteClassName.length() <= 0) {
             clearStatus();
             return null;
@@ -152,7 +153,7 @@ public abstract class BaseTestRunner implements TestListener {
      * Processes the command line arguments and
      * returns the name of the suite class to run or null
      */
-    protected String processArguments(String[] args) {
+    @Nullable protected String processArguments(String[] args) {
         String suiteName = null;
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("-noloading")) {

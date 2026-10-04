@@ -11,6 +11,8 @@ import java.util.Vector;
 
 import org.junit.internal.MethodSorter;
 import org.junit.internal.Throwables;
+import javax.annotation.Nullable;
+import org.jspecify.annotations.NullUnmarked;
 
 /**
  * A <code>TestSuite</code> is a <code>Composite</code> of Tests.
@@ -98,7 +100,7 @@ public class TestSuite implements Test {
         };
     }
 
-    private String fName;
+    @Nullable private String fName;
 
     private Vector<Test> fTests = new Vector<Test>(10); // Cannot convert this to List because it is used directly by some test runners
 
@@ -114,11 +116,11 @@ public class TestSuite implements Test {
      * Parts of this method were written at 2337 meters in the Hueffihuette,
      * Kanton Uri
      */
-    public TestSuite(final Class<?> theClass) {
+    public TestSuite(@Nullable final Class<?> theClass) {
         addTestsFromTestCase(theClass);
     }
 
-    private void addTestsFromTestCase(final Class<?> theClass) {
+    @NullUnmarked private void addTestsFromTestCase(@Nullable final Class<?> theClass) {
         fName = theClass.getName();
         try {
             getTestConstructor(theClass); // Avoid generating multiple error messages
@@ -158,7 +160,7 @@ public class TestSuite implements Test {
     /**
      * Constructs an empty TestSuite.
      */
-    public TestSuite(String name) {
+    public TestSuite(@Nullable String name) {
         setName(name);
     }
 
@@ -221,7 +223,7 @@ public class TestSuite implements Test {
      * test suites have a name and this method
      * can return null.
      */
-    public String getName() {
+    @Nullable public String getName() {
         return fName;
     }
 
@@ -246,7 +248,7 @@ public class TestSuite implements Test {
      *
      * @param name the name to set
      */
-    public void setName(String name) {
+    public void setName(@Nullable String name) {
         fName = name;
     }
 

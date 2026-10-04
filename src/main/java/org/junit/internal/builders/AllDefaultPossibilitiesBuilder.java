@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.runner.Runner;
 import org.junit.runners.model.RunnerBuilder;
+import javax.annotation.Nullable;
 
 public class AllDefaultPossibilitiesBuilder extends RunnerBuilder {
     private final boolean canUseSuiteMethod;
@@ -24,7 +25,7 @@ public class AllDefaultPossibilitiesBuilder extends RunnerBuilder {
         this.canUseSuiteMethod = canUseSuiteMethod;
     }
 
-    @Override
+    @Nullable @Override
     public Runner runnerForClass(Class<?> testClass) throws Throwable {
         List<RunnerBuilder> builders = Arrays.asList(
                 ignoredBuilder(),

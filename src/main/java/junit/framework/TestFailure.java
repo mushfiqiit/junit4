@@ -1,6 +1,7 @@
 package junit.framework;
 
 import org.junit.internal.Throwables;
+import javax.annotation.Nullable;
 
 
 /**
@@ -54,7 +55,7 @@ public class TestFailure {
     /**
      * Returns a String containing the message from the thrown exception.
      */
-    public String exceptionMessage() {
+    @Nullable public String exceptionMessage() {
         return thrownException().getMessage();
     }
 
