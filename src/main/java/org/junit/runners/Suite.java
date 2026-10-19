@@ -15,7 +15,6 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * Using <code>Suite</code> as a runner allows you to manually
@@ -26,11 +25,11 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @since 4.0
  */
-@NullUnmarked public class Suite extends ParentRunner<Runner> {
+public class Suite extends ParentRunner<Runner> {
     /**
      * Returns an empty suite.
      */
-    @NullUnmarked public static Runner emptySuite() {
+    public static Runner emptySuite() {
         try {
             return new Suite((Class<?>) null, new Class<?>[0]);
         } catch (InitializationError e) {

@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 
 import org.junit.Rule;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * The TemporaryFolder Rule allows creation of files and folders that should
@@ -186,7 +185,7 @@ public class TemporaryFolder extends ExternalResource {
      * and a directory named {@code "child"} will be created under the newly-created
      * {@code "parent"} directory.
      */
-    @NullUnmarked public File newFolder(String... paths) throws IOException {
+    public File newFolder(String... paths) throws IOException {
         if (paths.length == 0) {
             throw new IllegalArgumentException("must pass at least one path");
         }
@@ -272,7 +271,7 @@ public class TemporaryFolder extends ExternalResource {
         return (File) pathClass.getDeclaredMethod("toFile").invoke(tempDir);
     }
 
-    @NullUnmarked private static File createTemporaryFolderWithFileApi(@Nullable File parentFolder) throws IOException {
+    private static File createTemporaryFolderWithFileApi(@Nullable File parentFolder) throws IOException {
         File createdFolder = null;
         for (int i = 0; i < TEMP_DIR_ATTEMPTS; ++i) {
             // Use createTempFile to get a suitable folder name.

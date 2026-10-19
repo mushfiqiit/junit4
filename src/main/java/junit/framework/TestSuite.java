@@ -12,7 +12,6 @@ import java.util.Vector;
 import org.junit.internal.MethodSorter;
 import org.junit.internal.Throwables;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * A <code>TestSuite</code> is a <code>Composite</code> of Tests.
@@ -120,7 +119,7 @@ public class TestSuite implements Test {
         addTestsFromTestCase(theClass);
     }
 
-    @NullUnmarked private void addTestsFromTestCase(@Nullable final Class<?> theClass) {
+    private void addTestsFromTestCase(@Nullable final Class<?> theClass) {
         fName = theClass.getName();
         try {
             getTestConstructor(theClass); // Avoid generating multiple error messages

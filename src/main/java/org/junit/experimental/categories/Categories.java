@@ -15,7 +15,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * From a given set of test classes, runs only the classes and methods that are
@@ -120,7 +119,7 @@ public class Categories extends Suite {
         private final boolean includedAny;
         private final boolean excludedAny;
 
-        @NullUnmarked public static CategoryFilter include(boolean matchAny, Class<?>... categories) {
+        public static CategoryFilter include(boolean matchAny, Class<?>... categories) {
             return new CategoryFilter(matchAny, categories, true, null);
         }
 
@@ -132,7 +131,7 @@ public class Categories extends Suite {
             return include(true, categories);
         }
 
-        @NullUnmarked public static CategoryFilter exclude(boolean matchAny, Class<?>... categories) {
+        public static CategoryFilter exclude(boolean matchAny, Class<?>... categories) {
             return new CategoryFilter(true, null, matchAny, categories);
         }
 
@@ -321,7 +320,7 @@ public class Categories extends Suite {
         }
     }
 
-    @NullUnmarked private static Set<Class<?>> getIncludedCategory(Class<?> klass) {
+    private static Set<Class<?>> getIncludedCategory(Class<?> klass) {
         IncludeCategory annotation= klass.getAnnotation(IncludeCategory.class);
         return createSet(annotation == null ? null : annotation.value());
     }
@@ -331,7 +330,7 @@ public class Categories extends Suite {
         return annotation == null || annotation.matchAny();
     }
 
-    @NullUnmarked private static Set<Class<?>> getExcludedCategory(Class<?> klass) {
+    private static Set<Class<?>> getExcludedCategory(Class<?> klass) {
         ExcludeCategory annotation= klass.getAnnotation(ExcludeCategory.class);
         return createSet(annotation == null ? null : annotation.value());
     }

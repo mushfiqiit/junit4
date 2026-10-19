@@ -23,7 +23,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.internal.MethodSorter;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * Wraps a class to be run, providing method validation and annotation searching
@@ -44,7 +43,7 @@ public class TestClass implements Annotatable {
      * an expensive process (we hope in future JDK's it will not be.) Therefore,
      * try to share instances of {@code TestClass} where possible.
      */
-    @NullUnmarked public TestClass(@Nullable Class<?> clazz) {
+    public TestClass(@Nullable Class<?> clazz) {
         this.clazz = clazz;
         if (clazz != null && clazz.getConstructors().length > 1) {
             throw new IllegalArgumentException(

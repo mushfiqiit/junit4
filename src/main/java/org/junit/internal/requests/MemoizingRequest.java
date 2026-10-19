@@ -6,13 +6,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.junit.runner.Request;
 import org.junit.runner.Runner;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 abstract class MemoizingRequest extends Request {
     private final Lock runnerLock = new ReentrantLock();
     @Nullable private volatile Runner runner;
 
-    @NullUnmarked @Nullable @Override
+    @Nullable @Override
     public final Runner getRunner() {
         if (runner == null) {
             runnerLock.lock();

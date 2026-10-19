@@ -5,7 +5,6 @@ import java.io.Serializable;
 import org.junit.internal.Throwables;
 import org.junit.runner.Description;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * A <code>Failure</code> holds a description of the failed test and the
@@ -33,7 +32,7 @@ public class Failure implements Serializable {
      * @param description a {@link org.junit.runner.Description} of the test that failed
      * @param thrownException the exception that was thrown while running the test
      */
-    @NullUnmarked public Failure(Description description, @Nullable Throwable thrownException) {
+    public Failure(Description description, @Nullable Throwable thrownException) {
         this.fThrownException = thrownException;
         this.fDescription = description;
     }

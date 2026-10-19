@@ -15,7 +15,6 @@ import org.junit.runners.model.FrameworkField;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * A {@link BlockJUnit4ClassRunner} with parameters support. Parameters can be
@@ -163,7 +162,7 @@ public class BlockJUnit4ClassRunnerWithParameters extends
             super(next, befores, null);
         }
 
-        @NullUnmarked @Override
+        @Override
         protected void invokeMethod(FrameworkMethod method) throws Throwable {
             int paramCount = method.getMethod().getParameterTypes().length;
             method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);
@@ -181,7 +180,7 @@ public class BlockJUnit4ClassRunnerWithParameters extends
             super(next, afters, null);
         }
 
-        @NullUnmarked @Override
+        @Override
         protected void invokeMethod(FrameworkMethod method) throws Throwable {
             int paramCount = method.getMethod().getParameterTypes().length;
             method.invokeExplosively(null, paramCount == 0 ? (Object[]) null : parameters);

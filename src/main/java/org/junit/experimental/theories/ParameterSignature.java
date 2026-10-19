@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 public class ParameterSignature {
     
@@ -125,7 +124,7 @@ public class ParameterSignature {
         return null;
     }
 
-    @NullUnmarked public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
+    public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         for (Annotation each : getAnnotations()) {
             if (annotationType.isInstance(each)) {
                 return annotationType.cast(each);

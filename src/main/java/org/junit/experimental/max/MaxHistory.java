@@ -16,7 +16,6 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 import javax.annotation.Nullable;
-import org.jspecify.annotations.NullUnmarked;
 
 /**
  * Stores a subset of the history of each test:
@@ -124,7 +123,7 @@ public class MaxHistory implements Serializable {
             // possible time
         }
 
-        @NullUnmarked @Override
+        @Override
         public void testFinished(Description description) throws Exception {
             long end = System.nanoTime();
             long start = starts.get(description);
@@ -143,7 +142,7 @@ public class MaxHistory implements Serializable {
     }
 
     private class TestComparator implements Comparator<Description> {
-        @NullUnmarked public int compare(Description o1, Description o2) {
+        public int compare(Description o1, Description o2) {
             // Always prefer new tests
             if (isNewTest(o1)) {
                 return -1;
