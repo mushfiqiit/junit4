@@ -1,0 +1,23 @@
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/textui/TestRunner.java:117: warning: [NullAway] dereferenced expression suite is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestCase.java:173: warning: [NullAway] dereferenced expression runMethod is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Result.java:50: warning: [NullAway] dereferenced expression serializedForm is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/notification/Failure.java:36: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestSuite.java:123: warning: [NullAway] dereferenced expression theClass is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runner/Computer.java:51: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/model/TestClass.java:47: warning: [NullAway] assigning @Nullable expression to @NonNull field
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/ParameterSignature.java:133: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:129: warning: [NullAway] unboxing of a @Nullable value
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/max/MaxHistory.java:157: warning: [NullAway] dereferenced expression getTestDuration(o1) is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:34: warning: [NullAway] passing @Nullable parameter '(Class<?>) null' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/Suite.java:82: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:123: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:135: warning: [NullAway] passing @Nullable parameter 'null' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:325: warning: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/categories/Categories.java:335: warning: [NullAway] passing @Nullable parameter 'annotation == null ? null : annotation.value()' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/requests/MemoizingRequest.java:15: warning: [NullAway] method returns @Nullable, but superclass method org.junit.runner.Request.getRunner() returns @NonNull
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/TestMethod.java:46: warning: [NullAway] returning @Nullable expression from method with @NonNull return type
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:224: warning: [NullAway] dereferenced expression relativePath is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:291: warning: [NullAway] dereferenced expression parentFolder is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/rules/TemporaryFolder.java:292: warning: [NullAway] dereferenced expression createdFolder is @Nullable
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:168: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
+/Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:186: warning: [NullAway] passing @Nullable parameter 'paramCount == 0 ? (Object[]) null : parameters' where @NonNull is required
