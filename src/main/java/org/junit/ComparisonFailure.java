@@ -1,5 +1,9 @@
 package org.junit;
 
+import org.checkerframework.checker.index.qual.LTEqLengthOf;
+import org.checkerframework.checker.index.qual.LTLengthOf;
+import org.checkerframework.checker.index.qual.NonNegative;
+
 /**
  * Thrown when an {@link org.junit.Assert#assertEquals(Object, Object) assertEquals(String, String)} fails.
  * Create and throw a <code>ComparisonFailure</code> manually if you want to show users the
@@ -76,7 +80,7 @@ public class ComparisonFailure extends AssertionError {
          * The maximum length for <code>expected</code> and <code>actual</code> strings to show. When
          * <code>contextLength</code> is exceeded, the Strings are shortened.
          */
-        private final int contextLength;
+        private final @NonNegative int contextLength;
         private final String expected;
         private final String actual;
 
@@ -86,7 +90,7 @@ public class ComparisonFailure extends AssertionError {
          * @param expected the expected string value
          * @param actual the actual string value
          */
-        public ComparisonCompactor(int contextLength, String expected, String actual) {
+        public ComparisonCompactor(@NonNegative int contextLength, String expected, String actual) {
             this.contextLength = contextLength;
             this.expected = expected;
             this.actual = actual;
@@ -116,16 +120,14 @@ public class ComparisonFailure extends AssertionError {
         }
 
         private String sharedSuffix(String prefix) {
-            int suffixLength = 0;
-            int maxSuffixLength = Math.min(expected.length() - prefix.length(),
-                    actual.length() - prefix.length()) - 1;
-            for (; suffixLength <= maxSuffixLength; suffixLength++) {
-                if (expected.charAt(expected.length() - 1 - suffixLength)
-                        != actual.charAt(actual.length() - 1 - suffixLength)) {
-                    break;
-                }
+            int expectedIndex = expected.length() - 1;
+            int actualIndex = actual.length() - 1;
+            while (expectedIndex >= prefix.length() && actualIndex >= prefix.length()
+                    && expected.charAt(expectedIndex) == actual.charAt(actualIndex)) {
+                expectedIndex--;
+                actualIndex--;
             }
-            return expected.substring(expected.length() - suffixLength);
+            return expected.substring(expectedIndex + 1);
         }
 
         private class DiffExtractor {
@@ -149,10 +151,11 @@ public class ComparisonFailure extends AssertionError {
             }
 
             public String compactPrefix() {
-                if (sharedPrefix.length() <= contextLength) {
+                int begin = sharedPrefix.length() - contextLength;
+                if (begin <= 0) {
                     return sharedPrefix;
                 }
-                return ELLIPSIS + sharedPrefix.substring(sharedPrefix.length() - contextLength);
+                return ELLIPSIS + sharedPrefix.substring(begin);
             }
 
             public String compactSuffix() {
@@ -163,8 +166,12 @@ public class ComparisonFailure extends AssertionError {
             }
 
             private String extractDiff(String source) {
-                return DIFF_START + source.substring(sharedPrefix.length(), source.length() - sharedSuffix.length())
-                        + DIFF_END;
+                int begin = sharedPrefix.length();
+                int end = source.length() - sharedSuffix.length();
+                if (end < begin) {
+                    throw new IllegalStateException("prefix and suffix overlap");
+                }
+                return DIFF_START + source.substring(begin, end) + DIFF_END;
             }
         }
     }

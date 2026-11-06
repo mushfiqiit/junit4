@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+import org.checkerframework.checker.index.qual.NonNegative;
 /**
  * Miscellaneous functions dealing with {@code Throwable}.
  *
@@ -90,7 +90,7 @@ public final class Throwables {
         for (StackTraceElement stackTraceElement : asReversedList(stackTraceElements)) {
             state = state.processStackTraceElement(stackTraceElement);
             if (state == State.DONE) {
-                List<String> trimmedLines = new ArrayList<String>(linesToInclude + 2);
+                List<String> trimmedLines = new ArrayList<String>(Math.max(0, linesToInclude + 2));
                 trimmedLines.add("");
                 for (StackTraceElement each : stackTraceElements.subList(0, linesToInclude)) {
                     trimmedLines.add("\tat " + each);
@@ -131,7 +131,7 @@ public final class Throwables {
         if (exception.getCause() != null || hasSuppressed(exception)) {
             String fullTrace = getFullStackTrace(exception);
             BufferedReader reader = new BufferedReader(
-                    new StringReader(fullTrace.substring(exception.toString().length())));
+                    new StringReader(fullTrace.substring(Math.min(exception.toString().length(), fullTrace.length()))));
             List<String> causedByLines = new ArrayList<String>();
     
             try {
@@ -176,7 +176,7 @@ public final class Throwables {
             }
 
             @Override
-            public int size() {
+            public @NonNegative int size() {
                 return list.size();
             }
         };
