@@ -34,7 +34,7 @@
 [WARNING] /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/extensions/TestDecorator.java:[3,22] [deprecation] Assert in junit.framework has been deprecated
 [WARNING] /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/extensions/TestDecorator.java:[3,22] [deprecation] Assert in junit.framework has been deprecated
 [WARNING] /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/junit/framework/TestResult.java:[145,17] [removal] ThreadDeath in java.lang has been deprecated and marked for removal
-[WARNING] /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/Assignments.java:[126,18] [deprecation] newInstance() in Class has been deprecated
+[WARNING] /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/experimental/theories/internal/Assignments.java:[125,18] [deprecation] newInstance() in Class has been deprecated
   where T is a type-variable:
     T extends Object declared in class Class
 [WARNING] /Users/mushfiqurrahmanchowdhury/Documents/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:[145,24] [removal] isDaemon() in ThreadGroup has been deprecated and marked for removal
@@ -52,6 +52,6 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  38.531 s
-[INFO] Finished at: 2026-11-04T23:05:24-05:00
+[INFO] Total time:  40.612 s
+[INFO] Finished at: 2026-11-06T04:20:51-05:00
 [INFO] ------------------------------------------------------------------------

@@ -13,7 +13,8 @@ import org.junit.experimental.theories.ParametersSuppliedBy;
 import org.junit.experimental.theories.PotentialAssignment;
 import org.junit.experimental.theories.PotentialAssignment.CouldNotGenerateValueException;
 import org.junit.runners.model.TestClass;
-
+import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.checker.index.qual.LessThan;
 /**
  * A potentially incomplete list of value assignments for a method's formal
  * parameters
@@ -62,12 +63,10 @@ public class Assignments {
                 unassigned.size()), clazz);
     }
 
-    public Object[] getActualValues(int start, int stop) 
+    
+    public Object[] getActualValues(@NonNegative @LessThan("#2 + 1") int start, int stop) 
             throws CouldNotGenerateValueException {
         int length = stop - start;
-        if (length < 0) {
-            throw new NegativeArraySizeException(String.valueOf(length));
-        }
         Object[] values = new Object[length];
         for (int j = 0; j < length; j++) {
             values[j] = assigned.get(start + j).getValue();
@@ -126,23 +125,34 @@ public class Assignments {
         return cls.newInstance();
     }
 
-    public Object[] getConstructorArguments()
+    @SuppressWarnings("index:argument") // suppressed due to false positive
+    public Object[] getConstructorArguments() 
             throws CouldNotGenerateValueException {
-        return getActualValues(0, getConstructorParameterCount());
+        @NonNegative int count = getConstructorParameterCount();
+        return getActualValues(0, count); // false positive because count is nonnegative
     }
 
     public Object[] getMethodArguments() throws CouldNotGenerateValueException {
-        return getActualValues(getConstructorParameterCount(), assigned.size());
+        @NonNegative int start = getConstructorParameterCount();
+        int stop = assigned.size();
+        if (start > stop) {
+            throw new IllegalStateException("getMethodArguments() called before all "
+                    + start + " constructor parameters were assigned (only " + stop + " are)"); // true positive
+        }
+        return getActualValues(start, stop);
     }
 
+    @SuppressWarnings("index:argument") // false positive: 0 <= assignedSize
     public Object[] getAllArguments() throws CouldNotGenerateValueException {
-        return getActualValues(0, assigned.size());
+        @NonNegative int assignedSize=assigned.size();
+        return getActualValues(0, assignedSize);
     }
 
-    private int getConstructorParameterCount() {
+
+    private @NonNegative int getConstructorParameterCount() {
         List<ParameterSignature> signatures = ParameterSignature
                 .signatures(clazz.getOnlyConstructor());
-        int constructorParameterCount = signatures.size();
+        @NonNegative int constructorParameterCount = signatures.size();
         return constructorParameterCount;
     }
 
